@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/holo_blue_light" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <zulu.app.libraries.ripple.RippleView
+            android:id="@+id/more"
+            android:layout_width="?android:actionBarSize"
+            android:layout_height="?android:actionBarSize"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@+id/more2"
+            ripple:rv_centered="true" >
+
+            <ImageView
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="?android:actionBarSize"
+                android:layout_gravity="center"
+                android:background="@color/holo_blue_light"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_edit" />
+        </zulu.app.libraries.ripple.RippleView>
+
+        <zulu.app.libraries.ripple.RippleView
+            android:id="@+id/more2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            ripple:rv_type="doubleRipple" >
+
+            <ImageView
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="?android:actionBarSize"
+                android:layout_gravity="center"
+                android:background="@color/holo_blue_light"
+                android:padding="10dp"
+                android:src="@drawable/ic_profil_plus" />
+        </zulu.app.libraries.ripple.RippleView>
+    </RelativeLayout>
+
+    <zulu.app.libraries.ripple.RippleView
+        android:id="@+id/rect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionbar"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        ripple:rv_type="rectangle"
+        ripple:rv_zoom="true" >
+
+        <TextView
+            android:id="@+id/rect_child"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@color/holo_green_light"
+            android:gravity="center"
+            android:text="Hello World!"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </zulu.app.libraries.ripple.RippleView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rect"
+        android:scrollbars="vertical" />
+
+</RelativeLayout>

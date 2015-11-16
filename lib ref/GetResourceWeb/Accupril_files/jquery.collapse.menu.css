@@ -1,0 +1,70 @@
+#collapse_menu
+{
+	font-family:Arial;
+	font-size:12px;
+	color:#009900;
+	text-align:left;
+	margin-left:10px;
+	line-height:23px;
+}
+#collapse_menu .first_item a, #collapse_menu .first_item a:visited, #collapse_menu .second_item a, #collapse_menu .second_item a:visited
+{
+	color:#009900;
+	text-decoration:none;
+	margin-left:15px;
+}
+#collapse_menu .first_item a:hover, #collapse_menu .second_item a:hover
+{
+	font-weight:bold;
+}
+
+#collapse_menu .group_item
+{
+	overflow:hidden;
+	clear:both;
+	width:100%;
+	font-weight:bold;
+	line-height:25px;
+}
+#collapse_menu .current
+{
+	background-color:#f2ffef;
+}
+#collapse_menu .first_title, #collapse_menu .second_title
+{
+	float:left;
+	margin-right:15px;
+	font-size:12px;
+}
+#collapse_menu .second_title
+{
+	margin-left:15px;
+}
+#collapse_menu .link
+{
+	width:10px;
+	display:none;
+	float:right;
+}
+#collapse_menu .link img
+{
+	border-width:0px;
+	margin-top:5px;
+}
+#collapse_menu .first_item
+{
+	overflow:hidden;
+	margin-left:15px;
+	background:url(../images/arrow.gif) no-repeat 0px center;
+}
+#collapse_menu .second_item
+{
+	overflow:hidden;
+	margin-left:30px;
+	background:url(../images/subarrow.gif) no-repeat 0px center;
+}
+#collapse_menu .separator
+{
+	margin:3px 15px;
+	border-bottom:solid 1px #eeeeee;
+}

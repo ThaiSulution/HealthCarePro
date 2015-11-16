@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2010 Daniel Nilsson
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Zulu Libraries</string>
+    
+    <string name="main_text">Options:</string>
+    <string name="option_progress">Progress:</string>
+    <string name="option_bar_color">Bar color:</string>
+    <string name="option_wheel_color">Wheel color:</string>
+    
+    <string name="no_app_to_share">No app installed to share data of type %s!</string>
+    <string name="no_share_type">No share type specified!</string>
+    <string name="error_occurred">Sorry, an error occurred.</string>
+    
+    <!-- ldrawer -->
+    <string name="app_description">Android drawer icon with material design animation</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+
+    <string-array name="progress_value_options">
+        <item>Indeterminate</item>
+        <item>10%</item>
+        <item>25%</item>
+        <item>50%</item>
+        <item>75%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="progress_color_options">
+        <item>Default</item>
+        <item>Red</item>
+        <item>Magenta</item>
+    </string-array>
+    <string-array name="wheel_color_options">
+        <item>Default</item>
+        <item>Light Gray</item>
+        <item>Gray</item>
+    </string-array>
+</resources>

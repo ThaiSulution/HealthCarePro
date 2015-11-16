@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="2" >
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <app.healthcare.heartrate.HeartbeatView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+            </app.healthcare.heartrate.HeartbeatView>
+
+            <Button
+                android:id="@+id/btnStart"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_style" />
+
+            <Button
+                android:id="@+id/btnHelp"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_style"
+                android:text="Help" />
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/holo_red_light"/>
+
+    <LinearLayout
+        android:id="@+id/graphLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <SurfaceView
+        android:id="@+id/preview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </SurfaceView>
+
+</LinearLayout>

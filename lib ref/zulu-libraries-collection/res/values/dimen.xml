@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General dimensions -->
+    <dimen name="toast_hover">64dp</dimen>
+    <dimen name="buttontoast_hover">24dp</dimen>
+    <dimen name="buttontoast_x_padding">12dp</dimen>
+    <dimen name="cardtoast_margin">4dp</dimen>
+
+    <!-- ldrawer -->
+    <dimen name="ldrawer_drawableSize">50dp</dimen>
+    <dimen name="ldrawer_barSize">18dp</dimen>
+    <dimen name="ldrawer_topBottomBarArrowSize">11dp</dimen>
+    <dimen name="ldrawer_thickness">2dp</dimen>
+    <dimen name="ldrawer_gapBetweenBars">3dp</dimen>
+    <dimen name="ldrawer_middleBarArrowSize">16dp</dimen>
+    <dimen name="navdrawer_width">260dp</dimen>
+    
+</resources>

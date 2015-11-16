@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+    }
+}
+
+dependencies {
+    compile files(rootProject.core_jar_path,
+            rootProject.chat_jar_path,
+            rootProject.content_jar_path,
+            rootProject.customobjects_jar_path,
+            rootProject.location_jar_path,
+            rootProject.messages_jar_path)
+}

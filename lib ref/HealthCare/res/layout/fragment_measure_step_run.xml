@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/steprun" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/steprun" />
+
+    <EditText
+        android:id="@+id/tbxChiTieu"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tbxCountStepRun"
+        android:layout_alignRight="@+id/btnReset"
+        android:layout_below="@+id/TextView05"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_edittext"
+        android:gravity="center"
+        android:inputType="number"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tbxCountStepRun"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tbxCountStepRun"
+        android:layout_alignBottom="@+id/tbxCountStepRun"
+        android:layout_alignLeft="@+id/scrollView1"
+        android:text="@string/txtTodayString"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tbxChiTieu"
+        android:layout_alignBottom="@+id/tbxChiTieu"
+        android:layout_alignLeft="@+id/TextView05"
+        android:text="@string/txtTargetsString"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnStartService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnStopService"
+        android:layout_alignBottom="@+id/btnStopService"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_style"
+        android:text="@string/btnStartCountStepRun" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/btnReset"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginTop="15dp" >
+
+        <TableLayout
+            android:id="@+id/tableDataStepRun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_purple"
+            android:padding="10dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" >
+        </TableLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/scrollView1"
+        android:layout_below="@+id/TextView02"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/button_style"
+        android:text="@string/btnResetCountStepRun" />
+
+    <Button
+        android:id="@+id/btnStopService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnReset"
+        android:layout_alignBottom="@+id/btnReset"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_style"
+        android:text="@string/btnStopCountStepRun" />
+
+</RelativeLayout>

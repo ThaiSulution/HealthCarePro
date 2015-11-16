@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bmi_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbTitleBMIString"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0066CC"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lbHeightString"
+            android:textColor="#0066CC" />
+
+        <EditText
+            android:id="@+id/tbxHeight"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:inputType="numberDecimal" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lbWeightString"
+            android:textColor="#0066CC" />
+
+        <EditText
+            android:id="@+id/tbxWeight"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/cbWHO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cbWHOString" />
+
+            <CheckBox
+                android:id="@+id/cbIDIAndWPRO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cbIDIAndWPROString" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnCalculateBMI"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_style"
+            android:text="@string/btnCalculateBMIString" />
+
+        <Button
+            android:id="@+id/btnReinput"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_style"
+            android:text="@string/btnReinputString" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="start"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/lbTitleResultBMIString"
+            android:textColor="#0066CC" />
+
+        <TextView
+            android:id="@+id/tbxResultBMI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/tbxResultBMIString"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FF3333"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tbxImpact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/tbxImpactString"
+            android:textColor="#FF3333"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp" >
+
+        <TableLayout
+            android:id="@+id/tableDataBMI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_purple"
+            android:padding="10dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" >
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>

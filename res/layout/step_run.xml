@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="app.healthcare.StepRun" >
+
+    <com.echo.holographlibrary.PieGraph
+        android:id="@+id/step_run_chart_progess"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_weight="1"
+        app:pieInnerCircleRatio="128"
+        app:pieSlicePadding="0dip" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <!--
+            <Spinner
+                android:id="@+id/type_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/unit_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txtTarget" />
+
+        <EditText
+            android:id="@+id/target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/txtTargetHint"
+            android:textStyle="italic" 
+            android:inputType="numberDecimal" 
+            android:text="3000"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <com.gc.materialdesign.views.ButtonFlat
+            android:id="@+id/btnSetTarget"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Đặt mục tiêu"
+            android:layout_weight="1"
+            android:textColor="@color/red" 
+            android:background="@color/red"
+            
+            />
+                    
+
+        <com.gc.materialdesign.views.ButtonFlat
+            android:id="@+id/btnHistory"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Lịch sử kết quả"
+            android:layout_weight="1"
+            android:textColor="@color/red"
+            android:background="@color/red"/>
+                    />
+    </LinearLayout>
+
+</LinearLayout>

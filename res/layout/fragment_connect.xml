@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <Button
+        android:id="@+id/button_try_connect"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="@string/btnCalculateWHRString" 
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/text_message_not_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_try_connect"
+        android:gravity="center"
+        android:layout_marginBottom="30dp"
+        android:text="@string/connect_failed_mesage" />
+
+</RelativeLayout>

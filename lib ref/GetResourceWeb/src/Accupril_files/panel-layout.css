@@ -1,0 +1,21 @@
+#leftPanel {
+	vertical-align:top;
+}
+.leftPanel-show
+{
+	width: 675px; 
+}
+.leftPanel-hide
+{
+	width: 100%; 
+}
+.rightPanel-show
+{
+	width: 324px; 
+	background:url(../images/ui/dotted.gif) repeat-y left 20px;
+	vertical-align: top;
+}
+.rightPanel-hide
+{
+	display:none;
+}

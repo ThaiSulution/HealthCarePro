@@ -1,0 +1,81 @@
+#ajaxTipContainer
+{
+    position:absolute;
+    left:0;
+    top:0;
+    display:none;
+    z-index: 20000;
+}
+
+.ajaxTipPopup
+{
+}
+
+#ajaxTipContent
+{
+    background-color: #FFF;
+    min-width: 175px;
+    min-height: 50px;
+    text-align:left;
+    line-height:20px;
+    color:#333333;
+}
+
+#ajaxTipContent .deleted
+{
+	overflow:hidden;
+	background-color:#FEE0E0;
+}
+
+.ajaxTipPopup .ajaxTipImage
+{
+    margin: 5px;
+    margin-right: 15px;
+}
+
+.ajaxTipPopup .corner 
+{
+    width: 19px;
+    height: 15px;
+}
+    
+.ajaxTipPopup .topLeft 
+{
+    background: url(../images/ajaxtip/balloon_topLeft.png) no-repeat;
+}
+    
+.ajaxTipPopup .bottomLeft 
+{
+    background: url(../images/ajaxtip/balloon_bottomLeft.png) no-repeat;
+}
+    
+.ajaxTipPopup .left 
+{
+    background: url(../images/ajaxtip/balloon_left.png) repeat-y;
+}
+    
+.ajaxTipPopup .right 
+{
+    background: url(../images/ajaxtip/balloon_right.png) repeat-y;
+}
+    
+.ajaxTipPopup .topRight 
+{
+    background: url(../images/ajaxtip/balloon_topRight.png) no-repeat;
+}
+    
+.ajaxTipPopup .bottomRight 
+{
+    background: url(../images/ajaxtip/balloon_bottomRight.png) no-repeat;
+}
+    
+.ajaxTipPopup .top 
+{
+    background: url(../images/ajaxtip/balloon_top.png) repeat-x;
+}
+    
+.ajaxTipPopup .bottom 
+{
+    background: url(../images/ajaxtip/balloon_bottom.png) repeat-x;
+    text-align: center;
+}
