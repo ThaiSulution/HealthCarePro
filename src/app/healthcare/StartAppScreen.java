@@ -140,6 +140,7 @@ public class StartAppScreen extends Fragment {
 		sliceStepRun.setColor(resources.getColor(R.color.orange));
 		sliceStepRun.setValue(1);
 		pg.addSlice(sliceStepRun);
+		pg.setTextSizeGr(20);
 		pg.setOnSliceClickedListener(new OnSliceClickedListener() {
 
 			@Override
@@ -195,6 +196,7 @@ public class StartAppScreen extends Fragment {
 		sliceHeartRate.setColor(resources.getColor(R.color.orange));
 		sliceHeartRate.setValue(0);
 		pg.addSlice(sliceHeartRate);
+		pg.setTextSizeGr(20);
 		UserDTO userdto = new UserDAO(getActivity()).getUser();
 		List<HeartRateDTO> listdata = new HeartRateDAO(getActivity())
 				.getListHeartRate(userdto.getUserId());

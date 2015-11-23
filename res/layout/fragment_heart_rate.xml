@@ -20,12 +20,12 @@
             android:layout_height="match_parent"
             android:orientation="horizontal" >
 
-            <app.healthcare.heartrate.HeartbeatView
+           <!--  <app.healthcare.heartrate.HeartbeatView
                 android:id="@+id/image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true" >
-            </app.healthcare.heartrate.HeartbeatView>
+            </app.healthcare.heartrate.HeartbeatView> -->
 
             <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/btnStart"
@@ -66,13 +66,19 @@
         android:layout_weight="1"
         android:background="@android:color/white"
         android:orientation="vertical" >
+        <com.echo.holographlibrary.PieGraph
+        android:id="@+id/heartbeat_chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_margin"
+        app:pieInnerCircleRatio="128"
+        app:pieSlicePadding="0dip" />
     </LinearLayout>
 
-    
-    <SurfaceView
-        android:id="@+id/preview"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+   <SurfaceView
+       android:id="@+id/preview"
+       android:layout_width="fill_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1" />
 
 </LinearLayout>

@@ -388,11 +388,11 @@ int id bmi_chart 0x7f090086
 int id book_now 0x7f09001d
 int id btnCalculateBMI 0x7f090074
 int id btnCalculateWHR 0x7f09007e
-int id btnHelp 0x7f090067
+int id btnHelp 0x7f090066
 int id btnHistory 0x7f090098
 int id btnReinput 0x7f090075
 int id btnSetTarget 0x7f090097
-int id btnStart 0x7f090066
+int id btnStart 0x7f090065
 int id button 0x7f09009c
 int id button_accept 0x7f090059
 int id button_cancel 0x7f090058
@@ -430,10 +430,11 @@ int id frame_container 0x7f090036
 int id google_wallet_classic 0x7f090028
 int id google_wallet_grayscale 0x7f090029
 int id google_wallet_monochrome 0x7f09002a
-int id graphLayout 0x7f090068
+int id graphLayout 0x7f090067
 int id grayscale 0x7f09002b
 int id green 0x7f09004d
 int id heart_rate_chart 0x7f090083
+int id heartbeat_chart 0x7f090068
 int id holo_dark 0x7f090013
 int id holo_light 0x7f090014
 int id horizontal 0x7f090032
@@ -441,7 +442,6 @@ int id hybrid 0x7f09000f
 int id icon 0x7f09005a
 int id icon_app 0x7f090082
 int id icon_only 0x7f090006
-int id image 0x7f090065
 int id imageDialog 0x7f09004f
 int id ivIcon 0x7f090047
 int id l_w_height 0x7f090090

@@ -42,6 +42,7 @@ import com.google.android.gms.fitness.request.OnDataPointListener;
 import com.google.android.gms.fitness.request.SensorRequest;
 import com.google.android.gms.fitness.request.SessionInsertRequest;
 import com.google.android.gms.fitness.request.SessionReadRequest;
+import com.google.android.gms.fitness.result.DailyTotalResult;
 import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.fitness.result.DataSourcesResult;
 import com.google.android.gms.fitness.result.ListSubscriptionsResult;
@@ -156,9 +157,15 @@ public class GoogleFitService extends IntentService implements
 				startTime = cal.getTimeInMillis();
 				// lay data so buoc di trong ngay
 				readRequest = queryFitnessDataStep(startTime, endTime);
-				dataReadResult = Fitness.HistoryApi.readData(mClient,
-						readRequest).await(1, TimeUnit.MINUTES);
-				totalStepsGet = printDataStep(dataReadResult);
+				/*
+				 * dataReadResult = Fitness.HistoryApi.readData(mClient,
+				 * readRequest).await(1, TimeUnit.MINUTES);
+				 */
+				DailyTotalResult rs = Fitness.HistoryApi.readDailyTotal(mClient,
+						DataType.TYPE_STEP_COUNT_DELTA).await(1,
+						TimeUnit.MINUTES);
+				totalStepsGet = dumpDataSetHistorySteps(rs.getTotal());
+//				totalStepsGet = printDataStep(dataReadResult);
 				if (totalStepsGet > Constants.getInstance().getStepRuns()) {
 					Constants.getInstance().setStepRuns(totalStepsGet);
 				}
@@ -172,10 +179,15 @@ public class GoogleFitService extends IntentService implements
 				 * delete end
 				 */
 				// lay thong tin so calo tieu thu trong mot ngay
-				readRequest = queryFitnessDataCaloFree(startTime, endTime);
+				/*readRequest = queryFitnessDataCaloFree(startTime, endTime);
 				dataReadResult = Fitness.HistoryApi.readData(mClient,
 						readRequest).await(1, TimeUnit.MINUTES);
-				totalCalosGet = printDataCaloFree(dataReadResult);
+				totalCalosGet = printDataCaloFree(dataReadResult);*/
+				
+				DailyTotalResult rscl = Fitness.HistoryApi.readDailyTotal(mClient,
+						DataType.TYPE_CALORIES_EXPENDED).await(1,
+						TimeUnit.MINUTES);
+				totalCalosGet = dumpDataSetHistoryCalos(rscl.getTotal());
 				Constants.getInstance().setCalos(totalCalosGet);
 				// tinh so calo tieu thu trung binh moi ngay trong 1 nam
 				/*
@@ -1110,10 +1122,6 @@ public class GoogleFitService extends IntentService implements
 	 */
 	public DataSet insertFitnessCaloData() {
 		Log.i(TAG_HISTORY, "Creating a new data insert request");
-
-		// [START build_insert_data_request]
-		// Set a start and end time for our data, using a start time of 1 hour
-		// before this moment.
 		Calendar cal = Calendar.getInstance();
 		Date now = new Date();
 		cal.setTime(now);
@@ -1130,14 +1138,10 @@ public class GoogleFitService extends IntentService implements
 		int stepCountDelta = (int) totalStepsRecord;
 		totalStepsRecord = 0;
 		DataSet dataSet = DataSet.create(dataSourceSteps);
-		// For each data point, specify a start time, end time, and the data
-		// value -- in this case,
-		// the number of new steps.
 		DataPoint dataPoint = dataSet.createDataPoint().setTimeInterval(
 				startTime, endTime, TimeUnit.MILLISECONDS);
 		dataPoint.getValue(Field.FIELD_STEPS).setInt(stepCountDelta);
 		dataSet.add(dataPoint);
-		// [END build_insert_data_request]
 		return dataSet;
 	}
 
@@ -1146,43 +1150,16 @@ public class GoogleFitService extends IntentService implements
 	 * week.
 	 */
 	public DataReadRequest queryFitnessDataStep(long startTime, long endTime) {
-		// [START build_read_data_request]
-		// Setting a start and end date using a range of 1 week before this
-		// moment.
-		// Calendar cal = Calendar.getInstance();
-		// Date now = new Date();
-		// cal.setTime(now);
-		// long endTime = cal.getTimeInMillis();
-		// cal.add(Calendar.WEEK_OF_YEAR, -1);
-		// long startTime = cal.getTimeInMillis();
-
 		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		Log.i(TAG_HISTORY, "Range Start: " + dateFormat.format(startTime));
 		Log.i(TAG_HISTORY, "Range End: " + dateFormat.format(endTime));
 
 		DataReadRequest readRequest = new DataReadRequest.Builder()
-				// The data request can specify multiple data types to return,
-				// effectively
-				// combining multiple data queries into one call.
-				// In this example, it's very unlikely that the request is for
-				// several hundred
-				// datapoints each consisting of a few steps and a timestamp.
-				// The more likely
-				// scenario is wanting to see how many steps were walked per
-				// day, for 7 days.
 				.aggregate(DataType.TYPE_STEP_COUNT_DELTA,
 						DataType.AGGREGATE_STEP_COUNT_DELTA)
-				// Analogous to a "Group By" in SQL, defines how data should be
-				// aggregated.
-				// bucketByTime allows for a time span, whereas bucketBySession
-				// would allow
-				// bucketing by "sessions", which would need to be defined in
-				// code.
 				.bucketByTime(1, TimeUnit.DAYS)
 				.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
 				.build();
-		// [END build_read_data_request]
-
 		return readRequest;
 	}
 
@@ -1544,7 +1521,7 @@ public class GoogleFitService extends IntentService implements
 
 	public void notifyUiFitConnected() {
 		findFitnessDataSourcesSensors();
-		new InsertAndVerifyDataTask().execute();
+		// new InsertAndVerifyDataTask().execute();
 		subscribe();
 		Intent intent = new Intent(FIT_NOTIFY_INTENT);
 		intent.putExtra(FIT_EXTRA_CONNECTION_MESSAGE,

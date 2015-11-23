@@ -1249,11 +1249,11 @@ containing a value of this type.
         public static final int book_now=0x7f09001d;
         public static final int btnCalculateBMI=0x7f090074;
         public static final int btnCalculateWHR=0x7f09007e;
-        public static final int btnHelp=0x7f090067;
+        public static final int btnHelp=0x7f090066;
         public static final int btnHistory=0x7f090098;
         public static final int btnReinput=0x7f090075;
         public static final int btnSetTarget=0x7f090097;
-        public static final int btnStart=0x7f090066;
+        public static final int btnStart=0x7f090065;
         public static final int button=0x7f09009c;
         public static final int button_accept=0x7f090059;
         public static final int button_cancel=0x7f090058;
@@ -1291,10 +1291,11 @@ containing a value of this type.
         public static final int google_wallet_classic=0x7f090028;
         public static final int google_wallet_grayscale=0x7f090029;
         public static final int google_wallet_monochrome=0x7f09002a;
-        public static final int graphLayout=0x7f090068;
+        public static final int graphLayout=0x7f090067;
         public static final int grayscale=0x7f09002b;
         public static final int green=0x7f09004d;
         public static final int heart_rate_chart=0x7f090083;
+        public static final int heartbeat_chart=0x7f090068;
         public static final int holo_dark=0x7f090013;
         public static final int holo_light=0x7f090014;
         public static final int horizontal=0x7f090032;
@@ -1302,7 +1303,6 @@ containing a value of this type.
         public static final int icon=0x7f09005a;
         public static final int icon_app=0x7f090082;
         public static final int icon_only=0x7f090006;
-        public static final int image=0x7f090065;
         public static final int imageDialog=0x7f09004f;
         public static final int ivIcon=0x7f090047;
         public static final int l_w_height=0x7f090090;

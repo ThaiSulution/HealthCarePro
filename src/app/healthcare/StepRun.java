@@ -131,6 +131,7 @@ public class StepRun extends Activity implements LocationListener {
 		sliceRed.setColor(resources.getColor(R.color.orange));
 		sliceRed.setValue(target);
 		pg.addSlice(sliceRed);
+		pg.setTextSizeGr(25);
 		targetContent = (EditText) findViewById(R.id.target);
 		targetContent.setText(String.valueOf(target));
 		btnSetup = (Button) findViewById(R.id.btnSetTarget);
@@ -194,11 +195,25 @@ public class StepRun extends Activity implements LocationListener {
 							+ String.valueOf(Constants.getInstance().getCalos()));
 					pg.getSlices()
 							.get(0)
-							.setGoalValue(Constants.getInstance().getStepRuns()+1);
-					pg.getSlices().get(1)
-							.setGoalValue(Constants.getInstance().getTarget());
+							.setGoalValue(
+									Constants.getInstance().getStepRuns() + 1);
+					if (Constants.getInstance().getTarget() > 0) {
+						pg.getSlices()
+								.get(1)
+								.setGoalValue(
+										Constants.getInstance().getTarget());
+					} else {
+						pg.getSlices()
+								.get(1)
+								.setGoalValue(
+										Integer.parseInt(targetContent
+												.getText().toString()));
+						Constants.getInstance().setTarget(
+								Integer.parseInt(targetContent.getText()
+										.toString()));
+					}
+
 					pg.setDuration(1000);// default if unspecified is 300 ms
-					pg.setInterpolator(new AccelerateDecelerateInterpolator());
 					pg.setAnimationListener(getAnimationListener());
 					pg.animateToGoalValues();
 					dialog.cancel();
