@@ -353,7 +353,6 @@ public class MainActivity extends Activity {
 				inHomePage = false;
 			} else {
 				inHomePage = true;
-				;
 			}
 		} else {
 			mDrawerLayout.closeDrawer(mDrawerList);

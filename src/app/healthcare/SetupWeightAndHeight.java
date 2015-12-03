@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.gc.materialdesign.views.ButtonFlat;
 
+@SuppressLint("Instantiatable")
 public class SetupWeightAndHeight extends Dialog {
 	Context context;
 	View view;

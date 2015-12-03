@@ -7,12 +7,12 @@ import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.os.Build;
@@ -27,11 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import app.database.HeartRateDAO;
-import app.database.UserDAO;
-import app.dto.HeartRateDTO;
 import app.healthcare.heartrate.ImageProcessing;
 
 import com.echo.holographlibrary.PieGraph;
@@ -40,8 +36,6 @@ import com.gc.materialdesign.views.Button;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
-import com.jjoe64.graphview.LineGraphView;
 
 @SuppressWarnings("deprecation")
 public class HeartRateFragment extends Fragment {
@@ -57,12 +51,11 @@ public class HeartRateFragment extends Fragment {
 	private static Button btnHelp = null;
 	private static boolean checkHeartRate;
 	private static WakeLock wakeLock = null;
-	static Dialog alertDialog2;
+	static DialogResultHeartRate alertDialog2;
 	private static int averageIndex = 0;
 	private static final int averageArraySize = 4;
 	private static final int[] averageArray = new int[averageArraySize];
-	UserDAO userdao;
-	public static HeartRateDAO heartRateDAO;
+	
 	private PieSlice sliceRed;
 	static PieGraph pg;
 	static Bitmap bmHeartOn;
@@ -96,8 +89,8 @@ public class HeartRateFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_heart_rate,
 				container, false);
-		alertDialog2 = new Dialog(getActivity());
-		initGraph(rootView);
+		alertDialog2 = new DialogResultHeartRate(getActivity());
+//		initGraph(rootView);
 		initView(rootView);
 
 		return rootView;
@@ -130,8 +123,6 @@ public class HeartRateFragment extends Fragment {
 	}
 
 	private void initView(View rootView) {
-		userdao = new UserDAO(getActivity());
-		heartRateDAO = new HeartRateDAO(getActivity());
 		checkHeartRate = false;
 		preview = (SurfaceView) rootView.findViewById(R.id.preview);
 		previewHolder = preview.getHolder();
@@ -217,47 +208,15 @@ public class HeartRateFragment extends Fragment {
 		pg.setTextSizeGr(35);
 
 	}
-
-	private void initGraph(View rootView) {
-
-		graphView = new LineGraphView(getActivity(), "Graph");
-
-		listData = new ArrayList<GraphView.GraphViewData>();
-		GraphViewData[] data = new GraphViewData[listData.size()];
-		listData.toArray(data);
-		graphViewSeries = new GraphViewSeries("", new GraphViewSeriesStyle(
-				Color.RED, 7), data);
-
-		// add data
-		graphView.addSeries(graphViewSeries);
-		// set view port, start=2, size=40
-		graphView.setViewPort(0, 200);
-		graphView.setManualYMaxBound(250);
-		graphView.setManualYMinBound(230);
-		graphView.setScrollable(true);
-		// optional - activate scaling / zooming
-		graphView.getGraphViewStyle().setGridColor(Color.TRANSPARENT);
-		graphView.setScalable(true);
-
-		// graphView.setShowLegend(true);
-		graphView.setShowHorizontalLabels(false);
-		graphView.setShowVerticalLabels(false);
-
-		LinearLayout layout = (LinearLayout) rootView
-				.findViewById(R.id.graphLayout);
-		layout.addView(graphView);
-	}
-
 	static int timeFinish = 0;
 	static float grap = 0;
 	static boolean heartOn = false;
+	public static int heartBeat = 0;
+	
 	private static PreviewCallback previewCallback = new PreviewCallback() {
-
+		
 		@Override
 		public void onPreviewFrame(byte[] data, Camera cam) {
-
-			int hrAvg = 0;
-
 			if (data == null)
 				throw new NullPointerException();
 			Camera.Size size = cam.getParameters().getPreviewSize();
@@ -278,7 +237,7 @@ public class HeartRateFragment extends Fragment {
 			}
 
 			if (checkHeartRate) {
-
+				heartBeat = 0;
 				int averageArrayAvg = 0;
 				int averageArrayCnt = 0;
 				for (int i = 0; i < averageArray.length; i++) {
@@ -359,16 +318,13 @@ public class HeartRateFragment extends Fragment {
 						}
 					}
 					int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
-
+					heartBeat = beatsAvg;
 					pg.setBackgroundText("      "+String.valueOf(beatsAvg) + "\n     BPM");
-					// btnHelp.setText(String.valueOf(beatsAvg));
-					// text.setText(String.valueOf(beatsAvg));
 					startTime = System.currentTimeMillis();
 					beats = 0;
-					if (timeFinish >= 30) {
+					if (timeFinish >= 10) {
 						updateGraph(30);
 						checkHeartRate = false;
-
 						alertDialog2.setContentView(R.layout.custom_dialog);
 						alertDialog2.setTitle("Chỉ số");
 
@@ -381,20 +337,11 @@ public class HeartRateFragment extends Fragment {
 								.findViewById(R.id.textDialog);
 						text.setText("Chỉ số nhip tim trên phút: "
 								+ String.valueOf(beatsAvg));
-						HeartRateDTO dto = new HeartRateDTO();
-						dto.setHeartRate(hrAvg);
-						Constants.getInstance().getTime().setToNow();
-						dto.setTime(Constants.getInstance().getTime().monthDay
-								+ "/" + Constants.getInstance().getTime().month
-								+ 1 + "/"
-								+ Constants.getInstance().getTime().year + "");
-						dto.setUserId(1);
-						heartRateDAO.insertHeartRate(dto);
+						
 						// Setting Icon to Dialog
 						Button declineButton = (Button) alertDialog2
 								.findViewById(R.id.declineButton);
 						// if decline button is clicked, close the custom dialog
-
 						declineButton
 								.setOnClickListener(new View.OnClickListener() {
 									@Override
@@ -413,10 +360,10 @@ public class HeartRateFragment extends Fragment {
 										pg.setAnimationListener(getAnimationListener());
 										pg.animateToGoalValues();
 										pg.setBackgroundText("      000\n     BPM");
+										alertDialog2.startNewActivity();
 									}
 								});
 						alertDialog2.show();
-
 						btnStart.setText("START");
 					}
 
@@ -521,4 +468,5 @@ public class HeartRateFragment extends Fragment {
 		else
 			return null;
 	}
+	
 }

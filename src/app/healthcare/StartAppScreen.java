@@ -197,9 +197,8 @@ public class StartAppScreen extends Fragment {
 		sliceHeartRate.setValue(0);
 		pg.addSlice(sliceHeartRate);
 		pg.setTextSizeGr(20);
-		UserDTO userdto = new UserDAO(getActivity()).getUser();
 		List<HeartRateDTO> listdata = new HeartRateDAO(getActivity())
-				.getListHeartRate(userdto.getUserId());
+				.getListHeartRate();
 		int rows = listdata.size();
 		int avg = 0;
 		for (int i = 0; i < rows; i++) {

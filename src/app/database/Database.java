@@ -23,10 +23,8 @@ public class Database extends SQLiteOpenHelper {
 				+ "(RatioWHRId integer primary key, UserId integer, Time text, Ratio text, Status text)");
 		db.execSQL("create table STEPRUN "
 				+ "(StepRunId integer primary key, UserId integer, Time text, Tagets integer, TotalRun integer, Calos integer, TotalMin integer, Distance Float)");
-		db.execSQL("create table HEARTRATE "
-				+ "(HeartRateId integer primary key, UserId integer, Time text, HeartRate integer)");
-		db.execSQL("create table TIMETABLETAKE "
-				+ "(TimeTableTakeId integer primary key, UserId integer, Sick text, Time text, CountTime integer, Status text, TimeSpacing text)");
+		db.execSQL("create table HEART_RATE "
+				+ "(HEART_RATE_ID integer primary key, MOTION_STATUS text, TIME text, RATE integer, BODY_CONDITION text, NOTE text)");
 	}
 
 	@Override
@@ -35,8 +33,7 @@ public class Database extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS RATIOBMI");
 		db.execSQL("DROP TABLE IF EXISTS RATIOWHR");
 		db.execSQL("DROP TABLE IF EXISTS STEPRUN");
-		db.execSQL("DROP TABLE IF EXISTS HEARTRATE");
-		db.execSQL("DROP TABLE IF EXISTS TIMETABLETAKE");
+		db.execSQL("DROP TABLE IF EXISTS HEART_RATE");
 		onCreate(db);
 	}
 }

@@ -4,14 +4,32 @@ public class HeartRateDTO {
 	Integer heartRateId;
 	String time;
 	Integer heartRate;
-	Integer userId;
+	int statusSport;
+	int bodyCo;
+	String note;
 
-	public Integer getUserId() {
-		return userId;
+	public int getStatusSport() {
+		return statusSport;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setStatusSport(int status) {
+		this.statusSport = status;
+	}
+
+	public int getBodyCo() {
+		return bodyCo;
+	}
+
+	public void setBodyCo(int bodyCo) {
+		this.bodyCo = bodyCo;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	public Integer getHeartRateId() {

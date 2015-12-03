@@ -2,16 +2,57 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
+    <style name="Note">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/add_info_note</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
+    <style name="TypeText">
+        <item name="android:textSize">@dimen/text_size_x_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/add_info_temperature</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">2</item>
+    </style>
+
+    <style name="LineTitle">
+        <item name="android:textColor">@color/line_title</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingTop">10.0dip</item>
+        <item name="android:paddingRight">5.0dip</item>
+        <item name="android:paddingBottom">5.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="LineScale">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/line_scale</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingTop">5.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+        <item name="android:paddingBottom">5.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+    </style>
 
 </resources>

@@ -3,6 +3,7 @@
 
     <string name="app_name">Health Care Pro</string>
     <string name="app_name_info">Thông tin</string>
+    
     <string name="action_settings">Settings</string>
     <string name="line">Line</string>
     <string name="bar">Bar</string>
@@ -23,6 +24,22 @@
         <item>View for calo</item>
     </string-array>
 
+    <string name="note">Note</string>
+    <string name="hr_last_date_demo">05.11.1987 13:30</string>
+    <string name="status_nomal">Bình thường</string>
+    <string name="status_relax">Nghỉ ngơi</string>
+    <string name="status_before_sport">Trước vận động</string>
+    <string name="status_after_sport">Sau vận động</string>
+    <string name="status_max">Nhịp tim tối đa</string>
+    <string name="detail_activity_note_hint">Thêm ghi chú</string>
+    <string name="detail_activity_line_title_feeling">Bạn cảm thấy thế nào?</string>
+    <string name="detail_activity_line_title_type">Trạng thái</string>
+    <string name="detail_activity_scale_red">>90</string>
+    <string name="detail_activity_scale_green">&lt;60</string>
+    <string name="detail_activity_scale_yellow">60-90</string>
+    <string name="beats_per_minute">BPM</string>
+    
+    
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
     <string name="connect_button">Thử lại</string>
@@ -72,6 +89,7 @@
     <string name="lbHeightString">Chiều cao (m)</string>
     <string name="lbWeightString">Cân nặng (kg)</string>
     <string name="btnCalculateBMIString">Tính BMI</string>
+    <string name="btnSave">Lưu lại</string>
     <string name="lbTitleBMIString">BMI</string>
     <string name="tbxResultBMIString">BMI</string>
     <string name="lbTitleResultBMIString">BMI của bạn:</string>

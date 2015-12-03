@@ -20,6 +20,7 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
@@ -38,6 +39,7 @@ import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.request.DataDeleteRequest;
 import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.request.DataSourcesRequest;
+import com.google.android.gms.fitness.request.DataTypeCreateRequest;
 import com.google.android.gms.fitness.request.OnDataPointListener;
 import com.google.android.gms.fitness.request.SensorRequest;
 import com.google.android.gms.fitness.request.SessionInsertRequest;
@@ -45,13 +47,15 @@ import com.google.android.gms.fitness.request.SessionReadRequest;
 import com.google.android.gms.fitness.result.DailyTotalResult;
 import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.fitness.result.DataSourcesResult;
+import com.google.android.gms.fitness.result.DataTypeResult;
 import com.google.android.gms.fitness.result.ListSubscriptionsResult;
 import com.google.android.gms.fitness.result.SessionReadResult;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.fitness.ConfigApi;
 
 @SuppressLint("SimpleDateFormat")
 public class GoogleFitService extends IntentService implements
-		ConnectionCallbacks, OnConnectionFailedListener {
+		ConnectionCallbacks, OnConnectionFailedListener, ConfigApi {
 	public static GoogleApiClient mClient;
 	private boolean mTryingToConnect = false;
 	public static boolean isConnected = false;
@@ -161,11 +165,11 @@ public class GoogleFitService extends IntentService implements
 				 * dataReadResult = Fitness.HistoryApi.readData(mClient,
 				 * readRequest).await(1, TimeUnit.MINUTES);
 				 */
-				DailyTotalResult rs = Fitness.HistoryApi.readDailyTotal(mClient,
-						DataType.TYPE_STEP_COUNT_DELTA).await(1,
+				DailyTotalResult rs = Fitness.HistoryApi.readDailyTotal(
+						mClient, DataType.TYPE_STEP_COUNT_DELTA).await(1,
 						TimeUnit.MINUTES);
 				totalStepsGet = dumpDataSetHistorySteps(rs.getTotal());
-//				totalStepsGet = printDataStep(dataReadResult);
+				// totalStepsGet = printDataStep(dataReadResult);
 				if (totalStepsGet > Constants.getInstance().getStepRuns()) {
 					Constants.getInstance().setStepRuns(totalStepsGet);
 				}
@@ -179,13 +183,15 @@ public class GoogleFitService extends IntentService implements
 				 * delete end
 				 */
 				// lay thong tin so calo tieu thu trong mot ngay
-				/*readRequest = queryFitnessDataCaloFree(startTime, endTime);
-				dataReadResult = Fitness.HistoryApi.readData(mClient,
-						readRequest).await(1, TimeUnit.MINUTES);
-				totalCalosGet = printDataCaloFree(dataReadResult);*/
-				
-				DailyTotalResult rscl = Fitness.HistoryApi.readDailyTotal(mClient,
-						DataType.TYPE_CALORIES_EXPENDED).await(1,
+				/*
+				 * readRequest = queryFitnessDataCaloFree(startTime, endTime);
+				 * dataReadResult = Fitness.HistoryApi.readData(mClient,
+				 * readRequest).await(1, TimeUnit.MINUTES); totalCalosGet =
+				 * printDataCaloFree(dataReadResult);
+				 */
+
+				DailyTotalResult rscl = Fitness.HistoryApi.readDailyTotal(
+						mClient, DataType.TYPE_CALORIES_EXPENDED).await(1,
 						TimeUnit.MINUTES);
 				totalCalosGet = dumpDataSetHistoryCalos(rscl.getTotal());
 				Constants.getInstance().setCalos(totalCalosGet);
@@ -418,101 +424,6 @@ public class GoogleFitService extends IntentService implements
 
 		return dataSet;
 	}
-
-	/**
-	 * getstep between start and endtime
-	 * 
-	 * @param startTime
-	 * @param endTime
-	 */
-	// public void getSteps(long startTime, long endTime, int type) {
-	// DataReadRequest readRequest = new DataReadRequest.Builder()
-	// // The data request can specify multiple data types to
-	// // return, effectively
-	// // combining multiple data queries into one call.
-	// // In this example, it's very unlikely that the request is
-	// // for several hundred
-	// // datapoints each consisting of a few steps and a
-	// // timestamp. The more likely
-	// // scenario is wanting to see how many steps were walked per
-	// // day, for 7 days.
-	// .read(DataType.TYPE_STEP_COUNT_DELTA)
-	// // Analogous to a "Group By" in SQL, defines how data should
-	// // be aggregated.
-	// // bucketByTime allows for a time span, whereas
-	// // bucketBySession would allow
-	// // bucketing by "sessions", which would need to be defined
-	// // in code.
-	// .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-	// .build();
-	// DataReadResult dataReadResult = Fitness.HistoryApi.readData(mClient,
-	// readRequest).await(1, TimeUnit.MINUTES);
-	// DataSet stepData = dataReadResult
-	// .getDataSet(DataType.TYPE_STEP_COUNT_DELTA);
-	// totalStepsGet = 0;
-	// for (DataPoint dp : stepData.getDataPoints()) {
-	// for (Field field : dp.getDataType().getFields()) {
-	// int steps = dp.getValue(field).asInt();
-	// totalStepsGet += steps;
-	// }
-	// }
-	// publishTodaysStepData(totalStepsGet, type);
-	// }
-
-	// public void getAllStepsInYear() {
-	// Calendar cal = Calendar.getInstance();
-	// Date now = new Date();
-	// cal.setTime(now);
-	// int date = cal.get(Calendar.DAY_OF_YEAR);
-	// // int year = cal.get(Calendar.YEAR);
-	// // int month = Calendar.m
-	// // int hour = Integer.parseInt(s.split(" ")[2]);
-	// long endTime = cal.getTimeInMillis();
-	// long startTime = 0;
-	// int totalSteps = 0;
-	// for (int i = 1; i < date; i++) {
-	// cal.add(Calendar.DATE, -1);
-	// startTime = cal.getTimeInMillis();
-	// if (startTime < 0) {
-	// startTime = cal.getTimeInMillis();
-	// }
-	// final DataReadRequest readRequest = new DataReadRequest.Builder()
-	// .read(DataType.TYPE_STEP_COUNT_DELTA)
-	// .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-	// .build();
-	// DataReadResult dataReadResult = Fitness.HistoryApi.readData(
-	// mClient, readRequest).await(1, TimeUnit.DAYS);
-	// DataSet stepData = dataReadResult
-	// .getDataSet(DataType.TYPE_STEP_COUNT_DELTA);
-	// DataSet stepAVGData = dataReadResult
-	// .getDataSet(DataType.AGGREGATE_STEP_COUNT_DELTA);
-	// // Fitness.HistoryApi.readDailyTotal(mClient,
-	// // DataType.TYPE_STEP_COUNT_DELTA);
-	// // if (stepData.getDataPoints().size() == 0) {
-	// Log.i("test data", cal.getTime().toGMTString() + "----"
-	// + stepData.getDataPoints().size());
-	// Log.i("test size data AVG", cal.getTime().toGMTString() + "----"
-	// + stepAVGData.getDataPoints().size());
-	// // }
-	// for (DataPoint dp : stepAVGData.getDataPoints()) {
-	// for (Field field : dp.getDataType().getFields()) {
-	// int steps = dp.getValue(field).asInt();
-	// Log.i("AVG",
-	// cal.getTime().toGMTString() + "----"
-	// + String.valueOf(steps));
-	// }
-	// }
-	// for (DataPoint dp : stepData.getDataPoints()) {
-	// for (Field field : dp.getDataType().getFields()) {
-	// int steps = dp.getValue(field).asInt();
-	// totalSteps += steps;
-	// }
-	// }
-	// endTime = startTime;
-	// }
-	// totalStepsGetInYear = totalSteps;
-	// // publishTodaysStepData(totalStepsGetInYear);
-	// }
 
 	/*-----------SensorsApi------------------*/
 	/**
@@ -1552,5 +1463,57 @@ public class GoogleFitService extends IntentService implements
 	public void onConnectionSuspended(int arg0) {
 		mClient.connect();
 
+	}
+
+	@Override
+	public PendingResult<DataTypeResult> createCustomDataType(
+			GoogleApiClient arg0, DataTypeCreateRequest arg1) {
+		DataTypeCreateRequest request = new DataTypeCreateRequest.Builder()
+				// The prefix of your data type name must match your app's
+				// package name
+				.setName("app.healthcare")
+				.addField("HEART_RATE_ID", Field.FORMAT_INT32)
+				.addField("RATE", Field.FORMAT_INT32)
+				.addField("MOTION_STATUS", Field.FORMAT_STRING)
+				.addField("TIME", Field.FORMAT_STRING)
+				.addField("BODY_CONDITION", Field.FORMAT_STRING)
+				.addField("NOTE", Field.FORMAT_STRING)
+				.addField(Field.FIELD_ACTIVITY).build();
+		PendingResult<DataTypeResult> pendingResult = Fitness.ConfigApi
+				.createCustomDataType(mClient, request);
+
+		pendingResult.setResultCallback(new ResultCallback<DataTypeResult>() {
+			@Override
+			public void onResult(DataTypeResult dataTypeResult) {
+				DataType customType = dataTypeResult.getDataType();
+
+			}
+		});
+		return null;
+	}
+
+	@Override
+	public PendingResult<Status> disableFit(GoogleApiClient arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PendingResult<DataTypeResult> readDataType(GoogleApiClient arg0,
+			String arg1) {
+		PendingResult<DataTypeResult> pendingResult = Fitness.ConfigApi
+				.readDataType(mClient, "app.healthcare");
+
+		// 2. Check the result asynchronously
+		// (The result may not be immediately available)
+		pendingResult.setResultCallback(new ResultCallback<DataTypeResult>() {
+			@Override
+			public void onResult(DataTypeResult dataTypeResult) {
+				// Retrieve the custom data type
+				DataType customType = dataTypeResult.getDataType();
+
+			}
+		});
+		return null;
 	}
 }

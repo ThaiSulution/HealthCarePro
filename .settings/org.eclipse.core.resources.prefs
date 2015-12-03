@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/app/healthcare/HeartRateFragment.java=UTF-8
+encoding//src/app/healthcare/HeartRateResult.java=UTF-8
 encoding//src/app/healthcare/MainActivity.java=UTF-8
 encoding//src/app/healthcare/RatioBMIFragment.java=UTF-8
 encoding//src/app/healthcare/RatioWHRFragment.java=UTF-8

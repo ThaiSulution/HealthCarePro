@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8.0dip"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/measurement_bpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.0dip"
+            android:layout_marginRight="4.0dip"/>
+
+        <TextView
+            android:id="@+id/history_child_item_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="4.0dip"
+            android:drawableTop="@drawable/heart_red"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingTop="10.0dip"
+            android:singleLine="true"
+            android:text="@string/beats_per_minute"
+            android:textColor="@color/light_grey"
+            android:textSize="24.0dip"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/measurement_scala"
+        android:layout_width="match_parent"
+        android:layout_height="8.0dip"
+        android:layout_marginTop="8.0dip"
+        android:orientation="horizontal"
+        android:weightSum="3.0" >
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ff00ea53" />
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#fff3ce00" />
+
+        <View
+            android:id="@+id/v3"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ffff0054" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/measurement_bpm_indicator"
+        android:layout_width="3.0dip"
+        android:layout_height="16.0dip"
+        android:layout_marginTop="-13.0dip"
+        android:background="@color/dark_grey" />
+
+    <LinearLayout
+        android:id="@+id/measurement_scale_default"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-4.0dip"
+        android:orientation="horizontal"
+        android:weightSum="3.0" >
+
+        <TextView
+            android:id="@+id/measurement_scale_default_from"
+            style="@style/LineScale"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"
+            android:text="@string/detail_activity_scale_green" />
+
+        <TextView
+            android:id="@+id/measurement_scale_default_middle"
+            style="@style/LineScale"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="4.0dip"
+            android:paddingRight="4.0dip"
+            android:singleLine="true"
+            android:text="@string/detail_activity_scale_yellow" />
+
+        <TextView
+            android:id="@+id/measurement_scale_default_to"
+            style="@style/LineScale"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="left"
+            android:text="@string/detail_activity_scale_red" />
+    </LinearLayout>
+
+    <!-- <LinearLayout
+        android:id="@+id/measurement_scale_personal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-4.0dip"
+        android:orientation="horizontal"
+        android:weightSum="4.0" >
+
+        <TextView
+            android:id="@+id/measurement_scale_personal_from"
+            style="@style/LineScale"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="left"
+            android:text="@string/detail_activity_scale_green" />
+
+        <TextView
+            style="@style/LineScale"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.0"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/addinfo_activity_scale_title" />
+
+        <TextView
+            android:id="@+id/measurement_scale_personal_to"
+            style="@style/LineScale"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"
+            android:text="@string/detail_activity_scale_red" />
+    </LinearLayout> -->
+    <TextView
+        style="@style/LineTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/detail_activity_line_title_type" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:background="#ff9fa0a3" />
+
+    <LinearLayout
+        android:id="@+id/radiogroup_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8.0dip"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <CheckedTextView
+            android:id="@+id/measurement_type_anytime"
+            style="@style/TypeText"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:checked="true"
+            android:drawablePadding="4.0dip"
+            android:drawableTop="@drawable/radiobutton_type_custom"
+            android:text="@string/status_nomal" 
+            />
+
+        <CheckedTextView
+            android:id="@+id/measurement_type_resting"
+            style="@style/TypeText"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:checked="false"
+            android:drawablePadding="4.0dip"
+            android:drawableTop="@drawable/radiobutton_type_rest"
+            android:text="@string/status_relax"  
+            />
+
+        <CheckedTextView
+            android:id="@+id/measurement_type_before_sport"
+            style="@style/TypeText"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:checked="false"
+            android:drawablePadding="4.0dip"
+            android:drawableTop="@drawable/radiobutton_type_before_sport" 
+            android:text="@string/status_before_sport" />
+
+        <CheckedTextView
+            android:id="@+id/measurement_type_after_sport"
+            style="@style/TypeText"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:checked="false"
+            android:drawablePadding="4.0dip"
+            android:drawableTop="@drawable/radiobutton_type_after_sport" 
+            android:text="@string/status_after_sport" />
+
+        <CheckedTextView
+            android:id="@+id/measurement_type_max"
+            style="@style/TypeText"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:checked="false"
+            android:drawablePadding="4.0dip"
+            android:drawableTop="@drawable/radiobutton_type_max" 
+            android:text="@string/status_max" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/additional_info_feeling_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/LineTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/measurement_detail_edit_input_row_margin"
+            android:text="@string/detail_activity_line_title_feeling" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="#ff9fa0a3" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8.0dip" >
+
+            <CheckedTextView
+                android:id="@+id/measurement_feeling_awesome"
+                style="@style/TypeText"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:checked="false"
+                android:drawableTop="@drawable/radiobutton_feeling_awesome"
+                android:textSize="0.0sp" />
+
+            <CheckedTextView
+                android:id="@+id/measurement_feeling_good"
+                style="@style/TypeText"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:checked="false"
+                android:drawableTop="@drawable/radiobutton_feeling_good"
+                android:textSize="0.0sp" />
+
+            <CheckedTextView
+                android:id="@+id/measurement_feeling_soso"
+                style="@style/TypeText"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:checked="false"
+                android:drawableTop="@drawable/radiobutton_feeling_soso"
+                android:textSize="0.0sp" />
+
+            <CheckedTextView
+                android:id="@+id/measurement_feeling_sluggish"
+                style="@style/TypeText"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:checked="false"
+                android:drawableTop="@drawable/radiobutton_feeling_sluggish"
+                android:textSize="0.0sp" />
+
+            <CheckedTextView
+                android:id="@+id/measurement_feeling_injured"
+                style="@style/TypeText"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:checked="false"
+                android:drawableTop="@drawable/radiobutton_feeling_injured"
+                android:textSize="0.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/measurement_note"
+        style="@style/Note"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/measurement_detail_edit_input_row_margin"
+        android:hint="@string/detail_activity_note_hint" />
+    <com.gc.materialdesign.views.ButtonFlat
+                android:id="@+id/btnSave"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textColor="#ffffff"
+                android:text="@string/btnSave" 
+                android:background="@color/red"
+               />
+</LinearLayout>

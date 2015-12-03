@@ -24,20 +24,20 @@ public final class R {
 		public static final int pieSlicePadding = 0x7f010054;
 	}
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f020063;
-		public static final int popup_black = 0x7f020085;
+		public static final int ic_launcher = 0x7f02008f;
+		public static final int popup_black = 0x7f0200b1;
 	}
 	public static final class id {
-		public static final int horizontal = 0x7f090032;
-		public static final int vertical = 0x7f090033;
+		public static final int horizontal = 0x7f0a0035;
+		public static final int vertical = 0x7f0a0036;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f07002c;
-		public static final int hello_world = 0x7f070037;
+		public static final int app_name = 0x7f08002c;
+		public static final int hello_world = 0x7f080037;
 	}
 	public static final class style {
-		public static final int AppBaseTheme = 0x7f060005;
-		public static final int AppTheme = 0x7f060006;
+		public static final int AppBaseTheme = 0x7f070005;
+		public static final int AppTheme = 0x7f070006;
 	}
 	public static final class styleable {
 		public static final int[] BarGraph = { 0x7f01005b, 0x7f01005c, 0x7f01005d, 0x7f01005e, 0x7f01005f, 0x7f010060 };
