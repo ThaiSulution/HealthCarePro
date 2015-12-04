@@ -3,6 +3,7 @@ package app.healthcare;
 import com.gc.materialdesign.views.Button;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.CheckedTextView;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import app.database.HeartRateDAO;
 import app.dto.HeartRateDTO;
+import app.healthcare.heartratehistory.HistoryHeartRate;
 
 public class HeartRateResult extends Activity {
 	TextView resultView;
@@ -47,6 +49,7 @@ public class HeartRateResult extends Activity {
 			@Override
 			public void onClick(View v) {
 				insertHeartRate();
+				
 			}
 		});
 		vProgess = (View)findViewById(R.id.measurement_bpm_indicator);
@@ -202,12 +205,13 @@ public class HeartRateResult extends Activity {
 		dto.setHeartRate(HeartRateFragment.heartBeat);
 		Constants.getInstance().getTime().setToNow();
 		dto.setTime(Constants.getInstance().getTime().monthDay + "/"
-				+ Constants.getInstance().getTime().month + 1 + "/"
+				+ String.valueOf(Constants.getInstance().getTime().month + 1) + "/"
 				+ Constants.getInstance().getTime().year + "");
 
 		dto.setNote(noteString);
 		dto.setStatusSport(motionStatus);
 		heartRateDAO.insertHeartRate(dto);
-		finish();
+		startActivity(new Intent(this,HistoryHeartRate.class));
+		//finish();
 	}
 }
