@@ -16,6 +16,31 @@
         app:barShowAxis="true"
         app:barShowText="true" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" 
+            android:text="@string/avg_title"
+            android:textColor="#FF3333"
+            android:textStyle="italic" 
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/avg_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" 
+            android:textColor="#FF3333"
+            android:textStyle="italic|bold" 
+            android:gravity="center"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/treeview_heartrate"
         android:layout_width="match_parent"
@@ -30,4 +55,5 @@
             android:dividerHeight="1dp"
             android:listSelector="@drawable/list_selector_history" />
     </RelativeLayout>
+
 </LinearLayout>

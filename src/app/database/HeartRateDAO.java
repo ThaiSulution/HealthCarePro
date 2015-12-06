@@ -27,8 +27,7 @@ public class HeartRateDAO extends DbConnectionService {
 			contentValues.put(HEART_RATE_ID, getNewHeartRateaId());
 			contentValues.put(MOTION_STATUS, heartRate.getStatusSport());
 			contentValues.put(TIME, heartRate.getTime());
-			contentValues.put(RATE,
-					heartRate.getHeartRate());
+			contentValues.put(RATE, heartRate.getHeartRate());
 			contentValues.put(BODY_CONDITION, heartRate.getBodyCo());
 			contentValues.put(NOTE, heartRate.getNote());
 			myDb.insert(HEARTRATE_TABLE, null, contentValues);
@@ -43,25 +42,39 @@ public class HeartRateDAO extends DbConnectionService {
 				new String[] { Integer.toString(id) });
 	}
 
-	public ArrayList<HeartRateDTO> getListHeartRate() {
-		ArrayList<HeartRateDTO> arrayListHeartRate = new ArrayList<HeartRateDTO>();
-		String qr = "select * from " + HEARTRATE_TABLE;
-		Cursor res = myDb.rawQuery(qr,null);
+	public HeartRateDTO getHeartRate(int heartRateId) {
+		HeartRateDTO heartRateData = new HeartRateDTO();
+		String qr = "select * from " + HEARTRATE_TABLE + " where "
+				+ HEART_RATE_ID + " = ? ";
+		Cursor res = myDb.rawQuery(qr, new String[] { Integer.toString(heartRateId) });
 		res.moveToFirst();
 		while (res.isAfterLast() == false) {
 			HeartRateDTO item = new HeartRateDTO();
-			item.setHeartRateId(res.getInt(res
-					.getColumnIndex(HEART_RATE_ID)));
-			item.setTime(res.getString(res
-					.getColumnIndex(TIME)));
-			item.setHeartRate(res.getInt(res
-					.getColumnIndex(RATE)));
-			item.setBodyCo(res.getInt(res
-					.getColumnIndex(BODY_CONDITION)));
-			item.setNote(res.getString(res
-					.getColumnIndex(NOTE)));
-			item.setStatusSport(res.getInt(res
-					.getColumnIndex(MOTION_STATUS)));
+			item.setHeartRateId(res.getInt(res.getColumnIndex(HEART_RATE_ID)));
+			item.setTime(res.getString(res.getColumnIndex(TIME)));
+			item.setHeartRate(res.getInt(res.getColumnIndex(RATE)));
+			item.setBodyCo(res.getInt(res.getColumnIndex(BODY_CONDITION)));
+			item.setNote(res.getString(res.getColumnIndex(NOTE)));
+			item.setStatusSport(res.getInt(res.getColumnIndex(MOTION_STATUS)));
+			heartRateData = item;
+			res.moveToNext();
+		}
+		return heartRateData;
+	}
+
+	public ArrayList<HeartRateDTO> getListHeartRate() {
+		ArrayList<HeartRateDTO> arrayListHeartRate = new ArrayList<HeartRateDTO>();
+		String qr = "select * from " + HEARTRATE_TABLE;
+		Cursor res = myDb.rawQuery(qr, null);
+		res.moveToFirst();
+		while (res.isAfterLast() == false) {
+			HeartRateDTO item = new HeartRateDTO();
+			item.setHeartRateId(res.getInt(res.getColumnIndex(HEART_RATE_ID)));
+			item.setTime(res.getString(res.getColumnIndex(TIME)));
+			item.setHeartRate(res.getInt(res.getColumnIndex(RATE)));
+			item.setBodyCo(res.getInt(res.getColumnIndex(BODY_CONDITION)));
+			item.setNote(res.getString(res.getColumnIndex(NOTE)));
+			item.setStatusSport(res.getInt(res.getColumnIndex(MOTION_STATUS)));
 			arrayListHeartRate.add(item);
 			res.moveToNext();
 		}

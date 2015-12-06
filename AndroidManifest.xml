@@ -80,8 +80,9 @@
         <activity android:name="docbaoonline.activity.NewActivity" />
         <activity android:name="docbaoonline.activity.NoRssActivity" />
         <activity android:name="docbaoonline.activity.ReadNewsActivity" />
-        <activity android:name="app.healthcare.HeartRateResult" />
+        <activity android:name="app.healthcare.heartrate.HeartRateResult" />
         <activity android:name="app.healthcare.heartratehistory.HistoryHeartRate" />
+        <activity android:name="app.healthcare.heartratehistory.HeartRateResultView" />
         <activity
             android:name="app.healthcare.HistoryStep"
             android:label="Lịch sử đo đạc"

@@ -113,5 +113,6 @@
     <string name="txtTarget">Mục tiêu</string>
     <string name="txtTargetHint">Nhập mục tiêu của bạn</string>
     <string name="aboutContent">Vấn đề trọng tâm trong chăm sóc sức khỏe là thể chất, ngoài việc ăn uống điều độ cần có sự theo dõi thể trạng thường xuyên là điều cần thiết. Health Care giúp bạn theo dõi thường xuyên các chỉ số BMI (cân nặng, chiều cao), WHR (vòng eo/vòng mông), theo dõi quá trình tập thể dục (đo số bước đi trong ngày). Sử dụng Health Care để có thể chăm sóc sức khỏe không cần một thiết bị hỗ trợ nào khác, tối ưu hóa sự tập luyện và theo dõi sự tiến bộ của bạn</string>
+    <string name="avg_title">Nhịp tim trung bình:</string>
 
 </resources>

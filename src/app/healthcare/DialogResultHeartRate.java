@@ -3,6 +3,7 @@ package app.healthcare;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import app.healthcare.heartrate.HeartRateResult;
 
 public class DialogResultHeartRate extends Dialog{
 	Context c;

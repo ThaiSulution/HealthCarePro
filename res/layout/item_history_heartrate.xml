@@ -71,18 +71,18 @@
             <TextView
                 android:id="@+id/history_child_item_rate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/history_child_item_value"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="-6.0dip"
+                android:layout_alignParentTop="true"
                 android:layout_marginLeft="4.0dip"
                 android:layout_marginRight="8.0dip"
                 android:drawablePadding="2.0dip"
                 android:drawableTop="@drawable/heart_red_small"
                 android:text="@string/beats_per_minute"
                 android:textColor="@color/light_grey"
-                android:textSize="12.0sp"
-               />
+                android:textSize="12.0sp" />
+
         </RelativeLayout>
     </FrameLayout>
 
@@ -94,42 +94,3 @@
       />
 
 </FrameLayout>
-
-<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="2" >
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scrollbars="horizontal">
-
-        <com.echo.holographlibrary.BarGraph
-            android:id="@+id/chart_history_heartrate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:background="@color/white"
-            app:barAxisColor="@color/transparent_blue"
-            app:barShowAxis="true"
-            app:barShowText="true" />
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <ScrollView
-            android:id="@+id/list_item_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ScrollView>
-    </RelativeLayout>
-
-</LinearLayout> -->

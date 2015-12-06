@@ -15,7 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8.0dip"
-            android:layout_marginRight="4.0dip"/>
+            android:layout_marginRight="4.0dip"
+            android:textSize="40.0sp"/>
 
         <TextView
             android:id="@+id/history_child_item_unit"
@@ -258,7 +259,7 @@
                 android:layout_width="0.0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
-                android:checked="false"
+                android:checked="true"
                 android:drawableTop="@drawable/radiobutton_feeling_awesome"
                 android:textSize="0.0sp" />
 

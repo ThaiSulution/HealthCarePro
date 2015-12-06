@@ -1,8 +1,6 @@
 package app.healthcare.heartratehistory;
 import java.util.ArrayList;
 import java.util.HashMap;
- 
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,7 +14,15 @@ public class HistoryAdapter extends BaseAdapter {
 	 
 	    private Activity activity;
 	    private ArrayList<HashMap<String, String>> data;
-	    private static LayoutInflater inflater=null;
+	    public ArrayList<HashMap<String, String>> getData() {
+			return data;
+		}
+
+		public void setData(ArrayList<HashMap<String, String>> data) {
+			this.data = data;
+		}
+
+		private static LayoutInflater inflater=null;
 	    public ImageLoader imageLoader; 
 	 
 	    public HistoryAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
@@ -41,22 +47,22 @@ public class HistoryAdapter extends BaseAdapter {
 	    public View getView(int position, View convertView, ViewGroup parent) {
 	        View vi=convertView;
 	        if(convertView==null)
-	            vi = inflater.inflate(R.layout.list_row, null);
+	            vi = inflater.inflate(R.layout.item_history_heartrate, null);
 	 
-	        TextView title = (TextView)vi.findViewById(R.id.title); // title
-	        TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
-	        TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
-	        ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
+	        TextView typeFeel = (TextView)vi.findViewById(R.id.history_child_item_type_feel); 
+	        TextView typeDate = (TextView)vi.findViewById(R.id.history_child_item_date); 
+	        TextView typeRate = (TextView)vi.findViewById(R.id.history_child_item_rate);
+	        ImageView motionStatus=(ImageView)vi.findViewById(R.id.history_child_item_type_image); 
 	 
-	        HashMap<String, String> song = new HashMap<String, String>();
-	        song = data.get(position);
+	        HashMap<String, String> listHeartRate = new HashMap<String, String>();
+	        listHeartRate = data.get(position);
 	 
 	        // Setting all values in listview
-	        title.setText(song.get(HistoryHeartRate.KEY_TITLE));
-	        artist.setText(song.get(HistoryHeartRate.KEY_ARTIST));
-	        duration.setText(song.get(HistoryHeartRate.KEY_DURATION));
-	        imageLoader.DisplayImage(song.get(HistoryHeartRate.KEY_THUMB_URL), thumb_image);
+	        typeFeel.setText(listHeartRate.get( HistoryHeartRate.KEY_FEEL));
+	        typeDate.setText(listHeartRate.get(HistoryHeartRate.KEY_TIME));
+	        typeRate.setText(listHeartRate.get(HistoryHeartRate.KEY_RATE));
+	        
+	        imageLoader.DisplayImage(listHeartRate.get( HistoryHeartRate.KEY_MOTION_STATUS), motionStatus);
 	        return vi;
 	    }
-	
 }
