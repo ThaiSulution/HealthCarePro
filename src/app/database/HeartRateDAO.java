@@ -12,7 +12,8 @@ public class HeartRateDAO extends DbConnectionService {
 	public static final String HEARTRATE_TABLE = "HEART_RATE";
 	public static final String HEART_RATE_ID = "HEART_RATE_ID";
 	public static final String MOTION_STATUS = "MOTION_STATUS";
-	public static final String TIME = "TIME";
+	public static final String DATE = "DATE_RELEASE";
+	public static final String TIME = "TIME_RELEASE";
 	public static final String RATE = "RATE";
 	public static final String BODY_CONDITION = "BODY_CONDITION";
 	public static final String NOTE = "NOTE";
@@ -26,6 +27,7 @@ public class HeartRateDAO extends DbConnectionService {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put(HEART_RATE_ID, getNewHeartRateaId());
 			contentValues.put(MOTION_STATUS, heartRate.getStatusSport());
+			contentValues.put(DATE, heartRate.getDate());
 			contentValues.put(TIME, heartRate.getTime());
 			contentValues.put(RATE, heartRate.getHeartRate());
 			contentValues.put(BODY_CONDITION, heartRate.getBodyCo());
@@ -51,6 +53,7 @@ public class HeartRateDAO extends DbConnectionService {
 		while (res.isAfterLast() == false) {
 			HeartRateDTO item = new HeartRateDTO();
 			item.setHeartRateId(res.getInt(res.getColumnIndex(HEART_RATE_ID)));
+			item.setDate(res.getString(res.getColumnIndex(DATE)));
 			item.setTime(res.getString(res.getColumnIndex(TIME)));
 			item.setHeartRate(res.getInt(res.getColumnIndex(RATE)));
 			item.setBodyCo(res.getInt(res.getColumnIndex(BODY_CONDITION)));
@@ -70,6 +73,7 @@ public class HeartRateDAO extends DbConnectionService {
 		while (res.isAfterLast() == false) {
 			HeartRateDTO item = new HeartRateDTO();
 			item.setHeartRateId(res.getInt(res.getColumnIndex(HEART_RATE_ID)));
+			item.setDate(res.getString(res.getColumnIndex(DATE)));
 			item.setTime(res.getString(res.getColumnIndex(TIME)));
 			item.setHeartRate(res.getInt(res.getColumnIndex(RATE)));
 			item.setBodyCo(res.getInt(res.getColumnIndex(BODY_CONDITION)));

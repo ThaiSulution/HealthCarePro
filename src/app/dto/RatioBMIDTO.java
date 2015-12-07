@@ -3,6 +3,15 @@ package app.dto;
 public class RatioBMIDTO {
 	Integer ratioBMIId;
 	String time;
+	String date;
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	String ratio;
 	String status;
 	Integer userId;

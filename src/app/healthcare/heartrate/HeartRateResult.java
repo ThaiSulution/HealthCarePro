@@ -1,7 +1,5 @@
 package app.healthcare.heartrate;
 
-import com.gc.materialdesign.views.Button;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.util.DisplayMetrics;
@@ -13,9 +11,9 @@ import app.database.HeartRateDAO;
 import app.dto.HeartRateDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.R.id;
-import app.healthcare.R.layout;
 import app.healthcare.heartratehistory.HistoryHeartRate;
+
+import com.gc.materialdesign.views.Button;
 
 public class HeartRateResult extends Activity {
 	TextView resultView;
@@ -44,19 +42,19 @@ public class HeartRateResult extends Activity {
 		setContentView(R.layout.activity_heartrate_result);
 		DisplayMetrics displaymetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-		width= displaymetrics.widthPixels;
+		width = displaymetrics.widthPixels;
 		resultView = (TextView) findViewById(R.id.measurement_bpm);
 		resultView.setText(String.valueOf(HeartRateFragment.heartBeat));
-		btnSave = (Button)findViewById(R.id.btnSave);
+		btnSave = (Button) findViewById(R.id.btnSave);
 		btnSave.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				insertHeartRate();
-				
+
 			}
 		});
-		vProgess = (View)findViewById(R.id.measurement_bpm_indicator);
+		vProgess = (View) findViewById(R.id.measurement_bpm_indicator);
 		checkTextViewGenaral = (CheckedTextView) findViewById(R.id.measurement_type_anytime);
 		checkTextViewGenaral.setOnClickListener(new View.OnClickListener() {
 
@@ -196,11 +194,9 @@ public class HeartRateResult extends Activity {
 					}
 				});
 		note = (EditText) findViewById(R.id.measurement_note);
-		vProgess.setX((width/90)*(HeartRateFragment.heartBeat-30));
+		vProgess.setX((width / 90) * (HeartRateFragment.heartBeat - 30));
 		heartRateDAO = new HeartRateDAO(this);
 	}
-
-	
 
 	@SuppressWarnings("deprecation")
 	private void insertHeartRate() {
@@ -208,15 +204,20 @@ public class HeartRateResult extends Activity {
 		HeartRateDTO dto = new HeartRateDTO();
 		dto.setHeartRate(HeartRateFragment.heartBeat);
 		Constants.getInstance().getTime().setToNow();
-		dto.setTime(Constants.getInstance().getTime().monthDay + "/"
-				+ String.valueOf(Constants.getInstance().getTime().month + 1) + "/"
-				+ Constants.getInstance().getTime().year + "");
-
+		dto.setDate(String.valueOf(Constants.getInstance().getTime().monthDay)
+				+ "/"
+				+ String.valueOf(Constants.getInstance().getTime().month + 1)
+				+ "/" + Constants.getInstance().getTime().year + "");
+		dto.setTime(String.valueOf(Constants.getInstance().getTime().hour)
+				+ ":"
+				+ String.valueOf(Constants.getInstance().getTime().minute)
+				+ ":"
+				+ String.valueOf(Constants.getInstance().getTime().second));
 		dto.setNote(noteString);
 		dto.setStatusSport(motionStatus);
 		dto.setBodyCo(bodyCo);
 		heartRateDAO.insertHeartRate(dto);
-		startActivity(new Intent(this,HistoryHeartRate.class));
+		startActivity(new Intent(this, HistoryHeartRate.class));
 		finish();
 	}
 }

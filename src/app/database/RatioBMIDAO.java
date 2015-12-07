@@ -12,7 +12,8 @@ public class RatioBMIDAO extends DbConnectionService {
 	public static final String RATIOBMI_TABLE = "RATIOBMI";
 	public static final String COLUMN_RATIOBMI_ID = "RatioBMIId";
 	public static final String COLUMN_RATIOBMI_USER_ID = "UserId";
-	public static final String COLUMN_RATIOBMI_TIME = "Time";
+	public static final String COLUMN_RATIOBMI_DATE = "DateRelease";
+	public static final String COLUMN_RATIOBMI_TIME = "TimeRelease";
 	public static final String COLUMN_RATIOBMI_RATIO = "Ratio";
 	public static final String COLUMN_RATIOBMI_STATUS = "Status";
 
@@ -25,6 +26,7 @@ public class RatioBMIDAO extends DbConnectionService {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put(COLUMN_RATIOBMI_ID, this.getNewRatioBMIId());
 			contentValues.put(COLUMN_RATIOBMI_USER_ID, ratioBMIDTO.getUserId());
+			contentValues.put(COLUMN_RATIOBMI_DATE, ratioBMIDTO.getDate());
 			contentValues.put(COLUMN_RATIOBMI_TIME, ratioBMIDTO.getTime());
 			contentValues.put(COLUMN_RATIOBMI_RATIO, ratioBMIDTO.getRatio());
 			contentValues.put(COLUMN_RATIOBMI_STATUS, ratioBMIDTO.getStatus());
@@ -55,6 +57,7 @@ public class RatioBMIDAO extends DbConnectionService {
 			item.setRatioBMIId(res.getInt(res
 					.getColumnIndex(COLUMN_RATIOBMI_ID)));
 			item.setUserId(userId);
+			item.setDate(res.getString(res.getColumnIndex(COLUMN_RATIOBMI_DATE)));
 			item.setTime(res.getString(res.getColumnIndex(COLUMN_RATIOBMI_TIME)));
 			item.setRatio(res.getString(res
 					.getColumnIndex(COLUMN_RATIOBMI_RATIO)));

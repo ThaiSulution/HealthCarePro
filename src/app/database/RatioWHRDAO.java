@@ -11,7 +11,8 @@ public class RatioWHRDAO extends DbConnectionService {
 	public static final String RATIOWHR_TABLE = "RATIOWHR";
 	public static final String COLUMN_RATIOWHR_ID = "RatioWHRId";
 	public static final String COLUMN_RATIOWHR_USER_ID = "UserId";
-	public static final String COLUMN_RATIOWHR_TIME = "Time";
+	public static final String COLUMN_RATIOWHR_DATE = "DateRelease";
+	public static final String COLUMN_RATIOWHR_TIME = "TimeRelease";
 	public static final String COLUMN_RATIOWHR_RATIO = "Ratio";
 	public static final String COLUMN_RATIOWHR_STATUS = "Status";
 
@@ -24,6 +25,7 @@ public class RatioWHRDAO extends DbConnectionService {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put(COLUMN_RATIOWHR_ID, this.getNewRatioWHRId());
 			contentValues.put(COLUMN_RATIOWHR_USER_ID, ratioWHRDTO.getUserId());
+			contentValues.put(COLUMN_RATIOWHR_DATE, ratioWHRDTO.getDate());
 			contentValues.put(COLUMN_RATIOWHR_TIME, ratioWHRDTO.getTime());
 			contentValues.put(COLUMN_RATIOWHR_RATIO, ratioWHRDTO.getRatio());
 			contentValues.put(COLUMN_RATIOWHR_STATUS, ratioWHRDTO.getStatus());

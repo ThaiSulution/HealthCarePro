@@ -30,7 +30,8 @@ import com.gc.materialdesign.widgets.Dialog;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
-@SuppressLint("RtlHardcoded") public class RatioWHRFragment extends Fragment {
+@SuppressLint("RtlHardcoded")
+public class RatioWHRFragment extends Fragment {
 
 	CheckBox cbMale;
 	CheckBox cbFeMale;
@@ -161,14 +162,18 @@ import com.google.android.gms.plus.model.people.Person;
 		int date = Constants.getInstance().getTime().monthDay;
 		int month = Constants.getInstance().getTime().month + 1;
 		int year = Constants.getInstance().getTime().year;
-		dto.setTime(String.valueOf(date) + "/"
-				+ String.valueOf(month) +"/"
-				+ String.valueOf(year) + "");
+		dto.setTime(String.valueOf(date) + "/" + String.valueOf(month) + "/"
+				+ String.valueOf(year));
+		dto.setTime(String.valueOf(Constants.getInstance().getTime().hour)
+				+ ":"
+				+ String.valueOf(Constants.getInstance().getTime().minute)
+				+ ":"
+				+ String.valueOf(Constants.getInstance().getTime().second));
 		dto.setUserId(1);
 		dao.insertRatioWHR(dto);
 		Dialog dialog = new Dialog(getActivity(), "Chỉ số WHR",
 				"Chỉ số WHR của bạn là: " + String.valueOf(ratioWHR) + "\n"
-						+ result,0,app.healthcare.R.drawable.whr_icon);
+						+ result, 0, app.healthcare.R.drawable.whr_icon);
 		dialog.show();
 	}
 

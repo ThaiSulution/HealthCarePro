@@ -176,10 +176,30 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/image_time"
+                    android:id="@+id/image_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_calendar" />
+
+                <TextView
+                    android:id="@+id/date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hr_last_date_demo" 
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/box_light"
+                android:padding="5.0dip" 
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/image_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_gopro_notification" />
 
                 <TextView
                     android:id="@+id/time_text"

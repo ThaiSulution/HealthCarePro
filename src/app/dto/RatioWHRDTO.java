@@ -2,6 +2,15 @@ package app.dto;
 
 public class RatioWHRDTO {
 	Integer ratioWHRId;
+	String date;
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	String time;
 	String ratio;
 	String status;

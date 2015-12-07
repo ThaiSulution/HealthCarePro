@@ -28,7 +28,8 @@ import app.dto.UserDTO;
 
 import com.gc.materialdesign.widgets.Dialog;
 
-@SuppressLint("RtlHardcoded") public class RatioBMIFragment extends Fragment {
+@SuppressLint("RtlHardcoded")
+public class RatioBMIFragment extends Fragment {
 	CheckBox cbWHO;
 	CheckBox cbIDIAndWPRO;
 	EditText tbxHeight;
@@ -196,15 +197,18 @@ import com.gc.materialdesign.widgets.Dialog;
 		int date = Constants.getInstance().getTime().monthDay;
 		int month = Constants.getInstance().getTime().month + 1;
 		int year = Constants.getInstance().getTime().year;
-		dto.setTime(String.valueOf(date) + "/"
-				+ String.valueOf(month) +"/"
+		dto.setTime(String.valueOf(Constants.getInstance().getTime().hour)
+				+ ":"
+				+ String.valueOf(Constants.getInstance().getTime().minute)
+				+ ":"
+				+ String.valueOf(Constants.getInstance().getTime().second));
+		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
 				+ String.valueOf(year) + "");
 		dto.setUserId(1);
 		dao.insertRatioBMI(dto);
-//		ImageView im = 
 		Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
 				"Chỉ số BMI của bạn là: " + String.valueOf(ratioBMI) + "\n"
-						+ result,0, app.healthcare.R.drawable.bmi_icon);
+						+ result, 0, app.healthcare.R.drawable.bmi_icon);
 		dialog.show();
 	}
 
