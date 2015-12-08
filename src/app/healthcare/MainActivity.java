@@ -30,7 +30,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import app.database.UserDAO;
 import app.dto.UserDTO;
+import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.heartrate.HeartRateFragment;
+import app.healthcare.whr.RatioWHRFragment;
 import app.slidingmenu.adapter.NavDrawerListAdapter;
 import app.slidingmenu.model.NavDrawerItem;
 

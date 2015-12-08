@@ -5,9 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.animation.Animator;
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -30,10 +28,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.DialogResultHeartRate;
 import app.healthcare.R;
-import app.healthcare.R.color;
-import app.healthcare.R.drawable;
-import app.healthcare.R.id;
-import app.healthcare.R.layout;
 
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
@@ -51,7 +45,6 @@ public class HeartRateFragment extends Fragment {
 	private static SurfaceView preview = null;
 	private static SurfaceHolder previewHolder = null;
 	private static Camera camera = null;
-//	private static View image = null;
 	private static Button btnStart = null;
 	private static Button btnHelp = null;
 	private static boolean checkHeartRate;
@@ -60,7 +53,7 @@ public class HeartRateFragment extends Fragment {
 	private static int averageIndex = 0;
 	private static final int averageArraySize = 4;
 	private static final int[] averageArray = new int[averageArraySize];
-	
+
 	private PieSlice sliceRed;
 	static PieGraph pg;
 	static Bitmap bmHeartOn;
@@ -95,9 +88,7 @@ public class HeartRateFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_heart_rate,
 				container, false);
 		alertDialog2 = new DialogResultHeartRate(getActivity());
-//		initGraph(rootView);
 		initView(rootView);
-
 		return rootView;
 	}
 
@@ -105,9 +96,7 @@ public class HeartRateFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		wakeLock.acquire();
-
 		camera = Camera.open();
-
 		startTime = System.currentTimeMillis();
 	}
 
@@ -115,7 +104,6 @@ public class HeartRateFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		wakeLock.release();
-
 		camera.setPreviewCallback(null);
 		camera.stopPreview();
 		camera.release();
@@ -133,15 +121,11 @@ public class HeartRateFragment extends Fragment {
 		previewHolder = preview.getHolder();
 		previewHolder.addCallback(surfaceCallback);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
 		btnHelp = (Button) rootView.findViewById(R.id.btnHelp);
 		btnHelp.setOnClickListener(new View.OnClickListener() {
-
 			public void onClick(View v) {
 				alertDialog2.setContentView(R.layout.custom_dialog);
 				alertDialog2.setTitle("Hướng dẫn");
-
-				// Setting Dialog Message
 				TextView text = (TextView) alertDialog2
 						.findViewById(R.id.textDialog);
 				text.setText("Để có thể có kết quả đo chuẩn xác nhất, "
@@ -150,15 +134,11 @@ public class HeartRateFragment extends Fragment {
 						+ "bạn sẽ không có kết quả chuẩn xác nhất.\n Khi thấy biểu đồ có sự thay đổi tuần tự, "
 						+ "bạn bấm nút Start để bắt đầu đo và chờ kết quá. Trong quá trình đo đề nghị bạn giữ "
 						+ "nguyên vị trí tay, tránh giao động làm sai số kết quả");
-
-				// Setting Icon to Dialog
 				Button declineButton = (Button) alertDialog2
 						.findViewById(R.id.declineButton);
-				// if decline button is clicked, close the custom dialog
 				declineButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						// Close dialog
 						alertDialog2.dismiss();
 					}
 				});
@@ -179,8 +159,6 @@ public class HeartRateFragment extends Fragment {
 				}
 			}
 		});
-//		image = rootView.findViewById(R.id.image);
-
 		PowerManager pm = (PowerManager) getActivity().getSystemService(
 				Context.POWER_SERVICE);
 		wakeLock = pm
@@ -204,7 +182,6 @@ public class HeartRateFragment extends Fragment {
 				R.drawable.heart_on);
 		pg.setBackgroundBitmap(bmHeartOff, (int) pg.getX() / 2,
 				(int) pg.getY() / 2);
-		// pg.setBackgroundText("Step in here");
 		pg.setInnerCircleRatio(220);
 		pg.setBackgroundText("      000\n     BPM");
 		pg.setDuration(1000);// default if unspecified is 300 ms
@@ -213,13 +190,14 @@ public class HeartRateFragment extends Fragment {
 		pg.setTextSizeGr(35);
 
 	}
+
 	static int timeFinish = 0;
 	static float grap = 0;
 	static boolean heartOn = false;
 	public static int heartBeat = 0;
-	
+
 	private static PreviewCallback previewCallback = new PreviewCallback() {
-		
+
 		@Override
 		public void onPreviewFrame(byte[] data, Camera cam) {
 			if (data == null)
@@ -235,12 +213,10 @@ public class HeartRateFragment extends Fragment {
 
 			int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(),
 					height, width);
-			// Log.i(TAG, "imgAvg=" + imgAvg);
 			if (imgAvg == 0 || imgAvg == 255) {
 				processing.set(false);
 				return;
 			}
-
 			if (checkHeartRate) {
 				heartBeat = 0;
 				int averageArrayAvg = 0;
@@ -251,7 +227,6 @@ public class HeartRateFragment extends Fragment {
 						averageArrayCnt++;
 					}
 				}
-
 				int rollingAverage = (averageArrayCnt > 0) ? (averageArrayAvg / averageArrayCnt)
 						: 0;
 				TYPE newType = currentType;
@@ -260,31 +235,23 @@ public class HeartRateFragment extends Fragment {
 					pg.setBackgroundBitmap(bmHeartOn);
 					if (newType != currentType) {
 						beats++;
-						// Log.d(TAG, "BEAT!! beats="+beats);
 					}
 				} else if (imgAvg > rollingAverage) {
 					newType = TYPE.GREEN;
 					pg.setBackgroundBitmap(bmHeartOff);
 				}
-
 				if (averageIndex == averageArraySize)
 					averageIndex = 0;
 				averageArray[averageIndex] = imgAvg;
 				averageIndex++;
-
-				// Transitioned from one state to another to the same
 				if (newType != currentType) {
 					currentType = newType;
-//					image.postInvalidate();
 					if (heartOn) {
-
 						heartOn = false;
 					} else {
-
 						heartOn = true;
 					}
 				}
-
 				long endTime = System.currentTimeMillis();
 				double totalTimeInSecs = (endTime - startTime) / 1000d;
 				double totalTimeInSecsUpdate = (endTime - startTimeUpdate) / 1000d;
@@ -305,10 +272,6 @@ public class HeartRateFragment extends Fragment {
 						processing.set(false);
 						return;
 					}
-
-					// Log.d(TAG,
-					// "totalTimeInSecs="+totalTimeInSecs+" beats="+beats);
-
 					if (beatsIndex == beatsArraySize)
 						beatsIndex = 0;
 					beatsArray[beatsIndex] = dpm;
@@ -324,43 +287,36 @@ public class HeartRateFragment extends Fragment {
 					}
 					int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
 					heartBeat = beatsAvg;
-					pg.setBackgroundText("      "+String.valueOf(beatsAvg) + "\n     BPM");
+					pg.setBackgroundText("      " + String.valueOf(beatsAvg)
+							+ "\n     BPM");
 					startTime = System.currentTimeMillis();
 					beats = 0;
-					if (timeFinish >= 10) {
+					if (timeFinish >= 30) {
 						updateGraph(30);
 						checkHeartRate = false;
 						alertDialog2.setContentView(R.layout.custom_dialog);
 						alertDialog2.setTitle("Chỉ số");
-
-						// Setting Dialog Message
 						ImageView image = (ImageView) alertDialog2
 								.findViewById(R.id.imageDialog);
 						image.setImageResource(R.drawable.capture);
-
 						TextView text = (TextView) alertDialog2
 								.findViewById(R.id.textDialog);
 						text.setText("Chỉ số nhip tim trên phút: "
 								+ String.valueOf(beatsAvg));
-						
-						// Setting Icon to Dialog
 						Button declineButton = (Button) alertDialog2
 								.findViewById(R.id.declineButton);
-						// if decline button is clicked, close the custom dialog
+						declineButton.setText("OK");
 						declineButton
 								.setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View v) {
-										// Close dialog
 										alertDialog2.dismiss();
 										timeFinish = 0;
 										grap = 0;
 										pg.getSlices().get(0)
 												.setGoalValue(0.01f);
 										pg.getSlices().get(1).setGoalValue(30);
-										pg.setDuration(1000);// default if
-																// unspecified
-																// is 300 ms
+										pg.setDuration(1000);
 										pg.setInterpolator(new AccelerateDecelerateInterpolator());
 										pg.setAnimationListener(getAnimationListener());
 										pg.animateToGoalValues();
@@ -371,12 +327,10 @@ public class HeartRateFragment extends Fragment {
 						alertDialog2.show();
 						btnStart.setText("START");
 					}
-
 				}
 			}
 			processing.set(false);
 		}
-
 	};
 
 	private static void updateGraph(float f) {
@@ -428,7 +382,6 @@ public class HeartRateFragment extends Fragment {
 	private static Camera.Size getSmallestPreviewSize(int width, int height,
 			Camera.Parameters parameters) {
 		Camera.Size result = null;
-
 		for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
 			if (size.width <= width && size.height <= height) {
 				if (result == null) {
@@ -473,5 +426,4 @@ public class HeartRateFragment extends Fragment {
 		else
 			return null;
 	}
-	
 }

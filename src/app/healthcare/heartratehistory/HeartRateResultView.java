@@ -1,10 +1,8 @@
 package app.healthcare.heartratehistory;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,7 +14,7 @@ import app.healthcare.R;
 public class HeartRateResultView extends Activity {
 	HeartRateDAO dao;
 	HeartRateDTO data;
-	
+
 	public HeartRateDTO getData() {
 		return data;
 	}
@@ -28,16 +26,23 @@ public class HeartRateResultView extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_heartrate_result_view);		
+		setContentView(R.layout.activity_heartrate_result_view);
 		dao = new HeartRateDAO(this);
-		data = dao.getHeartRate(HistoryHeartRate.itemCurentSelect.getHeartRateId());
+		data = dao.getHeartRate(HistoryHeartRate.itemCurentSelect
+				.getHeartRateId());
 		init();
-		
+
 	}
 
 	private void init() {
+		DisplayMetrics displaymetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+		float width;
+		width = displaymetrics.widthPixels;
+		View vProgess;
+		vProgess = (View) findViewById(R.id.measurement_bpm_indicator);
+		vProgess.setX((width / 90) * (data.getHeartRate() - 30));
 		TextView measurementBpm = (TextView) findViewById(R.id.measurement_bpm);
-		View measurementBpmIndicator = (View) findViewById(R.id.measurement_bpm_indicator);
 		TextView motionStatusText = (TextView) findViewById(R.id.motion_status_text);
 		TextView bodyConditionText = (TextView) findViewById(R.id.body_condition_text);
 		TextView timeText = (TextView) findViewById(R.id.time_text);
@@ -46,55 +51,73 @@ public class HeartRateResultView extends Activity {
 		ImageView imageBodyCondition = (ImageView) findViewById(R.id.image_body_condition);
 		ImageView imageMotionStatus = (ImageView) findViewById(R.id.image_motion_status);
 		ImageButton imgeShareFacebook = (ImageButton) findViewById(R.id.image_share_facebook);
+		imgeShareFacebook.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		measurementBpm.setText(String.valueOf(data.getHeartRate()));
 		switch (data.getStatusSport()) {
 		case 1:
-			imageMotionStatus.setBackgroundResource(R.drawable.ic_hr_type_custom);
+			imageMotionStatus.setImageResource(R.drawable.ic_hr_type_custom);
 			motionStatusText.setText("Bình thường");
 			break;
 		case 2:
-			imageMotionStatus.setBackgroundResource(R.drawable.ic_hr_type_sleep);
+			imageMotionStatus.setImageResource(R.drawable.ic_hr_type_sleep);
 			motionStatusText.setText("Nghỉ ngơi");
 			break;
 		case 3:
-			imageMotionStatus.setBackgroundResource(R.drawable.ic_hr_type_before_sport);
+			imageMotionStatus
+					.setImageResource(R.drawable.ic_hr_type_before_sport);
 			motionStatusText.setText("Trước vận động");
 			break;
 		case 4:
-			imageMotionStatus.setBackgroundResource(R.drawable.ic_hr_type_after_sport);
+			imageMotionStatus
+					.setImageResource(R.drawable.ic_hr_type_after_sport);
 			motionStatusText.setText("Sau vận động");
 			break;
 		case 5:
-			imageMotionStatus.setBackgroundResource(R.drawable.ic_hr_type_max);
+			imageMotionStatus.setImageResource(R.drawable.ic_hr_type_max);
 			motionStatusText.setText("Nhịp tim tối đa");
 			break;
 		default:
 			break;
 		}
-		
+
 		switch (data.getBodyCo()) {
 		case 1:
-			imageBodyCondition.setBackgroundResource(R.drawable.feeling_colored_awesome);
+			imageBodyCondition
+					.setImageResource(R.drawable.feeling_colored_awesome);
 			bodyConditionText.setText("Rất tốt");
 			break;
 		case 2:
-			imageBodyCondition.setBackgroundResource(R.drawable.feeling_colored_good);
+			imageBodyCondition
+					.setImageResource(R.drawable.feeling_colored_good);
 			bodyConditionText.setText("Tốt");
 			break;
 		case 3:
-			imageBodyCondition.setBackgroundResource(R.drawable.feeling_colored_soso);
+			imageBodyCondition
+					.setImageResource(R.drawable.feeling_colored_soso);
 			bodyConditionText.setText("Bình thường");
 			break;
 		case 4:
-			imageBodyCondition.setBackgroundResource(R.drawable.feeling_colored_sluggish);
+			imageBodyCondition
+					.setImageResource(R.drawable.feeling_colored_sluggish);
 			bodyConditionText.setText("Không tốt");
 			break;
 		case 5:
-			imageBodyCondition.setBackgroundResource(R.drawable.feeling_colored_injured);
+			imageBodyCondition
+					.setImageResource(R.drawable.feeling_colored_injured);
 			bodyConditionText.setText("Tệ");
 			break;
 		default:
 			break;
 		}
+		timeText.setText(data.getTime());
+		dateText.setText(data.getDate());
+		measurementNote.setText(data.getNote());
+
 	}
 }

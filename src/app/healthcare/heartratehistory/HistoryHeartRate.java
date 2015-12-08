@@ -19,6 +19,7 @@ import app.healthcare.R;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
+import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
 
 public class HistoryHeartRate extends Activity {
 	BarGraph bg;
@@ -26,30 +27,31 @@ public class HistoryHeartRate extends Activity {
 	public static HeartRateDTO itemCurentSelect;
 	List<HeartRateDTO> listData;
 	TextView avgHeartRate;
-	
-	// All static variables
-		static final String URL = "http://api.androidhive.info/music/music.xml";
-		// XML node keys
-		static final String KEY_ID = "ID";
-		static final String KEY_RATE = "rate";
-		static final String KEY_TIME = "time";
-		static final String KEY_FEEL = "feel";
-		static final String KEY_MOTION_STATUS = "motion_status";
-		static final String KEY_NOTE = "note";
 
-		ListView list;
-		HistoryAdapter adapter;
+	// All static variables
+	static final String URL = "http://api.androidhive.info/music/music.xml";
+	// XML node keys
+	static final String KEY_ID = "ID";
+	static final String KEY_RATE = "rate";
+	static final String KEY_TIME = "time";
+	static final String KEY_DATE = "date";
+	static final String KEY_FEEL = "feel";
+	static final String KEY_MOTION_STATUS = "motion_status";
+	static final String KEY_NOTE = "note";
+
+	ListView list;
+	HistoryAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_heartrate);
-		avgHeartRate = (TextView)findViewById(R.id.avg_text);
+		avgHeartRate = (TextView) findViewById(R.id.avg_text);
 		dao = new HeartRateDAO(this);
 		listData = dao.getListHeartRate();
 		itemCurentSelect = new HeartRateDTO();
 		initChart();
-		initList() ;
+		initList();
 	}
 
 	private void initChart() {
@@ -62,11 +64,12 @@ public class HistoryHeartRate extends Activity {
 			bar = new Bar();
 			bar.setColor(resources.getColor(R.color.red));
 			bar.setSelectedColor(resources.getColor(R.color.transparent_orange));
-			String dateMonth = listData.get(i).getTime();
+			String dateMonth = listData.get(i).getDate();
 			String[] sub = dateMonth.split("/");
 			bar.setName(sub[0] + "/" + sub[1]);
 			bar.setValue((float) listData.get(i).getHeartRate());
 			bar.setValueString(String.valueOf(listData.get(i).getHeartRate()));
+			bar.setId(listData.get(i).getHeartRateId());
 			aBars.add(bar);
 			if ((listData.size() - i) >= 10) {
 				break;
@@ -76,6 +79,15 @@ public class HistoryHeartRate extends Activity {
 		final BarGraph barGraph = (BarGraph) findViewById(R.id.chart_history_heartrate);
 		bg = barGraph;
 		barGraph.setBars(aBars);
+		final Intent i = new Intent(this, HeartRateResultView.class);
+		barGraph.setOnBarClickedListener(new OnBarClickedListener() {
+			@Override
+			public void onClick(int index) {
+				HistoryHeartRate.itemCurentSelect = dao.getHeartRate(barGraph
+						.getBars().get(index).getId());
+				startActivity(i);
+			}
+		});
 	}
 
 	private void initList() {
@@ -91,6 +103,7 @@ public class HistoryHeartRate extends Activity {
 			// adding each child node to HashMap key =&gt; value
 			map.put(KEY_RATE, String.valueOf(listData.get(i).getHeartRate()));
 			map.put(KEY_TIME, listData.get(i).getTime());
+			map.put(KEY_DATE, listData.get(i).getDate());
 			switch (listData.get(i).getBodyCo()) {
 			case 1:
 				map.put(KEY_FEEL, "Rất tốt");
@@ -112,19 +125,24 @@ public class HistoryHeartRate extends Activity {
 			}
 			switch (listData.get(i).getStatusSport()) {
 			case 1:
-				map.put(KEY_MOTION_STATUS, String.valueOf(R.drawable.ic_hr_type_custom_add));
+				map.put(KEY_MOTION_STATUS,
+						String.valueOf(R.drawable.ic_hr_type_custom_add));
 				break;
 			case 2:
-				map.put(KEY_MOTION_STATUS, String.valueOf(R.drawable.ic_hr_type_sleep_add));
+				map.put(KEY_MOTION_STATUS,
+						String.valueOf(R.drawable.ic_hr_type_sleep_add));
 				break;
 			case 3:
-				map.put(KEY_MOTION_STATUS, String.valueOf(R.drawable.ic_hr_type_before_sport_add));
+				map.put(KEY_MOTION_STATUS,
+						String.valueOf(R.drawable.ic_hr_type_before_sport_add));
 				break;
 			case 4:
-				map.put(KEY_MOTION_STATUS, String.valueOf(R.drawable.ic_hr_type_after_sport_add));
+				map.put(KEY_MOTION_STATUS,
+						String.valueOf(R.drawable.ic_hr_type_after_sport_add));
 				break;
 			case 5:
-				map.put(KEY_MOTION_STATUS, String.valueOf(R.drawable.ic_hr_type_max_add));
+				map.put(KEY_MOTION_STATUS,
+						String.valueOf(R.drawable.ic_hr_type_max_add));
 				break;
 			default:
 				break;
@@ -132,23 +150,23 @@ public class HistoryHeartRate extends Activity {
 			map.put(KEY_NOTE, listData.get(i).getNote());
 			// adding HashList to ArrayList
 			heasrtRateList.add(map);
-			avg+=listData.get(i).getHeartRate();
+			avg += listData.get(i).getHeartRate();
 		}
 		list = (ListView) findViewById(R.id.list);
 		// Getting adapter by passing xml data ArrayList
 		adapter = new HistoryAdapter(this, heasrtRateList);
 		list.setAdapter(adapter);
-		avg = avg/listData.size();
+		avg = avg / listData.size();
 		avgHeartRate.setText(String.valueOf(avg));
-		final Intent i = new Intent(this,HeartRateResultView.class);
-		list.setOnItemClickListener( new OnItemClickListener() {
+		final Intent i = new Intent(this, HeartRateResultView.class);
+		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
 					long id) {
 				itemCurentSelect = listData.get(pos);
 				startActivity(i);
 			}
-			
+
 		});
 	}
 }

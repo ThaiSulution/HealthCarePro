@@ -1,4 +1,4 @@
-package app.healthcare;
+package app.healthcare.bmi;
 
 import java.util.List;
 
@@ -25,6 +25,11 @@ import app.database.RatioBMIDAO;
 import app.database.UserDAO;
 import app.dto.RatioBMIDTO;
 import app.dto.UserDTO;
+import app.healthcare.Constants;
+import app.healthcare.R;
+import app.healthcare.R.drawable;
+import app.healthcare.R.id;
+import app.healthcare.R.layout;
 
 import com.gc.materialdesign.widgets.Dialog;
 
@@ -208,7 +213,7 @@ public class RatioBMIFragment extends Fragment {
 		dao.insertRatioBMI(dto);
 		Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
 				"Chỉ số BMI của bạn là: " + String.valueOf(ratioBMI) + "\n"
-						+ result, 0, app.healthcare.R.drawable.bmi_icon);
+						+ result, app.healthcare.R.drawable.bmi_icon);
 		dialog.show();
 	}
 

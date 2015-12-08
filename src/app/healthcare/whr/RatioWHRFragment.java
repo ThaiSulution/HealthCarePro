@@ -1,4 +1,4 @@
-package app.healthcare;
+package app.healthcare.whr;
 
 import java.util.List;
 
@@ -25,6 +25,12 @@ import app.database.RatioWHRDAO;
 import app.database.UserDAO;
 import app.dto.RatioWHRDTO;
 import app.dto.UserDTO;
+import app.healthcare.Constants;
+import app.healthcare.GoogleFitService;
+import app.healthcare.R;
+import app.healthcare.R.drawable;
+import app.healthcare.R.id;
+import app.healthcare.R.layout;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.google.android.gms.plus.Plus;
@@ -162,7 +168,7 @@ public class RatioWHRFragment extends Fragment {
 		int date = Constants.getInstance().getTime().monthDay;
 		int month = Constants.getInstance().getTime().month + 1;
 		int year = Constants.getInstance().getTime().year;
-		dto.setTime(String.valueOf(date) + "/" + String.valueOf(month) + "/"
+		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
 				+ String.valueOf(year));
 		dto.setTime(String.valueOf(Constants.getInstance().getTime().hour)
 				+ ":"
@@ -173,7 +179,7 @@ public class RatioWHRFragment extends Fragment {
 		dao.insertRatioWHR(dto);
 		Dialog dialog = new Dialog(getActivity(), "Chỉ số WHR",
 				"Chỉ số WHR của bạn là: " + String.valueOf(ratioWHR) + "\n"
-						+ result, 0, app.healthcare.R.drawable.whr_icon);
+						+ result, app.healthcare.R.drawable.whr_icon);
 		dialog.show();
 	}
 

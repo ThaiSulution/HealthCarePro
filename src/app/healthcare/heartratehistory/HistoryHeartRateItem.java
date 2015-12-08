@@ -1,16 +1,15 @@
 package app.healthcare.heartratehistory;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import app.healthcare.R.id;
-import app.healthcare.R.layout;
-
 import com.gc.materialdesign.treeview.model.TreeNode;
 
+@SuppressLint("InflateParams")
 public class HistoryHeartRateItem extends TreeNode.BaseNodeViewHolder<HistoryHeartRateItem.IconTreeItem>{
 	ImageView historyChildItemImage;
 	TextView historyChildItemDate;
