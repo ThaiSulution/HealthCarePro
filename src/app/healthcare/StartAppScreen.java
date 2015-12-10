@@ -131,7 +131,7 @@ public class StartAppScreen extends Fragment {
 				}
 			});
 		} catch (NullPointerException e) {
-			Log.e("buildChartStepRun", e.toString());
+			Log.e("buildChartWHR", e.toString());
 		}
 	}
 

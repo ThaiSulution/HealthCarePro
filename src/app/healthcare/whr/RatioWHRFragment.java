@@ -28,10 +28,6 @@ import app.dto.UserDTO;
 import app.healthcare.Constants;
 import app.healthcare.GoogleFitService;
 import app.healthcare.R;
-import app.healthcare.R.drawable;
-import app.healthcare.R.id;
-import app.healthcare.R.layout;
-
 import com.gc.materialdesign.widgets.Dialog;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
