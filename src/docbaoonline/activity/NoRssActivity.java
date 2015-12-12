@@ -16,7 +16,7 @@ public class NoRssActivity extends Activity {
 	private ProgressDialog dialog;
 	private String link;
 
-	@SuppressWarnings({ "deprecation", "static-access" })
+	@SuppressWarnings({ "static-access" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

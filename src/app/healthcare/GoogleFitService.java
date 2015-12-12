@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.fitness.ConfigApi;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.FitnessActivities;
 import com.google.android.gms.fitness.FitnessStatusCodes;
@@ -51,7 +52,7 @@ import com.google.android.gms.fitness.result.DataTypeResult;
 import com.google.android.gms.fitness.result.ListSubscriptionsResult;
 import com.google.android.gms.fitness.result.SessionReadResult;
 import com.google.android.gms.plus.Plus;
-import com.google.android.gms.fitness.ConfigApi;
+import com.google.android.gms.plus.model.people.Person;
 
 @SuppressLint("SimpleDateFormat")
 public class GoogleFitService extends IntentService implements
@@ -73,6 +74,7 @@ public class GoogleFitService extends IntentService implements
 	public static int dataSizeCalories = 0;
 	public static int dataSizeDistance = 0;
 	public static int dataSizeHour = 0;
+	public static Integer targetToset = 0;
 	public static ArrayList<HistoryStepObject> listDataStep;
 
 	public static final int TYPE_GET_DATA_TO_DAY = 1;
@@ -83,6 +85,8 @@ public class GoogleFitService extends IntentService implements
 	public static final int TYPE_SET_HEIGHT_ANDWEIGHT = 6;
 	public static final int TYPE_SET_DISTANCE = 7;
 	public static final int TYPE_SET_ROUND_BUTT = 8;
+	public static final int TYPE_SET_TARGET = 9;
+	public static final int TYPE_GET_TARGET = 10;
 
 	public static final String TAG = "GoogleFitService";
 	public static final String TAG_SENSOR = "BasicSensorsApi";
@@ -161,10 +165,6 @@ public class GoogleFitService extends IntentService implements
 				startTime = cal.getTimeInMillis();
 				// lay data so buoc di trong ngay
 				readRequest = queryFitnessDataStep(startTime, endTime);
-				/*
-				 * dataReadResult = Fitness.HistoryApi.readData(mClient,
-				 * readRequest).await(1, TimeUnit.MINUTES);
-				 */
 				DailyTotalResult rs = Fitness.HistoryApi.readDailyTotal(
 						mClient, DataType.TYPE_STEP_COUNT_DELTA).await(1,
 						TimeUnit.MINUTES);
@@ -279,9 +279,59 @@ public class GoogleFitService extends IntentService implements
 			case TYPE_SET_DISTANCE:
 
 				break;
-			case TYPE_SET_ROUND_BUTT:
-				break;
+			case TYPE_SET_TARGET:
+				float target = StepRun.target;
+				cal = Calendar.getInstance();
+				cal.setTime(now);
+				endTime = cal.getTimeInMillis();
+				cal.add(Calendar.DAY_OF_YEAR, -1);
+				startTime = cal.getTimeInMillis();
 
+				DataSet targetDataSet = createDataForRequest(
+						DataType.TYPE_HEART_RATE_BPM, DataSource.TYPE_RAW,
+						target, startTime, endTime, TimeUnit.MILLISECONDS);
+
+				Fitness.HistoryApi.insertData(mClient, targetDataSet).await(1,
+						TimeUnit.MINUTES);
+				break;
+			case TYPE_GET_TARGET:
+				cal = Calendar.getInstance();
+				cal.setTime(now);
+				endTime = cal.getTimeInMillis();
+				cal.add(Calendar.WEEK_OF_YEAR, -1);
+				startTime = cal.getTimeInMillis();
+				readRequest = new DataReadRequest.Builder()
+						.aggregate(DataType.TYPE_HEART_RATE_BPM,
+								DataType.AGGREGATE_HEART_RATE_SUMMARY)
+						.bucketByTime(1, TimeUnit.DAYS)
+						.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+						.build();
+				dataReadResult = Fitness.HistoryApi.readData(mClient,
+						readRequest).await(1, TimeUnit.MINUTES);
+				int targetGet = 0;
+				if (dataReadResult.getBuckets().size() > 0) {
+					for (Bucket bucket : dataReadResult.getBuckets()) {
+						List<DataSet> dataSets = bucket.getDataSets();
+						int temp = 0;
+						for (DataSet dataSet : dataSets) {
+							temp += dumpDataSetHistoryTarget(dataSet);
+						}
+						if (temp > 0) {
+							targetGet = temp;
+							break;
+						}
+					}
+				} else if (dataReadResult.getDataSets().size() > 0) {
+					for (DataSet dataSet : dataReadResult.getDataSets()) {
+						int temp = dumpDataSetHistoryTarget(dataSet);
+						if (temp > 0) {
+							targetGet = temp;
+							break;
+						}
+					}
+				}
+				targetToset = targetGet;
+				break;
 			case TYPE_GET_DATA_TO_YEAR:
 				getDataYearFinish = false;
 				// xac dinh khoang thoi gian can lay data
@@ -383,12 +433,7 @@ public class GoogleFitService extends IntentService implements
 		cal.add(Calendar.DAY_OF_YEAR, -1);
 		long startTime = cal.getTimeInMillis();
 
-		DataSet weightDataSet = createDataForRequest(DataType.TYPE_WEIGHT, // for
-																			// height,
-																			// it
-																			// would
-																			// be
-																			// DataType.TYPE_HEIGHT
+		DataSet weightDataSet = createDataForRequest(DataType.TYPE_WEIGHT,
 				DataSource.TYPE_RAW, weight, // weight in kgs
 				startTime, // start time
 				endTime, // end time
@@ -1282,6 +1327,18 @@ public class GoogleFitService extends IntentService implements
 		return calos;
 	}
 
+	public int dumpDataSetHistoryTarget(DataSet dataSet) {
+		int target = 0;
+		for (DataPoint dp : dataSet.getDataPoints()) {
+			for (Field field : dp.getDataType().getFields()) {
+				if (field.equals(DataType.TYPE_HEART_RATE_BPM)) {
+					target += dp.getValue(field).asInt();
+				}
+			}
+		}
+		return target;
+	}
+
 	public float dumpDataSetHistoryDistance(DataSet dataSet) {
 		Log.i(TAG, "Data returned for Data type: "
 				+ dataSet.getDataType().getName());
@@ -1431,6 +1488,17 @@ public class GoogleFitService extends IntentService implements
 	}
 
 	public void notifyUiFitConnected() {
+		try {
+			if (Plus.PeopleApi.getCurrentPerson(mClient) != null) {
+				Person currentPerson = Plus.PeopleApi.getCurrentPerson(mClient);
+				Constants.getInstance().name = currentPerson.getDisplayName();
+				Constants.getInstance().email = Plus.AccountApi
+						.getAccountName(mClient);
+				Constants.getInstance().sex = currentPerson.getGender();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		findFitnessDataSourcesSensors();
 		// new InsertAndVerifyDataTask().execute();
 		subscribe();
@@ -1485,7 +1553,7 @@ public class GoogleFitService extends IntentService implements
 		pendingResult.setResultCallback(new ResultCallback<DataTypeResult>() {
 			@Override
 			public void onResult(DataTypeResult dataTypeResult) {
-				DataType customType = dataTypeResult.getDataType();
+				//DataType customType = dataTypeResult.getDataType();
 
 			}
 		});
@@ -1510,7 +1578,7 @@ public class GoogleFitService extends IntentService implements
 			@Override
 			public void onResult(DataTypeResult dataTypeResult) {
 				// Retrieve the custom data type
-				DataType customType = dataTypeResult.getDataType();
+				//DataType customType = dataTypeResult.getDataType();
 
 			}
 		});

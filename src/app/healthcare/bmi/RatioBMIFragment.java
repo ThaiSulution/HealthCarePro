@@ -1,37 +1,31 @@
 package app.healthcare.bmi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import app.database.RatioBMIDAO;
-import app.database.UserDAO;
 import app.dto.RatioBMIDTO;
-import app.dto.UserDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.R.drawable;
-import app.healthcare.R.id;
-import app.healthcare.R.layout;
 
 import com.gc.materialdesign.widgets.Dialog;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 @SuppressLint("RtlHardcoded")
 public class RatioBMIFragment extends Fragment {
@@ -44,9 +38,7 @@ public class RatioBMIFragment extends Fragment {
 
 	Button btnReinphut;
 	Button btnCalculateBMI;
-	TableLayout tableData;
-	UserDAO userdao;
-	RatioBMIDAO dao;
+	List<RatioBMIDTO> allData = new ArrayList<RatioBMIDTO>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +46,18 @@ public class RatioBMIFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_ratio_bmi,
 				container, false);
 		initView(rootView);
+		try {
+			ParseQuery<RatioBMIDTO> query = ParseQuery.getQuery("RatioBMIDTO");
+			query.findInBackground(new FindCallback<RatioBMIDTO>() {
+				@Override
+				public void done(List<RatioBMIDTO> datas, ParseException e) {
+					if (datas != null) {
+						allData = datas;
+					}
+				}
+			});
+		} catch (Exception e) {
+		}
 		return rootView;
 	}
 
@@ -64,9 +68,6 @@ public class RatioBMIFragment extends Fragment {
 	 *            container chua cac control
 	 */
 	private void initView(View rootView) {
-		userdao = new UserDAO(getActivity());
-		dao = new RatioBMIDAO(getActivity());
-		tableData = (TableLayout) rootView.findViewById(R.id.tableDataBMI);
 		cbIDIAndWPRO = (CheckBox) rootView.findViewById(R.id.cbIDIAndWPRO);
 		cbIDIAndWPRO.setOnCheckedChangeListener(listener);
 		cbWHO = (CheckBox) rootView.findViewById(R.id.cbWHO);
@@ -100,41 +101,6 @@ public class RatioBMIFragment extends Fragment {
 		tbxResult = (TextView) rootView.findViewById(R.id.tbxResultBMI);
 		tbxImpact = (TextView) rootView.findViewById(R.id.tbxImpact);
 
-		try {
-			buildTableData();
-
-		} catch (NullPointerException e) {
-			Log.e("nulldata", "chua co du lieu");
-		}
-	}
-
-	private void buildTableData() {
-		UserDTO userdto = userdao.getUser();
-		List<RatioBMIDTO> listdata = dao.getListRatioBMI(userdto.getUserId());
-		int rows = listdata.size();
-		int cols = 3;
-		for (int i = 0; i < rows; i++) {
-
-			TableRow row = new TableRow(getActivity());
-			row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT));
-			for (int j = 0; j < cols; j++) {
-				TextView tv = new TextView(getActivity());
-				tv.setTextColor(Color.YELLOW);
-				if (j == 0) {
-					tv.setGravity(Gravity.LEFT);
-					tv.setText(listdata.get(i).getTime());
-				} else if (j == 1) {
-					tv.setGravity(Gravity.CENTER);
-					tv.setText(listdata.get(i).getRatio());
-				} else if (j == 2) {
-					tv.setGravity(Gravity.RIGHT);
-					tv.setText(listdata.get(i).getStatus());
-				}
-				row.addView(tv);
-			}
-			tableData.addView(row);
-		}
 	}
 
 	/**
@@ -148,11 +114,10 @@ public class RatioBMIFragment extends Fragment {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public void calculateBMI() {
-		float height = Float.parseFloat(tbxHeight.getText().toString());
-		float weight = Float.parseFloat(tbxWeight.getText().toString());
-		float ratioBMI = weight / (height * height);
+		Double height = Double.parseDouble(tbxHeight.getText().toString());
+		Double weight = Double.parseDouble(tbxWeight.getText().toString());
+		Double ratioBMI = weight / (height * height);
 		String result;
 		if (cbIDIAndWPRO.isChecked()) {
 			if (ratioBMI < 18.5) {
@@ -189,15 +154,16 @@ public class RatioBMIFragment extends Fragment {
 			}
 		}
 		RatioBMIDTO dto = new RatioBMIDTO();
-		ratioBMI *= 10;
-		int temp = (int) (ratioBMI);
-		ratioBMI = temp;
-		ratioBMI /= 10;
+		ratioBMI = (double) (Math.round((double) ratioBMI * 10) / (double) 10);
 		tbxResult.setText(String.valueOf(ratioBMI));
 		tbxImpact.setText(result);
-		dto.setRatio(String.valueOf(ratioBMI));
+		dto.setRatio(ratioBMI);
 		dto.setStatus(result);
-
+		int id = 1;
+		if (allData.size() > 0) {
+			id = allData.size() + 1;
+		}
+		dto.setRatioBMIId(id);
 		Constants.getInstance().getTime().setToNow();
 		int date = Constants.getInstance().getTime().monthDay;
 		int month = Constants.getInstance().getTime().month + 1;
@@ -209,12 +175,37 @@ public class RatioBMIFragment extends Fragment {
 				+ String.valueOf(Constants.getInstance().getTime().second));
 		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
 				+ String.valueOf(year) + "");
-		dto.setUserId(1);
-		dao.insertRatioBMI(dto);
-		Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
-				"Chỉ số BMI của bạn là: " + String.valueOf(ratioBMI) + "\n"
-						+ result, app.healthcare.R.drawable.bmi_icon);
-		dialog.show();
+		final Double ratioToView = ratioBMI;
+		final String resultToView = result;
+		final Intent historyBMI = new Intent(getActivity(), HistoryBMI.class);
+		dto.saveInBackground(new SaveCallback() {
+			@Override
+			public void done(ParseException ex) {
+				if (ex == null) {
+					final Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
+							"Chỉ số BMI của bạn là: "
+									+ String.valueOf(ratioToView) + "\n"
+									+ resultToView,
+							app.healthcare.R.drawable.bmi_icon);
+					dialog.show();
+					dialog.getButtonAccept().setOnClickListener(
+							new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									startActivity(historyBMI);
+									dialog.dismiss();
+								}
+							});
+
+				} else {
+					Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
+							"Có lỗi xảy ra!",
+							app.healthcare.R.drawable.bmi_icon);
+					dialog.show();
+				}
+			}
+		});
 	}
 
 	private OnCheckedChangeListener listener = new OnCheckedChangeListener() {

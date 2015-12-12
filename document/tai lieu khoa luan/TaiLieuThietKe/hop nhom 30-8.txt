@@ -1,8 +1,0 @@
-﻿-gom chung trường hợp "in home" và trường hợp "working" trong chức năng cảnh báo ngất thành 1
--xây dựng 2 loại giao diện
-1 cho bác sĩ
-2 cho bệnh nhân
--chẩn đoán
-trắc nghiệm
-chọn a --> câu thứ "n" (dựa theo trường hợp xét trước). tránh tình trạng lặp lại bài test cố định
--sửa lại bản thiết kế news

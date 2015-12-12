@@ -1,68 +1,78 @@
 package app.dto;
 
-public class HeartRateDTO {
-	Integer heartRateId;
-	String date;
-	public String getDate() {
-		return date;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+@ParseClassName("HeartRateDTO")
+public class HeartRateDTO extends ParseObject {
+	public static ParseQuery<HeartRateDTO> getQuery() {
+		return ParseQuery.getQuery(HeartRateDTO.class);
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public ParseUser getUser() {
+		return getParseUser("user");
 	}
 
-	String time;
-	Integer heartRate;
-	int statusSport;
-	int bodyCo;
-	String note;
-
-	public int getStatusSport() {
-		return statusSport;
-	}
-
-	public void setStatusSport(int status) {
-		this.statusSport = status;
-	}
-
-	public int getBodyCo() {
-		return bodyCo;
-	}
-
-	public void setBodyCo(int bodyCo) {
-		this.bodyCo = bodyCo;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public Integer getHeartRateId() {
-		return heartRateId;
-	}
-
-	public void setHeartRateId(Integer heartRateId) {
-		this.heartRateId = heartRateId;
+	public void setUser(ParseUser value) {
+		put("user", value);
 	}
 
 	public String getTime() {
-		return time;
+		return getString("time");
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setTime(String value) {
+		put("time", value);
+	}
+
+	public String getDate() {
+		return getString("date1");
+	}
+
+	public void setDate(String value) {
+		put("date1", value);
+	}
+
+	public int getStatusSport() {
+		return getInt("statusSport");
+	}
+
+	public void setStatusSport(int value) {
+		put("statusSport", value);
+	}
+
+	public int getBodyCo() {
+		return getInt("bodyCo");
+	}
+
+	public void setBodyCo(int value) {
+		put("bodyCo", value);
+	}
+
+	public String getNote() {
+		return getString("note");
+	}
+
+	public void setNote(String value) {
+		put("note", value);
+	}
+
+	public Integer getHeartRateId() {
+		return getInt("heartRateId");
+	}
+
+	public void setHeartRateId(Integer value) {
+		put("heartRateId", value);
 	}
 
 	public Integer getHeartRate() {
-		return heartRate;
+		return getInt("heartRate");
 	}
 
-	public void setHeartRate(Integer heartRate) {
-		this.heartRate = heartRate;
+	public void setHeartRate(Integer value) {
+		put("heartRate", value);
 	}
 
 }

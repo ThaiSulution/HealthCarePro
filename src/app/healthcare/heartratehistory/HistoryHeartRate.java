@@ -13,19 +13,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import app.database.HeartRateDAO;
 import app.dto.HeartRateDTO;
 import app.healthcare.R;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class HistoryHeartRate extends Activity {
 	BarGraph bg;
-	HeartRateDAO dao;
 	public static HeartRateDTO itemCurentSelect;
-	List<HeartRateDTO> listData;
+	List<HeartRateDTO> listData = new ArrayList<HeartRateDTO>();
 	TextView avgHeartRate;
 
 	// All static variables
@@ -47,8 +47,14 @@ public class HistoryHeartRate extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_heartrate);
 		avgHeartRate = (TextView) findViewById(R.id.avg_text);
-		dao = new HeartRateDAO(this);
-		listData = dao.getListHeartRate();
+		try {
+			ParseQuery<HeartRateDTO> query = ParseQuery
+					.getQuery("HeartRateDTO");
+			listData = query.find();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		itemCurentSelect = new HeartRateDTO();
 		initChart();
 		initList();
@@ -64,9 +70,7 @@ public class HistoryHeartRate extends Activity {
 			bar = new Bar();
 			bar.setColor(resources.getColor(R.color.red));
 			bar.setSelectedColor(resources.getColor(R.color.transparent_orange));
-			String dateMonth = listData.get(i).getDate();
-			String[] sub = dateMonth.split("/");
-			bar.setName(sub[0] + "/" + sub[1]);
+			bar.setName(listData.get(i).getDate());
 			bar.setValue((float) listData.get(i).getHeartRate());
 			bar.setValueString(String.valueOf(listData.get(i).getHeartRate()));
 			bar.setId(listData.get(i).getHeartRateId());
@@ -83,8 +87,22 @@ public class HistoryHeartRate extends Activity {
 		barGraph.setOnBarClickedListener(new OnBarClickedListener() {
 			@Override
 			public void onClick(int index) {
-				HistoryHeartRate.itemCurentSelect = dao.getHeartRate(barGraph
-						.getBars().get(index).getId());
+				try {
+					ParseQuery<HeartRateDTO> query = ParseQuery
+							.getQuery("HeartRateDTO");
+					query.whereEqualTo("heartRateId",
+							barGraph.getBars().get(index).getId());
+					List<HeartRateDTO> dataSelect = new ArrayList<HeartRateDTO>();
+					dataSelect = query.find();
+					if (dataSelect.size() > 0) {
+						HistoryHeartRate.itemCurentSelect = dataSelect.get(0);
+					} else {
+						HistoryHeartRate.itemCurentSelect = new HeartRateDTO();
+					}
+
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				startActivity(i);
 			}
 		});
@@ -93,8 +111,6 @@ public class HistoryHeartRate extends Activity {
 	private void initList() {
 		int avg = 0;
 		ArrayList<HashMap<String, String>> heasrtRateList = new ArrayList<HashMap<String, String>>();
-
-		listData = dao.getListHeartRate();
 
 		// looping through all song nodes &lt;song&gt;
 		for (int i = 0; i < listData.size(); i++) {

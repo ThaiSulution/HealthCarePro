@@ -1,59 +1,62 @@
 package app.dto;
 
-public class RatioBMIDTO {
-	Integer ratioBMIId;
-	String time;
-	String date;
-	public String getDate() {
-		return date;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+@ParseClassName("RatioBMIDTO")
+public class RatioBMIDTO extends ParseObject {
+	public static ParseQuery<RatioBMIDTO> getQuery() {
+		return ParseQuery.getQuery(RatioBMIDTO.class);
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public ParseUser getUser() {
+		return getParseUser("user");
 	}
 
-	String ratio;
-	String status;
-	Integer userId;
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public Integer getRatioBMIId() {
-		return ratioBMIId;
-	}
-
-	public void setRatioBMIId(Integer ratioBMIId) {
-		this.ratioBMIId = ratioBMIId;
+	public void setUser(ParseUser value) {
+		put("user", value);
 	}
 
 	public String getTime() {
-		return time;
+		return getString("time");
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setTime(String value) {
+		put("time", value);
 	}
 
-	public String getRatio() {
-		return ratio;
+	public String getDate() {
+		return getString("date");
 	}
 
-	public void setRatio(String ratio) {
-		this.ratio = ratio;
+	public void setDate(String value) {
+		put("date", value);
+	}
+
+	public Integer getRatioBMIId() {
+		return getInt("ratioBMIId");
+	}
+
+	public void setRatioBMIId(Integer value) {
+		put("ratioBMIId", value);
+	}
+
+	public Double getRatio() {
+		return getDouble("ratio");
+	}
+
+	public void setRatio(Double value) {
+		put("ratio", value);
 	}
 
 	public String getStatus() {
-		return status;
+		return getString("status");
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(String value) {
+		put("status", value);
 	}
 
 }

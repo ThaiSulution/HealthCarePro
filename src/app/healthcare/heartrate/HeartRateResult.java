@@ -1,19 +1,24 @@
 package app.healthcare.heartrate;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import app.database.HeartRateDAO;
 import app.dto.HeartRateDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
 import app.healthcare.heartratehistory.HistoryHeartRate;
 
 import com.gc.materialdesign.views.Button;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 public class HeartRateResult extends Activity {
 	TextView resultView;
@@ -32,7 +37,6 @@ public class HeartRateResult extends Activity {
 	public int motionStatus = 1;
 	public int bodyCo = 1;
 	public String noteString = "";
-	public HeartRateDAO heartRateDAO;
 	View vProgess;
 	float width;
 
@@ -195,29 +199,52 @@ public class HeartRateResult extends Activity {
 				});
 		note = (EditText) findViewById(R.id.measurement_note);
 		vProgess.setX((width / 90) * (HeartRateFragment.heartBeat - 30));
-		heartRateDAO = new HeartRateDAO(this);
 	}
 
-	@SuppressWarnings("deprecation")
 	private void insertHeartRate() {
+		int id = 1;
+		try {
+			ParseQuery<HeartRateDTO> query = ParseQuery
+					.getQuery("HeartRateDTO");
+			List<HeartRateDTO> datas;
+			datas = query.find();
+			if (datas != null && datas.size() > 0) {
+				id = datas.size() + 1;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		final Intent i = new Intent(this, HistoryHeartRate.class);
 		noteString = note.getText().toString();
 		HeartRateDTO dto = new HeartRateDTO();
 		dto.setHeartRate(HeartRateFragment.heartBeat);
 		Constants.getInstance().getTime().setToNow();
-		dto.setDate(String.valueOf(Constants.getInstance().getTime().monthDay)
-				+ "/"
-				+ String.valueOf(Constants.getInstance().getTime().month + 1)
-				+ "/" + Constants.getInstance().getTime().year + "");
+		int date = Constants.getInstance().getTime().monthDay;
+		int month = Constants.getInstance().getTime().month + 1;
+		int year = Constants.getInstance().getTime().year;
 		dto.setTime(String.valueOf(Constants.getInstance().getTime().hour)
 				+ ":"
 				+ String.valueOf(Constants.getInstance().getTime().minute)
 				+ ":"
 				+ String.valueOf(Constants.getInstance().getTime().second));
+		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
+				+ String.valueOf(year) + "");
 		dto.setNote(noteString);
 		dto.setStatusSport(motionStatus);
 		dto.setBodyCo(bodyCo);
-		heartRateDAO.insertHeartRate(dto);
-		startActivity(new Intent(this, HistoryHeartRate.class));
-		finish();
+		dto.setHeartRateId(id);
+		dto.saveInBackground(new SaveCallback() {
+
+			@Override
+			public void done(ParseException arg0) {
+				if (arg0 != null) {
+					Log.e("Save heart rate", arg0.getMessage());
+				} else {
+					startActivity(i);
+					finish();
+				}
+			}
+		});
 	}
 }

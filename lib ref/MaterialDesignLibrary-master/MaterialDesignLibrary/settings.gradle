@@ -1,4 +1,0 @@
-// DEVELOPER MODE
-include ':MaterialDesignDemo', ':MaterialDesign'
-// UPLOAd LIBRARY TO BINTARRAY
-//include ':MaterialDesign'

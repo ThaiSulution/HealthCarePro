@@ -16,7 +16,7 @@ public class NewActivity extends Activity{
 	private WebView webView;
 	private ProgressDialog dialog;
 	private String link;
-	@SuppressWarnings({ "static-access", "deprecation" })
+	@SuppressWarnings({ "static-access" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

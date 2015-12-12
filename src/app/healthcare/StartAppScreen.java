@@ -17,14 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
-import app.database.HeartRateDAO;
-import app.database.RatioBMIDAO;
-import app.database.RatioWHRDAO;
-import app.database.UserDAO;
 import app.dto.HeartRateDTO;
 import app.dto.RatioBMIDTO;
 import app.dto.RatioWHRDTO;
-import app.dto.UserDTO;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
@@ -32,6 +27,8 @@ import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieGraph.OnSliceClickedListener;
 import com.echo.holographlibrary.PieSlice;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class StartAppScreen extends Fragment {
 	ImageView imgNew;
@@ -57,10 +54,15 @@ public class StartAppScreen extends Fragment {
 
 	private void buildChartBMI(View rootView, final MainActivity a) {
 		try {
-			UserDTO userdto = new UserDAO(getActivity()).getUser();
-			List<RatioBMIDTO> listdata = new RatioBMIDAO(getActivity())
-					.getListRatioBMI(userdto.getUserId());
-			int rows = listdata.size();
+			List<RatioBMIDTO> listData = new ArrayList<RatioBMIDTO>();
+			ParseQuery<RatioBMIDTO> query = new ParseQuery<RatioBMIDTO>(
+					"RatioBMIDTO");
+			try {
+				listData = query.find();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			int rows = listData.size();
 			final Resources resources = getResources();
 			ArrayList<Bar> aBars = new ArrayList<Bar>();
 			Bar bar;
@@ -69,11 +71,12 @@ public class StartAppScreen extends Fragment {
 				bar.setColor(resources.getColor(R.color.holo_ogrange_light));
 				bar.setSelectedColor(resources
 						.getColor(R.color.transparent_orange));
-				String dateMonth = listdata.get(i).getDate().split("/")[0]
-						+ "/" + listdata.get(i).getDate().split("/")[1];
+				String dateMonth = listData.get(i).getDate().split("/")[0]
+						+ "/" + listData.get(i).getDate().split("/")[1];
 				bar.setName(dateMonth);
-				bar.setValue(Float.parseFloat(listdata.get(i).getRatio()));
-				bar.setValueString(listdata.get(i).getRatio());
+				bar.setValue(Float.parseFloat(String.valueOf(listData.get(i)
+						.getRatio())));
+				bar.setValueString(String.valueOf(listData.get(i).getRatio()));
 				aBars.add(bar);
 
 			}
@@ -91,16 +94,21 @@ public class StartAppScreen extends Fragment {
 				}
 			});
 		} catch (NullPointerException e) {
-			Log.e("buildChartStepRun", e.toString());
+			Log.e("buildChartBMI", e.toString());
 		}
 	}
 
 	private void buildChartWHR(View rootView, final MainActivity a) {
 		try {
-			UserDTO userdto = new UserDAO(getActivity()).getUser();
-			List<RatioWHRDTO> listdata = new RatioWHRDAO(getActivity())
-					.getListRatioWHR(userdto.getUserId());
-			int rows = listdata.size();
+			List<RatioWHRDTO> listData = new ArrayList<RatioWHRDTO>();
+			ParseQuery<RatioWHRDTO> query = new ParseQuery<RatioWHRDTO>(
+					"RatioWHRDTO");
+			try {
+				listData = query.find();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			int rows = listData.size();
 			final Resources resources = getResources();
 			ArrayList<Bar> aBars = new ArrayList<Bar>();
 			Bar bar;
@@ -109,29 +117,27 @@ public class StartAppScreen extends Fragment {
 				bar.setColor(resources.getColor(R.color.red));
 				bar.setSelectedColor(resources
 						.getColor(R.color.transparent_orange));
-				String dateMonth = listdata.get(i).getDate().split("/")[0]
-						+ "/" + listdata.get(i).getDate().split("/")[1];
+				String dateMonth = listData.get(i).getDate().split("/")[0]
+						+ "/" + listData.get(i).getDate().split("/")[1];
 				bar.setName(dateMonth);
-				bar.setValue(Float.parseFloat(listdata.get(i).getRatio()));
-				bar.setValueString(listdata.get(i).getRatio());
+				bar.setValue(Float.parseFloat(String.valueOf(listData.get(i)
+						.getRatio())));
+				bar.setValueString(String.valueOf(listData.get(i).getRatio()));
 				aBars.add(bar);
-
 			}
-
 			final BarGraph barGraph = (BarGraph) rootView
 					.findViewById(R.id.whr_chart);
 			bg = barGraph;
 			barGraph.setBars(aBars);
 			barGraph.setBackgroundResource(R.drawable.whr_cover);
 			barGraph.setOnBarClickedListener(new OnBarClickedListener() {
-
 				@Override
 				public void onClick(int index) {
 					a.displayView(2);
 				}
 			});
 		} catch (NullPointerException e) {
-			Log.e("buildChartStepRun", e.toString());
+			Log.e("buildChartWHR", e.toString());
 		}
 	}
 
@@ -214,8 +220,14 @@ public class StartAppScreen extends Fragment {
 			sliceHeartRate.setValue(0);
 			pg.addSlice(sliceHeartRate);
 			pg.setTextSizeGr(20);
-			List<HeartRateDTO> listdata = new HeartRateDAO(getActivity())
-					.getListHeartRate();
+			List<HeartRateDTO> listdata = new ArrayList<HeartRateDTO>();
+			ParseQuery<HeartRateDTO> query = new ParseQuery<HeartRateDTO>(
+					"HeartRateDTO");
+			try {
+				listdata = query.find();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			int rows = listdata.size();
 			int avg = 0;
 			for (int i = 0; i < rows; i++) {

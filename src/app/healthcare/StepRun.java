@@ -28,8 +28,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
-import app.database.UserDAO;
-import app.dto.UserDTO;
 
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieGraph.OnSliceClickedListener;
@@ -62,6 +60,7 @@ public class StepRun extends Activity implements LocationListener {
 	 */
 	private PieSlice sliceRed;
 	public static String weight_weight;
+	public static int target;
 	EditText targetContent;
 	Button btnHistory;
 	Button btnSetup;
@@ -97,6 +96,7 @@ public class StepRun extends Activity implements LocationListener {
 		requestFitConnection();
 		if (GoogleFitService.isConnected) {
 			getDataToDay();
+			getTargetToDay();
 			getDataToYear();
 		}
 
@@ -110,8 +110,8 @@ public class StepRun extends Activity implements LocationListener {
 		 * app.healthcare.R.drawable.capture); a.show(); }
 		 */
 
-		UserDAO dao = new UserDAO(this);
-		int target = dao.getUser().getTarget();
+		// UserDAO dao = new UserDAO(this);
+		// int target = dao.getUser().getTarget();
 		btnHistory = (Button) findViewById(R.id.btnHistory);
 		btnHistory.setOnClickListener(new View.OnClickListener() {
 
@@ -129,11 +129,11 @@ public class StepRun extends Activity implements LocationListener {
 		pg.addSlice(sliceRed);
 		sliceRed = new PieSlice();
 		sliceRed.setColor(resources.getColor(R.color.orange));
-		sliceRed.setValue(target);
+		sliceRed.setValue(1000);
 		pg.addSlice(sliceRed);
 		pg.setTextSizeGr(25);
 		targetContent = (EditText) findViewById(R.id.target);
-		targetContent.setText(String.valueOf(target));
+		targetContent.setText(String.valueOf(1000));
 		btnSetup = (Button) findViewById(R.id.btnSetTarget);
 		btnSetup.setOnClickListener(new View.OnClickListener() {
 
@@ -167,7 +167,8 @@ public class StepRun extends Activity implements LocationListener {
 				pg.setInterpolator(new AccelerateDecelerateInterpolator());
 				pg.setAnimationListener(getAnimationListener());
 				pg.animateToGoalValues();
-				setTargetToDB();
+				target = Integer.parseInt(targetContent.getText().toString());
+				setTargetToDay();
 			}
 		});
 		// wait for get data finnish from service
@@ -228,6 +229,7 @@ public class StepRun extends Activity implements LocationListener {
 			@Override
 			public void onClick(int index) {
 				getDataToDay();
+				getTargetToDay();
 
 				if (targetContent.getText().toString().length() > 0) {
 					try {
@@ -238,6 +240,9 @@ public class StepRun extends Activity implements LocationListener {
 						// default
 						Constants.getInstance().setTarget(3000);
 					}
+				} else if (GoogleFitService.targetToset > 0) {
+					Constants.getInstance().setTarget(
+							GoogleFitService.targetToset);
 				}
 				pg.getSlices()
 						.get(0)
@@ -258,7 +263,7 @@ public class StepRun extends Activity implements LocationListener {
 				pg.setInterpolator(new AccelerateDecelerateInterpolator());
 				pg.setAnimationListener(getAnimationListener());
 				pg.animateToGoalValues();
-				setTargetToDB();
+				// setTargetToDB();
 			}
 		});
 
@@ -315,13 +320,6 @@ public class StepRun extends Activity implements LocationListener {
 	// }
 
 	public void setTargetToDB() {
-		UserDAO dao = new UserDAO(this);
-		UserDTO dto = new UserDTO();
-		dto.setUserId(1);
-		dto.setTarget((int) Constants.getInstance().getTarget());
-		dto.setUserName("THAI");
-		dto.setTimeStrat(" ");
-		dao.updateUSER(dto);
 	}
 
 	// [START GET DATA]
@@ -329,6 +327,20 @@ public class StepRun extends Activity implements LocationListener {
 		Intent service = new Intent(this, GoogleFitService.class);
 		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
 				GoogleFitService.TYPE_GET_DATA_TO_DAY);
+		startService(service);
+	}
+
+	private void getTargetToDay() {
+		Intent service = new Intent(this, GoogleFitService.class);
+		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
+				GoogleFitService.TYPE_GET_TARGET);
+		startService(service);
+	}
+
+	private void setTargetToDay() {
+		Intent service = new Intent(this, GoogleFitService.class);
+		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
+				GoogleFitService.TYPE_SET_TARGET);
 		startService(service);
 	}
 

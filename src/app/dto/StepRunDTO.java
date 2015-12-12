@@ -1,76 +1,65 @@
 package app.dto;
 
-public class StepRunDTO {
-	Integer stepRunId;
-	String time;
-	Integer tagets;
-	Integer userId;
-	Integer totalRun;
-	Integer calos;
-	Integer totalMin;
-	Float distance; 
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
-	public Integer getCalos() {
-		return calos;
+@ParseClassName("StepRunDTO")
+public class StepRunDTO extends ParseObject {
+	public static ParseQuery<StepRunDTO> getQuery() {
+		return ParseQuery.getQuery(StepRunDTO.class);
 	}
 
-	public void setCalos(Integer calos) {
-		this.calos = calos;
+	public ParseUser getUser() {
+		return getParseUser("user");
 	}
 
-	public Integer getTotalMin() {
-		return totalMin;
+	public void setUser(ParseUser value) {
+		put("user", value);
 	}
 
-	public void setTotalMin(Integer totalMin) {
-		this.totalMin = totalMin;
+	public String getUserId() {
+		return getString("userId");
+	}
+	
+	public int getTarget() {
+		return getInt("target");
 	}
 
-	public Float getDistance() {
-		return distance;
+	public void setTarget(int value) {
+		put("target", value);
+	}
+	
+	public int getStep() {
+		return getInt("step");
 	}
 
-	public void setDistance(Float distance) {
-		this.distance = distance;
+	public void setStep(int value) {
+		put("step", value);
+	}
+	
+	public Double getDistance() {
+		return getDouble("step");
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public void setDistance(Double value) {
+		put("step", value);
+	}
+	
+	public Double getCalos() {
+		return getDouble("calos");
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setCalos(Double value) {
+		put("calos", value);
+	}
+	
+	public Integer getStepID() {
+		return getInt("stepID");
 	}
 
-	public Integer getStepRunId() {
-		return stepRunId;
-	}
-
-	public void setStepRunId(Integer stepRunId) {
-		this.stepRunId = stepRunId;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String totalTime) {
-		this.time = totalTime;
-	}
-
-	public Integer getTagets() {
-		return tagets;
-	}
-
-	public void setTagets(Integer tagets) {
-		this.tagets = tagets;
-	}
-
-	public Integer getTotalRun() {
-		return totalRun;
-	}
-
-	public void setTotalRun(Integer totalRun) {
-		this.totalRun = totalRun;
+	public void setStepID(Integer value) {
+		put("stepID", value);
 	}
 }

@@ -83,6 +83,8 @@
         <activity android:name="app.healthcare.heartrate.HeartRateResult" />
         <activity android:name="app.healthcare.heartratehistory.HistoryHeartRate" />
         <activity android:name="app.healthcare.heartratehistory.HeartRateResultView" />
+        <activity android:name="app.healthcare.bmi.HistoryBMI" />
+        <activity android:name="app.healthcare.whr.HistoryWHR" />
         <activity
             android:name="app.healthcare.HistoryStep"
             android:label="Lịch sử đo đạc"
@@ -97,6 +99,12 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5" />
     </application>
 
 </manifest>

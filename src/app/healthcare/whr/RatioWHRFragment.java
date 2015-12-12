@@ -1,40 +1,31 @@
 package app.healthcare.whr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import app.database.RatioWHRDAO;
-import app.database.UserDAO;
 import app.dto.RatioWHRDTO;
-import app.dto.UserDTO;
 import app.healthcare.Constants;
-import app.healthcare.GoogleFitService;
 import app.healthcare.R;
-import app.healthcare.R.drawable;
-import app.healthcare.R.id;
-import app.healthcare.R.layout;
 
 import com.gc.materialdesign.widgets.Dialog;
-import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.Person;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 @SuppressLint("RtlHardcoded")
 public class RatioWHRFragment extends Fragment {
@@ -47,9 +38,7 @@ public class RatioWHRFragment extends Fragment {
 	TextView tbxResult;
 	Button btnReinphut;
 	Button btnCalculateWHR;
-	UserDAO userdao;
-	RatioWHRDAO dao;
-	TableLayout tableData;
+	List<RatioWHRDTO> allData = new ArrayList<RatioWHRDTO>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,13 +46,22 @@ public class RatioWHRFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_ratio_whr,
 				container, false);
 		initView(rootView);
+		try {
+			ParseQuery<RatioWHRDTO> query = ParseQuery.getQuery("RatioWHRDTO");
+			query.findInBackground(new FindCallback<RatioWHRDTO>() {
+				@Override
+				public void done(List<RatioWHRDTO> datas, ParseException e) {
+					if (datas != null) {
+						allData = datas;
+					}
+				}
+			});
+		} catch (Exception e) {
+		}
 		return rootView;
 	}
 
 	public void initView(View rootView) {
-		userdao = new UserDAO(getActivity());
-		dao = new RatioWHRDAO(getActivity());
-		tableData = (TableLayout) rootView.findViewById(R.id.tableDataWHR);
 		cbMale = (CheckBox) rootView.findViewById(R.id.cbMale);
 		cbMale.setOnCheckedChangeListener(listener);
 		cbFeMale = (CheckBox) rootView.findViewById(R.id.cbFeMale);
@@ -96,42 +94,24 @@ public class RatioWHRFragment extends Fragment {
 		});
 		tbxResult = (TextView) rootView.findViewById(R.id.tbxResultWHR);
 		tbxImpact = (TextView) rootView.findViewById(R.id.tbxImpact);
-		try {
-			buildTableData();
-		} catch (NullPointerException e) {
-			Log.e("nulldata", "chua co du lieu");
-		}
-		try {
-			if (GoogleFitService.mClient.equals(null)) {
-				if (Plus.PeopleApi.getCurrentPerson(GoogleFitService.mClient) != null) {
-					Person currentPerson = Plus.PeopleApi
-							.getCurrentPerson(GoogleFitService.mClient);
-					int gender = currentPerson.getGender();
-					if (gender == 0) {
-						cbMale.setChecked(true);
-						cbFeMale.setChecked(false);
-						cbMale.setEnabled(false);
-						cbFeMale.setEnabled(false);
-					} else if (gender == 1) {
-						cbMale.setChecked(false);
-						cbFeMale.setChecked(true);
-						cbMale.setEnabled(false);
-						cbFeMale.setEnabled(false);
-					}
-				}
-			}
-
-		} catch (NullPointerException e) {
-			Log.e("RatioWhr", e.toString());
+		if (Constants.getInstance().sex == 0) {
+			cbMale.setChecked(true);
+			cbFeMale.setChecked(false);
+			cbMale.setEnabled(false);
+			cbFeMale.setEnabled(false);
+		} else if (Constants.getInstance().sex == 1) {
+			cbMale.setChecked(false);
+			cbFeMale.setChecked(true);
+			cbMale.setEnabled(false);
+			cbFeMale.setEnabled(false);
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void calculateWHR() {
-		float ce = Float.parseFloat(tbxCe.getText().toString());
-		float cm = Float.parseFloat(tbxCm.getText().toString());
+		Double ce = Double.parseDouble(tbxCe.getText().toString());
+		Double cm = Double.parseDouble(tbxCm.getText().toString());
 		String result;
-		float ratioWHR = ce / cm;
+		Double ratioWHR = ce / cm;
 		if (cbMale.isChecked()) {
 			if (ratioWHR <= 0.9) {
 				result = "Sức khỏe tốt";
@@ -154,33 +134,57 @@ public class RatioWHRFragment extends Fragment {
 				result = "Rất nguy hiểm";
 			}
 		}
-		ratioWHR *= 10;
-		int temp = (int) (ratioWHR);
-		ratioWHR = temp;
-		ratioWHR /= 10;
+		ratioWHR = (double) (Math.round((double) ratioWHR * 10) / (double) 10);
 		tbxResult.setText(String.valueOf(ratioWHR));
 		tbxImpact.setText(result);
 		RatioWHRDTO dto = new RatioWHRDTO();
-		dto.setRatio(String.valueOf(ratioWHR));
+		dto.setRatio(ratioWHR);
 		dto.setStatus(result);
-
+		int id = 1;
+		if (allData.size() > 0) {
+			id = allData.size() + 1;
+		}
+		dto.setRatioWHRId(id);
 		Constants.getInstance().getTime().setToNow();
 		int date = Constants.getInstance().getTime().monthDay;
 		int month = Constants.getInstance().getTime().month + 1;
 		int year = Constants.getInstance().getTime().year;
-		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
-				+ String.valueOf(year));
 		dto.setTime(String.valueOf(Constants.getInstance().getTime().hour)
 				+ ":"
 				+ String.valueOf(Constants.getInstance().getTime().minute)
 				+ ":"
 				+ String.valueOf(Constants.getInstance().getTime().second));
-		dto.setUserId(1);
-		dao.insertRatioWHR(dto);
-		Dialog dialog = new Dialog(getActivity(), "Chỉ số WHR",
-				"Chỉ số WHR của bạn là: " + String.valueOf(ratioWHR) + "\n"
-						+ result, app.healthcare.R.drawable.whr_icon);
-		dialog.show();
+		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
+				+ String.valueOf(year) + "");
+		final Double ratioToView = ratioWHR;
+		final String resultToView = result;
+		final Intent historyWHR = new Intent(getActivity(), HistoryWHR.class);
+		dto.saveInBackground(new SaveCallback() {
+			@Override
+			public void done(ParseException ex) {
+				if (ex == null) {
+					final Dialog dialog = new Dialog(getActivity(), "Chỉ số WHR",
+							"Chỉ số WHR của bạn là: " + String.valueOf(ratioToView) + "\n"
+									+ resultToView, app.healthcare.R.drawable.whr_icon);
+					dialog.show();
+					dialog.getButtonAccept().setOnClickListener(
+							new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									startActivity(historyWHR);
+									dialog.dismiss();
+								}
+							});
+
+				} else {
+					Dialog dialog = new Dialog(getActivity(), "Chỉ số WHR",
+							"Có lỗi xảy ra!",
+							app.healthcare.R.drawable.whr_icon);
+					dialog.show();
+				}
+			}
+		});
 	}
 
 	public void reInput() {
@@ -188,34 +192,6 @@ public class RatioWHRFragment extends Fragment {
 		tbxCm.setText("");
 		tbxImpact.setText("Mức độ ảnh hưởng");
 		tbxResult.setText("WHR");
-	}
-
-	private void buildTableData() {
-		UserDTO userdto = userdao.getUser();
-		List<RatioWHRDTO> listdata = dao.getListRatioWHR(userdto.getUserId());
-		int rows = listdata.size();
-		int cols = 3;
-		for (int i = 0; i < rows; i++) {
-			TableRow row = new TableRow(getActivity());
-			row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT));
-			for (int j = 0; j < cols; j++) {
-				TextView tv = new TextView(getActivity());
-				tv.setTextColor(Color.YELLOW);
-				if (j == 0) {
-					tv.setGravity(Gravity.LEFT);
-					tv.setText(listdata.get(i).getTime());
-				} else if (j == 1) {
-					tv.setGravity(Gravity.RIGHT);
-					tv.setText(listdata.get(i).getRatio());
-				} else if (j == 2) {
-					tv.setGravity(Gravity.RIGHT);
-					tv.setText(listdata.get(i).getStatus());
-				}
-				row.addView(tv);
-			}
-			tableData.addView(row);
-		}
 	}
 
 	private OnCheckedChangeListener listener = new OnCheckedChangeListener() {

@@ -1,5 +1,8 @@
 package app.healthcare.heartratehistory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -7,13 +10,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import app.database.HeartRateDAO;
 import app.dto.HeartRateDTO;
 import app.healthcare.R;
 
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
 public class HeartRateResultView extends Activity {
-	HeartRateDAO dao;
-	HeartRateDTO data;
+	HeartRateDTO data = new HeartRateDTO();
 
 	public HeartRateDTO getData() {
 		return data;
@@ -27,9 +31,21 @@ public class HeartRateResultView extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_heartrate_result_view);
-		dao = new HeartRateDAO(this);
-		data = dao.getHeartRate(HistoryHeartRate.itemCurentSelect
-				.getHeartRateId());
+		try {
+			ParseQuery<HeartRateDTO> query = ParseQuery
+					.getQuery("HeartRateDTO");
+			query.whereEqualTo("heartRateId",
+					HistoryHeartRate.itemCurentSelect
+							.getHeartRateId());
+			List<HeartRateDTO> allData = new ArrayList<HeartRateDTO>();
+			allData = query.find();
+			if (allData.size() > 0) {
+				data = allData.get(0);
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 
 	}

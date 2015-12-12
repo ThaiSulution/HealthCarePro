@@ -28,7 +28,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import app.database.UserDAO;
+import app.dto.HeartRateDTO;
+import app.dto.RatioBMIDTO;
+import app.dto.RatioWHRDTO;
 import app.dto.UserDTO;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.heartrate.HeartRateFragment;
@@ -39,6 +41,14 @@ import app.slidingmenu.model.NavDrawerItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.fitness.FitnessStatusCodes;
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import docbaoonline.activity.ReadNewsActivity;
 
@@ -56,6 +66,8 @@ public class MainActivity extends Activity {
 	private DrawerArrowDrawable drawerArrow;
 	final Handler mHandler = new Handler();
 	private ProgressDialog dialog;
+	boolean hasAcount = false;
+	boolean hasLogIn = false;
 
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -82,7 +94,6 @@ public class MainActivity extends Activity {
 
 	// Database db;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -177,21 +188,22 @@ public class MainActivity extends Activity {
 
 		checkCreateDatabase = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		if (getCheckData() == 0) {
-			// db = new Database(this);
-			UserDAO user = new UserDAO(this);
-			UserDTO userDTO = new UserDTO();
-			userDTO.setUserId(1);
-			userDTO.setUserName("THAI");
-			userDTO.setTarget(3000);
-			Constants.getInstance().getTime().setToNow();
-			userDTO.setTimeStrat(Constants.getInstance().getTime().monthDay
-					+ "/" + Constants.getInstance().getTime().month + "/"
-					+ Constants.getInstance().getTime().year + "");
-			user.insertUSER(userDTO);
-			setCheckData(1);
-			Constants.getInstance().setTarget(3000);
-		}
+		getCheckData();
+		// if (getCheckData() == 0) {
+		// db = new Database(this);
+		// UserDAO user = new UserDAO(this);
+		// UserDTO userDTO = new UserDTO();
+		// userDTO.setUserId(1);
+		// userDTO.setUserName("THAI");
+		// userDTO.setTarget(3000);
+		// Constants.getInstance().getTime().setToNow();
+		// userDTO.setTimeStrat(Constants.getInstance().getTime().monthDay
+		// + "/" + Constants.getInstance().getTime().month + "/"
+		// + Constants.getInstance().getTime().year + "");
+		// user.insertUSER(userDTO);
+		// setCheckData(1);
+		// Constants.getInstance().setTarget(3000);
+		// }
 		requestFitConnection();
 		if (GoogleFitService.isConnected) {
 			getDataToDay();
@@ -221,7 +233,25 @@ public class MainActivity extends Activity {
 			mHandler.post(runnable);
 		}
 		displayView(FRAG_HOME);
-
+		try {
+			// ParseUser currentUser = ParseUser.getCurrentUser();
+			//
+			Parse.enableLocalDatastore(this);
+			ParseObject.registerSubclass(HeartRateDTO.class);
+			ParseObject.registerSubclass(RatioBMIDTO.class);
+			ParseObject.registerSubclass(RatioWHRDTO.class);
+			ParseObject.registerSubclass(UserDTO.class);
+			Parse.initialize(MainActivity.this,
+					"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
+					"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
+			ParseAnalytics.trackAppOpenedInBackground(getIntent());
+			// ParseUser.enableAutomaticUser();
+			ParseACL defaultACL = new ParseACL();
+			ParseACL.setDefaultACL(defaultACL, true);
+			// logIn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void getDataToDay() {
@@ -258,6 +288,63 @@ public class MainActivity extends Activity {
 				}
 			}
 		}
+	}
+
+	private void logIn() {
+		try {
+			if (!hasAcount) {
+				ParseUser user = new ParseUser();
+				user.setUsername(Constants.getInstance().email);
+				user.setPassword(Constants.getInstance().email);
+				// Call the Parse signup method
+				user.signUpInBackground(new SignUpCallback() {
+					@Override
+					public void done(ParseException e) {
+						if (e != null) {
+							// Show the error message
+							Toast.makeText(MainActivity.this, e.getMessage(),
+									Toast.LENGTH_LONG).show();
+						} else {
+							// Start an intent for the dispatch activity
+							/*
+							 * Intent intent = new Intent(SignUpActivity.this,
+							 * DispatchActivity.class);
+							 * intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+							 * Intent.FLAG_ACTIVITY_NEW_TASK);
+							 * startActivity(intent);
+							 */
+							Toast.makeText(MainActivity.this,
+									"dang ki thanh cong", Toast.LENGTH_LONG)
+									.show();
+
+						}
+					}
+				});
+			} 
+			if (!hasLogIn) {
+				ParseUser.logInInBackground(Constants.getInstance().email,
+						Constants.getInstance().email, new LogInCallback() {
+							@Override
+							public void done(ParseUser user, ParseException e) {
+								if (e != null) {
+									Toast.makeText(MainActivity.this,
+											"login that bai",
+											Toast.LENGTH_SHORT).show();
+								} else {
+									hasLogIn = true;
+									Toast.makeText(MainActivity.this,
+											"login thanh cong",
+											Toast.LENGTH_SHORT).show();
+								}
+
+							}
+						});
+			}
+
+		} catch (IllegalArgumentException ex) {
+			Log.e("login parse", "loi tham so " + ex.toString());
+		}
+
 	}
 
 	@Override
@@ -307,33 +394,61 @@ public class MainActivity extends Activity {
 			fragment = new StartAppScreen();
 			break;
 		case FRAG_HEART_RATE:
-			fragment = new HeartRateFragment();
+			if (GoogleFitService.isConnected) {
+				fragment = new HeartRateFragment();
+			} else {
+				handleConnect();
+			}
+			if (ParseUser.getCurrentUser() == null) {
+				hasAcount = false;
+				logIn();
+			}
 			break;
 		case FRAG_WHR:
-			fragment = new RatioWHRFragment();
+			if (GoogleFitService.isConnected) {
+				fragment = new RatioWHRFragment();
+			} else {
+				handleConnect();
+			}
+			if (ParseUser.getCurrentUser() == null) {
+				hasAcount = false;
+				logIn();
+			}
 			break;
 		case FRAG_BMI:
-			fragment = new RatioBMIFragment();
+			if (GoogleFitService.isConnected) {
+				fragment = new RatioBMIFragment();
+			} else {
+				handleConnect();
+			}
+			if (ParseUser.getCurrentUser() == null) {
+				hasAcount = false;
+				logIn();
+			}
 			break;
 		case FRAG_STEPRUN:
 			if (GoogleFitService.isConnected) {
 				startActivity(new Intent(this, StepRun.class));
 			} else {
-				mDrawerLayout.closeDrawer(mDrawerList);
 				handleConnect();
+			}
+			if (ParseUser.getCurrentUser() == null) {
+				hasAcount = false;
+				logIn();
 			}
 			break;
 		case FRAG_NEWS:
-			mDrawerLayout.closeDrawer(mDrawerList);
 			startActivity(new Intent(this, ReadNewsActivity.class));
 			break;
 		case FRAG_INFO:
-			mDrawerLayout.closeDrawer(mDrawerList);
 			startActivity(new Intent(this, About.class));
 			break;
 		case 7:
-			mDrawerLayout.closeDrawer(mDrawerList);
 			handleConnect();
+			if (ParseUser.getCurrentUser() == null) {
+				hasAcount = false;
+				logIn();
+			}
 			break;
 		case 8:
 			this.finish();
@@ -341,7 +456,7 @@ public class MainActivity extends Activity {
 		default:
 			break;
 		}
-
+		mDrawerLayout.closeDrawer(mDrawerList);
 		if (fragment != null) {
 			FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()

@@ -1,9 +1,0 @@
-﻿tạo data và lưu trên host, server chỉ xử lý dữ liệu
-phần chẩn đoán thì hiển thị một form cơ thể người. Khi người dùng chọn bộ phận nào thì hiển thị các triệu chứng. Người dùng sẽ chọn triệu chứng,
-sau khi chọn ứng dụng thì dữ liệu được xử lý để chẩn đoán và xuất kết quả ngay cho người dùng, sau đó gửi tới bác sĩ để bác sĩ xác nhận lại bệnh và cho lời khuyên
-khi thực hiện một chức năng thì cần phải kết nối mạng để lấy dữ liệu, code xử lý lọc triệu chứng để xác nhận bệnh phải được xử lý trên server
-những chức năng khác thì khi có dữ liệu sẽ lưu trên server, nếu không có kết nối mạng thì lưu file dưới dạng text, khi nào có mạng sẽ đồng bộ lên server
-công việc tuần sau:
- - tạo server, xử lý code lấy dữ liệu. tạo một số data ảo để test
- - demo lấy tin tức
- - demo phần đo bước đi

@@ -19,7 +19,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-@SuppressWarnings("deprecation")
 public class RssParser {
 
 	public List<RssItem> parser(String link) {

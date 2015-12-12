@@ -168,20 +168,4 @@
             android:textStyle="italic" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp" >
-
-        <TableLayout
-            android:id="@+id/tableDataBMI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_purple"
-            android:padding="10dp"
-            android:shrinkColumns="*"
-            android:stretchColumns="*" >
-        </TableLayout>
-    </ScrollView>
-
 </LinearLayout>

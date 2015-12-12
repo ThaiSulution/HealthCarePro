@@ -6,7 +6,6 @@ import java.util.List;
 import android.app.Fragment;
 import android.text.format.Time;
 
-@SuppressWarnings("deprecation")
 public class Constants {
 	public static final String CHECK_DATA = "createdata";
 	public static final String CHECK_TIME = "time";
@@ -20,6 +19,9 @@ public class Constants {
 	private float distance;
 	private long target;
 	private long stepsAvg;
+	public int sex = 0;
+	public String email = "";
+	public String name = "";
 
 	public long getStepsAvg() {
 		return stepsAvg;

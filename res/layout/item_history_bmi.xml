@@ -24,29 +24,27 @@
             android:paddingTop="8.0dip" >
 
             <ImageView
-                android:id="@+id/history_child_item_type_image"
+                android:id="@+id/history_bmi_child_item_type_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8.0dip"
                 android:layout_marginRight="16.0dip"
-                android:src="@drawable/ic_hr_type_sleep_unselected"
-                 />
+                android:src="@drawable/binhthuong" />
 
             <LinearLayout
                 android:id="@+id/history_child_item_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/history_child_item_type_image"
+                android:layout_toRightOf="@id/history_bmi_child_item_type_image"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/history_child_item_type_feel"
+                    android:id="@+id/history_child_item_type_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Resting HR"
-                   />
+                    android:text="Status" />
 
                 <TextView
                     android:id="@+id/history_child_item_date"
@@ -54,8 +52,7 @@
                     android:layout_height="wrap_content"
                     android:text="14/11/2012 08:23"
                     android:textColor="@color/beat_signal"
-                    android:textSize="12.0sp"
-                    />
+                    android:textSize="12.0sp" />
             </LinearLayout>
 
             <TextView
@@ -64,8 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="4.0dip"
-                android:layout_toLeftOf="@id/history_child_item_unit"
-/>
+                android:layout_toLeftOf="@id/history_child_item_unit" />
 
             <TextView
                 android:id="@+id/history_child_item_rate"
@@ -77,11 +73,10 @@
                 android:layout_marginLeft="4.0dip"
                 android:layout_marginRight="8.0dip"
                 android:drawablePadding="2.0dip"
-                android:drawableTop="@drawable/heart_red_small"
+                android:gravity="center"
                 android:text="@string/beats_per_minute"
                 android:textColor="@color/light_grey"
-                android:textSize="12.0sp" />
-
+                android:textSize="22.0sp" />
         </RelativeLayout>
     </FrameLayout>
 
@@ -89,7 +84,6 @@
         android:id="@+id/history_child_item_txt_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-      />
+        android:visibility="gone" />
 
 </FrameLayout>
