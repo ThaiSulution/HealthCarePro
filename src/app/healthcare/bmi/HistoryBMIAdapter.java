@@ -1,5 +1,6 @@
 package app.healthcare.bmi;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -100,4 +101,8 @@ public class HistoryBMIAdapter extends BaseAdapter {
 
 		return vi;
 	}
+=======
+public class HistoryBMIAdapter {
+
+>>>>>>> ddef683a6e1f695bedba55a20d69afead1f89c78
 }
