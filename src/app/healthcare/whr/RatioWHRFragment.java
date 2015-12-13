@@ -20,10 +20,7 @@ import android.widget.Toast;
 import app.dto.RatioWHRDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
-<<<<<<< HEAD
 
-=======
->>>>>>> ddef683a6e1f695bedba55a20d69afead1f89c78
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.FindCallback;
 import com.parse.ParseException;

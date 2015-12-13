@@ -1,9 +1,8 @@
 package app.healthcare.bmi;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import app.healthcare.R;
 import app.healthcare.heartratehistory.ImageLoader;
 
+@SuppressLint("InflateParams")
 public class HistoryBMIAdapter extends BaseAdapter {
 
 	private Activity activity;
@@ -101,8 +101,4 @@ public class HistoryBMIAdapter extends BaseAdapter {
 
 		return vi;
 	}
-=======
-public class HistoryBMIAdapter {
-
->>>>>>> ddef683a6e1f695bedba55a20d69afead1f89c78
 }
