@@ -5,21 +5,23 @@ import java.util.ArrayList;
 import zulu.app.libraries.ldrawer.ActionBarDrawerToggle;
 import zulu.app.libraries.ldrawer.DrawerArrowDrawable;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -82,7 +84,7 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
-	SharedPreferences checkCreateDatabase;
+//	SharedPreferences checkCreateDatabase;
 
 	public static final int FRAG_HOME = 0;
 	public static final int FRAG_HEART_RATE = 1;
@@ -98,7 +100,20 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		if (!isNetworkAvaiable()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+			builder.setTitle("Không có kết nối");
+			builder.setMessage("Vui lòng kiểm tra kết nối mạng!");
+			builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+					
+				}
+			});
+			builder.show();
+		}
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -186,9 +201,9 @@ public class MainActivity extends Activity {
 				mFitDataReceiver,
 				new IntentFilter(GoogleFitService.HISTORY_INTENT));
 
-		checkCreateDatabase = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		getCheckData();
+//		checkCreateDatabase = PreferenceManager
+//				.getDefaultSharedPreferences(this);
+//		getCheckData();
 		// if (getCheckData() == 0) {
 		// db = new Database(this);
 		// UserDAO user = new UserDAO(this);
@@ -504,15 +519,15 @@ public class MainActivity extends Activity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	public void setCheckData(int bool) {
-		SharedPreferences.Editor settingsEditor = checkCreateDatabase.edit();
-		settingsEditor.putInt(Constants.CHECK_DATA, bool);
-		settingsEditor.commit();
-	}
+//	public void setCheckData(int bool) {
+//		SharedPreferences.Editor settingsEditor = checkCreateDatabase.edit();
+//		settingsEditor.putInt(Constants.CHECK_DATA, bool);
+//		settingsEditor.commit();
+//	}
 
-	public int getCheckData() {
-		return checkCreateDatabase.getInt(Constants.CHECK_DATA, 0);
-	}
+//	public int getCheckData() {
+//		return checkCreateDatabase.getInt(Constants.CHECK_DATA, 0);
+//	}
 
 	@Override
 	public void onBackPressed() {
@@ -571,6 +586,13 @@ public class MainActivity extends Activity {
 		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
 				GoogleFitService.TYPE_REQUEST_CONNECTION);
 		startService(service);
+	}
+	
+	private boolean isNetworkAvaiable() {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo info = cm.getActiveNetworkInfo();
+		Log.d("Network 3", (info != null) + "  " + info);
+		return (info != null);
 	}
 
 	private BroadcastReceiver mFitStatusReceiver = new BroadcastReceiver() {
