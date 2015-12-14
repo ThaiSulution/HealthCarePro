@@ -64,9 +64,9 @@ public class GoogleFitService extends IntentService implements
 	public static boolean setWHDataYearFinish = false;
 	private OnDataPointListener mListener;
 	public static long totalStepsRecord = 0;
-	public long totalStepsGet = 0;
+	public static long totalStepsGet = 0;
 	public static long totalStepsGetInYear = 0;
-	public float totalCalosGet = 0;
+	public static float totalCalosGet = 0;
 	public static float totalCalosInYear = 0;
 	public static float totalCalosRecord = 0;
 	public static int dataSizeSteps = 0;
@@ -184,62 +184,6 @@ public class GoogleFitService extends IntentService implements
 				setUserHeight(height);
 				setUserWeight(weight);
 				break;
-			case TYPE_SET_DISTANCE:
-
-				break;
-//			case TYPE_SET_TARGET:
-//				float target = StepRun.target;
-//				cal = Calendar.getInstance();
-//				cal.setTime(now);
-//				endTime = cal.getTimeInMillis();
-//				cal.add(Calendar.DAY_OF_YEAR, -1);
-//				startTime = cal.getTimeInMillis();
-//
-//				DataSet targetDataSet = createDataForRequest(
-//						DataType.TYPE_HEART_RATE_BPM, DataSource.TYPE_RAW,
-//						target, startTime, endTime, TimeUnit.MILLISECONDS);
-//
-//				Fitness.HistoryApi.insertData(mClient, targetDataSet).await(1,
-//						TimeUnit.MINUTES);
-//				break;
-//			case TYPE_GET_TARGET:
-//				cal = Calendar.getInstance();
-//				cal.setTime(now);
-//				endTime = cal.getTimeInMillis();
-//				cal.add(Calendar.WEEK_OF_YEAR, -1);
-//				startTime = cal.getTimeInMillis();
-//				readRequest = new DataReadRequest.Builder()
-//						.aggregate(DataType.TYPE_HEART_RATE_BPM,
-//								DataType.AGGREGATE_HEART_RATE_SUMMARY)
-//						.bucketByTime(1, TimeUnit.DAYS)
-//						.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-//						.build();
-//				dataReadResult = Fitness.HistoryApi.readData(mClient,
-//						readRequest).await(1, TimeUnit.MINUTES);
-//				int targetGet = 0;
-//				if (dataReadResult.getBuckets().size() > 0) {
-//					for (Bucket bucket : dataReadResult.getBuckets()) {
-//						List<DataSet> dataSets = bucket.getDataSets();
-//						int temp = 0;
-//						for (DataSet dataSet : dataSets) {
-//							temp += dumpDataSetHistoryTarget(dataSet);
-//						}
-//						if (temp > 0) {
-//							targetGet = temp;
-//							break;
-//						}
-//					}
-//				} else if (dataReadResult.getDataSets().size() > 0) {
-//					for (DataSet dataSet : dataReadResult.getDataSets()) {
-//						int temp = dumpDataSetHistoryTarget(dataSet);
-//						if (temp > 0) {
-//							targetGet = temp;
-//							break;
-//						}
-//					}
-//				}
-//				targetToset = targetGet;
-//				break;
 			case TYPE_GET_DATA_TO_YEAR:
 				getDataYearFinish = false;
 				cal = Calendar.getInstance();
@@ -385,7 +329,9 @@ public class GoogleFitService extends IntentService implements
 						.setDataTypes(DataType.TYPE_LOCATION_SAMPLE,
 								DataType.TYPE_STEP_COUNT_DELTA,
 								DataType.TYPE_DISTANCE_DELTA,
-								DataType.TYPE_HEART_RATE_BPM)
+								DataType.TYPE_HEART_RATE_BPM,
+								DataType.TYPE_CALORIES_EXPENDED,
+								DataType.TYPE_CALORIES_CONSUMED)
 						// Can specify whether data type is raw or derived.
 						.setDataSourceTypes(DataSource.TYPE_RAW,
 								DataSource.TYPE_DERIVED).build())

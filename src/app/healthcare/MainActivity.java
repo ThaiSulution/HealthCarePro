@@ -1,6 +1,8 @@
 package app.healthcare;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import zulu.app.libraries.ldrawer.ActionBarDrawerToggle;
@@ -242,13 +244,12 @@ public class MainActivity extends Activity {
 			}
 
 			try {
-				// ParseUser currentUser = ParseUser.getCurrentUser();
-				//
 				Parse.enableLocalDatastore(this);
 				ParseObject.registerSubclass(HeartRateDTO.class);
 				ParseObject.registerSubclass(RatioBMIDTO.class);
 				ParseObject.registerSubclass(RatioWHRDTO.class);
 				ParseObject.registerSubclass(UserDTO.class);
+				ParseObject.registerSubclass(StepRunDTO.class);
 				Parse.initialize(MainActivity.this,
 						"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
 						"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
@@ -384,6 +385,16 @@ public class MainActivity extends Activity {
 												// LAY THONG TIN STEP
 												ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
 														"StepRunDTO");
+												Calendar cal = Calendar
+														.getInstance();
+												Date now = new Date();
+												cal.setTime(now);
+												long timeQuery = cal
+														.getTimeInMillis();
+												queryStep
+														.whereGreaterThanOrEqualTo(
+																"time",
+																timeQuery);
 												queryStep
 														.findInBackground((new FindCallback<StepRunDTO>() {
 

@@ -22,7 +22,7 @@ public class StepRunDTO extends ParseObject {
 	public String getUserId() {
 		return getString("userId");
 	}
-	
+
 	public int getTarget() {
 		return getInt("target");
 	}
@@ -30,7 +30,7 @@ public class StepRunDTO extends ParseObject {
 	public void setTarget(int value) {
 		put("target", value);
 	}
-	
+
 	public int getStep() {
 		return getInt("step");
 	}
@@ -38,7 +38,7 @@ public class StepRunDTO extends ParseObject {
 	public void setStep(int value) {
 		put("step", value);
 	}
-	
+
 	public Double getDistance() {
 		return getDouble("step");
 	}
@@ -46,7 +46,7 @@ public class StepRunDTO extends ParseObject {
 	public void setDistance(Double value) {
 		put("step", value);
 	}
-	
+
 	public Double getCalos() {
 		return getDouble("calos");
 	}
@@ -54,12 +54,20 @@ public class StepRunDTO extends ParseObject {
 	public void setCalos(Double value) {
 		put("calos", value);
 	}
-	
+
 	public Integer getStepID() {
 		return getInt("stepID");
 	}
 
 	public void setStepID(Integer value) {
 		put("stepID", value);
+	}
+
+	public long getTime() {
+		return getLong("time");
+	}
+
+	public void setTime(long value) {
+		put("time", value);
 	}
 }

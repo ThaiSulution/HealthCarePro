@@ -1,8 +1,6 @@
 package app.healthcare.heartrate;
 
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.app.Fragment;
@@ -32,9 +30,6 @@ import app.healthcare.R;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.gc.materialdesign.views.Button;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphView.GraphViewData;
-import com.jjoe64.graphview.GraphViewSeries;
 
 @SuppressWarnings("deprecation")
 public class HeartRateFragment extends Fragment {
@@ -75,11 +70,6 @@ public class HeartRateFragment extends Fragment {
 	private static double beats = 0;
 	private static long startTime = 0;
 	private static long startTimeUpdate = 0;
-
-	// for graph
-	static ArrayList<GraphViewData> listData = new ArrayList<GraphView.GraphViewData>();
-	static GraphView graphView;
-	static GraphViewSeries graphViewSeries;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -50,7 +50,8 @@ public class StartAppScreen extends Fragment {
 			@Override
 			public void run() {
 				if (MainActivity.getBMIFinish && MainActivity.getHRFinish
-						&& MainActivity.getWHRFinish && MainActivity.getStepFinish) {
+						&& MainActivity.getWHRFinish
+						&& MainActivity.getStepFinish) {
 					dialog.dismiss();
 					buildChartBMI(rootView, a);
 					buildChartWHR(rootView, a);
@@ -151,6 +152,19 @@ public class StartAppScreen extends Fragment {
 
 	private void buildChartStepRun(View rootView, final MainActivity a) {
 		try {
+			float distance = 0;
+			int target = 0;
+			int size = Constants.getInstance().listDataStepDTO.size();
+			if (size > 0) {
+				distance += Constants.getInstance().listDataStepDTO.get(
+						size - 1).getDistance();
+				target += Constants.getInstance().listDataStepDTO.get(size - 1)
+						.getTarget();
+			}
+			Constants.getInstance().setDistance(distance);
+			Constants.getInstance().setTarget(target);
+			Log.e("thiatahihaishi", String.valueOf(distance));
+			Log.e("thiatahihaishi", String.valueOf(target));
 			final Resources resources = getResources();
 			final PieGraph pg = (PieGraph) rootView
 					.findViewById(R.id.step_run_chart);
@@ -181,21 +195,20 @@ public class StartAppScreen extends Fragment {
 			// pg.setBackgroundText("Step in here");
 			pg.setInnerCircleRatio(220);
 			pg.setBackgroundText("SB: "
-					+ String.valueOf(Constants.getInstance().getStepRuns())
+					+ String.valueOf(GoogleFitService.totalStepsGet)
 					+ "\n"
 					+ "KC: "
 					+ String.valueOf((long) Constants.getInstance()
 							.getDistance()) + "m\n" + "Calo: "
-					+ String.valueOf(Constants.getInstance().getCalos()));
-			if (Constants.getInstance().getTarget() > Constants.getInstance()
-					.getStepRuns()) {
+					+ String.valueOf(GoogleFitService.totalCalosGet));
+			if (Constants.getInstance().getTarget() > GoogleFitService.totalStepsGet) {
 				pg.getSlices().get(0)
-						.setGoalValue(Constants.getInstance().getStepRuns());
+						.setGoalValue(GoogleFitService.totalStepsGet);
 				pg.getSlices()
 						.get(1)
 						.setGoalValue(
 								Constants.getInstance().getTarget()
-										- Constants.getInstance().getStepRuns());
+										- GoogleFitService.totalStepsGet);
 			} else {
 				pg.getSlices().get(0).setGoalValue(1);
 				pg.getSlices().get(1).setGoalValue(0);

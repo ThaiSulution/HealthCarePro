@@ -1,5 +1,8 @@
 package app.healthcare;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -28,6 +31,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
+import app.dto.StepRunDTO;
 
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieGraph.OnSliceClickedListener;
@@ -96,22 +100,10 @@ public class StepRun extends Activity implements LocationListener {
 		requestFitConnection();
 		if (GoogleFitService.isConnected) {
 			getDataToDay();
-			getTargetToDay();
 			getDataToYear();
 		}
 
 		dialog = ProgressDialog.show(StepRun.this, "", "Vui lòng chờ...");
-		/*
-		 * if (!AppStatus.getInstance(this).isOnline()) { // Dialog dialog = new
-		 * Dialog(this, "Kết nối mạng", //
-		 * "Thiết bị đang off line, hãy kiểm tra lại kết nối của bạn", //
-		 * R.drawable.whr_icon, 0); // dialog.show(); Dialog a = new
-		 * Dialog(this, "Loi", "Khong co ket noi", 0,
-		 * app.healthcare.R.drawable.capture); a.show(); }
-		 */
-
-		// UserDAO dao = new UserDAO(this);
-		// int target = dao.getUser().getTarget();
 		btnHistory = (Button) findViewById(R.id.btnHistory);
 		btnHistory.setOnClickListener(new View.OnClickListener() {
 
@@ -146,7 +138,7 @@ public class StepRun extends Activity implements LocationListener {
 										.toString()));
 					} catch (NumberFormatException e) {
 						// default
-						Constants.getInstance().setTarget(3000);
+						Constants.getInstance().setTarget(5000);
 					}
 				}
 				pg.getSlices().get(0)
@@ -168,7 +160,7 @@ public class StepRun extends Activity implements LocationListener {
 				pg.setAnimationListener(getAnimationListener());
 				pg.animateToGoalValues();
 				target = Integer.parseInt(targetContent.getText().toString());
-				setTargetToDay();
+				setTargetToDB();
 			}
 		});
 		// wait for get data finnish from service
@@ -228,8 +220,6 @@ public class StepRun extends Activity implements LocationListener {
 			@Override
 			public void onClick(int index) {
 				getDataToDay();
-				getTargetToDay();
-
 				if (targetContent.getText().toString().length() > 0) {
 					try {
 						Constants.getInstance().setTarget(
@@ -262,7 +252,7 @@ public class StepRun extends Activity implements LocationListener {
 				pg.setInterpolator(new AccelerateDecelerateInterpolator());
 				pg.setAnimationListener(getAnimationListener());
 				pg.animateToGoalValues();
-				// setTargetToDB();
+				setTargetToDB();
 			}
 		});
 
@@ -272,8 +262,22 @@ public class StepRun extends Activity implements LocationListener {
 		pg.setInnerCircleRatio(220);
 	}
 
-	public void setTargetToDB() {
-		
+	private void setTargetToDB() {
+		int id = 1;
+		if (Constants.getInstance().listDataStep.size() > 0) {
+			id = Constants.getInstance().listDataStep.size() + 1;
+		}
+		Date now = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(now);
+		long insertTime = cal.getTimeInMillis();
+		StepRunDTO dto = new StepRunDTO();
+		dto.setCalos((double) Constants.getInstance().getCalos());
+		dto.setTime(insertTime);
+		dto.setDistance((double) Constants.getInstance().getDistance());
+		dto.setStepID(id);
+		dto.setTarget(target);
+		dto.saveInBackground();
 	}
 
 	// [START GET DATA]
@@ -281,20 +285,6 @@ public class StepRun extends Activity implements LocationListener {
 		Intent service = new Intent(this, GoogleFitService.class);
 		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
 				GoogleFitService.TYPE_GET_DATA_TO_DAY);
-		startService(service);
-	}
-
-	private void getTargetToDay() {
-		Intent service = new Intent(this, GoogleFitService.class);
-		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
-				GoogleFitService.TYPE_GET_TARGET);
-		startService(service);
-	}
-
-	private void setTargetToDay() {
-		Intent service = new Intent(this, GoogleFitService.class);
-		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
-				GoogleFitService.TYPE_SET_TARGET);
 		startService(service);
 	}
 

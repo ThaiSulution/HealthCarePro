@@ -36,7 +36,7 @@
     <string name="detail_activity_line_title_type">Trạng thái</string>
     <string name="detail_activity_scale_red">>90</string>
     <string name="detail_activity_scale_green">&lt;60</string>
-    <string name="detail_activity_scale_yellow">60-90</string>
+    <string name="detail_activity_scale_yellow">60–90</string>
     <string name="beats_per_minute">BPM</string>
     
     
@@ -55,7 +55,6 @@
         <item>Đo số bước chạy</item>
         <item>Tin tức và y học</item>
         <item>Thông tin</item>
-        <!-- <item>Tài khoản</item> -->
         <item>Thoát</item>
     </string-array>
 
@@ -69,7 +68,6 @@
         <item>@drawable/run_icon</item>
         <item>@drawable/news_ico</item>
         <item>@drawable/info</item>
-        <!-- <item>@drawable/user</item> -->
         <item>@drawable/exit_icon</item>
     </array>
     <!-- whr -->
