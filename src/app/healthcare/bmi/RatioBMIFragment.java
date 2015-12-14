@@ -1,8 +1,5 @@
 package app.healthcare.bmi;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
@@ -22,9 +19,7 @@ import app.healthcare.Constants;
 import app.healthcare.R;
 
 import com.gc.materialdesign.widgets.Dialog;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 @SuppressLint("RtlHardcoded")
@@ -38,7 +33,6 @@ public class RatioBMIFragment extends Fragment {
 
 	Button btnReinphut;
 	Button btnCalculateBMI;
-	List<RatioBMIDTO> allData = new ArrayList<RatioBMIDTO>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,18 +40,6 @@ public class RatioBMIFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_ratio_bmi,
 				container, false);
 		initView(rootView);
-		try {
-			ParseQuery<RatioBMIDTO> query = ParseQuery.getQuery("RatioBMIDTO");
-			query.findInBackground(new FindCallback<RatioBMIDTO>() {
-				@Override
-				public void done(List<RatioBMIDTO> datas, ParseException e) {
-					if (datas != null) {
-						allData = datas;
-					}
-				}
-			});
-		} catch (Exception e) {
-		}
 		return rootView;
 	}
 
@@ -160,8 +142,8 @@ public class RatioBMIFragment extends Fragment {
 		dto.setRatio(ratioBMI);
 		dto.setStatus(result);
 		int id = 1;
-		if (allData.size() > 0) {
-			id = allData.size() + 1;
+		if (Constants.getInstance().listDataBMI.size() > 0) {
+			id = Constants.getInstance().listDataBMI.size() + 1;
 		}
 		dto.setRatioBMIId(id);
 		Constants.getInstance().getTime().setToNow();
@@ -175,6 +157,7 @@ public class RatioBMIFragment extends Fragment {
 				+ String.valueOf(Constants.getInstance().getTime().second));
 		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
 				+ String.valueOf(year) + "");
+		Constants.getInstance().listDataBMI.add(dto);
 		final Double ratioToView = ratioBMI;
 		final String resultToView = result;
 		final Intent historyBMI = new Intent(getActivity(), HistoryBMI.class);
@@ -182,8 +165,8 @@ public class RatioBMIFragment extends Fragment {
 			@Override
 			public void done(ParseException ex) {
 				if (ex == null) {
-					final Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
-							"Chỉ số BMI của bạn là: "
+					final Dialog dialog = new Dialog(getActivity(),
+							"Chỉ số BMI", "Chỉ số BMI của bạn là: "
 									+ String.valueOf(ratioToView) + "\n"
 									+ resultToView,
 							app.healthcare.R.drawable.bmi_icon);
@@ -199,6 +182,8 @@ public class RatioBMIFragment extends Fragment {
 							});
 
 				} else {
+					Constants.getInstance().listDataBMI.remove(Constants
+							.getInstance().listDataBMI.size() - 1);
 					Dialog dialog = new Dialog(getActivity(), "Chỉ số BMI",
 							"Có lỗi xảy ra!",
 							app.healthcare.R.drawable.bmi_icon);

@@ -1,8 +1,5 @@
 package app.healthcare.whr;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
@@ -22,9 +19,7 @@ import app.healthcare.Constants;
 import app.healthcare.R;
 
 import com.gc.materialdesign.widgets.Dialog;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 @SuppressLint("RtlHardcoded")
@@ -38,7 +33,8 @@ public class RatioWHRFragment extends Fragment {
 	TextView tbxResult;
 	Button btnReinphut;
 	Button btnCalculateWHR;
-	List<RatioWHRDTO> allData = new ArrayList<RatioWHRDTO>();
+
+	// List<RatioWHRDTO> allData = new ArrayList<RatioWHRDTO>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,18 +42,6 @@ public class RatioWHRFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_ratio_whr,
 				container, false);
 		initView(rootView);
-		try {
-			ParseQuery<RatioWHRDTO> query = ParseQuery.getQuery("RatioWHRDTO");
-			query.findInBackground(new FindCallback<RatioWHRDTO>() {
-				@Override
-				public void done(List<RatioWHRDTO> datas, ParseException e) {
-					if (datas != null) {
-						allData = datas;
-					}
-				}
-			});
-		} catch (Exception e) {
-		}
 		return rootView;
 	}
 
@@ -141,8 +125,8 @@ public class RatioWHRFragment extends Fragment {
 		dto.setRatio(ratioWHR);
 		dto.setStatus(result);
 		int id = 1;
-		if (allData.size() > 0) {
-			id = allData.size() + 1;
+		if (Constants.getInstance().listDataWHR.size() > 0) {
+			id = Constants.getInstance().listDataWHR.size() + 1;
 		}
 		dto.setRatioWHRId(id);
 		Constants.getInstance().getTime().setToNow();
@@ -156,6 +140,7 @@ public class RatioWHRFragment extends Fragment {
 				+ String.valueOf(Constants.getInstance().getTime().second));
 		dto.setDate(String.valueOf(date) + "/" + String.valueOf(month) + "/"
 				+ String.valueOf(year) + "");
+		Constants.getInstance().listDataWHR.add(dto);
 		final Double ratioToView = ratioWHR;
 		final String resultToView = result;
 		final Intent historyWHR = new Intent(getActivity(), HistoryWHR.class);
@@ -163,9 +148,12 @@ public class RatioWHRFragment extends Fragment {
 			@Override
 			public void done(ParseException ex) {
 				if (ex == null) {
-					final Dialog dialog = new Dialog(getActivity(), "Chỉ số WHR",
-							"Chỉ số WHR của bạn là: " + String.valueOf(ratioToView) + "\n"
-									+ resultToView, app.healthcare.R.drawable.whr_icon);
+
+					final Dialog dialog = new Dialog(getActivity(),
+							"Chỉ số WHR", "Chỉ số WHR của bạn là: "
+									+ String.valueOf(ratioToView) + "\n"
+									+ resultToView,
+							app.healthcare.R.drawable.whr_icon);
 					dialog.show();
 					dialog.getButtonAccept().setOnClickListener(
 							new View.OnClickListener() {
@@ -182,6 +170,8 @@ public class RatioWHRFragment extends Fragment {
 							"Có lỗi xảy ra!",
 							app.healthcare.R.drawable.whr_icon);
 					dialog.show();
+					Constants.getInstance().listDataWHR.remove(Constants
+							.getInstance().listDataWHR.size() - 1);
 				}
 			}
 		});

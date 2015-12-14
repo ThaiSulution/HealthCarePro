@@ -1,7 +1,6 @@
 package app.healthcare;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -73,9 +72,9 @@ public class GoogleFitService extends IntentService implements
 	public static int dataSizeSteps = 0;
 	public static int dataSizeCalories = 0;
 	public static int dataSizeDistance = 0;
-	public static int dataSizeHour = 0;
+	// public static int dataSizeHour = 0;
 	public static Integer targetToset = 0;
-	public static ArrayList<HistoryStepObject> listDataStep;
+	// public static ArrayList<HistoryStepObject> listDataStep;
 
 	public static final int TYPE_GET_DATA_TO_DAY = 1;
 	public static final int TYPE_GET_DATA_TO_WEEK = 2;
@@ -121,7 +120,7 @@ public class GoogleFitService extends IntentService implements
 	public void onCreate() {
 		super.onCreate();
 		buildFitnessClient();
-		listDataStep = new ArrayList<HistoryStepObject>();
+		// listDataStep = new ArrayList<HistoryStepObject>();
 		Log.d(TAG, "GoogleFitService created");
 	}
 
@@ -157,117 +156,26 @@ public class GoogleFitService extends IntentService implements
 			switch (type) {
 			case TYPE_GET_DATA_TO_DAY:
 				getDataDayFinish = false;
-				// tinh khoang thoi gian can lay data
 				cal = Calendar.getInstance();
 				cal.setTime(now);
 				endTime = cal.getTimeInMillis();
 				cal.add(Calendar.HOUR, -time);
 				startTime = cal.getTimeInMillis();
-				// lay data so buoc di trong ngay
 				readRequest = queryFitnessDataStep(startTime, endTime);
 				DailyTotalResult rs = Fitness.HistoryApi.readDailyTotal(
 						mClient, DataType.TYPE_STEP_COUNT_DELTA).await(1,
 						TimeUnit.MINUTES);
 				totalStepsGet = dumpDataSetHistorySteps(rs.getTotal());
-				// totalStepsGet = printDataStep(dataReadResult);
-				if (totalStepsGet > Constants.getInstance().getStepRuns()) {
+//				if (totalStepsGet > Constants.getInstance().getStepRuns()) {
 					Constants.getInstance().setStepRuns(totalStepsGet);
-				}
-				// tinh so buoc trung binh moi ngay di duoc trong khoang thoi
-				// gian 1 nam
-
-				/*
-				 * Thai delete start - vi o truong hop lay data theo nam da tinh
-				 * muc trung binh nen khong can tinh lai stepsAVG =
-				 * totalStepsGetInYear / dataSizeSteps; dataSizeSteps = 1; Thai
-				 * delete end
-				 */
-				// lay thong tin so calo tieu thu trong mot ngay
-				/*
-				 * readRequest = queryFitnessDataCaloFree(startTime, endTime);
-				 * dataReadResult = Fitness.HistoryApi.readData(mClient,
-				 * readRequest).await(1, TimeUnit.MINUTES); totalCalosGet =
-				 * printDataCaloFree(dataReadResult);
-				 */
-
+//				}
 				DailyTotalResult rscl = Fitness.HistoryApi.readDailyTotal(
 						mClient, DataType.TYPE_CALORIES_EXPENDED).await(1,
 						TimeUnit.MINUTES);
 				totalCalosGet = dumpDataSetHistoryCalos(rscl.getTotal());
 				Constants.getInstance().setCalos(totalCalosGet);
-				// tinh so calo tieu thu trung binh moi ngay trong 1 nam
-				/*
-				 * Thai delete start - vi o truong hop lay data theo nam da tinh
-				 * muc trung binh nen khong can tinh lai calosAVG =
-				 * totalCalosInYear / dataSizeSteps; dataSizeSteps = 1; Thai
-				 * delete end
-				 */
-				// publishTodaysStepData(totalCalosGet,
-				// TYPE_GET_CALO_FREE_TODAY);
-				// readRequest = queryFitnessDataDistance(startTime, endTime);
-				// dataReadResult = Fitness.HistoryApi.readData(mClient,
-				// readRequest).await(1, TimeUnit.MINUTES);
-				// totalDistasnceGet = printDataDistance(dataReadResult);
 				getDataDayFinish = true;
 				break;
-			case TYPE_GET_DATA_TO_WEEK:
-				// cal = Calendar.getInstance();
-				// cal.setTime(now);
-				// endTime = cal.getTimeInMillis();
-				// int dayInWeek = cal.get(Calendar.DAY_OF_WEEK);
-				// cal.add(Calendar.DATE, -dayInWeek);
-				// cal.add(Calendar.HOUR, -time);
-				// startTime = cal.getTimeInMillis();
-				// readRequest = queryFitnessDataStep(startTime, endTime);
-				// dataReadResult = Fitness.HistoryApi.readData(mClient,
-				// readRequest).await(1, TimeUnit.MINUTES);
-				// totalStepsGet = printDataStep(dataReadResult);
-				// if (totalStepsGet > Constants.getInstance().getStepRuns()) {
-				// Constants.getInstance().setStepRuns(totalStepsGet);
-				// }
-				// Constants.getInstance().setStepsAvg(
-				// totalStepsGetInYear / dataSizeSteps);
-				// dataSizeSteps = 1;
-				break;
-			case TYPE_GET_DATA_TO_MONTH:
-				// cal = Calendar.getInstance();
-				// cal.setTime(now);
-				// endTime = cal.getTimeInMillis();
-				// int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-				// cal.add(Calendar.DAY_OF_MONTH, -dayOfMonth);
-				// cal.add(Calendar.HOUR, -time);
-				// startTime = cal.getTimeInMillis();
-				// readRequest = queryFitnessDataStep(startTime, endTime);
-				// dataReadResult = Fitness.HistoryApi.readData(mClient,
-				// readRequest).await(1, TimeUnit.MINUTES);
-				// totalStepsGet = printDataStep(dataReadResult);
-				// Constants.getInstance().setStepsAvg(
-				// totalStepsGetInYear / dataSizeSteps);
-				// dataSizeSteps = 1;
-				// publishTodaysStepData(totalStepsGet, TYPE_GET_DATA_TO_MONTH);
-
-				break;
-			// //Thai delete start - gom chung lay tat ca data 1 lan
-			// case TYPE_GET_CALO_FREE_TODAY:
-			// cal = Calendar.getInstance();
-			// cal.setTime(now);
-			// endTime = cal.getTimeInMillis();
-			// cal.add(Calendar.HOUR, -time);
-			// startTime = cal.getTimeInMillis();
-			// readRequest = queryFitnessDataCaloFree(startTime, endTime);
-			// dataReadResult = Fitness.HistoryApi.readData(mClient,
-			// readRequest).await(1, TimeUnit.MINUTES);
-			// totalCalosGet = printDataCaloFree(dataReadResult);
-			// calosAVG = totalStepsGetInYear / dataSize;
-			// dataSize = 1;
-			// publishTodaysStepData(totalCalosGet, TYPE_GET_CALO_FREE_TODAY);
-			// break;
-			// case TYPE_GET_DISTANCE_TODAY:
-			//
-			// break;
-			// case TYPE_TOTAL_HOURS:
-			// break;
-			// thai delete end - gom chung lay tat ca data 1 lan
 			case TYPE_SET_HEIGHT_ANDWEIGHT:
 				String sWeight = StepRun.weight_weight.split("_")[0];
 				String sHeight = StepRun.weight_weight.split("_")[1];
@@ -279,72 +187,71 @@ public class GoogleFitService extends IntentService implements
 			case TYPE_SET_DISTANCE:
 
 				break;
-			case TYPE_SET_TARGET:
-				float target = StepRun.target;
-				cal = Calendar.getInstance();
-				cal.setTime(now);
-				endTime = cal.getTimeInMillis();
-				cal.add(Calendar.DAY_OF_YEAR, -1);
-				startTime = cal.getTimeInMillis();
-
-				DataSet targetDataSet = createDataForRequest(
-						DataType.TYPE_HEART_RATE_BPM, DataSource.TYPE_RAW,
-						target, startTime, endTime, TimeUnit.MILLISECONDS);
-
-				Fitness.HistoryApi.insertData(mClient, targetDataSet).await(1,
-						TimeUnit.MINUTES);
-				break;
-			case TYPE_GET_TARGET:
-				cal = Calendar.getInstance();
-				cal.setTime(now);
-				endTime = cal.getTimeInMillis();
-				cal.add(Calendar.WEEK_OF_YEAR, -1);
-				startTime = cal.getTimeInMillis();
-				readRequest = new DataReadRequest.Builder()
-						.aggregate(DataType.TYPE_HEART_RATE_BPM,
-								DataType.AGGREGATE_HEART_RATE_SUMMARY)
-						.bucketByTime(1, TimeUnit.DAYS)
-						.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-						.build();
-				dataReadResult = Fitness.HistoryApi.readData(mClient,
-						readRequest).await(1, TimeUnit.MINUTES);
-				int targetGet = 0;
-				if (dataReadResult.getBuckets().size() > 0) {
-					for (Bucket bucket : dataReadResult.getBuckets()) {
-						List<DataSet> dataSets = bucket.getDataSets();
-						int temp = 0;
-						for (DataSet dataSet : dataSets) {
-							temp += dumpDataSetHistoryTarget(dataSet);
-						}
-						if (temp > 0) {
-							targetGet = temp;
-							break;
-						}
-					}
-				} else if (dataReadResult.getDataSets().size() > 0) {
-					for (DataSet dataSet : dataReadResult.getDataSets()) {
-						int temp = dumpDataSetHistoryTarget(dataSet);
-						if (temp > 0) {
-							targetGet = temp;
-							break;
-						}
-					}
-				}
-				targetToset = targetGet;
-				break;
+//			case TYPE_SET_TARGET:
+//				float target = StepRun.target;
+//				cal = Calendar.getInstance();
+//				cal.setTime(now);
+//				endTime = cal.getTimeInMillis();
+//				cal.add(Calendar.DAY_OF_YEAR, -1);
+//				startTime = cal.getTimeInMillis();
+//
+//				DataSet targetDataSet = createDataForRequest(
+//						DataType.TYPE_HEART_RATE_BPM, DataSource.TYPE_RAW,
+//						target, startTime, endTime, TimeUnit.MILLISECONDS);
+//
+//				Fitness.HistoryApi.insertData(mClient, targetDataSet).await(1,
+//						TimeUnit.MINUTES);
+//				break;
+//			case TYPE_GET_TARGET:
+//				cal = Calendar.getInstance();
+//				cal.setTime(now);
+//				endTime = cal.getTimeInMillis();
+//				cal.add(Calendar.WEEK_OF_YEAR, -1);
+//				startTime = cal.getTimeInMillis();
+//				readRequest = new DataReadRequest.Builder()
+//						.aggregate(DataType.TYPE_HEART_RATE_BPM,
+//								DataType.AGGREGATE_HEART_RATE_SUMMARY)
+//						.bucketByTime(1, TimeUnit.DAYS)
+//						.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+//						.build();
+//				dataReadResult = Fitness.HistoryApi.readData(mClient,
+//						readRequest).await(1, TimeUnit.MINUTES);
+//				int targetGet = 0;
+//				if (dataReadResult.getBuckets().size() > 0) {
+//					for (Bucket bucket : dataReadResult.getBuckets()) {
+//						List<DataSet> dataSets = bucket.getDataSets();
+//						int temp = 0;
+//						for (DataSet dataSet : dataSets) {
+//							temp += dumpDataSetHistoryTarget(dataSet);
+//						}
+//						if (temp > 0) {
+//							targetGet = temp;
+//							break;
+//						}
+//					}
+//				} else if (dataReadResult.getDataSets().size() > 0) {
+//					for (DataSet dataSet : dataReadResult.getDataSets()) {
+//						int temp = dumpDataSetHistoryTarget(dataSet);
+//						if (temp > 0) {
+//							targetGet = temp;
+//							break;
+//						}
+//					}
+//				}
+//				targetToset = targetGet;
+//				break;
 			case TYPE_GET_DATA_TO_YEAR:
 				getDataYearFinish = false;
-				// xac dinh khoang thoi gian can lay data
 				cal = Calendar.getInstance();
 				cal.setTime(now);
 				endTime = cal.getTimeInMillis();
 				int date = cal.get(Calendar.DAY_OF_YEAR);
 				// reset lai so ngay co du lieu
-				dataSizeCalories = 0;
-				dataSizeDistance = 0;
-				dataSizeHour = 0;
+				// dataSizeHour = 0;
 				dataSizeSteps = 0;
-				listDataStep.retainAll(listDataStep);
+				// listDataStep.retainAll(listDataStep);
+				Constants.getInstance().listDataStep.retainAll(Constants
+						.getInstance().listDataStep);
 				// xac dinh so ngay co hoat dong de tinh so buoc di trung binh
 				for (int i = 0; i < date; i++) {
 					// xac dinh thoi gian bat dau lay data
@@ -365,7 +272,7 @@ public class GoogleFitService extends IntentService implements
 								+ "/"
 								+ String.valueOf(cal.get(Calendar.MONTH) + 1);
 						o.setTime(curTime);
-						listDataStep.add(o);
+						Constants.getInstance().listDataStep.add(o);
 					}
 					// tien hanh lay data so calo
 					readRequest = queryFitnessDataCaloFree(startTime, endTime);
@@ -376,21 +283,11 @@ public class GoogleFitService extends IntentService implements
 						dataSizeCalories += 1;
 						totalCalosInYear += tempCalories;
 					}
+					if (dataSizeSteps >= 20) {
+						break;
+					}
 					endTime = startTime;
 				}
-				// tinh so buoc di trung binh
-				if (dataSizeSteps != 0) {
-					Constants.getInstance().setStepsAvg(
-							totalStepsGetInYear / dataSizeSteps);
-				} else {
-					Constants.getInstance().setStepsAvg(totalStepsGetInYear);
-				}
-				// tinh so calo tieu thu trung binh
-				// if (dataSizeCalories != 0) {
-				// calosAVG = totalCalosInYear / dataSizeCalories;
-				// } else {
-				// calosAVG = totalCalosInYear;
-				// }
 				getDataYearFinish = true;
 				break;
 			default:
@@ -1553,7 +1450,7 @@ public class GoogleFitService extends IntentService implements
 		pendingResult.setResultCallback(new ResultCallback<DataTypeResult>() {
 			@Override
 			public void onResult(DataTypeResult dataTypeResult) {
-				//DataType customType = dataTypeResult.getDataType();
+				// DataType customType = dataTypeResult.getDataType();
 
 			}
 		});
@@ -1562,7 +1459,6 @@ public class GoogleFitService extends IntentService implements
 
 	@Override
 	public PendingResult<Status> disableFit(GoogleApiClient arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -1578,7 +1474,7 @@ public class GoogleFitService extends IntentService implements
 			@Override
 			public void onResult(DataTypeResult dataTypeResult) {
 				// Retrieve the custom data type
-				//DataType customType = dataTypeResult.getDataType();
+				// DataType customType = dataTypeResult.getDataType();
 
 			}
 		});

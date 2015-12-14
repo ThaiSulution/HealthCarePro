@@ -213,7 +213,6 @@ public class StepRun extends Activity implements LocationListener {
 								Integer.parseInt(targetContent.getText()
 										.toString()));
 					}
-
 					pg.setDuration(1000);// default if unspecified is 300 ms
 					pg.setAnimationListener(getAnimationListener());
 					pg.animateToGoalValues();
@@ -271,55 +270,10 @@ public class StepRun extends Activity implements LocationListener {
 				R.drawable.run_icon_black);
 		pg.setBackgroundBitmap(b);
 		pg.setInnerCircleRatio(220);
-		/*
-		 * view_type = (Spinner) findViewById(R.id.type_view);
-		 * ArrayAdapter<CharSequence> adapter_view_type = ArrayAdapter
-		 * .createFromResource(this, R.array.steptun_list_type_view,
-		 * android.R.layout.simple_spinner_item); // Specify the layout to use
-		 * when the list of choices appears adapter_view_type
-		 * .setDropDownViewResource
-		 * (android.R.layout.simple_spinner_dropdown_item); // Apply the adapter
-		 * to the spinner view_type.setAdapter(adapter_view_type);
-		 * view_type.setOnItemSelectedListener(new OnItemSelectedListener() {
-		 * 
-		 * @Override public void onItemSelected(AdapterView<?> parent, View
-		 * view, int position, long id) { switch (position) { case 0: dayTypeFlg
-		 * = true; monthTypeFlg = false; weekTypeFlg = false; getDataToDay();
-		 * break; case 1: dayTypeFlg = false; monthTypeFlg = false; weekTypeFlg
-		 * = true; getDataToWeek(); break; case 2: dayTypeFlg = false;
-		 * monthTypeFlg = true; weekTypeFlg = false; getDataToMonth(); break;
-		 * default: break; } }
-		 * 
-		 * @Override public void onNothingSelected(AdapterView<?> parent) {
-		 * getDataToDay(); dayTypeFlg = true; monthTypeFlg = false; weekTypeFlg
-		 * = false; } }); view_unit = (Spinner) findViewById(R.id.unit_view);
-		 * ArrayAdapter<CharSequence> adapter_view_unit = ArrayAdapter
-		 * .createFromResource(this, R.array.steptun_list_unit_view,
-		 * android.R.layout.simple_spinner_item); // Specify the layout to use
-		 * when the list of choices appears adapter_view_unit
-		 * .setDropDownViewResource
-		 * (android.R.layout.simple_spinner_dropdown_item); // Apply the adapter
-		 * to the spinner view_unit.setAdapter(adapter_view_unit);
-		 */
 	}
 
-	// private boolean handleConnectButton() {
-	// try {
-	// authInProgress = true;
-	// mFitResultResolution.startResolutionForResult(StepRun.this,
-	// REQUEST_OAUTH);
-	// return true;
-	// } catch (IntentSender.SendIntentException e) {
-	// Log.e(TAG,
-	// "Activity Thread Google Fit Exception while starting resolution activity",
-	// e);
-	// } catch (NullPointerException ex) {
-	// Log.e("thai", ex.getMessage(), ex);
-	// }
-	// return false;
-	// }
-
 	public void setTargetToDB() {
+		
 	}
 
 	// [START GET DATA]
@@ -344,20 +298,6 @@ public class StepRun extends Activity implements LocationListener {
 		startService(service);
 	}
 
-	// private void getDataToWeek() {
-	// Intent service = new Intent(this, GoogleFitService.class);
-	// service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
-	// GoogleFitService.TYPE_GET_DATA_TO_WEEK);
-	// startService(service);
-	// }
-	//
-	// private void getDataToMonth() {
-	// Intent service = new Intent(this, GoogleFitService.class);
-	// service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
-	// GoogleFitService.TYPE_GET_DATA_TO_MONTH);
-	// startService(service);
-	// }
-
 	private void getDataToYear() {
 		Intent service = new Intent(this, GoogleFitService.class);
 		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
@@ -366,10 +306,6 @@ public class StepRun extends Activity implements LocationListener {
 	}
 
 	// [END GET DATA]
-
-	private void setProgess(long steps) {
-
-	}
 
 	private void requestFitConnection() {
 		Intent service = new Intent(this, GoogleFitService.class);
@@ -417,7 +353,6 @@ public class StepRun extends Activity implements LocationListener {
 						GoogleFitService.HISTORY_EXTRA_STEPS_TODAY, 0);
 				Toast.makeText(StepRun.this, "Total Steps: " + totalSteps,
 						Toast.LENGTH_SHORT).show();
-				setProgess(totalSteps);
 
 			}
 
@@ -427,7 +362,6 @@ public class StepRun extends Activity implements LocationListener {
 						GoogleFitService.HISTORY_EXTRA_STEPS_TOWEEK, 0);
 				Toast.makeText(StepRun.this, "Total Steps: " + totalSteps,
 						Toast.LENGTH_SHORT).show();
-				setProgess(totalSteps);
 
 			}
 
@@ -438,7 +372,6 @@ public class StepRun extends Activity implements LocationListener {
 						GoogleFitService.HISTORY_EXTRA_STEPS_TOMONTH, 0);
 				Toast.makeText(StepRun.this, "Total Steps: " + totalSteps,
 						Toast.LENGTH_SHORT).show();
-				setProgess(totalSteps);
 
 			}
 
@@ -614,19 +547,16 @@ public class StepRun extends Activity implements LocationListener {
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 }

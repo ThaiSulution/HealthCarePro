@@ -17,7 +17,7 @@ import com.parse.ParseQuery;
 
 public class HistoryWHR extends Activity {
 	BarGraph bg;
-	List<RatioWHRDTO> listData = new ArrayList<RatioWHRDTO>();;
+	List<RatioWHRDTO> listData = new ArrayList<RatioWHRDTO>();
 
 	static final String KEY_ID = "ID";
 	static final String KEY_RATE = "ratio";

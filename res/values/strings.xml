@@ -55,7 +55,7 @@
         <item>Đo số bước chạy</item>
         <item>Tin tức và y học</item>
         <item>Thông tin</item>
-        <item>Tài khoản</item>
+        <!-- <item>Tài khoản</item> -->
         <item>Thoát</item>
     </string-array>
 
@@ -69,7 +69,7 @@
         <item>@drawable/run_icon</item>
         <item>@drawable/news_ico</item>
         <item>@drawable/info</item>
-        <item>@drawable/user</item>
+        <!-- <item>@drawable/user</item> -->
         <item>@drawable/exit_icon</item>
     </array>
     <!-- whr -->

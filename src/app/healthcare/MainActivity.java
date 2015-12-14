@@ -1,6 +1,7 @@
 package app.healthcare;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import zulu.app.libraries.ldrawer.ActionBarDrawerToggle;
 import zulu.app.libraries.ldrawer.DrawerArrowDrawable;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import app.dto.HeartRateDTO;
 import app.dto.RatioBMIDTO;
 import app.dto.RatioWHRDTO;
+import app.dto.StepRunDTO;
 import app.dto.UserDTO;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.heartrate.HeartRateFragment;
@@ -43,12 +45,14 @@ import app.slidingmenu.model.NavDrawerItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.fitness.FitnessStatusCodes;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -68,8 +72,12 @@ public class MainActivity extends Activity {
 	private DrawerArrowDrawable drawerArrow;
 	final Handler mHandler = new Handler();
 	private ProgressDialog dialog;
-	boolean hasAcount = false;
-	boolean hasLogIn = false;
+	static boolean hasAcount = false;
+	public static boolean hasLogIn = false;
+	public static boolean getBMIFinish = false;
+	public static boolean getWHRFinish = false;
+	public static boolean getHRFinish = false;
+	public static boolean getStepFinish = false;
 
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -84,7 +92,7 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
-//	SharedPreferences checkCreateDatabase;
+	// SharedPreferences checkCreateDatabase;
 
 	public static final int FRAG_HOME = 0;
 	public static final int FRAG_HEART_RATE = 1;
@@ -100,20 +108,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		if (!isNetworkAvaiable()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-			builder.setTitle("Không có kết nối");
-			builder.setMessage("Vui lòng kiểm tra kết nối mạng!");
-			builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					finish();
-					
-				}
-			});
-			builder.show();
-		}
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -150,8 +144,8 @@ public class MainActivity extends Activity {
 				.getResourceId(6, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons
 				.getResourceId(7, -1)));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
-				.getResourceId(8, -1)));
+		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
+		// .getResourceId(8, -1)));
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -176,7 +170,9 @@ public class MainActivity extends Activity {
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				drawerArrow, R.string.app_name, R.string.app_name) {
 
-			/** Called when a drawer has settled in a completely closed state. */
+			/**
+			 * Called when a drawer has settled in a completely closed state.
+			 */
 
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
@@ -191,82 +187,82 @@ public class MainActivity extends Activity {
 
 		// Set the drawer toggle as the DrawerListener
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-		if (savedInstanceState != null) {
-			authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
-		}
-		LocalBroadcastManager.getInstance(this).registerReceiver(
-				mFitStatusReceiver,
-				new IntentFilter(GoogleFitService.FIT_NOTIFY_INTENT));
-		LocalBroadcastManager.getInstance(this).registerReceiver(
-				mFitDataReceiver,
-				new IntentFilter(GoogleFitService.HISTORY_INTENT));
+		if (!isNetworkAvaiable()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Không có kết nối");
+			builder.setMessage("Vui lòng kiểm tra kết nối mạng!");
+			builder.setPositiveButton("Finish",
+					new DialogInterface.OnClickListener() {
 
-//		checkCreateDatabase = PreferenceManager
-//				.getDefaultSharedPreferences(this);
-//		getCheckData();
-		// if (getCheckData() == 0) {
-		// db = new Database(this);
-		// UserDAO user = new UserDAO(this);
-		// UserDTO userDTO = new UserDTO();
-		// userDTO.setUserId(1);
-		// userDTO.setUserName("THAI");
-		// userDTO.setTarget(3000);
-		// Constants.getInstance().getTime().setToNow();
-		// userDTO.setTimeStrat(Constants.getInstance().getTime().monthDay
-		// + "/" + Constants.getInstance().getTime().month + "/"
-		// + Constants.getInstance().getTime().year + "");
-		// user.insertUSER(userDTO);
-		// setCheckData(1);
-		// Constants.getInstance().setTarget(3000);
-		// }
-		requestFitConnection();
-		if (GoogleFitService.isConnected) {
-			getDataToDay();
-			dialog = ProgressDialog.show(MainActivity.this, "",
-					"Vui lòng chờ...");
-			// getDataToDay();
-			Runnable runnable = new Runnable() {
-				@Override
-				public void run() {
-					if (!GoogleFitService.getDataDayFinish) {
-						if (!dialog.isShowing()) {
-							dialog = ProgressDialog.show(MainActivity.this, "",
-									"Vui lòng chờ...");
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+
 						}
-						mHandler.postDelayed(this, 1000);
-					} else {
-						// if (savedInstanceState == null) {
-						// on first time display view for first nav item
-						dialog.cancel();
-						displayView(FRAG_HOME);
-						// }
-						Thread.currentThread().interrupt();
+					});
+			builder.show();
+		} else {
+
+			if (savedInstanceState != null) {
+				authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
+			}
+			LocalBroadcastManager.getInstance(this).registerReceiver(
+					mFitStatusReceiver,
+					new IntentFilter(GoogleFitService.FIT_NOTIFY_INTENT));
+			LocalBroadcastManager.getInstance(this).registerReceiver(
+					mFitDataReceiver,
+					new IntentFilter(GoogleFitService.HISTORY_INTENT));
+			requestFitConnection();
+			if (GoogleFitService.isConnected) {
+				getDataToDay();
+				dialog = ProgressDialog.show(MainActivity.this, "",
+						"Vui lòng chờ...");
+				// getDataToDay();
+				Runnable runnable = new Runnable() {
+					@Override
+					public void run() {
+						if (!GoogleFitService.getDataDayFinish) {
+							if (!dialog.isShowing()) {
+								dialog = ProgressDialog.show(MainActivity.this,
+										"", "Vui lòng chờ...");
+							}
+							mHandler.postDelayed(this, 1000);
+						} else {
+							// if (savedInstanceState == null) {
+							// on first time display view for first nav item
+							dialog.cancel();
+							// displayView(FRAG_HOME);
+							// }
+							Thread.currentThread().interrupt();
+						}
 					}
-				}
-			};
-			// start handler
-			mHandler.post(runnable);
+				};
+				// start handler
+				mHandler.post(runnable);
+			}
+
+			try {
+				// ParseUser currentUser = ParseUser.getCurrentUser();
+				//
+				Parse.enableLocalDatastore(this);
+				ParseObject.registerSubclass(HeartRateDTO.class);
+				ParseObject.registerSubclass(RatioBMIDTO.class);
+				ParseObject.registerSubclass(RatioWHRDTO.class);
+				ParseObject.registerSubclass(UserDTO.class);
+				Parse.initialize(MainActivity.this,
+						"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
+						"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
+				ParseAnalytics.trackAppOpenedInBackground(getIntent());
+				// ParseUser.enableAutomaticUser();
+				ParseACL defaultACL = new ParseACL();
+				ParseACL.setDefaultACL(defaultACL, true);
+				// logIn();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			displayView(FRAG_HOME);
 		}
-		displayView(FRAG_HOME);
-		try {
-			// ParseUser currentUser = ParseUser.getCurrentUser();
-			//
-			Parse.enableLocalDatastore(this);
-			ParseObject.registerSubclass(HeartRateDTO.class);
-			ParseObject.registerSubclass(RatioBMIDTO.class);
-			ParseObject.registerSubclass(RatioWHRDTO.class);
-			ParseObject.registerSubclass(UserDTO.class);
-			Parse.initialize(MainActivity.this,
-					"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
-					"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
-			ParseAnalytics.trackAppOpenedInBackground(getIntent());
-			// ParseUser.enableAutomaticUser();
-			ParseACL defaultACL = new ParseACL();
-			ParseACL.setDefaultACL(defaultACL, true);
-			// logIn();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	private void getDataToDay() {
@@ -305,7 +301,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	private void logIn() {
+	public static void logIn() {
 		try {
 			if (!hasAcount) {
 				ParseUser user = new ParseUser();
@@ -316,46 +312,100 @@ public class MainActivity extends Activity {
 					@Override
 					public void done(ParseException e) {
 						if (e != null) {
-							// Show the error message
-							Toast.makeText(MainActivity.this, e.getMessage(),
-									Toast.LENGTH_LONG).show();
-						} else {
-							// Start an intent for the dispatch activity
-							/*
-							 * Intent intent = new Intent(SignUpActivity.this,
-							 * DispatchActivity.class);
-							 * intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
-							 * Intent.FLAG_ACTIVITY_NEW_TASK);
-							 * startActivity(intent);
-							 */
-							Toast.makeText(MainActivity.this,
-									"dang ki thanh cong", Toast.LENGTH_LONG)
-									.show();
+							ParseUser.logInInBackground(
+									Constants.getInstance().email,
+									Constants.getInstance().email,
+									new LogInCallback() {
+										@Override
+										public void done(ParseUser user,
+												ParseException e) {
+											if (e != null) {
+											} else {
+												// lay thong tin bmi
+												if (Constants.getInstance().listDataBMI
+														.size() > 0) {
+													Constants.getInstance().listDataBMI
+															.retainAll(Constants
+																	.getInstance().listDataBMI);
+												}
+												ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
+														"RatioBMIDTO");
+												queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
 
+													@Override
+													public void done(
+															List<RatioBMIDTO> datas,
+															ParseException arg1) {
+														Constants.getInstance().listDataBMI = datas;
+														getBMIFinish = true;
+													}
+
+												}));
+												// lay thong tin whr
+												if (Constants.getInstance().listDataWHR
+														.size() > 0) {
+													Constants.getInstance().listDataWHR
+															.retainAll(Constants
+																	.getInstance().listDataWHR);
+												}
+												ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
+														"RatioWHRDTO");
+												queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+
+													@Override
+													public void done(
+															List<RatioWHRDTO> datas,
+															ParseException arg1) {
+														Constants.getInstance().listDataWHR = datas;
+														getWHRFinish = true;
+													}
+
+												}));
+												// lay thong tin heartrate
+												if (Constants.getInstance().listDataHR
+														.size() > 0) {
+													Constants.getInstance().listDataHR
+															.retainAll(Constants
+																	.getInstance().listDataHR);
+												}
+												ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
+														"HeartRateDTO");
+												queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+
+													@Override
+													public void done(
+															List<HeartRateDTO> datas,
+															ParseException arg1) {
+														Constants.getInstance().listDataHR = datas;
+														getHRFinish = true;
+													}
+
+												}));
+												// LAY THONG TIN STEP
+												ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
+														"StepRunDTO");
+												queryStep
+														.findInBackground((new FindCallback<StepRunDTO>() {
+
+															@Override
+															public void done(
+																	List<StepRunDTO> datas,
+																	ParseException arg1) {
+																Constants
+																		.getInstance().listDataStepDTO = datas;
+																getStepFinish = true;
+															}
+
+														}));
+												hasLogIn = true;
+											}
+
+										}
+									});
 						}
 					}
 				});
-			} 
-			if (!hasLogIn) {
-				ParseUser.logInInBackground(Constants.getInstance().email,
-						Constants.getInstance().email, new LogInCallback() {
-							@Override
-							public void done(ParseUser user, ParseException e) {
-								if (e != null) {
-									Toast.makeText(MainActivity.this,
-											"login that bai",
-											Toast.LENGTH_SHORT).show();
-								} else {
-									hasLogIn = true;
-									Toast.makeText(MainActivity.this,
-											"login thanh cong",
-											Toast.LENGTH_SHORT).show();
-								}
-
-							}
-						});
 			}
-
 		} catch (IllegalArgumentException ex) {
 			Log.e("login parse", "loi tham so " + ex.toString());
 		}
@@ -406,6 +456,7 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case FRAG_HOME:
+			logIn();
 			fragment = new StartAppScreen();
 			break;
 		case FRAG_HEART_RATE:
@@ -459,13 +510,6 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, About.class));
 			break;
 		case 7:
-			handleConnect();
-			if (ParseUser.getCurrentUser() == null) {
-				hasAcount = false;
-				logIn();
-			}
-			break;
-		case 8:
 			this.finish();
 			break;
 		default:
@@ -518,16 +562,6 @@ public class MainActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-
-//	public void setCheckData(int bool) {
-//		SharedPreferences.Editor settingsEditor = checkCreateDatabase.edit();
-//		settingsEditor.putInt(Constants.CHECK_DATA, bool);
-//		settingsEditor.commit();
-//	}
-
-//	public int getCheckData() {
-//		return checkCreateDatabase.getInt(Constants.CHECK_DATA, 0);
-//	}
 
 	@Override
 	public void onBackPressed() {
@@ -587,7 +621,7 @@ public class MainActivity extends Activity {
 				GoogleFitService.TYPE_REQUEST_CONNECTION);
 		startService(service);
 	}
-	
+
 	private boolean isNetworkAvaiable() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo info = cm.getActiveNetworkInfo();

@@ -1,7 +1,5 @@
 package app.healthcare.heartrate;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.util.DisplayMetrics;
@@ -17,7 +15,6 @@ import app.healthcare.heartratehistory.HistoryHeartRate;
 
 import com.gc.materialdesign.views.Button;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 public class HeartRateResult extends Activity {
@@ -203,18 +200,9 @@ public class HeartRateResult extends Activity {
 
 	private void insertHeartRate() {
 		int id = 1;
-		try {
-			ParseQuery<HeartRateDTO> query = ParseQuery
-					.getQuery("HeartRateDTO");
-			List<HeartRateDTO> datas;
-			datas = query.find();
-			if (datas != null && datas.size() > 0) {
-				id = datas.size() + 1;
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (Constants.getInstance().listDataHR.size() > 0) {
+			id = Constants.getInstance().listDataHR.size() + 1;
 		}
-		
 		final Intent i = new Intent(this, HistoryHeartRate.class);
 		noteString = note.getText().toString();
 		HeartRateDTO dto = new HeartRateDTO();
@@ -234,11 +222,14 @@ public class HeartRateResult extends Activity {
 		dto.setStatusSport(motionStatus);
 		dto.setBodyCo(bodyCo);
 		dto.setHeartRateId(id);
+		Constants.getInstance().listDataHR.add(dto);
 		dto.saveInBackground(new SaveCallback() {
 
 			@Override
 			public void done(ParseException arg0) {
 				if (arg0 != null) {
+					Constants.getInstance().listDataHR.remove(Constants
+							.getInstance().listDataHR.size() - 1);
 					Log.e("Save heart rate", arg0.getMessage());
 				} else {
 					startActivity(i);

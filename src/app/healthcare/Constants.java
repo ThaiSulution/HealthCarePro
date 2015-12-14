@@ -5,6 +5,10 @@ import java.util.List;
 
 import android.app.Fragment;
 import android.text.format.Time;
+import app.dto.HeartRateDTO;
+import app.dto.RatioBMIDTO;
+import app.dto.RatioWHRDTO;
+import app.dto.StepRunDTO;
 
 public class Constants {
 	public static final String CHECK_DATA = "createdata";
@@ -22,6 +26,11 @@ public class Constants {
 	public int sex = 0;
 	public String email = "";
 	public String name = "";
+	public List<RatioBMIDTO> listDataBMI = new ArrayList<RatioBMIDTO>();
+	public List<RatioWHRDTO> listDataWHR = new ArrayList<RatioWHRDTO>();
+	public List<HeartRateDTO> listDataHR = new ArrayList<HeartRateDTO>();
+	public List<StepRunDTO> listDataStepDTO = new ArrayList<StepRunDTO>();
+	public ArrayList<HistoryStepObject> listDataStep = new ArrayList<HistoryStepObject>();
 
 	public long getStepsAvg() {
 		return stepsAvg;

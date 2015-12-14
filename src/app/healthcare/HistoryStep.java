@@ -47,20 +47,20 @@ public class HistoryStep extends Activity {
 		ArrayList<Bar> aBars = new ArrayList<Bar>();
 		Bar bar;
 		int total = 0;
-		if (GoogleFitService.listDataStep.size() >= 16) {
-			total = 16;
+		if (Constants.getInstance().listDataStep.size() >= 20) {
+			total = 20;
 		} else {
-			total = GoogleFitService.listDataStep.size();
+			total = Constants.getInstance().listDataStep.size();
 		}
 		// for (int i = GoogleFitService.listDataStep.size()-1;i>=0;i--){
 		for (int i = 0; i < total; i++) {
 			bar = new Bar();
 			bar.setColor(resources.getColor(R.color.red));
 			bar.setSelectedColor(resources.getColor(R.color.transparent_orange));
-			String dateMonth = GoogleFitService.listDataStep.get(i).getTime();
+			String dateMonth = Constants.getInstance().listDataStep.get(i).getTime();
 			bar.setName(dateMonth);
-			bar.setValue((float) GoogleFitService.listDataStep.get(i).getStep());
-			bar.setValueString(String.valueOf(GoogleFitService.listDataStep
+			bar.setValue((float) Constants.getInstance().listDataStep.get(i).getStep());
+			bar.setValueString(String.valueOf(Constants.getInstance().listDataStep
 					.get(i).getStep()));
 			aBars.add(bar);
 			// if ((GoogleFitService.listDataStep.size() - i )>15){

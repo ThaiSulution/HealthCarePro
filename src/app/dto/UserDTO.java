@@ -42,7 +42,7 @@ public class UserDTO extends ParseObject {
 	public void setWeight(Double value) {
 		put("weight", value);
 	}
-	
+
 	public int getTarget() {
 		return getInt("target");
 	}
@@ -57,5 +57,13 @@ public class UserDTO extends ParseObject {
 
 	public void setSex(String value) {
 		put("sex", value);
+	}
+
+	public Double getDistance() {
+		return getDouble("distance");
+	}
+
+	public void setDistance(Double value) {
+		put("distance", value);
 	}
 }
