@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import zulu.app.libraries.ldrawer.ActionBarDrawerToggle;
 import zulu.app.libraries.ldrawer.DrawerArrowDrawable;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -28,6 +31,7 @@ import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -308,6 +312,7 @@ public class MainActivity extends Activity {
 				ParseUser user = new ParseUser();
 				user.setUsername(Constants.getInstance().email);
 				user.setPassword(Constants.getInstance().email);
+
 				// Call the Parse signup method
 				user.signUpInBackground(new SignUpCallback() {
 					@Override
@@ -463,6 +468,16 @@ public class MainActivity extends Activity {
 	 * Diplaying fragment view for selected nav drawer list item
 	 * */
 	public void displayView(int position) {
+		if (Constants.getInstance().email.length() == 0) {
+			Pattern emailPattern = Patterns.EMAIL_ADDRESS; 
+			Account[] accounts = AccountManager.get(this).getAccounts();
+			for (Account account : accounts) {
+				if (emailPattern.matcher(account.name).matches()) {
+					Constants.getInstance().email = account.name;
+					break;
+				}
+			}
+		}
 		// update the main content by replacing fragments
 		Fragment fragment = null;
 		switch (position) {
