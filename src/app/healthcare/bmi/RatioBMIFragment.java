@@ -33,6 +33,7 @@ public class RatioBMIFragment extends Fragment {
 
 	Button btnReinphut;
 	Button btnCalculateBMI;
+	Button btnHistory;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +58,15 @@ public class RatioBMIFragment extends Fragment {
 		cbWHO.setOnCheckedChangeListener(listener);
 		tbxHeight = (EditText) rootView.findViewById(R.id.tbxHeight);
 		tbxWeight = (EditText) rootView.findViewById(R.id.tbxWeight);
+		final Intent historyBMI = new Intent(getActivity(), HistoryBMI.class);
+		btnHistory = (Button) rootView.findViewById(R.id.btn_history);
+		btnHistory.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(historyBMI);
+			}
+		});
 		btnCalculateBMI = (Button) rootView.findViewById(R.id.btnCalculateBMI);
 		btnCalculateBMI.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("ShowToast")
@@ -161,6 +171,7 @@ public class RatioBMIFragment extends Fragment {
 		final Double ratioToView = ratioBMI;
 		final String resultToView = result;
 		final Intent historyBMI = new Intent(getActivity(), HistoryBMI.class);
+		final Intent BMIResult = new Intent(getActivity(), BMIResultView.class);
 		dto.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException ex) {
@@ -176,7 +187,12 @@ public class RatioBMIFragment extends Fragment {
 
 								@Override
 								public void onClick(View v) {
+									HistoryBMI.itemCurentSelect = Constants
+											.getInstance().listDataBMI
+											.get(Constants.getInstance().listDataBMI
+													.size() - 1);
 									startActivity(historyBMI);
+									startActivity(BMIResult);
 									dialog.dismiss();
 								}
 							});

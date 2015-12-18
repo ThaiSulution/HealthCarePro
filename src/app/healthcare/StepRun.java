@@ -1,5 +1,9 @@
 package app.healthcare;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,11 +21,14 @@ import android.content.IntentSender;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -67,6 +74,7 @@ public class StepRun extends Activity implements LocationListener {
 	Button btnSetup;
 	final Handler mHandler = new Handler();
 	private ProgressDialog dialog;
+	File imagePath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -442,6 +450,15 @@ public class StepRun extends Activity implements LocationListener {
 			// start handler
 			mHandler.post(runnable);
 			return true;
+		} else if (id == R.id.share) {
+			saveBitmap(takeScreenshot());
+			Intent shareIntent = new Intent();
+			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_STREAM,
+					Uri.fromFile(imagePath.getAbsoluteFile()));
+			shareIntent.setType("image/png");
+			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			startActivity(Intent.createChooser(shareIntent, "send"));
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -560,5 +577,31 @@ public class StepRun extends Activity implements LocationListener {
 	@Override
 	public void onProviderDisabled(String provider) {
 
+	}
+
+	public Bitmap takeScreenshot() {
+		View rootView = findViewById(R.id.step_run_chart_progess);// .getRootView();
+		rootView.setDrawingCacheEnabled(true);
+		return rootView.getDrawingCache();
+	}
+
+	public void saveBitmap(Bitmap bitmap) {
+		imagePath = new File(Environment.getExternalStorageDirectory()
+				+ "/"
+				+ String.valueOf(Constants.getInstance().listDataStepDTO.get(
+						Constants.getInstance().listDataStepDTO.size() - 1)
+						.getStepID()) + ".png");
+		Log.e("imagePath", imagePath.getAbsolutePath());
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(imagePath);
+			bitmap.compress(CompressFormat.PNG, 100, fos);
+			fos.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			Log.e("GREC", e.getMessage(), e);
+		} catch (IOException e) {
+			Log.e("GREC", e.getMessage(), e);
+		}
 	}
 }

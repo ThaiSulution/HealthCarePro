@@ -28,6 +28,7 @@ public class HeartRateResultView extends Activity {
 	ShareLinkContent content = new ShareLinkContent.Builder().setContentUrl(
 			Uri.parse("https://developers.facebook.com")).build();
 	ImageButton imgeShareFacebook;
+	File imagePath;
 
 	public HeartRateDTO getData() {
 		return data;
@@ -50,7 +51,7 @@ public class HeartRateResultView extends Activity {
 		DisplayMetrics displaymetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 		float width;
-		width = displaymetrics.widthPixels;
+		width = displaymetrics.widthPixels - 32;
 		View vProgess;
 		vProgess = (View) findViewById(R.id.measurement_bpm_indicator);
 		vProgess.setX((width / 90) * (data.getHeartRate() - 30));
@@ -70,20 +71,10 @@ public class HeartRateResultView extends Activity {
 			public void onClick(View v) {
 				// Bitmap bm = takeScreenshot();
 				saveBitmap(takeScreenshot());
-				File filePath = getFileStreamPath(Environment
-						.getExternalStorageDirectory()
-						+ "/"
-						+ String.valueOf(data.getHeartRateId()) + ".png"); // optional
-				// //internal
-				// storage
 				Intent shareIntent = new Intent();
 				shareIntent.setAction(Intent.ACTION_SEND);
-				shareIntent.putExtra(Intent.EXTRA_TEXT, "Nhịp tim của tôi là: "
-						+ String.valueOf(data.getHeartRate()));
 				shareIntent.putExtra(Intent.EXTRA_STREAM,
-						Uri.fromFile(filePath)); // optional//use this
-													// when you want to
-													// send an image
+						Uri.fromFile(imagePath.getAbsoluteFile()));
 				shareIntent.setType("image/png");
 				shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivity(Intent.createChooser(shareIntent, "send"));
@@ -153,15 +144,15 @@ public class HeartRateResultView extends Activity {
 	}
 
 	public Bitmap takeScreenshot() {
-		View rootView = findViewById(android.R.id.content).getRootView();
+		View rootView = findViewById(R.id.content_take);//.getRootView();
 		rootView.setDrawingCacheEnabled(true);
 		return rootView.getDrawingCache();
 	}
 
 	public void saveBitmap(Bitmap bitmap) {
-		File imagePath = new File(Environment.getExternalStorageDirectory()
-				+ "/" + String.valueOf(data.getHeartRateId()) + ".png");
-		Log.e("imagePath", String.valueOf(data.getHeartRateId()));
+		imagePath = new File(Environment.getExternalStorageDirectory() + "/"
+				+ String.valueOf(data.getHeartRateId()) + ".png");
+		Log.e("imagePath", imagePath.getAbsolutePath());
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(imagePath);

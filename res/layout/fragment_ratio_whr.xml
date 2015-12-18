@@ -111,7 +111,9 @@
         android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip" >
 
         <Button
             android:id="@+id/btnCalculateWHR"
@@ -119,6 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:background="@drawable/button_style"
             android:text="@string/btnCalculateWHRString" />
 
@@ -128,8 +131,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:background="@drawable/button_style"
             android:text="@string/btnReinputString" />
+        <Button
+            android:id="@+id/btn_history"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_style"
+            android:text="@string/btnHistoryString" />
     </LinearLayout>
 
     <LinearLayout

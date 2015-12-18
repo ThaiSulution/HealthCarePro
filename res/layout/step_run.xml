@@ -13,7 +13,8 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_weight="1"
         app:pieInnerCircleRatio="128"
-        app:pieSlicePadding="0dip" />
+        app:pieSlicePadding="0dip" 
+        android:background="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"

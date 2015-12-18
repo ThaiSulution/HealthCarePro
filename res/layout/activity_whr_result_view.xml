@@ -14,11 +14,10 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/content_take"
+                android:id="@+id/whr_content_take"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -33,7 +32,7 @@
                     android:gravity="center_vertical" >
 
                     <TextView
-                        android:id="@id/measurement_bpm"
+                        android:id="@+id/ratio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8.0dip"
@@ -42,17 +41,15 @@
                         android:textSize="40.0sp" />
 
                     <TextView
-                        android:id="@+id/history_child_item_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="4.0dip"
-                        android:drawableTop="@drawable/heart_red"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:paddingTop="10.0dip"
                         android:singleLine="true"
-                        android:text="@string/beats_per_minute"
+                        android:text="@string/cm_per_cm"
                         android:textColor="@color/light_grey"
                         android:textSize="24.0dip" />
                 </LinearLayout>
@@ -63,77 +60,45 @@
                     android:layout_height="8.0dip"
                     android:layout_marginTop="8.0dip"
                     android:orientation="horizontal"
-                    android:weightSum="3.0" >
+                    android:weightSum="4.0" >
 
                     <View
-                        android:id="@id/v1"
+                        android:id="@+id/whr_v1"
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="#ff00ea53" />
+                        android:background="#9400D3" />
 
                     <View
-                        android:id="@id/v2"
+                        android:id="@+id/whr_v2"
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="#fff3ce00" />
+                        android:background="#6495ED" />
 
                     <View
-                        android:id="@id/v3"
+                        android:id="@+id/whr_v3"
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="#ffff0054" />
+                        android:background="#FFFF00" />
+
+                    <View
+                        android:id="@+id/whr_v4"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:background="#DD0000" />
+
+                   
                 </LinearLayout>
 
                 <View
-                    android:id="@id/measurement_bpm_indicator"
+                    android:id="@+id/whr_indicator"
                     android:layout_width="3.0dip"
                     android:layout_height="16.0dip"
                     android:layout_marginTop="-13.0dip"
                     android:background="@color/dark_grey" />
-
-                <LinearLayout
-                    android:id="@+id/measurement_scale_default"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-4.0dip"
-                    android:orientation="horizontal"
-                    android:weightSum="3.0" >
-
-                    <TextView
-                        android:id="@+id/measurement_scale_default_from"
-                        style="@style/LineScale"
-                        android:layout_width="0.0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.0"
-                        android:gravity="right"
-                        android:text="@string/detail_activity_scale_green" />
-
-                    <TextView
-                        android:id="@+id/measurement_scale_default_middle"
-                        style="@style/LineScale"
-                        android:layout_width="0.0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.0"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:paddingLeft="4.0dip"
-                        android:paddingRight="4.0dip"
-                        android:singleLine="true"
-                        android:text="@string/detail_activity_scale_yellow" />
-
-                    <TextView
-                        android:id="@+id/measurement_scale_default_to"
-                        style="@style/LineScale"
-                        android:layout_width="0.0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.0"
-                        android:gravity="left"
-                        android:text="@string/detail_activity_scale_red" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -144,13 +109,13 @@
                     android:padding="5.0dip" >
 
                     <ImageView
-                        android:id="@+id/image_motion_status"
+                        android:id="@+id/image_whr_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_hr_type_custom_add" />
+                        android:src="@drawable/good" />
 
                     <TextView
-                        android:id="@+id/motion_status_text"
+                        android:id="@+id/whr_status_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -165,28 +130,6 @@
                     android:padding="5.0dip" >
 
                     <ImageView
-                        android:id="@+id/image_body_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/feeling_colored_awesome" />
-
-                    <TextView
-                        android:id="@+id/body_condition_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Good" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/box_light"
-                    android:padding="5.0dip" >
-
-                    <ImageView
-                        android:id="@+id/image_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_calendar" />
@@ -207,7 +150,6 @@
                     android:padding="5.0dip" >
 
                     <ImageView
-                        android:id="@+id/image_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_gopro_notification" />
@@ -218,26 +160,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/hr_last_date_demo" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/measurement_note_container"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/box_light"
-                    android:padding="8.0dip" >
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_pencil" />
-
-                    <TextView
-                        android:id="@id/measurement_note"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/note" />
                 </LinearLayout>
             </LinearLayout>
 

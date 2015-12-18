@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import app.dto.RatioWHRDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.bmi.BMIResultView;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
+import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
 
 public class HistoryWHR extends Activity {
 	BarGraph bg;
@@ -24,11 +32,13 @@ public class HistoryWHR extends Activity {
 
 	ListView list;
 	HistoryWHRAdapter adapter;
+	public static RatioWHRDTO itemCurentSelect;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_whr);
+		itemCurentSelect = new RatioWHRDTO();
 		initChart();
 		initList();
 	}
@@ -58,6 +68,16 @@ public class HistoryWHR extends Activity {
 		// Getting adapter by passing xml data ArrayList
 		adapter = new HistoryWHRAdapter(this, ratiopWHRList);
 		list.setAdapter(adapter);
+		final Intent i = new Intent(this, WHRResultView.class);
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+					long id) {
+				itemCurentSelect = Constants.getInstance().listDataWHR.get(pos);
+				startActivity(i);
+			}
+
+		});
 	}
 
 	private void initChart() {
@@ -86,5 +106,16 @@ public class HistoryWHR extends Activity {
 		final BarGraph barGraph = (BarGraph) findViewById(R.id.chart_history_whr);
 		bg = barGraph;
 		barGraph.setBars(aBars);
+		final Intent i = new Intent(this, BMIResultView.class);
+		barGraph.setOnBarClickedListener(new OnBarClickedListener() {
+			@Override
+			public void onClick(int index) {
+				Log.e("bargrap click", String.valueOf(index));
+				index += 1;
+				itemCurentSelect = Constants.getInstance().listDataWHR
+						.get(Constants.getInstance().listDataWHR.size() - index);
+				startActivity(i);
+			}
+		});
 	}
 }

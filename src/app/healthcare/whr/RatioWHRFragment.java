@@ -33,6 +33,7 @@ public class RatioWHRFragment extends Fragment {
 	TextView tbxResult;
 	Button btnReinphut;
 	Button btnCalculateWHR;
+	Button btnHistory;
 
 	// List<RatioWHRDTO> allData = new ArrayList<RatioWHRDTO>();
 
@@ -53,6 +54,15 @@ public class RatioWHRFragment extends Fragment {
 		cbFeMale.setOnCheckedChangeListener(listener);
 		tbxCe = (EditText) rootView.findViewById(R.id.tbxCe);
 		tbxCm = (EditText) rootView.findViewById(R.id.tbxCm);
+		btnHistory = (Button) rootView.findViewById(R.id.btn_history);
+		final Intent historyIntent = new Intent(getActivity(), HistoryWHR.class);
+		btnHistory.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(historyIntent);
+			}
+		});
 		btnCalculateWHR = (Button) rootView.findViewById(R.id.btnCalculateWHR);
 		btnCalculateWHR.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("ShowToast")
@@ -113,7 +123,7 @@ public class RatioWHRFragment extends Fragment {
 			} else if (ratioWHR > 0.7 && ratioWHR <= 0.8) {
 				result = "Ít nguy hiểm";
 			} else if (ratioWHR > 0.8 && ratioWHR < 0.85) {
-				result = "Nguy hiểm";
+				result = "Mức độ nguy hiểm trung bình";
 			} else {
 				result = "Rất nguy hiểm";
 			}
@@ -144,6 +154,8 @@ public class RatioWHRFragment extends Fragment {
 		final Double ratioToView = ratioWHR;
 		final String resultToView = result;
 		final Intent historyWHR = new Intent(getActivity(), HistoryWHR.class);
+		final Intent intentResult = new Intent(getActivity(),
+				WHRResultView.class);
 		dto.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException ex) {
@@ -160,7 +172,12 @@ public class RatioWHRFragment extends Fragment {
 
 								@Override
 								public void onClick(View v) {
+									HistoryWHR.itemCurentSelect = Constants
+											.getInstance().listDataWHR
+											.get(Constants.getInstance().listDataWHR
+													.size() - 1);
 									startActivity(historyWHR);
+									startActivity(intentResult);
 									dialog.dismiss();
 								}
 							});

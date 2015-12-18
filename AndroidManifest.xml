@@ -89,7 +89,9 @@
         <activity android:name="app.healthcare.heartratehistory.HistoryHeartRate" />
         <activity android:name="app.healthcare.heartratehistory.HeartRateResultView" />
         <activity android:name="app.healthcare.bmi.HistoryBMI" />
+        <activity android:name="app.healthcare.bmi.BMIResultView" />
         <activity android:name="app.healthcare.whr.HistoryWHR" />
+        <activity android:name="app.healthcare.whr.WHRResultView" />
         <activity android:name="app.healthcare.heartrate.HelpActivity" />
         <activity
             android:name="app.healthcare.HistoryStep"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import app.dto.HeartRateDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.heartratehistory.HeartRateResultView;
 import app.healthcare.heartratehistory.HistoryHeartRate;
 
 import com.gc.materialdesign.views.Button;
@@ -204,6 +205,7 @@ public class HeartRateResult extends Activity {
 			id = Constants.getInstance().listDataHR.size() + 1;
 		}
 		final Intent i = new Intent(this, HistoryHeartRate.class);
+		final Intent resultView = new Intent(this, HeartRateResultView.class);
 		noteString = note.getText().toString();
 		HeartRateDTO dto = new HeartRateDTO();
 		dto.setHeartRate(HeartRateFragment.heartBeat);
@@ -232,7 +234,10 @@ public class HeartRateResult extends Activity {
 							.getInstance().listDataHR.size() - 1);
 					Log.e("Save heart rate", arg0.getMessage());
 				} else {
+					HistoryHeartRate.itemCurentSelect = Constants.getInstance().listDataHR
+							.get(Constants.getInstance().listDataHR.size() - 1);
 					startActivity(i);
+					startActivity(resultView);
 					finish();
 				}
 			}

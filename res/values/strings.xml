@@ -8,6 +8,7 @@
     <string name="bar">Bar</string>
     <string name="pie">Pie</string>
     <string name="menu_setup_string">Cài đặt</string>
+    <string name="menu_share_string">Chi sẻ</string>
     <string name="step_run_title">Thể dục</string>
     <string name="news_title">Tin tức và y học</string>
 
@@ -36,7 +37,9 @@
     <string name="detail_activity_scale_red">>90</string>
     <string name="detail_activity_scale_green">&lt;60</string>
     <string name="detail_activity_scale_yellow">60–90</string>
-    <string name="beats_per_minute">BPM</string>
+    <string name="beats_per_minute">B/M</string>
+    <string name="kg_per_m">KG/M2</string>
+     <string name="cm_per_cm">CM/CM</string>
     <string name="tutorial_camera">Hướng dẫn sử dụng</string>
     <string name="tutorial_camera_decription">Nhẹ đặt ngón tay trỏ của bạn trên ống kính camera và đèn flash ở mặt sau của điện thoại của bạn. Hãy chắc chắn rằng các ống kính và đèn flash được bao phủ hoàn toàn. Giữ cho đến khi đo xong.</string>
     <string name="drawer_open">Slider Menu Opened</string>
@@ -77,11 +80,16 @@
     <string name="cbFeMaleString">Nữ</string>
     <string name="btnCalculateWHRString">Tính WHR</string>
     <string name="btnReinputString">Nhập lại</string>
+    <string name="btnHistoryString">Lịch sử</string>
     <string name="lbTitleWHRString">WHR</string>
     <string name="tbxResultWHRString">WHR</string>
     <string name="lbTitleResultWHRString">WHR của bạn:</string>
     <string name="lbNoteWHRString">Chú ý:\nSố đó vòng eo (bụng) được đo ở nơi nhỏ nhất của bụng, vòng mông được đo tại nơi to nhất của mông</string>
     <string name="tbxImpactString">Mức độ ảnh hưởng</string>
+    <string name="whr_status_nomal">Sức khỏe tốt</string>
+    <string name="whr_status_risk_little">Ít nguy hiểm</string>
+    <string name="whr_status_risk">Mức độ nguy hiểm trung bình</string>
+    <string name="whr_status_risk_much">Rất nguy hiểm</string>
     <!-- bmi -->
     <string name="lbHeightString">Chiều cao (m)</string>
     <string name="lbWeightString">Cân nặng (kg)</string>
