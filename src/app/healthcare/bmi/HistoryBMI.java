@@ -97,7 +97,7 @@ public class HistoryBMI extends Activity {
 			bar.setValueString(String.valueOf(Constants.getInstance().listDataBMI
 					.get(i).getRatio()));
 			aBars.add(bar);
-			if ((Constants.getInstance().listDataBMI.size() - i) >= 10) {
+			if ((Constants.getInstance().listDataBMI.size() - i) >= 8) {
 				break;
 			}
 		}

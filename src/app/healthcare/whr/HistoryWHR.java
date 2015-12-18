@@ -15,7 +15,6 @@ import android.widget.ListView;
 import app.dto.RatioWHRDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.bmi.BMIResultView;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
@@ -98,7 +97,7 @@ public class HistoryWHR extends Activity {
 			bar.setValueString(String.valueOf(Constants.getInstance().listDataWHR
 					.get(i).getRatio()));
 			aBars.add(bar);
-			if ((Constants.getInstance().listDataWHR.size() - i) >= 10) {
+			if ((Constants.getInstance().listDataWHR.size() - i) >= 8) {
 				break;
 			}
 		}
@@ -106,7 +105,7 @@ public class HistoryWHR extends Activity {
 		final BarGraph barGraph = (BarGraph) findViewById(R.id.chart_history_whr);
 		bg = barGraph;
 		barGraph.setBars(aBars);
-		final Intent i = new Intent(this, BMIResultView.class);
+		final Intent i = new Intent(this, WHRResultView.class);
 		barGraph.setOnBarClickedListener(new OnBarClickedListener() {
 			@Override
 			public void onClick(int index) {
