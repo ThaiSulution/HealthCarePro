@@ -47,6 +47,12 @@
     <string name="connect_button">Thử lại</string>
     <string name="connect_failed_mesage">Không kết nối được với GooglePlay Service</string>
     <string name="default_text_heart_rate">--</string>
+    <string name="add_doctor_title">Thêm địa chỉ bác sĩ</string>
+    <string name="lbadd_doctor_name">Tên bác sĩ</string>
+    <string name="lbadd_doctor_skypes">Địa chỉ skype</string>
+    <string name="lbadd_doctor_number_call">Số điện thoại</string>
+    <string name="btn_add_doctor">Thêm</string>
+    <string name="list_doctor_skypes">Danh sách</string>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
@@ -57,6 +63,7 @@
         <item>Đo số bước chạy</item>
         <item>Tin tức và y học</item>
         <item>Thông tin</item>
+        <item>Danh sách bác sĩ</item>
         <item>Thoát</item>
     </string-array>
 
@@ -70,6 +77,7 @@
         <item>@drawable/run_icon</item>
         <item>@drawable/news_ico</item>
         <item>@drawable/info</item>
+        <item>@drawable/doctor14</item>
         <item>@drawable/exit_icon</item>
     </array>
     <!-- whr -->

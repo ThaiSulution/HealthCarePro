@@ -29,6 +29,7 @@
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -88,6 +89,8 @@
         <activity android:name="app.healthcare.whr.HistoryWHR" />
         <activity android:name="app.healthcare.whr.WHRResultView" />
         <activity android:name="app.healthcare.heartrate.HelpActivity" />
+        <activity android:name="app.healthcare.call.ActivityAddDoctor" />
+        <activity android:name="app.healthcare.call.ListDoctor"/>
         <activity
             android:name="app.healthcare.HistoryStep"
             android:label="Lịch sử đo đạc"

@@ -53,7 +53,8 @@ public class StartAppScreen extends Fragment {
 			public void run() {
 				if (MainActivity.getBMIFinish && MainActivity.getHRFinish
 						&& MainActivity.getWHRFinish
-						&& MainActivity.getStepFinish) {
+						&& MainActivity.getStepFinish
+						&& MainActivity.getDoctorFinish) {
 					dialog.dismiss();
 					buildChartBMI(rootView, a);
 					buildChartWHR(rootView, a);

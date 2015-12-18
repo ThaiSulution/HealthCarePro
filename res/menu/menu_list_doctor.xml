@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="healthcarepro.steprun.MainActivity" >
+
+    
+    <item
+        android:id="@+id/addNew"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Thêm địa chỉ mới"/>
+     <item
+        android:id="@+id/refresh"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Làm mới"/>
+
+</menu>

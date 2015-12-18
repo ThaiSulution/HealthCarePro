@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Fragment;
 import android.text.format.Time;
+import app.dto.DoctorDTO;
 import app.dto.HeartRateDTO;
 import app.dto.RatioBMIDTO;
 import app.dto.RatioWHRDTO;
@@ -30,6 +31,7 @@ public class Constants {
 	public List<RatioWHRDTO> listDataWHR = new ArrayList<RatioWHRDTO>();
 	public List<HeartRateDTO> listDataHR = new ArrayList<HeartRateDTO>();
 	public List<StepRunDTO> listDataStepDTO = new ArrayList<StepRunDTO>();
+	public List<DoctorDTO> listDoctorDTO = new ArrayList<DoctorDTO>();
 	public ArrayList<HistoryStepObject> listDataStep = new ArrayList<HistoryStepObject>();
 
 	public long getStepsAvg() {

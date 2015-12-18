@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/history_child_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="2.0dip"
+    android:paddingLeft="@dimen/history_child_item_padding"
+    android:paddingRight="@dimen/history_child_item_padding"
+    android:paddingTop="2.0dip" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/selectable_item_accent" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_light"
+            android:paddingBottom="8.0dip"
+            android:paddingLeft="8.0dip"
+            android:paddingRight="8.0dip"
+            android:paddingTop="8.0dip" >
+
+            <ImageView
+                android:id="@+id/doctor_item_type_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8.0dip"
+                android:layout_marginRight="16.0dip"
+                android:src="@drawable/doctor14" />
+
+            <LinearLayout
+                android:id="@+id/history_child_item_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/doctor_item_type_image"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/name_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BS.Thai" />
+
+                <TextView
+                    android:id="@+id/number_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01688000836"
+                    android:textColor="@color/beat_signal"
+                    android:textSize="12.0sp" />
+
+                <TextView
+                    android:id="@+id/number_skype_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="live:qthai93"
+                    android:textColor="@color/beat_signal"
+                    android:textSize="12.0sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/history_child_item_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</FrameLayout>

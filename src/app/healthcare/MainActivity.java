@@ -37,12 +37,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import app.dto.DoctorDTO;
 import app.dto.HeartRateDTO;
 import app.dto.RatioBMIDTO;
 import app.dto.RatioWHRDTO;
 import app.dto.StepRunDTO;
 import app.dto.UserDTO;
 import app.healthcare.bmi.RatioBMIFragment;
+import app.healthcare.call.ListDoctor;
 import app.healthcare.heartrate.HeartRateFragment;
 import app.healthcare.whr.RatioWHRFragment;
 import app.slidingmenu.adapter.NavDrawerListAdapter;
@@ -84,6 +86,7 @@ public class MainActivity extends Activity {
 	public static boolean getWHRFinish = false;
 	public static boolean getHRFinish = false;
 	public static boolean getStepFinish = false;
+	public static boolean getDoctorFinish = false;
 
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -107,6 +110,7 @@ public class MainActivity extends Activity {
 	public static final int FRAG_STEPRUN = 4;
 	public static final int FRAG_NEWS = 5;
 	public static final int FRAG_INFO = 6;
+	public static final int FRAG_LIST_DOCTOR = 7;
 
 	// Database db;
 
@@ -150,8 +154,8 @@ public class MainActivity extends Activity {
 				.getResourceId(6, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons
 				.getResourceId(7, -1)));
-		// navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
-		// .getResourceId(8, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
+				.getResourceId(8, -1)));
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -254,6 +258,7 @@ public class MainActivity extends Activity {
 				ParseObject.registerSubclass(RatioWHRDTO.class);
 				ParseObject.registerSubclass(UserDTO.class);
 				ParseObject.registerSubclass(StepRunDTO.class);
+				ParseObject.registerSubclass(DoctorDTO.class);
 				Parse.initialize(MainActivity.this,
 						"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
 						"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
@@ -327,31 +332,6 @@ public class MainActivity extends Activity {
 												ParseException e) {
 											if (e != null) {
 											} else {
-//												int i = 0;
-//												while (!getData()) {
-//													i++;
-//													if (i > 100) {
-//														AlertDialog.Builder builder = new AlertDialog.Builder(
-//																c);
-//														builder.setTitle("Không có kết nối");
-//														builder.setMessage("Kết nối không ổn định!");
-//														builder.setPositiveButton(
-//																"Finish",
-//																new DialogInterface.OnClickListener() {
-//
-//																	@Override
-//																	public void onClick(
-//																			DialogInterface dialog,
-//																			int which) {
-//																		((Activity) c)
-//																				.finish();
-//
-//																	}
-//																});
-//														builder.show();
-//													}
-//													continue;
-//												}
 												try {
 													// lay thong tin bmi
 													if (Constants.getInstance().listDataBMI
@@ -436,6 +416,22 @@ public class MainActivity extends Activity {
 																}
 
 															}));
+													// LAY THONG TIN BAC SI
+													ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
+															"DoctorDTO");
+													queryDoctor
+															.findInBackground((new FindCallback<DoctorDTO>() {
+
+																@Override
+																public void done(
+																		List<DoctorDTO> datas,
+																		ParseException arg1) {
+																	Constants
+																			.getInstance().listDoctorDTO = datas;
+																	getDoctorFinish = true;
+																}
+
+															}));
 													hasLogIn = true;
 
 												} catch (NullPointerException ex) {
@@ -468,80 +464,6 @@ public class MainActivity extends Activity {
 			}
 		} catch (IllegalArgumentException ex) {
 			Log.e("login parse", "loi tham so " + ex.toString());
-		}
-
-	}
-
-	public static boolean getData() {
-		try {
-			// lay thong tin bmi
-			if (Constants.getInstance().listDataBMI.size() > 0) {
-				Constants.getInstance().listDataBMI.retainAll(Constants
-						.getInstance().listDataBMI);
-			}
-			ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
-					"RatioBMIDTO");
-			queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
-
-				@Override
-				public void done(List<RatioBMIDTO> datas, ParseException arg1) {
-					Constants.getInstance().listDataBMI = datas;
-					getBMIFinish = true;
-				}
-
-			}));
-			// lay thong tin whr
-			if (Constants.getInstance().listDataWHR.size() > 0) {
-				Constants.getInstance().listDataWHR.retainAll(Constants
-						.getInstance().listDataWHR);
-			}
-			ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
-					"RatioWHRDTO");
-			queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
-
-				@Override
-				public void done(List<RatioWHRDTO> datas, ParseException arg1) {
-					Constants.getInstance().listDataWHR = datas;
-					getWHRFinish = true;
-				}
-
-			}));
-			// lay thong tin heartrate
-			if (Constants.getInstance().listDataHR.size() > 0) {
-				Constants.getInstance().listDataHR.retainAll(Constants
-						.getInstance().listDataHR);
-			}
-			ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
-					"HeartRateDTO");
-			queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
-
-				@Override
-				public void done(List<HeartRateDTO> datas, ParseException arg1) {
-					Constants.getInstance().listDataHR = datas;
-					getHRFinish = true;
-				}
-
-			}));
-			// LAY THONG TIN STEP
-			ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
-					"StepRunDTO");
-			Calendar cal = Calendar.getInstance();
-			Date now = new Date();
-			cal.setTime(now);
-			queryStep.findInBackground((new FindCallback<StepRunDTO>() {
-
-				@Override
-				public void done(List<StepRunDTO> datas, ParseException arg1) {
-					Constants.getInstance().listDataStepDTO = datas;
-					getStepFinish = true;
-				}
-
-			}));
-			hasLogIn = true;
-			return true;
-
-		} catch (NullPointerException ex) {
-			return false;
 		}
 
 	}
@@ -653,7 +575,10 @@ public class MainActivity extends Activity {
 		case FRAG_INFO:
 			startActivity(new Intent(this, About.class));
 			break;
-		case 7:
+		case FRAG_LIST_DOCTOR:
+			startActivity(new Intent(this, ListDoctor.class));
+			break;
+		case 8:
 			this.finish();
 			break;
 		default:
@@ -851,4 +776,5 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
+
 }

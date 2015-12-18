@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:src="@drawable/ic_facebook" />
+                    android:src="@drawable/ic_share" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
