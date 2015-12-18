@@ -40,6 +40,8 @@ import com.gc.materialdesign.views.Button;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.fitness.FitnessStatusCodes;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 public class StepRun extends Activity implements LocationListener {
 	// location
@@ -57,11 +59,6 @@ public class StepRun extends Activity implements LocationListener {
 	private static final String AUTH_PENDING = "auth_state_pending";
 	private boolean authInProgress = false;
 	private static final int REQUEST_OAUTH = 1431;
-	/*
-	 * private Spinner view_type; private Spinner view_unit; private long
-	 * avgStep; private boolean monthTypeFlg = true; private boolean dayTypeFlg
-	 * = false; private boolean weekTypeFlg = false;
-	 */
 	private PieSlice sliceRed;
 	public static String weight_weight;
 	public static int target;
@@ -209,6 +206,7 @@ public class StepRun extends Activity implements LocationListener {
 					pg.setAnimationListener(getAnimationListener());
 					pg.animateToGoalValues();
 					dialog.cancel();
+					setTargetToDB();
 					Thread.currentThread().interrupt();
 				}
 			}
@@ -264,8 +262,8 @@ public class StepRun extends Activity implements LocationListener {
 
 	private void setTargetToDB() {
 		int id = 1;
-		if (Constants.getInstance().listDataStep.size() > 0) {
-			id = Constants.getInstance().listDataStep.size() + 1;
+		if (Constants.getInstance().listDataStepDTO.size() > 0) {
+			id = Constants.getInstance().listDataStepDTO.size() + 1;
 		}
 		Date now = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -277,7 +275,21 @@ public class StepRun extends Activity implements LocationListener {
 		dto.setDistance((double) Constants.getInstance().getDistance());
 		dto.setStepID(id);
 		dto.setTarget(target);
-		dto.saveInBackground();
+		dto.setStep((int) Constants.getInstance().getStepRuns());
+		Constants.getInstance().listDataStepDTO.add(dto);
+		dto.saveInBackground(new SaveCallback() {
+
+			@Override
+			public void done(ParseException arg0) {
+				if (arg0 != null) {
+					Log.e("setTargetToDB", arg0.toString());
+				} else {
+					Log.e("setTargetToDB", "thanh cong");
+				}
+
+			}
+
+		});
 	}
 
 	// [START GET DATA]

@@ -1,11 +1,12 @@
 package app.healthcare;
 
 import java.util.ArrayList;
-
 import android.animation.Animator;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,8 +46,9 @@ public class StartAppScreen extends Fragment {
 	private void init(final View rootView) {
 		final MainActivity a = (MainActivity) getActivity();
 		dialog = ProgressDialog.show(getActivity(), "", "Vui lòng chờ...");
-		// getDataToDay();
 		Runnable runnable = new Runnable() {
+			int i = 0;
+
 			@Override
 			public void run() {
 				if (MainActivity.getBMIFinish && MainActivity.getHRFinish
@@ -59,14 +61,30 @@ public class StartAppScreen extends Fragment {
 					buildChartStepRun(rootView, a);
 					Thread.currentThread().interrupt();
 				} else {
-					MainActivity.logIn();
-					mHandler.postDelayed(this, 2000);
+
+					if (i > 15) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(a);
+						builder.setTitle("Lỗi kết nối");
+						builder.setMessage("Kết nối không ổn định, hãy kiểm tra kết nối mạng và thử lại lần nữa!");
+						builder.setPositiveButton("Finish",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										(a).finish();
+									}
+								});
+						builder.show();
+					}
+					MainActivity.logIn(a);
+					i++;
+					mHandler.postDelayed(this, 3000);
 				}
 			}
 		};
 		// start handler
 		mHandler.post(runnable);
-
 	}
 
 	private void buildChartBMI(View rootView, final MainActivity a) {
@@ -154,17 +172,35 @@ public class StartAppScreen extends Fragment {
 		try {
 			float distance = 0;
 			int target = 0;
+			int step = 0;
+			Double calos = (double) 0;
 			int size = Constants.getInstance().listDataStepDTO.size();
 			if (size > 0) {
 				distance += Constants.getInstance().listDataStepDTO.get(
 						size - 1).getDistance();
-				target += Constants.getInstance().listDataStepDTO.get(size - 1)
+				target = Constants.getInstance().listDataStepDTO.get(size - 1)
 						.getTarget();
+				step = Constants.getInstance().listDataStepDTO.get(size - 1)
+						.getStep();
+				calos = Constants.getInstance().listDataStepDTO.get(size - 1)
+						.getCalos();
 			}
 			Constants.getInstance().setDistance(distance);
 			Constants.getInstance().setTarget(target);
-			Log.e("thiatahihaishi", String.valueOf(distance));
-			Log.e("thiatahihaishi", String.valueOf(target));
+			Constants.getInstance().setStepRuns(step);
+			Constants.getInstance().setCalos(
+					Float.parseFloat(String.valueOf(calos)));
+			Log.e("setDistance",
+					String.valueOf(Constants.getInstance().getDistance()));
+			Log.e("setTarget",
+					String.valueOf(Constants.getInstance().getTarget()));
+			Log.e("setStepRuns",
+					String.valueOf(Constants.getInstance().getStepRuns()));
+			Log.e("setCalos",
+					String.valueOf(Constants.getInstance().getCalos()));
+			Log.e("buildChartStepRun",
+					String.valueOf(Constants.getInstance().listDataStepDTO
+							.size()));
 			final Resources resources = getResources();
 			final PieGraph pg = (PieGraph) rootView
 					.findViewById(R.id.step_run_chart);
@@ -192,23 +228,23 @@ public class StartAppScreen extends Fragment {
 			Bitmap b = BitmapFactory.decodeResource(getResources(),
 					R.drawable.run_icon_black);
 			pg.setBackgroundBitmap(b);
-			// pg.setBackgroundText("Step in here");
 			pg.setInnerCircleRatio(220);
 			pg.setBackgroundText("SB: "
-					+ String.valueOf(GoogleFitService.totalStepsGet)
+					+ String.valueOf(Constants.getInstance().getDistance())
 					+ "\n"
 					+ "KC: "
 					+ String.valueOf((long) Constants.getInstance()
-							.getDistance()) + "m\n" + "Calo: "
-					+ String.valueOf(GoogleFitService.totalCalosGet));
-			if (Constants.getInstance().getTarget() > GoogleFitService.totalStepsGet) {
+							.getDistance()) + " m\n" + "Calo: "
+					+ String.valueOf(Constants.getInstance().getCalos()));
+			if (Constants.getInstance().getTarget() > Constants.getInstance()
+					.getDistance()) {
 				pg.getSlices().get(0)
-						.setGoalValue(GoogleFitService.totalStepsGet);
+						.setGoalValue(Constants.getInstance().getDistance());
 				pg.getSlices()
 						.get(1)
 						.setGoalValue(
 								Constants.getInstance().getTarget()
-										- GoogleFitService.totalStepsGet);
+										- Constants.getInstance().getDistance());
 			} else {
 				pg.getSlices().get(0).setGoalValue(1);
 				pg.getSlices().get(1).setGoalValue(0);
@@ -221,7 +257,6 @@ public class StartAppScreen extends Fragment {
 		} catch (NullPointerException e) {
 			Log.e("buildChartStepRun", e.toString());
 		}
-
 	}
 
 	private void buildChartHreatRate(View rootView, final MainActivity a) {
@@ -241,7 +276,6 @@ public class StartAppScreen extends Fragment {
 			sliceHeartRate.setValue(0);
 			pg.addSlice(sliceHeartRate);
 			pg.setTextSizeGr(20);
-
 			int rows = Constants.getInstance().listDataHR.size();
 			int avg = 0;
 			for (int i = 0; i < rows; i++) {
@@ -296,11 +330,9 @@ public class StartAppScreen extends Fragment {
 				}
 
 			});
-
 			Bitmap b = BitmapFactory.decodeResource(getResources(),
 					R.drawable.heart_on);
 			pg.setBackgroundBitmap(b);
-			// pg.setBackgroundText("Step in here");
 			pg.setInnerCircleRatio(220);
 		} catch (NullPointerException e) {
 			Log.e("buildChartHreatRate", e.toString());

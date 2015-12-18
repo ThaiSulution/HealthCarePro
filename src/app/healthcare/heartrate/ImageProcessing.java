@@ -2,6 +2,8 @@ package app.healthcare.heartrate;
 
 public abstract class ImageProcessing {
 
+	public static int red = 0;
+
 	private static int decodeYUV420SPtoRedSum(byte[] yuv420sp, int width,
 			int height) {
 		if (yuv420sp == null)
@@ -38,13 +40,16 @@ public abstract class ImageProcessing {
 				else if (b > 262143)
 					b = 262143;
 
-//				int pixel = 0xff000000 | ((r << 6) & 0xff0000)
-//						| ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
-//				int red = (pixel >> 16) & 0xff;
+				// int pixel = 0xff000000 | ((r << 6) & 0xff0000)
+				// | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
+				// int red = (pixel >> 16) & 0xff;
 				int pixel = 0xff000000 | ((r << 3) & 0xff0000)
 						| ((g >> 1) & 0xff00) | ((b >> 5) & 0xff);
-				int red = (pixel >> 8) & 0xff;
-				sum += red;
+				int green = (pixel >> 8) & 0xff;
+				sum += green;
+				int pixel2 = 0xff000000 | ((r << 6) & 0xff0000)
+						| ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
+				red = (pixel2 >> 16) & 0xff;
 			}
 		}
 		return sum;

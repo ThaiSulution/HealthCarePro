@@ -2,30 +2,28 @@ package app.healthcare.heartratehistory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import app.dto.HeartRateDTO;
+import app.healthcare.Constants;
 import app.healthcare.R;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 
 public class HistoryHeartRate extends Activity {
 	BarGraph bg;
 	public static HeartRateDTO itemCurentSelect;
-	List<HeartRateDTO> listData = new ArrayList<HeartRateDTO>();
 	TextView avgHeartRate;
 
 	// All static variables
@@ -47,14 +45,6 @@ public class HistoryHeartRate extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_heartrate);
 		avgHeartRate = (TextView) findViewById(R.id.avg_text);
-		try {
-			ParseQuery<HeartRateDTO> query = ParseQuery
-					.getQuery("HeartRateDTO");
-			listData = query.find();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		itemCurentSelect = new HeartRateDTO();
 		initChart();
 		initList();
@@ -66,16 +56,19 @@ public class HistoryHeartRate extends Activity {
 		ArrayList<Bar> aBars = new ArrayList<Bar>();
 		Bar bar;
 
-		for (int i = listData.size() - 1; i >= 0; i--) {
+		for (int i = Constants.getInstance().listDataHR.size() - 1; i >= 0; i--) {
 			bar = new Bar();
 			bar.setColor(resources.getColor(R.color.red));
 			bar.setSelectedColor(resources.getColor(R.color.transparent_orange));
-			bar.setName(listData.get(i).getDate());
-			bar.setValue((float) listData.get(i).getHeartRate());
-			bar.setValueString(String.valueOf(listData.get(i).getHeartRate()));
-			bar.setId(listData.get(i).getHeartRateId());
+			bar.setName(Constants.getInstance().listDataHR.get(i).getDate());
+			bar.setValue((float) Constants.getInstance().listDataHR.get(i)
+					.getHeartRate());
+			bar.setValueString(String.valueOf(Constants.getInstance().listDataHR
+					.get(i).getHeartRate()));
+			bar.setId(Constants.getInstance().listDataHR.get(i)
+					.getHeartRateId());
 			aBars.add(bar);
-			if ((listData.size() - i) >= 10) {
+			if ((Constants.getInstance().listDataHR.size() - i) >= 8) {
 				break;
 			}
 		}
@@ -87,22 +80,11 @@ public class HistoryHeartRate extends Activity {
 		barGraph.setOnBarClickedListener(new OnBarClickedListener() {
 			@Override
 			public void onClick(int index) {
-				try {
-					ParseQuery<HeartRateDTO> query = ParseQuery
-							.getQuery("HeartRateDTO");
-					query.whereEqualTo("heartRateId",
-							barGraph.getBars().get(index).getId());
-					List<HeartRateDTO> dataSelect = new ArrayList<HeartRateDTO>();
-					dataSelect = query.find();
-					if (dataSelect.size() > 0) {
-						HistoryHeartRate.itemCurentSelect = dataSelect.get(0);
-					} else {
-						HistoryHeartRate.itemCurentSelect = new HeartRateDTO();
-					}
+				Log.e("bargrap click", String.valueOf(index));
+				index += 1;
+				HistoryHeartRate.itemCurentSelect = Constants.getInstance().listDataHR
+						.get(Constants.getInstance().listDataHR.size() - index);
 
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
 				startActivity(i);
 			}
 		});
@@ -113,14 +95,17 @@ public class HistoryHeartRate extends Activity {
 		ArrayList<HashMap<String, String>> heasrtRateList = new ArrayList<HashMap<String, String>>();
 
 		// looping through all song nodes &lt;song&gt;
-		for (int i = 0; i < listData.size(); i++) {
+		for (int i = 0; i < Constants.getInstance().listDataHR.size(); i++) {
 			// creating new HashMap
 			HashMap<String, String> map = new HashMap<String, String>();
 			// adding each child node to HashMap key =&gt; value
-			map.put(KEY_RATE, String.valueOf(listData.get(i).getHeartRate()));
-			map.put(KEY_TIME, listData.get(i).getTime());
-			map.put(KEY_DATE, listData.get(i).getDate());
-			switch (listData.get(i).getBodyCo()) {
+			map.put(KEY_RATE, String.valueOf(Constants.getInstance().listDataHR
+					.get(i).getHeartRate()));
+			map.put(KEY_TIME, Constants.getInstance().listDataHR.get(i)
+					.getTime());
+			map.put(KEY_DATE, Constants.getInstance().listDataHR.get(i)
+					.getDate());
+			switch (Constants.getInstance().listDataHR.get(i).getBodyCo()) {
 			case 1:
 				map.put(KEY_FEEL, "Rất tốt");
 				break;
@@ -139,7 +124,7 @@ public class HistoryHeartRate extends Activity {
 			default:
 				break;
 			}
-			switch (listData.get(i).getStatusSport()) {
+			switch (Constants.getInstance().listDataHR.get(i).getStatusSport()) {
 			case 1:
 				map.put(KEY_MOTION_STATUS,
 						String.valueOf(R.drawable.ic_hr_type_custom_add));
@@ -163,23 +148,24 @@ public class HistoryHeartRate extends Activity {
 			default:
 				break;
 			}
-			map.put(KEY_NOTE, listData.get(i).getNote());
+			map.put(KEY_NOTE, Constants.getInstance().listDataHR.get(i)
+					.getNote());
 			// adding HashList to ArrayList
 			heasrtRateList.add(map);
-			avg += listData.get(i).getHeartRate();
+			avg += Constants.getInstance().listDataHR.get(i).getHeartRate();
 		}
 		list = (ListView) findViewById(R.id.list);
 		// Getting adapter by passing xml data ArrayList
 		adapter = new HistoryAdapter(this, heasrtRateList);
 		list.setAdapter(adapter);
-		avg = avg / listData.size();
+		avg = avg / Constants.getInstance().listDataHR.size();
 		avgHeartRate.setText(String.valueOf(avg));
 		final Intent i = new Intent(this, HeartRateResultView.class);
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
 					long id) {
-				itemCurentSelect = listData.get(pos);
+				itemCurentSelect = Constants.getInstance().listDataHR.get(pos);
 				startActivity(i);
 			}
 

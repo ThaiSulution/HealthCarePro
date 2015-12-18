@@ -15,70 +15,72 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
-
-           <!--  <app.healthcare.heartrate.HeartbeatView
-                android:id="@+id/image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" >
-            </app.healthcare.heartrate.HeartbeatView> -->
-
-            <com.gc.materialdesign.views.ButtonFlat
-                android:id="@+id/btnStart"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="5dp"
-                android:textColor="#ffffff"
-                android:text="Start" 
-                android:background="@color/red"
-               />
 
             <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/btnHelp"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:layout_margin="5dp"
-                android:textColor="#ffffff"
+                android:layout_weight="1"
                 android:background="@color/red"
-                android:text="Help" />
-        </RelativeLayout>
+                android:text="Help"
+                android:textColor="#ffffff" />
+
+            <com.gc.materialdesign.views.ButtonFlat
+                android:id="@+id/btn_history"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/red"
+                android:text="Lịch sử đo"
+                android:textColor="#ffffff" />
+
+            <com.gc.materialdesign.views.ButtonFlat
+                android:id="@+id/btnStart"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/red"
+                android:text="Start"
+                android:textColor="#ffffff" />
+        </LinearLayout>
     </LinearLayout>
-    
-    <View 
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/holo_red_light"/>
+        android:background="@color/holo_red_light" />
 
-   <LinearLayout
+    <LinearLayout
         android:id="@+id/graphLayout"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/white"
         android:orientation="vertical" >
+
         <com.echo.holographlibrary.PieGraph
-        android:id="@+id/heartbeat_chart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/default_margin"
-        app:pieInnerCircleRatio="128"
-        app:pieSlicePadding="0dip" />
+            android:id="@+id/heartbeat_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/default_margin"
+            app:pieInnerCircleRatio="128"
+            app:pieSlicePadding="0dip" />
     </LinearLayout>
 
-   <SurfaceView
-       android:id="@+id/preview"
-       android:layout_width="fill_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1" />
+    <SurfaceView
+        android:id="@+id/preview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

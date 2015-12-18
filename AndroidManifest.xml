@@ -35,6 +35,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider784296165031043"
+            android:exported="true" />
+
         <activity
             android:name="app.healthcare.SplashActivity"
             android:label="@string/app_name"
@@ -85,6 +90,7 @@
         <activity android:name="app.healthcare.heartratehistory.HeartRateResultView" />
         <activity android:name="app.healthcare.bmi.HistoryBMI" />
         <activity android:name="app.healthcare.whr.HistoryWHR" />
+        <activity android:name="app.healthcare.heartrate.HelpActivity" />
         <activity
             android:name="app.healthcare.HistoryStep"
             android:label="Lịch sử đo đạc"
