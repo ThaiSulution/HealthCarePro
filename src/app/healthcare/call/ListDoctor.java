@@ -2,6 +2,7 @@ package app.healthcare.call;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -20,10 +21,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import app.dto.DoctorDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
 
 import com.gc.materialdesign.widgets.Dialog;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class ListDoctor extends Activity {
 
@@ -98,8 +104,51 @@ public class ListDoctor extends Activity {
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								Constants.getInstance().listDoctorDTO
-										.get(index).deleteInBackground();
+								ParseQuery<DoctorDTO> queryDoctor = ParseQuery
+										.getQuery("DoctorDTO");
+								queryDoctor.whereEqualTo("doctorId", Constants
+										.getInstance().listDoctorDTO.get(index)
+										.getDoctorId());
+								queryDoctor
+										.findInBackground((new FindCallback<DoctorDTO>() {
+											@Override
+											public void done(
+													List<DoctorDTO> datas,
+													ParseException e) {
+												if (e == null) {
+													for (int i = 0; i < datas
+															.size(); i++) {
+														for (int j = 0; j < Constants
+																.getInstance().listDoctorDTO
+																.size(); j++) {
+															if (Constants
+																	.getInstance().listDoctorDTO
+																	.get(j)
+																	.getDoctorId() == datas
+																	.get(i)
+																	.getDoctorId()) {
+																Constants
+																		.getInstance().listDoctorDTO
+																		.remove(j);
+															}
+														}
+														datas.get(i)
+																.deleteInBackground(
+																		new DeleteCallback() {
+
+																			@Override
+																			public void done(
+																					ParseException arg0) {
+																				initList();
+																			}
+																		});
+
+													}
+												}
+											}
+
+										}));
+
 								dialog.dismiss();
 							}
 						});

@@ -2,6 +2,7 @@ package app.healthcare.whr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import app.dto.RatioWHRDTO;
 import app.healthcare.Constants;
@@ -19,6 +21,11 @@ import app.healthcare.R;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
+import com.gc.materialdesign.widgets.Dialog;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class HistoryWHR extends Activity {
 	BarGraph bg;
@@ -76,6 +83,64 @@ public class HistoryWHR extends Activity {
 				startActivity(i);
 			}
 
+		});
+		final Dialog dialogWHR = new Dialog(this, "Xóa chỉ số WHR",
+				"Bạn có muốn xóa thông tin WHR này?", R.drawable.whr_icon);
+		list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int pos, long arg3) {
+				final int index = pos;
+				dialogWHR.show();
+				dialogWHR.getButtonAccept().setOnClickListener(
+						new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								ParseQuery<RatioWHRDTO> queryWHR = ParseQuery
+										.getQuery("RatioWHRDTO");
+								queryWHR.whereEqualTo("ratioWHRId", Constants
+										.getInstance().listDataWHR.get(index)
+										.getRatioWHRId());
+								queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+									@Override
+									public void done(List<RatioWHRDTO> datas,
+											ParseException e) {
+										if (e == null) {
+											for (int i = 0; i < datas.size(); i++) {
+												for (int j = 0; j < Constants
+														.getInstance().listDataWHR
+														.size(); j++) {
+													if (Constants.getInstance().listDataWHR
+															.get(j)
+															.getRatioWHRId() == datas
+															.get(i)
+															.getRatioWHRId()) {
+														Constants.getInstance().listDataWHR
+																.remove(j);
+													}
+												}
+												datas.get(i)
+														.deleteInBackground( new DeleteCallback() {
+															
+															@Override
+															public void done(ParseException arg0) {
+																initList();
+																initChart();
+															}
+														});
+
+											}
+										}
+									}
+
+								}));
+
+								dialogWHR.dismiss();
+							}
+						});
+				return false;
+			}
 		});
 	}
 

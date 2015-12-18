@@ -2,6 +2,7 @@ package app.healthcare.heartratehistory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import app.dto.HeartRateDTO;
@@ -20,6 +22,11 @@ import app.healthcare.R;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
+import com.gc.materialdesign.widgets.Dialog;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class HistoryHeartRate extends Activity {
 	BarGraph bg;
@@ -169,6 +176,67 @@ public class HistoryHeartRate extends Activity {
 				startActivity(i);
 			}
 
+		});
+		
+		final Dialog dialogHR = new Dialog(this, "Xóa Heart rate",
+				"Bạn có muốn xóa thông tin lần đo này không?", R.drawable.heart_on);
+		list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int pos, long arg3) {
+				final int index = pos;
+				dialogHR.show();
+				dialogHR.getButtonAccept().setOnClickListener(
+						new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								ParseQuery<HeartRateDTO> queryHR = ParseQuery
+										.getQuery("HeartRateDTO");
+								queryHR.whereEqualTo("heartRateId", Constants
+										.getInstance().listDataHR.get(index)
+										.getHeartRateId());
+								queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+									@Override
+									public void done(List<HeartRateDTO> datas,
+											ParseException e) {
+										if (e == null) {
+											for (int i = 0; i < datas.size(); i++) {
+												for (int j = 0; j < Constants
+														.getInstance().listDataHR
+														.size(); j++) {
+													if (Constants.getInstance().listDataHR
+															.get(j)
+															.getHeartRateId() == datas
+															.get(i)
+															.getHeartRateId()) {
+														Constants.getInstance().listDataHR
+																.remove(j);
+													}
+												}
+												datas.get(i)
+														.deleteInBackground(
+																new DeleteCallback() {
+
+																	@Override
+																	public void done(
+																			ParseException arg0) {
+																		initList();
+																		initChart();
+																	}
+																});
+
+											}
+										}
+									}
+
+								}));
+
+								dialogHR.dismiss();
+							}
+						});
+				return false;
+			}
 		});
 	}
 }

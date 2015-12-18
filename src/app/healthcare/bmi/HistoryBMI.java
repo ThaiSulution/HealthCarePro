@@ -2,6 +2,7 @@ package app.healthcare.bmi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import app.dto.RatioBMIDTO;
 import app.healthcare.Constants;
@@ -19,6 +21,11 @@ import app.healthcare.R;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
+import com.gc.materialdesign.widgets.Dialog;
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class HistoryBMI extends Activity {
 	BarGraph bg;
@@ -76,6 +83,66 @@ public class HistoryBMI extends Activity {
 				startActivity(i);
 			}
 
+		});
+		final Dialog dialogBMI = new Dialog(this, "Xóa chỉ số BMI",
+				"Bạn có muốn xóa thông tin BMI này?", R.drawable.bmi_icon);
+		list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int pos, long arg3) {
+				final int index = pos;
+				dialogBMI.show();
+				dialogBMI.getButtonAccept().setOnClickListener(
+						new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								ParseQuery<RatioBMIDTO> queryBMI = ParseQuery
+										.getQuery("RatioBMIDTO");
+								queryBMI.whereEqualTo("ratioBMIId", Constants
+										.getInstance().listDataBMI.get(index)
+										.getRatioBMIId());
+								queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
+									@Override
+									public void done(List<RatioBMIDTO> datas,
+											ParseException e) {
+										if (e == null) {
+											for (int i = 0; i < datas.size(); i++) {
+												for (int j = 0; j < Constants
+														.getInstance().listDataBMI
+														.size(); j++) {
+													if (Constants.getInstance().listDataBMI
+															.get(j)
+															.getRatioBMIId() == datas
+															.get(i)
+															.getRatioBMIId()) {
+														Constants.getInstance().listDataBMI
+																.remove(j);
+													}
+												}
+												datas.get(i)
+														.deleteInBackground(
+																new DeleteCallback() {
+
+																	@Override
+																	public void done(
+																			ParseException arg0) {
+																		initList();
+																		initChart();
+																	}
+																});
+
+											}
+										}
+									}
+
+								}));
+
+								dialogBMI.dismiss();
+							}
+						});
+				return false;
+			}
 		});
 	}
 
