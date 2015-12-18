@@ -77,7 +77,7 @@ public class HeartRateResultView extends Activity {
 						Uri.fromFile(imagePath.getAbsoluteFile()));
 				shareIntent.setType("image/png");
 				shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				startActivity(Intent.createChooser(shareIntent, "send"));
+				startActivity(Intent.createChooser(shareIntent, "Chia sẻ qua"));
 			}
 		});
 		measurementBpm.setText(String.valueOf(data.getHeartRate()));
