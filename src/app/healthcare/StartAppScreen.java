@@ -73,7 +73,7 @@ public class StartAppScreen extends Fragment {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										(a).finish();
+										//(a).finish();
 									}
 								});
 						builder.show();

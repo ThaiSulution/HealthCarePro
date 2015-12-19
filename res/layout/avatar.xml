@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10.0dip"
+        android:gravity="center_horizontal" >
+
+        <ImageView
+            android:id="@id/layer2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/symptoms_avatar"
+            android:src="@drawable/avt_male" />
+
+        <ImageView
+            android:id="@id/layer1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@null" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@id/btn_avt_all_symptoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8.0dip"
+        android:layout_marginTop="8.0dip"
+        android:background="@android:drawable/list_selector_background"
+        android:contentDescription="@string/complete_symptoms_list"
+        android:padding="2.0dip"
+        android:src="@drawable/ic_symptoms_list" />
+
+    <ImageButton
+        android:id="@id/btn_avt_gender"
+        android:layout_width="75.0dip"
+        android:layout_height="21.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60.0dip"
+        android:layout_marginRight="20.0dip"
+        android:adjustViewBounds="true"
+        android:background="@android:drawable/list_selector_background"
+        android:contentDescription="@string/switch_gender"
+        android:onClick="onSearchRequested"
+        android:scaleType="centerInside"
+        android:src="@drawable/avatar_gender_button" />
+
+    <ImageButton
+        android:id="@id/btn_avt_flip"
+        android:layout_width="75.0dip"
+        android:layout_height="21.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="60.0dip"
+        android:layout_marginLeft="20.0dip"
+        android:adjustViewBounds="true"
+        android:background="@android:drawable/list_selector_background"
+        android:contentDescription="@string/rotate_avatar"
+        android:onClick="onRotateRequest"
+        android:scaleType="centerInside"
+        android:src="@drawable/avatar_rotate_button" />
+
+</RelativeLayout>

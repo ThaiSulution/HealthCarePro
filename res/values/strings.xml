@@ -64,6 +64,7 @@
         <item>Tin tức và y học</item>
         <item>Thông tin</item>
         <item>Danh sách bác sĩ</item>
+        <item>Chẩn đoán</item>
         <item>Thoát</item>
     </string-array>
 
@@ -78,6 +79,7 @@
         <item>@drawable/news_ico</item>
         <item>@drawable/info</item>
         <item>@drawable/doctor14</item>
+        <item>@drawable/diagnose_icon</item>
         <item>@drawable/exit_icon</item>
     </array>
     <!-- whr -->
@@ -127,5 +129,20 @@
     <string name="txtTargetHint">Nhập mục tiêu của bạn</string>
     <string name="aboutContent">Vấn đề trọng tâm trong chăm sóc sức khỏe là thể chất, ngoài việc ăn uống điều độ cần có sự theo dõi thể trạng thường xuyên là điều cần thiết. Health Care giúp bạn theo dõi thường xuyên các chỉ số BMI (cân nặng, chiều cao), WHR (vòng eo/vòng mông), theo dõi quá trình tập thể dục (đo số bước đi trong ngày). Sử dụng Health Care để có thể chăm sóc sức khỏe không cần một thiết bị hỗ trợ nào khác, tối ưu hóa sự tập luyện và theo dõi sự tiến bộ của bạn</string>
     <string name="avg_title">Nhịp tim trung bình:</string>
-
+    <string name="loadscreen">GuideCook</string>
+    <string name="login">Đăng nhập</string>
+    <string name="loginName">Tên đăng nhập</string>
+    <string name="loginPassword">Mật khẩu</string>
+    <string name="register">Đăng ký tài khoản</string>
+    <string name="timkiem">Tìm kiếm triệu chứng</string>
+    <string name="label_nhacnho">Nhắc nhở</string>
+    <string name="label_phatsinh">Phát sinh</string>
+    <string name="label_thucdon_child_nguyenlieu">Chi tiết món ăn</string>
+    <string name="phatsinh_songuoilon_content"/>
+    <string name="phatsinh_sotrecon_content"/>
+    <string name="monan">Danh sách triệu chứng</string>
+    <string name="symptoms_avatar">Symptoms Avatar</string>
+    <string name="complete_symptoms_list">Switch to a text listing of symptoms</string>
+    <string name="switch_gender">Switch avatar gender</string>
+    <string name="rotate_avatar">Xoay avatar</string>
 </resources>

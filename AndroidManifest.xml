@@ -30,6 +30,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" />
+    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH.youtube" />
 
     <application
         android:allowBackup="true"
@@ -90,12 +94,40 @@
         <activity android:name="app.healthcare.whr.WHRResultView" />
         <activity android:name="app.healthcare.heartrate.HelpActivity" />
         <activity android:name="app.healthcare.call.ActivityAddDoctor" />
-        <activity android:name="app.healthcare.call.ListDoctor"/>
+        <activity android:name="app.healthcare.call.ListDoctor" />
+        <activity android:name="app.healthcare.symptom.activity.GuideMenu" />
         <activity
             android:name="app.healthcare.HistoryStep"
             android:label="Lịch sử đo đạc"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="app.healthcare.symptom.activity.Diasease"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="app.healthcare.symptom.activity.Diabete"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="app.healthcare.symptom.activity.ListMenu"
+            android:label="@string/monan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name="app.healthcare.symptom.list.ListBenh" >
+        </activity>
+        
+        <activity
+            android:name="app.healthcare.symptom.activity.BodyActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="app.healthcare.symptom.activity.Symptom4Part"
+            android:screenOrientation="portrait" >
+        </activity>
+        
 
         <service
             android:name="app.healthcare.GoogleFitService"

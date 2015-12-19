@@ -46,6 +46,7 @@ import app.dto.UserDTO;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.call.ListDoctor;
 import app.healthcare.heartrate.HeartRateFragment;
+import app.healthcare.symptom.activity.GuideMenu;
 import app.healthcare.whr.RatioWHRFragment;
 import app.slidingmenu.adapter.NavDrawerListAdapter;
 import app.slidingmenu.model.NavDrawerItem;
@@ -156,6 +157,8 @@ public class MainActivity extends Activity {
 				.getResourceId(7, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
 				.getResourceId(8, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
+				.getResourceId(9, -1)));
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -206,7 +209,7 @@ public class MainActivity extends Activity {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							finish();
+						//	finish();
 
 						}
 					});
@@ -447,8 +450,8 @@ public class MainActivity extends Activity {
 																public void onClick(
 																		DialogInterface dialog,
 																		int which) {
-																	((Activity) c)
-																			.finish();
+																	//((Activity) c)
+																		//	.finish();
 																}
 															});
 													builder.show();
@@ -579,6 +582,9 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, ListDoctor.class));
 			break;
 		case 8:
+			startActivity(new Intent(this, GuideMenu.class));
+			break;
+		case 9:
 			this.finish();
 			break;
 		default:
