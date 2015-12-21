@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import app.dto.RatioBMIDTO;
 import app.healthcare.R;
+import app.healthcare.dataobject.RatioBMIDTO;
 
 public class BMIResultView extends Activity {
 	RatioBMIDTO data = new RatioBMIDTO();

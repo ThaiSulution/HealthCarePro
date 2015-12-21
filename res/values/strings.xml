@@ -11,18 +11,9 @@
     <string name="menu_share_string">Chi sẻ</string>
     <string name="step_run_title">Thể dục</string>
     <string name="news_title">Tin tức và y học</string>
-
-    <string-array name="steptun_list_type_view">
-        <item>View for dayly</item>
-        <item>View for week</item>
-        <item>View for month</item>
-    </string-array>
-    <string-array name="steptun_list_unit_view">
-        <item>View for step</item>
-        <item>View for km</item>
-        <item>View for time</item>
-        <item>View for calo</item>
-    </string-array>
+    <string name="btnStartString">Bắt đầu</string>
+    <string name="btnStopString">Dừng</string>
+    <string name="btnHelpString">Trợ giúp</string>
 
     <string name="note">Note</string>
     <string name="hr_last_date_demo">05.11.1987 13:30</string>

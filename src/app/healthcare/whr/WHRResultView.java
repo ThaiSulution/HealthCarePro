@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import app.dto.RatioWHRDTO;
 import app.healthcare.R;
+import app.healthcare.dataobject.RatioWHRDTO;
 
 public class WHRResultView extends Activity {
 	RatioWHRDTO data = new RatioWHRDTO();

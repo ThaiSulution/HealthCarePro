@@ -1,4 +1,4 @@
-package docbaoonline.adapters;
+package app.healthcare.docbaoonline.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

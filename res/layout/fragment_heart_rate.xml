@@ -28,7 +28,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/red"
-                android:text="Help"
+                android:text="@string/btnHelpString"
                 android:textColor="#ffffff" />
 
             <com.gc.materialdesign.views.ButtonFlat
@@ -39,7 +39,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/red"
-                android:text="Lịch sử đo"
+                android:text="@string/btnHistoryString"
                 android:textColor="#ffffff" />
 
             <com.gc.materialdesign.views.ButtonFlat
@@ -50,7 +50,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@color/red"
-                android:text="Start"
+                android:text="@string/btnStartString"
                 android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>

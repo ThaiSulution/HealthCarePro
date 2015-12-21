@@ -21,9 +21,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import app.dto.DoctorDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.dataobject.DoctorDTO;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.DeleteCallback;

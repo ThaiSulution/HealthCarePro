@@ -14,9 +14,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import app.dto.RatioBMIDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.dataobject.RatioBMIDTO;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;

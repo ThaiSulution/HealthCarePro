@@ -35,7 +35,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
-import app.dto.StepRunDTO;
+import app.healthcare.dataobject.StepRunDTO;
 
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieGraph.OnSliceClickedListener;

@@ -35,19 +35,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import app.dto.DoctorDTO;
-import app.dto.HeartRateDTO;
-import app.dto.RatioBMIDTO;
-import app.dto.RatioWHRDTO;
-import app.dto.StepRunDTO;
-import app.dto.UserDTO;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.call.ListDoctor;
+import app.healthcare.dataobject.DoctorDTO;
+import app.healthcare.dataobject.HeartRateDTO;
+import app.healthcare.dataobject.RatioBMIDTO;
+import app.healthcare.dataobject.RatioWHRDTO;
+import app.healthcare.dataobject.StepRunDTO;
+import app.healthcare.dataobject.UserDTO;
+import app.healthcare.docbaoonline.activity.ReadNewsActivity;
 import app.healthcare.heartrate.HeartRateFragment;
+import app.healthcare.slidingmenu.adapter.NavDrawerListAdapter;
+import app.healthcare.slidingmenu.model.NavDrawerItem;
 import app.healthcare.symptom.activity.GuideMenu;
 import app.healthcare.whr.RatioWHRFragment;
-import app.slidingmenu.adapter.NavDrawerListAdapter;
-import app.slidingmenu.model.NavDrawerItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -62,8 +63,6 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import docbaoonline.activity.ReadNewsActivity;
 
 public class MainActivity extends Activity {
 	public final static String TAG = "GoogleFitService";

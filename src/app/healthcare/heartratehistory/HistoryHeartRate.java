@@ -15,9 +15,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import app.dto.HeartRateDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.dataobject.HeartRateDTO;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;

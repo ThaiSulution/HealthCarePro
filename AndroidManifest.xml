@@ -78,13 +78,13 @@
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
-            android:name="docbaoonline.activity.CategotyActivity"
+            android:name="app.healthcare.docbaoonline.activity.CategotyActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="docbaoonline.activity.NewsListActivity" />
-        <activity android:name="docbaoonline.activity.NewActivity" />
-        <activity android:name="docbaoonline.activity.NoRssActivity" />
-        <activity android:name="docbaoonline.activity.ReadNewsActivity" />
+        <activity android:name="app.healthcare.docbaoonline.activity.NewsListActivity" />
+        <activity android:name="app.healthcare.docbaoonline.activity.NewActivity" />
+        <activity android:name="app.healthcare.docbaoonline.activity.NoRssActivity" />
+        <activity android:name="app.healthcare.docbaoonline.activity.ReadNewsActivity" />
         <activity android:name="app.healthcare.heartrate.HeartRateResult" />
         <activity android:name="app.healthcare.heartratehistory.HistoryHeartRate" />
         <activity android:name="app.healthcare.heartratehistory.HeartRateResultView" />

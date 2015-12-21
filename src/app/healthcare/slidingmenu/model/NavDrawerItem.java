@@ -1,4 +1,4 @@
-package app.slidingmenu.model;
+package app.healthcare.slidingmenu.model;
 
 public class NavDrawerItem {
 	private String title;

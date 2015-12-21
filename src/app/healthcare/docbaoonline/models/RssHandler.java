@@ -1,4 +1,4 @@
-package docbaoonline.models;
+package app.healthcare.docbaoonline.models;
 
 import java.util.ArrayList;
 import java.util.List;

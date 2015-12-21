@@ -1,4 +1,4 @@
-package app.slidingmenu.adapter;
+package app.healthcare.slidingmenu.adapter;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import app.slidingmenu.model.NavDrawerItem;
+import app.healthcare.slidingmenu.model.NavDrawerItem;
 
 public class NavDrawerListAdapter extends BaseAdapter {
     

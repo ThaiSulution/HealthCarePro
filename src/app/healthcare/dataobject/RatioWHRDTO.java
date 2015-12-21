@@ -1,14 +1,14 @@
-package app.dto;
+package app.healthcare.dataobject;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-@ParseClassName("RatioBMIDTO")
-public class RatioBMIDTO extends ParseObject {
-	public static ParseQuery<RatioBMIDTO> getQuery() {
-		return ParseQuery.getQuery(RatioBMIDTO.class);
+@ParseClassName("RatioWHRDTO")
+public class RatioWHRDTO extends ParseObject {
+	public static ParseQuery<RatioWHRDTO> getQuery() {
+		return ParseQuery.getQuery(RatioWHRDTO.class);
 	}
 
 	public ParseUser getUser() {
@@ -35,12 +35,12 @@ public class RatioBMIDTO extends ParseObject {
 		put("date", value);
 	}
 
-	public Integer getRatioBMIId() {
-		return getInt("ratioBMIId");
+	public Integer getRatioWHRId() {
+		return getInt("ratioWHRId");
 	}
 
-	public void setRatioBMIId(Integer value) {
-		put("ratioBMIId", value);
+	public void setRatioWHRId(Integer value) {
+		put("ratioWHRId", value);
 	}
 
 	public Double getRatio() {
@@ -58,5 +58,4 @@ public class RatioBMIDTO extends ParseObject {
 	public void setStatus(String value) {
 		put("status", value);
 	}
-
 }

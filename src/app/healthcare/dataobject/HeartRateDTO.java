@@ -1,4 +1,4 @@
-package app.dto;
+package app.healthcare.dataobject;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;

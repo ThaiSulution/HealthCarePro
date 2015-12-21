@@ -1,8 +1,9 @@
-package docbaoonline.adapters;
+package app.healthcare.docbaoonline.adapters;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import docbaoonline.models.RssItem;
+import app.healthcare.docbaoonline.models.RssItem;
 
 @SuppressLint({ "InflateParams", "ViewHolder" }) public class NewsListAdapter extends ArrayAdapter<RssItem> {
 

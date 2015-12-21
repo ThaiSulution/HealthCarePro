@@ -1,4 +1,4 @@
-package docbaoonline.models;
+package app.healthcare.docbaoonline.models;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,9 +8,9 @@ import app.healthcare.R;
 @SuppressLint("UseSparseArrays")
 public class Variables {
 	// Thai update start - thay doi title
-	// public static final String[] PAPERS = {"Bác Sĩ Gia Đình", "Afamily",
-	// "Y Học Sức Khỏe"};
-	public static final String[] PAPERS = { "Sức khỏe đời sống", "Afamily",
+	// public static final String[] PAPERS = {"Bác Sĩ Gia �?ình", "Afamily",
+	// "Y H�?c Sức Kh�?e"};
+	public static final String[] PAPERS = { "Sức kh�?e đ�?i sống", "Afamily",
 			"VnExpress", "KhoaHoc.TV" };
 	// Thai update end
 	public static final int[] ICONS = { R.drawable.skds, R.drawable.afamily,
@@ -20,13 +20,13 @@ public class Variables {
 	// public static final String[] BACSIGIADINH_CATEGORIES = {
 	// "Tin tức",
 	// "Chương trình BSGD",
-	// "Sức khoẻ thường thức",
+	// "Sức khoẻ thư�?ng thức",
 	// "Dinh dưỡng", "Làm đẹp",
-	// "Đời sống tinh thần",
+	// "�?�?i sống tinh thần",
 	// "Bệnh",s	// "Sản phẩm cho sức khoẻ",
 	// "Dịch vụ Y tế",
 	// "Bác sĩ gia đình giải đáp",
-	// "Bác sĩ gia đình Cười"};
+	// "Bác sĩ gia đình Cư�?i"};
 	// public static final String[] BACSIGIADINH_LINKS = {
 	// "http://www.bacsigiadinh.org/rss/tin-tuc.xml",
 	// "http://www.bacsigiadinh.org/rss/chuong-trinh-bsgd.xml",
@@ -40,11 +40,11 @@ public class Variables {
 	// "http://www.bacsigiadinh.org/rss/bac-si-gia-dinh-giai-dap.xml"};
 
 	public static final String[] SUCKHOEDOISONG_CATEGORIES = { "Trang chủ",
-			"Bạn cần biết về y học", "Diễn đàn",
-			"Tư vấn truyền hình trực tuyến", "Tra cứu sức khỏe", "Thời sự",
-			"Mẹ và bé", "Dược sĩ tư vấn", "Y học cổ truyền",
+			"Bạn cần biết v�? y h�?c", "Diễn đàn",
+			"Tư vấn truy�?n hình trực tuyến", "Tra cứu sức kh�?e", "Th�?i sự",
+			"Mẹ và bé", "Dược sĩ tư vấn", "Y h�?c cổ truy�?n",
 			"Tình yêu và giới tính", "Văn hóa - Thể thao", "Làm đẹp",
-			"Quốc tế", "Bác sĩ trả lời", "Phòng mạch Online" };
+			"Quốc tế", "Bác sĩ trả l�?i", "Phòng mạch Online" };
 	public static final String[] SUCKHOEDOISONG_LINKS = {
 			"http://suckhoedoisong.vn/rss/home",
 			"http://suckhoedoisong.vn/rss/ban-can-biet-ve-y-hoc",
@@ -64,7 +64,7 @@ public class Variables {
 	// Thai update end
 	// Afamily
 	public static final String[] AFAMILY_CATEGORIES = { "Trang chủ",
-			"Sức khỏe", "Mẹ và bé" };
+			"Sức kh�?e", "Mẹ và bé" };
 	public static final String[] AFAMILY_LINKS = {
 			"http://afamily.vn/trang-chu.rss",
 			"http://afamily.vn/suc-khoe.rss", "http://afamily.vn/me-va-be.rss" };
@@ -72,16 +72,16 @@ public class Variables {
 	// y hoc suc khoe
 	// public static final String[] YHOCSUCKHOE_CATEGORIES = {
 	// "Trang chủ",
-	// "Sức khỏe",
+	// "Sức kh�?e",
 	// "Tin tức"};
 	// public static final String[] YHOCSUCKHOE_LINKS = {
 	// "http://www.yhocsuckhoe.com/rss/_t19-m1.html?param=BF30CQM2BBIcdRdDPw4hARIfaFRcZkkWFThJCzZg",
 	// "http://www.yhocsuckhoe.com/rss/_t19-m1.html?param=BCC0CQM2BBIcdRdDPw4hARIfaFRcYEkWFThJCzZg",
 	// "http://www.yhocsuckhoe.com/rss/_t19-m1.html?param=BB70CQM2BBIcdRdDPw4hARIfaFRcY0kWFThJCzZg"};
 	public static final String[] VNEXPRESS_CATEGORIES = { "Trang chủ",
-			"Thời sự", "Thế giới", "Kinh doanh", "Giải trí ", "Thể thao",
-			"Pháp luật", "Giáo dục", "Sức khỏe", "Gia đình", "Du lịch",
-			"Khoa học", "Số hóa", "Cộng đồng", "Tâm sự" };
+			"Th�?i sự", "Thế giới", "Kinh doanh", "Giải trí ", "Thể thao",
+			"Pháp luật", "Giáo dục", "Sức kh�?e", "Gia đình", "Du lịch",
+			"Khoa h�?c", "Số hóa", "Cộng đồng", "Tâm sự" };
 	public static final String[] VNEXPRESS_LINKS = {
 			"http://vnexpress.net/rss/tin-moi-nhat.rss",
 			"http://vnexpress.net/rss/thoi-su.rss",
@@ -100,12 +100,12 @@ public class Variables {
 			"http://vnexpress.net/rss/tam-su.rss" };
 	// Thai update end
 	public static final String[] KHOAHOCTV_CATEGORIES = { "Trang chủ",
-			"Công nghệ mới", "Khoa học vũ trụ", "Khoa học máy tính",
-			"Phần mềm hữu ích", "Phát minh khoa học", "Sinh vật học",
-			"Khảo cổ học", "Y học - Sức khỏe", "Môi trường", "Đại dương học",
-			"Thế giới động vật", "Ứng dụng khoa học", "Khám phá", "1001 bí ẩn",
-			"Câu chuyện khoa học", "Công trình khoa học", "Sự kiện Khoa học",
-			"Thư viện ảnh", "Góc hài hước", "Lịch sử", "Khoa học & Bạn đọc",
+			"Công nghệ mới", "Khoa h�?c vũ trụ", "Khoa h�?c máy tính",
+			"Phần m�?m hữu ích", "Phát minh khoa h�?c", "Sinh vật h�?c",
+			"Khảo cổ h�?c", "Y h�?c - Sức kh�?e", "Môi trư�?ng", "�?ại dương h�?c",
+			"Thế giới động vật", "Ứng dụng khoa h�?c", "Khám phá", "1001 bí ẩn",
+			"Câu chuyện khoa h�?c", "Công trình khoa h�?c", "Sự kiện Khoa h�?c",
+			"Thư viện ảnh", "Góc hài hước", "Lịch sử", "Khoa h�?c & Bạn đ�?c",
 			"Video" };
 	public static final String[] KHOAHOCTV_LINKS = {
 			"http://www.KhoaHoc.tv/rss/index.aspx",

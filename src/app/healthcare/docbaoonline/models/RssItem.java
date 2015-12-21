@@ -1,4 +1,4 @@
-package docbaoonline.models;
+package app.healthcare.docbaoonline.models;
 
 public class RssItem {
 	

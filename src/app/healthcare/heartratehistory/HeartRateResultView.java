@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import app.dto.HeartRateDTO;
 import app.healthcare.R;
+import app.healthcare.dataobject.HeartRateDTO;
 
 import com.facebook.share.model.ShareLinkContent;
 

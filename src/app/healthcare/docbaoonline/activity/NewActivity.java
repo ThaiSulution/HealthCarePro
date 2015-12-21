@@ -1,4 +1,4 @@
-package docbaoonline.activity;
+package app.healthcare.docbaoonline.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,8 +8,8 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import app.healthcare.R;
-import docbaoonline.models.RssItem;
-import docbaoonline.models.Variables;
+import app.healthcare.docbaoonline.models.RssItem;
+import app.healthcare.docbaoonline.models.Variables;
 
 public class NewActivity extends Activity{
 	

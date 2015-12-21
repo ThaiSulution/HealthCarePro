@@ -5,11 +5,11 @@ import java.util.List;
 
 import android.app.Fragment;
 import android.text.format.Time;
-import app.dto.DoctorDTO;
-import app.dto.HeartRateDTO;
-import app.dto.RatioBMIDTO;
-import app.dto.RatioWHRDTO;
-import app.dto.StepRunDTO;
+import app.healthcare.dataobject.DoctorDTO;
+import app.healthcare.dataobject.HeartRateDTO;
+import app.healthcare.dataobject.RatioBMIDTO;
+import app.healthcare.dataobject.RatioWHRDTO;
+import app.healthcare.dataobject.StepRunDTO;
 
 public class Constants {
 	public static final String CHECK_DATA = "createdata";

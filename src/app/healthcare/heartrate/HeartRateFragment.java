@@ -1,8 +1,8 @@
 package app.healthcare.heartrate;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -31,11 +31,11 @@ import android.widget.TextView;
 import app.healthcare.DialogResultHeartRate;
 import app.healthcare.R;
 import app.healthcare.heartratehistory.HistoryHeartRate;
-
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.gc.materialdesign.views.Button;
 
+@SuppressLint("DefaultLocale")
 @SuppressWarnings("deprecation")
 public class HeartRateFragment extends Fragment {
 
@@ -60,6 +60,8 @@ public class HeartRateFragment extends Fragment {
 	static Bitmap bmHeartOn;
 	static Bitmap bmHeartOff;
 	static AlertDialog.Builder builder;
+	public static String startString = "";
+	public static String stopString = "";
 
 	public static enum TYPE {
 		GREEN, RED
@@ -114,6 +116,8 @@ public class HeartRateFragment extends Fragment {
 	}
 
 	private void initView(View rootView) {
+		startString = getResources().getString(R.string.btnStartString);
+		stopString = getResources().getString(R.string.btnStopString);
 		checkHeartRate = false;
 		preview = (SurfaceView) rootView.findViewById(R.id.preview);
 		previewHolder = preview.getHolder();
@@ -127,7 +131,7 @@ public class HeartRateFragment extends Fragment {
 			public void onClick(View v) {
 				grap = 0;
 				processing.set(false);
-				btnStart.setText("START");
+				btnStart.setText(startString);
 				isRemove = false;
 				timeFinish = 0;
 				pg.getSlices().get(0).setGoalValue(0.01f);
@@ -146,7 +150,7 @@ public class HeartRateFragment extends Fragment {
 			public void onClick(View v) {
 				grap = 0;
 				processing.set(false);
-				btnStart.setText("START");
+				btnStart.setText(startString);
 				isRemove = false;
 				timeFinish = 0;
 				pg.getSlices().get(0).setGoalValue(0.01f);
@@ -160,18 +164,18 @@ public class HeartRateFragment extends Fragment {
 			}
 		});
 		btnStart = (Button) rootView.findViewById(R.id.btnStart);
-		btnStart.setText("START");
+		btnStart.setText(startString);
 		btnStart.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				if (btnStart.getText() == "START") {
+				if (btnStart.getText().toUpperCase().equals(startString.toUpperCase())) {
 					checkHeartRate = true;
-					btnStart.setText("STOP");
-				} else if (btnStart.getText() == "STOP") {
+					btnStart.setText(stopString);
+				} else if (btnStart.getText().toUpperCase().equals(stopString.toUpperCase())) {
 					checkHeartRate = false;
 					grap = 0;
 					processing.set(false);
-					btnStart.setText("START");
+					btnStart.setText(startString);
 					isRemove = false;
 					timeFinish = 0;
 					pg.getSlices().get(0).setGoalValue(0.01f);
@@ -181,7 +185,7 @@ public class HeartRateFragment extends Fragment {
 					pg.setAnimationListener(getAnimationListener());
 					pg.animateToGoalValues();
 					pg.setBackgroundText("      000\n     BPM");
-					btnStart.setText("START");
+					btnStart.setText(startString);
 				}
 			}
 		});
@@ -339,7 +343,7 @@ public class HeartRateFragment extends Fragment {
 												int which) {
 											grap = 0;
 											processing.set(false);
-											btnStart.setText("START");
+											btnStart.setText(startString);
 											isRemove = false;
 											timeFinish = 0;
 											pg.getSlices().get(0)
@@ -389,7 +393,7 @@ public class HeartRateFragment extends Fragment {
 									});
 							alertDialog2.show();
 						}
-						btnStart.setText("START");
+						btnStart.setText(startString);
 					}
 				}
 			}

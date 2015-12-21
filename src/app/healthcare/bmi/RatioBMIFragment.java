@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import app.dto.RatioBMIDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.dataobject.RatioBMIDTO;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.ParseException;

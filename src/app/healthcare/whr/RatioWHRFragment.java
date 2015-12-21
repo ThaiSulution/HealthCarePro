@@ -14,9 +14,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import app.dto.RatioWHRDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.dataobject.RatioWHRDTO;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.ParseException;

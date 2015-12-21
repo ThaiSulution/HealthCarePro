@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import app.dto.HeartRateDTO;
 import app.healthcare.Constants;
 import app.healthcare.R;
+import app.healthcare.dataobject.HeartRateDTO;
 import app.healthcare.heartratehistory.HeartRateResultView;
 import app.healthcare.heartratehistory.HistoryHeartRate;
 
