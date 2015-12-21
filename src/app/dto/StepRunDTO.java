@@ -40,11 +40,11 @@ public class StepRunDTO extends ParseObject {
 	}
 
 	public Double getDistance() {
-		return getDouble("step");
+		return getDouble("distance");
 	}
 
 	public void setDistance(Double value) {
-		put("step", value);
+		put("distance", value);
 	}
 
 	public Double getCalos() {

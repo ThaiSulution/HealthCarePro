@@ -1,6 +1,9 @@
 package app.healthcare;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -51,37 +54,50 @@ public class StartAppScreen extends Fragment {
 
 			@Override
 			public void run() {
-				if (MainActivity.getBMIFinish && MainActivity.getHRFinish
-						&& MainActivity.getWHRFinish
-						&& MainActivity.getStepFinish
-						&& MainActivity.getDoctorFinish) {
-					dialog.dismiss();
+				if (Constants.getInstance().isStart) {
+					if (MainActivity.getBMIFinish && MainActivity.getHRFinish
+							&& MainActivity.getWHRFinish
+							&& MainActivity.getStepFinish
+							&& MainActivity.getDoctorFinish) {
+						Constants.getInstance().isStart = false;
+						dialog.dismiss();
+						buildChartBMI(rootView, a);
+						buildChartWHR(rootView, a);
+						buildChartHreatRate(rootView, a);
+						buildChartStepRun(rootView, a);
+						Thread.currentThread().interrupt();
+					} else {
+						if (i > 15) {
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									a);
+							builder.setTitle("Lỗi kết nối");
+							builder.setMessage("Kết nối không ổn định, hãy kiểm tra kết nối mạng và thử lại lần nữa!");
+							builder.setPositiveButton("Finish",
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											i = 0;
+											MainActivity.getData();
+										}
+									});
+							builder.show();
+						}
+						//MainActivity.logIn(a);
+						i++;
+						mHandler.postDelayed(this, 3000);
+					}
+				} else {
 					buildChartBMI(rootView, a);
 					buildChartWHR(rootView, a);
 					buildChartHreatRate(rootView, a);
 					buildChartStepRun(rootView, a);
+					dialog.dismiss();
 					Thread.currentThread().interrupt();
-				} else {
-
-					if (i > 15) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(a);
-						builder.setTitle("Lỗi kết nối");
-						builder.setMessage("Kết nối không ổn định, hãy kiểm tra kết nối mạng và thử lại lần nữa!");
-						builder.setPositiveButton("Finish",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										//(a).finish();
-									}
-								});
-						builder.show();
-					}
-					MainActivity.logIn(a);
-					i++;
-					mHandler.postDelayed(this, 3000);
 				}
+
 			}
 		};
 		// start handler
@@ -171,26 +187,45 @@ public class StartAppScreen extends Fragment {
 
 	private void buildChartStepRun(View rootView, final MainActivity a) {
 		try {
-			float distance = 0;
+			Double distance = 0.0;
 			int target = 0;
 			int step = 0;
+			long time = 0;
 			Double calos = (double) 0;
 			int size = Constants.getInstance().listDataStepDTO.size();
+			Log.e("distance",
+					String.valueOf(Constants.getInstance().listDataStepDTO.get(
+							size - 1).getDistance()));
 			if (size > 0) {
-				distance += Constants.getInstance().listDataStepDTO.get(
-						size - 1).getDistance();
+				distance = Constants.getInstance().listDataStepDTO
+						.get(size - 1).getDistance();
 				target = Constants.getInstance().listDataStepDTO.get(size - 1)
 						.getTarget();
 				step = Constants.getInstance().listDataStepDTO.get(size - 1)
 						.getStep();
 				calos = Constants.getInstance().listDataStepDTO.get(size - 1)
 						.getCalos();
+				time = Constants.getInstance().listDataStepDTO.get(size - 1)
+						.getTime();
 			}
-			Constants.getInstance().setDistance(distance);
+			Date now = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(now);
+			@SuppressWarnings("deprecation")
+			int timeRange = Integer
+					.parseInt((now.toLocaleString().split(" ")[1]).split(":")[0]);
+			cal.add(Calendar.HOUR, -timeRange);
+			if (cal.getTimeInMillis() > time) {
+				Constants.getInstance().setDistance(0);
+			} else {
+				Constants.getInstance().setDistance(
+						Float.parseFloat(String.valueOf(distance)));
+			}
 			Constants.getInstance().setTarget(target);
 			Constants.getInstance().setStepRuns(step);
 			Constants.getInstance().setCalos(
 					Float.parseFloat(String.valueOf(calos)));
+
 			Log.e("setDistance",
 					String.valueOf(Constants.getInstance().getDistance()));
 			Log.e("setTarget",
@@ -231,21 +266,21 @@ public class StartAppScreen extends Fragment {
 			pg.setBackgroundBitmap(b);
 			pg.setInnerCircleRatio(220);
 			pg.setBackgroundText("SB: "
-					+ String.valueOf(Constants.getInstance().getDistance())
+					+ String.valueOf(Constants.getInstance().getStepRuns())
 					+ "\n"
 					+ "KC: "
 					+ String.valueOf((long) Constants.getInstance()
 							.getDistance()) + " m\n" + "Calo: "
 					+ String.valueOf(Constants.getInstance().getCalos()));
 			if (Constants.getInstance().getTarget() > Constants.getInstance()
-					.getDistance()) {
+					.getStepRuns()) {
 				pg.getSlices().get(0)
-						.setGoalValue(Constants.getInstance().getDistance());
+						.setGoalValue(Constants.getInstance().getStepRuns());
 				pg.getSlices()
 						.get(1)
 						.setGoalValue(
 								Constants.getInstance().getTarget()
-										- Constants.getInstance().getDistance());
+										- Constants.getInstance().getStepRuns());
 			} else {
 				pg.getSlices().get(0).setGoalValue(1);
 				pg.getSlices().get(1).setGoalValue(0);

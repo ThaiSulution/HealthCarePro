@@ -78,38 +78,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:orientation="vertical" >
-
-            <CheckBox
-                android:id="@+id/cbWHO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cbWHOString" />
-
-            <CheckBox
-                android:id="@+id/cbIDIAndWPRO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cbIDIAndWPROString" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="20dip"

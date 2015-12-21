@@ -1,8 +1,6 @@
 package app.healthcare;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -119,6 +117,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Constants.getInstance().isStart = true;
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -157,7 +156,7 @@ public class MainActivity extends Activity {
 				.getResourceId(7, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
 				.getResourceId(8, -1)));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[9], navMenuIcons
 				.getResourceId(9, -1)));
 
 		// Recycle the typed array
@@ -209,7 +208,7 @@ public class MainActivity extends Activity {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-						//	finish();
+							// finish();
 
 						}
 					});
@@ -314,6 +313,81 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public static void getData() {
+		// lay thong tin bmi
+		if (Constants.getInstance().listDataBMI.size() > 0) {
+			Constants.getInstance().listDataBMI.retainAll(Constants
+					.getInstance().listDataBMI);
+		}
+		ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
+				"RatioBMIDTO");
+		queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
+
+			@Override
+			public void done(List<RatioBMIDTO> datas, ParseException arg1) {
+				Constants.getInstance().listDataBMI = datas;
+				getBMIFinish = true;
+			}
+
+		}));
+		// lay thong tin whr
+		if (Constants.getInstance().listDataWHR.size() > 0) {
+			Constants.getInstance().listDataWHR.retainAll(Constants
+					.getInstance().listDataWHR);
+		}
+		ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
+				"RatioWHRDTO");
+		queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+
+			@Override
+			public void done(List<RatioWHRDTO> datas, ParseException arg1) {
+				Constants.getInstance().listDataWHR = datas;
+				getWHRFinish = true;
+			}
+
+		}));
+		// lay thong tin heartrate
+		if (Constants.getInstance().listDataHR.size() > 0) {
+			Constants.getInstance().listDataHR.retainAll(Constants
+					.getInstance().listDataHR);
+		}
+		ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
+				"HeartRateDTO");
+		queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+
+			@Override
+			public void done(List<HeartRateDTO> datas, ParseException arg1) {
+				Constants.getInstance().listDataHR = datas;
+				getHRFinish = true;
+			}
+
+		}));
+		// LAY THONG TIN STEP
+		ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
+				"StepRunDTO");
+		queryStep.findInBackground((new FindCallback<StepRunDTO>() {
+
+			@Override
+			public void done(List<StepRunDTO> datas, ParseException arg1) {
+				Constants.getInstance().listDataStepDTO = datas;
+				getStepFinish = true;
+			}
+
+		}));
+		// LAY THONG TIN BAC SI
+		ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
+				"DoctorDTO");
+		queryDoctor.findInBackground((new FindCallback<DoctorDTO>() {
+
+			@Override
+			public void done(List<DoctorDTO> datas, ParseException arg1) {
+				Constants.getInstance().listDoctorDTO = datas;
+				getDoctorFinish = true;
+			}
+
+		}));
+	}
+
 	public static void logIn(final Context c) {
 		try {
 			if (!hasAcount) {
@@ -336,105 +410,7 @@ public class MainActivity extends Activity {
 											if (e != null) {
 											} else {
 												try {
-													// lay thong tin bmi
-													if (Constants.getInstance().listDataBMI
-															.size() > 0) {
-														Constants.getInstance().listDataBMI
-																.retainAll(Constants
-																		.getInstance().listDataBMI);
-													}
-													ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
-															"RatioBMIDTO");
-													queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
-
-														@Override
-														public void done(
-																List<RatioBMIDTO> datas,
-																ParseException arg1) {
-															Constants
-																	.getInstance().listDataBMI = datas;
-															getBMIFinish = true;
-														}
-
-													}));
-													// lay thong tin whr
-													if (Constants.getInstance().listDataWHR
-															.size() > 0) {
-														Constants.getInstance().listDataWHR
-																.retainAll(Constants
-																		.getInstance().listDataWHR);
-													}
-													ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
-															"RatioWHRDTO");
-													queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
-
-														@Override
-														public void done(
-																List<RatioWHRDTO> datas,
-																ParseException arg1) {
-															Constants
-																	.getInstance().listDataWHR = datas;
-															getWHRFinish = true;
-														}
-
-													}));
-													// lay thong tin heartrate
-													if (Constants.getInstance().listDataHR
-															.size() > 0) {
-														Constants.getInstance().listDataHR
-																.retainAll(Constants
-																		.getInstance().listDataHR);
-													}
-													ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
-															"HeartRateDTO");
-													queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
-
-														@Override
-														public void done(
-																List<HeartRateDTO> datas,
-																ParseException arg1) {
-															Constants
-																	.getInstance().listDataHR = datas;
-															getHRFinish = true;
-														}
-
-													}));
-													// LAY THONG TIN STEP
-													ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
-															"StepRunDTO");
-													Calendar cal = Calendar
-															.getInstance();
-													Date now = new Date();
-													cal.setTime(now);
-													queryStep
-															.findInBackground((new FindCallback<StepRunDTO>() {
-
-																@Override
-																public void done(
-																		List<StepRunDTO> datas,
-																		ParseException arg1) {
-																	Constants
-																			.getInstance().listDataStepDTO = datas;
-																	getStepFinish = true;
-																}
-
-															}));
-													// LAY THONG TIN BAC SI
-													ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
-															"DoctorDTO");
-													queryDoctor
-															.findInBackground((new FindCallback<DoctorDTO>() {
-
-																@Override
-																public void done(
-																		List<DoctorDTO> datas,
-																		ParseException arg1) {
-																	Constants
-																			.getInstance().listDoctorDTO = datas;
-																	getDoctorFinish = true;
-																}
-
-															}));
+													getData();
 													hasLogIn = true;
 
 												} catch (NullPointerException ex) {
@@ -450,8 +426,8 @@ public class MainActivity extends Activity {
 																public void onClick(
 																		DialogInterface dialog,
 																		int which) {
-																	//((Activity) c)
-																		//	.finish();
+																	((Activity) c)
+																			.finish();
 																}
 															});
 													builder.show();

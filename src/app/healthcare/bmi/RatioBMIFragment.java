@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +21,6 @@ import com.parse.SaveCallback;
 
 @SuppressLint("RtlHardcoded")
 public class RatioBMIFragment extends Fragment {
-	CheckBox cbWHO;
-	CheckBox cbIDIAndWPRO;
 	EditText tbxHeight;
 	EditText tbxWeight;
 	TextView tbxImpact;
@@ -51,11 +46,6 @@ public class RatioBMIFragment extends Fragment {
 	 *            container chua cac control
 	 */
 	private void initView(View rootView) {
-		cbIDIAndWPRO = (CheckBox) rootView.findViewById(R.id.cbIDIAndWPRO);
-		cbIDIAndWPRO.setOnCheckedChangeListener(listener);
-		cbWHO = (CheckBox) rootView.findViewById(R.id.cbWHO);
-		cbWHO.setChecked(true);
-		cbWHO.setOnCheckedChangeListener(listener);
 		tbxHeight = (EditText) rootView.findViewById(R.id.tbxHeight);
 		tbxWeight = (EditText) rootView.findViewById(R.id.tbxWeight);
 		final Intent historyBMI = new Intent(getActivity(), HistoryBMI.class);
@@ -111,39 +101,20 @@ public class RatioBMIFragment extends Fragment {
 		Double weight = Double.parseDouble(tbxWeight.getText().toString());
 		Double ratioBMI = weight / (height * height);
 		String result;
-		if (cbIDIAndWPRO.isChecked()) {
-			if (ratioBMI < 18.5) {
-				result = "Thể trạng gầy, thiếu năng lượng";
-			} else if (ratioBMI == 23) {
-				result = "Bạn đang thừa cân";
-			} else if (ratioBMI >= 18.5 && ratioBMI < 23) {
-				result = "Thân hình bình thường";
-			} else if (ratioBMI > 23 && ratioBMI < 25) {
-				result = "Thừa cân - tiền béo phì";
-			} else if (ratioBMI >= 25 && ratioBMI < 30) {
-				result = "Béo phì cấp độ 1";
-			} else if (ratioBMI == 30) {
-				result = "Béo phì cấp độ 2";
-			} else {
-				result = "Béo phì cấp độ 3";
-			}
+		if (ratioBMI < 18.5) {
+			result = "Thể trạng gầy, thiếu năng lượng";
+		} else if (ratioBMI == 25) {
+			result = "Bạn đang thừa cân";
+		} else if (ratioBMI >= 18.5 && ratioBMI < 25) {
+			result = "Thân hình bình thường";
+		} else if (ratioBMI > 25 && ratioBMI < 30) {
+			result = "Thừa cân - tiền béo phì";
+		} else if (ratioBMI >= 30 && ratioBMI < 35) {
+			result = "Béo phì cấp độ 1";
+		} else if (ratioBMI >= 35 && ratioBMI < 40) {
+			result = "Béo phì cấp độ 2";
 		} else {
-			cbWHO.setChecked(true);
-			if (ratioBMI < 18.5) {
-				result = "Thể trạng gầy, thiếu năng lượng";
-			} else if (ratioBMI == 25) {
-				result = "Bạn đang thừa cân";
-			} else if (ratioBMI >= 18.5 && ratioBMI < 25) {
-				result = "Thân hình bình thường";
-			} else if (ratioBMI > 25 && ratioBMI < 30) {
-				result = "Thừa cân - tiền béo phì";
-			} else if (ratioBMI >= 30 && ratioBMI < 35) {
-				result = "Béo phì cấp độ 1";
-			} else if (ratioBMI >= 35 && ratioBMI < 40) {
-				result = "Béo phì cấp độ 2";
-			} else {
-				result = "Béo phì cấp độ 3";
-			}
+			result = "Béo phì cấp độ 3";
 		}
 		RatioBMIDTO dto = new RatioBMIDTO();
 		ratioBMI = (double) (Math.round((double) ratioBMI * 10) / (double) 10);
@@ -208,21 +179,4 @@ public class RatioBMIFragment extends Fragment {
 			}
 		});
 	}
-
-	private OnCheckedChangeListener listener = new OnCheckedChangeListener() {
-		public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-			if (isChecked) {
-				switch (arg0.getId()) {
-				case R.id.cbIDIAndWPRO:
-					cbIDIAndWPRO.setChecked(true);
-					cbWHO.setChecked(false);
-					break;
-				case R.id.cbWHO:
-					cbWHO.setChecked(true);
-					cbIDIAndWPRO.setChecked(false);
-					break;
-				}
-			}
-		}
-	};
 }

@@ -74,6 +74,8 @@ public class GoogleFitService extends IntentService implements
 	public static int dataSizeDistance = 0;
 	// public static int dataSizeHour = 0;
 	public static Integer targetToset = 0;
+	public static Integer workout = 0;
+	public static float distance = 0;
 	// public static ArrayList<HistoryStepObject> listDataStep;
 
 	public static final int TYPE_GET_DATA_TO_DAY = 1;
@@ -174,6 +176,11 @@ public class GoogleFitService extends IntentService implements
 						TimeUnit.MINUTES);
 				totalCalosGet = dumpDataSetHistoryCalos(rscl.getTotal());
 				Constants.getInstance().setCalos(totalCalosGet);
+				DailyTotalResult rsd = Fitness.HistoryApi.readDailyTotal(
+						mClient, DataType.TYPE_DISTANCE_DELTA).await(1,
+						TimeUnit.MINUTES);
+				distance = dumpDataSetHistoryDistance(rsd.getTotal());
+				Constants.getInstance().setDistance(distance);
 				getDataDayFinish = true;
 				break;
 			case TYPE_SET_HEIGHT_ANDWEIGHT:
@@ -329,9 +336,10 @@ public class GoogleFitService extends IntentService implements
 						.setDataTypes(DataType.TYPE_LOCATION_SAMPLE,
 								DataType.TYPE_STEP_COUNT_DELTA,
 								DataType.TYPE_DISTANCE_DELTA,
-								DataType.TYPE_HEART_RATE_BPM,
+								DataType.TYPE_LOCATION_SAMPLE,
 								DataType.TYPE_CALORIES_EXPENDED,
-								DataType.TYPE_CALORIES_CONSUMED)
+								DataType.TYPE_CALORIES_CONSUMED,
+								DataType.TYPE_WORKOUT_EXERCISE)
 						// Can specify whether data type is raw or derived.
 						.setDataSourceTypes(DataSource.TYPE_RAW,
 								DataSource.TYPE_DERIVED).build())
@@ -467,6 +475,108 @@ public class GoogleFitService extends IntentService implements
 						}
 					}
 				});
+		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_LOCATION_SAMPLE)
+		.setResultCallback(new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				if (status.isSuccess()) {
+					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+						Log.i(TAG_RECORDING,
+								"Existing subscription for activity detected.");
+					} else {
+						Log.i(TAG_RECORDING, "Successfully subscribed!");
+					}
+				} else {
+					Log.i(TAG_RECORDING,
+							"There was a problem subscribing.");
+				}
+			}
+		});
+		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_LOCATION_TRACK)
+		.setResultCallback(new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				if (status.isSuccess()) {
+					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+						Log.i(TAG_RECORDING,
+								"Existing subscription for activity detected.");
+					} else {
+						Log.i(TAG_RECORDING, "Successfully subscribed!");
+					}
+				} else {
+					Log.i(TAG_RECORDING,
+							"There was a problem subscribing.");
+				}
+			}
+		});
+		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_DISTANCE_DELTA)
+		.setResultCallback(new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				if (status.isSuccess()) {
+					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+						Log.i(TAG_RECORDING,
+								"Existing subscription for activity detected.");
+					} else {
+						Log.i(TAG_RECORDING, "Successfully subscribed!");
+					}
+				} else {
+					Log.i(TAG_RECORDING,
+							"There was a problem subscribing.");
+				}
+			}
+		});
+		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_CALORIES_EXPENDED)
+		.setResultCallback(new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				if (status.isSuccess()) {
+					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+						Log.i(TAG_RECORDING,
+								"Existing subscription for activity detected.");
+					} else {
+						Log.i(TAG_RECORDING, "Successfully subscribed!");
+					}
+				} else {
+					Log.i(TAG_RECORDING,
+							"There was a problem subscribing.");
+				}
+			}
+		});
+		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_CALORIES_CONSUMED)
+		.setResultCallback(new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				if (status.isSuccess()) {
+					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+						Log.i(TAG_RECORDING,
+								"Existing subscription for activity detected.");
+					} else {
+						Log.i(TAG_RECORDING, "Successfully subscribed!");
+					}
+				} else {
+					Log.i(TAG_RECORDING,
+							"There was a problem subscribing.");
+				}
+			}
+		});
+		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_WORKOUT_EXERCISE)
+		.setResultCallback(new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				if (status.isSuccess()) {
+					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+						Log.i(TAG_RECORDING,
+								"Existing subscription for activity detected.");
+					} else {
+						Log.i(TAG_RECORDING, "Successfully subscribed!");
+					}
+				} else {
+					Log.i(TAG_RECORDING,
+							"There was a problem subscribing.");
+				}
+			}
+		});
 		// [END subscribe_to_datatype]
 	}
 
@@ -1170,26 +1280,15 @@ public class GoogleFitService extends IntentService implements
 		return calos;
 	}
 
-	public int dumpDataSetHistoryTarget(DataSet dataSet) {
-		int target = 0;
-		for (DataPoint dp : dataSet.getDataPoints()) {
-			for (Field field : dp.getDataType().getFields()) {
-				if (field.equals(DataType.TYPE_HEART_RATE_BPM)) {
-					target += dp.getValue(field).asInt();
-				}
-			}
-		}
-		return target;
-	}
 
 	public float dumpDataSetHistoryDistance(DataSet dataSet) {
-		Log.i(TAG, "Data returned for Data type: "
+		Log.e(TAG, "Data returned for Data type: "
 				+ dataSet.getDataType().getName());
 		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		float distance = 0;
 		for (DataPoint dp : dataSet.getDataPoints()) {
-			Log.i(TAG_HISTORY, "Data point:");
-			Log.i(TAG_HISTORY, "\tType: " + dp.getDataType().getName());
+			Log.e(TAG_HISTORY, "Data point:");
+			Log.e(TAG_HISTORY, "\tType: " + dp.getDataType().getName());
 			Log.i(TAG_HISTORY,
 					"\tStart: "
 							+ dateFormat.format(dp
@@ -1199,10 +1298,10 @@ public class GoogleFitService extends IntentService implements
 							+ dateFormat.format(dp
 									.getEndTime(TimeUnit.MILLISECONDS)));
 			for (Field field : dp.getDataType().getFields()) {
-				Log.i(TAG,
+				Log.e("type",
 						"\tField: " + field.getName() + " Value: "
 								+ dp.getValue(field));
-				if (field.getName().equals(Field.FIELD_DISTANCE)) {
+				if (field.getName().equals("distance")) {
 					distance += dp.getValue(field).asFloat();
 				}
 			}

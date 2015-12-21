@@ -103,6 +103,7 @@
     <!-- bmi -->
     <string name="lbHeightString">Chiều cao (m)</string>
     <string name="lbWeightString">Cân nặng (kg)</string>
+    <string name="lbAgeString">Tuổi</string>
     <string name="btnCalculateBMIString">Tính BMI</string>
     <string name="btnSave">Lưu lại</string>
     <string name="lbTitleBMIString">BMI</string>

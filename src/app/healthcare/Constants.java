@@ -25,8 +25,10 @@ public class Constants {
 	private long target;
 	private long stepsAvg;
 	public int sex = 0;
+	public int age = 0;
 	public String email = "";
 	public String name = "";
+	public boolean isStart = true;
 	public List<RatioBMIDTO> listDataBMI = new ArrayList<RatioBMIDTO>();
 	public List<RatioWHRDTO> listDataWHR = new ArrayList<RatioWHRDTO>();
 	public List<HeartRateDTO> listDataHR = new ArrayList<HeartRateDTO>();

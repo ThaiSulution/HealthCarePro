@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp" >
+        android:padding="5dp" 
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
             android:id="@+id/tb_name_doctor"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.72"
+            android:layout_weight="1"
             android:background="@drawable/rounded_edittext"
             android:ems="10">
 
@@ -52,7 +53,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp" >
+        android:padding="5dp" 
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +76,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp" >
+        android:padding="5dp" 
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"

@@ -20,11 +20,8 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,17 +47,8 @@ import com.google.android.gms.fitness.FitnessStatusCodes;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 
-public class StepRun extends Activity implements LocationListener {
-	// location
-	protected LocationManager locationManager;
-	protected LocationListener locationListener;
-	protected String latitude, longitude;
-	protected boolean gps_enabled, network_enabled;
-	double lastLocationX;
-	double lastLocationY;
-	double curentLocationX;
-	double curentLocationY;
-	// end location
+public class StepRun extends Activity {
+
 	public final static String TAG = "GoogleFitService";
 	private ConnectionResult mFitResultResolution;
 	private static final String AUTH_PENDING = "auth_state_pending";
@@ -85,15 +73,7 @@ public class StepRun extends Activity implements LocationListener {
 
 	@SuppressLint({ "NewApi", "ResourceAsColor" })
 	private void init() {
-		// loaction
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-				0, this);
-		lastLocationX = 0;
-		lastLocationY = 0;
-		curentLocationX = 0;
-		curentLocationY = 0;
-		// location
+
 		final Resources resources = getResources();
 		final PieGraph pg = (PieGraph) findViewById(R.id.step_run_chart_progess);
 		LocalBroadcastManager.getInstance(this).registerReceiver(
@@ -186,11 +166,14 @@ public class StepRun extends Activity implements LocationListener {
 									.getStepRuns())
 							+ "\n"
 							+ "Khoảng cách: "
-							+ String.valueOf((long) Constants.getInstance()
-									.getDistance())
+							// + String.valueOf((long) Constants.getInstance()
+							// .getDistance())
+							+ String.valueOf(Math
+									.round(GoogleFitService.distance))
 							+ "m\n"
 							+ "Calo: "
-							+ String.valueOf(Constants.getInstance().getCalos()));
+							+ String.valueOf(Math.round(Constants.getInstance()
+									.getCalos())));
 					pg.getSlices()
 							.get(0)
 							.setGoalValue(
@@ -278,15 +261,16 @@ public class StepRun extends Activity implements LocationListener {
 		cal.setTime(now);
 		long insertTime = cal.getTimeInMillis();
 		StepRunDTO dto = new StepRunDTO();
-		dto.setCalos((double) Constants.getInstance().getCalos());
+		dto.setCalos((double) Math.round(Constants.getInstance().getCalos()));
 		dto.setTime(insertTime);
-		dto.setDistance((double) Constants.getInstance().getDistance());
+		dto.setDistance(Double.parseDouble(String
+				.valueOf(GoogleFitService.distance)));
+		Log.e("setDistance", String.valueOf(dto.getDistance()));
 		dto.setStepID(id);
-		dto.setTarget(target);
+		dto.setTarget(Integer.parseInt(targetContent.getText().toString()));
 		dto.setStep((int) Constants.getInstance().getStepRuns());
 		Constants.getInstance().listDataStepDTO.add(dto);
 		dto.saveInBackground(new SaveCallback() {
-
 			@Override
 			public void done(ParseException arg0) {
 				if (arg0 != null) {
@@ -294,9 +278,7 @@ public class StepRun extends Activity implements LocationListener {
 				} else {
 					Log.e("setTargetToDB", "thanh cong");
 				}
-
 			}
-
 		});
 	}
 
@@ -544,39 +526,6 @@ public class StepRun extends Activity implements LocationListener {
 		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
 				GoogleFitService.TYPE_SET_HEIGHT_ANDWEIGHT);
 		startService(service);
-	}
-
-	@Override
-	public void onLocationChanged(Location location) {
-		try {
-			lastLocationX = curentLocationX;
-			lastLocationY = curentLocationY;
-			curentLocationX = location.getLatitude();
-			curentLocationY = location.getLongitude();
-			float[] dis = new float[1];
-			dis[0] = 0;
-			Location.distanceBetween(lastLocationX, lastLocationY,
-					curentLocationX, curentLocationY, dis);
-			Constants.getInstance().setDistance(
-					Constants.getInstance().getDistance() + dis[0]);
-		} catch (Exception e) {
-
-		}
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-
 	}
 
 	public Bitmap takeScreenshot() {

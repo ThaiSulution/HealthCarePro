@@ -66,4 +66,12 @@ public class UserDTO extends ParseObject {
 	public void setDistance(Double value) {
 		put("distance", value);
 	}
+	
+	public int getAge() {
+		return getInt("distance");
+	}
+
+	public void setAge(int value) {
+		put("distance", value);
+	}
 }
