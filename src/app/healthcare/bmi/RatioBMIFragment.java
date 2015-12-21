@@ -2,6 +2,7 @@ package app.healthcare.bmi;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class RatioBMIFragment extends Fragment {
 	Button btnReinphut;
 	Button btnCalculateBMI;
 	Button btnHistory;
+	private ProgressDialog dialogProgess;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,6 +73,8 @@ public class RatioBMIFragment extends Fragment {
 							Toast.LENGTH_SHORT).show();
 					return;
 				}
+				dialogProgess = ProgressDialog.show(getActivity(), "",
+						"Vui lòng chờ...");
 				calculateBMI();
 			}
 		});
@@ -146,6 +150,7 @@ public class RatioBMIFragment extends Fragment {
 		dto.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException ex) {
+				dialogProgess.dismiss();
 				if (ex == null) {
 					final Dialog dialog = new Dialog(getActivity(),
 							"Chỉ số BMI", "Chỉ số BMI của bạn là: "

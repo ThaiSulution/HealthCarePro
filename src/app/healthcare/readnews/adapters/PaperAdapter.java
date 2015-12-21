@@ -1,4 +1,4 @@
-package app.healthcare.docbaoonline.adapters;
+package app.healthcare.readnews.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import app.healthcare.docbaoonline.models.Variables;
+import app.healthcare.readnews.models.Variables;
 
 @SuppressLint({ "ViewHolder", "InflateParams" }) public class PaperAdapter extends ArrayAdapter<String> {
 

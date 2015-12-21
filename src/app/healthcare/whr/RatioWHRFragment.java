@@ -2,6 +2,7 @@ package app.healthcare.whr;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,8 +35,7 @@ public class RatioWHRFragment extends Fragment {
 	Button btnReinphut;
 	Button btnCalculateWHR;
 	Button btnHistory;
-
-	// List<RatioWHRDTO> allData = new ArrayList<RatioWHRDTO>();
+	private ProgressDialog dialogProgess;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +77,8 @@ public class RatioWHRFragment extends Fragment {
 							Toast.LENGTH_SHORT).show();
 					return;
 				}
+				dialogProgess = ProgressDialog.show(getActivity(), "",
+						"Vui lòng chờ...");
 				calculateWHR();
 			}
 		});
@@ -159,8 +161,8 @@ public class RatioWHRFragment extends Fragment {
 		dto.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException ex) {
+				dialogProgess.dismiss();
 				if (ex == null) {
-
 					final Dialog dialog = new Dialog(getActivity(),
 							"Chỉ số WHR", "Chỉ số WHR của bạn là: "
 									+ String.valueOf(ratioToView) + "\n"

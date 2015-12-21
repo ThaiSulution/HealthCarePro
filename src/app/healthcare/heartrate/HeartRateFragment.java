@@ -1,6 +1,7 @@
 package app.healthcare.heartrate;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -28,9 +29,9 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-import app.healthcare.DialogResultHeartRate;
 import app.healthcare.R;
 import app.healthcare.heartratehistory.HistoryHeartRate;
+
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.gc.materialdesign.views.Button;

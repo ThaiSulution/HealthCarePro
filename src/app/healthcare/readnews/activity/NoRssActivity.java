@@ -1,4 +1,4 @@
-package app.healthcare.docbaoonline.activity;
+package app.healthcare.readnews.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,28 +8,32 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import app.healthcare.R;
-import app.healthcare.docbaoonline.models.RssItem;
-import app.healthcare.docbaoonline.models.Variables;
+import app.healthcare.readnews.models.Variables;
 
-public class NewActivity extends Activity{
-	
+public class NoRssActivity extends Activity {
+
 	private WebView webView;
 	private ProgressDialog dialog;
 	private String link;
+
 	@SuppressWarnings({ "static-access" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.news);
-		
-		int key = getIntent().getExtras().getInt(Variables.key);
+
+		// int key = getIntent().getExtras().getInt(Variables.key);
+		int paper = getIntent().getExtras().getInt(Variables.paper);
 		int position = getIntent().getExtras().getInt(Variables.position);
-		RssItem item = Variables.MAP.get(key).get(position);
-		setTitle(item.getTitle());
-		link = item.getLink();
-		
-		webView = (WebView)findViewById(R.id.webView);
+		Log.d("Position", position + "");
+		// RssItem item = Variables.MAP.get(key).get(position);
+		// setTitle(item.getTitle());
+		setTitle(Variables.PAPERS[paper]);
+		link = Variables.LINKS[paper][position];
+		Log.d("LINK", link);
+
+		webView = (WebView) findViewById(R.id.webView);
 		webView.getSettings().setSupportZoom(true);
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setUseWideViewPort(true);
@@ -38,40 +42,32 @@ public class NewActivity extends Activity{
 		webView.setInitialScale(1);
 		webView.getSettings().setLightTouchEnabled(true);
 		webView.setWebViewClient(new MyWebViewClient());
-		
+
 		dialog = ProgressDialog.show(this, "", "Loading...");
 		new MyTask().execute();
-//		webView.loadUrl(link);
+		// webView.loadUrl(link);
 	}
-	
-	class MyTask extends AsyncTask<Void, Void, Void>{
+
+	class MyTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			webView.loadUrl(link);
 			return null;
 		}
-		
+
 	}
-	
-	class MyWebViewClient extends WebViewClient{
+
+	class MyWebViewClient extends WebViewClient {
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			if(dialog != null){
+			if (dialog != null) {
 				dialog.dismiss();
 			}
-			Log.d("finish", url);
+			Log.d("URL finish", url);
 			super.onPageFinished(view, url);
 		}
 
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		
-		
-		
 	}
 }

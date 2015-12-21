@@ -1,6 +1,7 @@
 package app.healthcare.heartrate;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class HeartRateResult extends Activity {
 	public String noteString = "";
 	View vProgess;
 	float width;
+	private ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(android.os.Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class HeartRateResult extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				dialog = ProgressDialog.show(HeartRateResult.this, "",
+						"Vui lòng chờ...");
 				insertHeartRate();
 
 			}
@@ -229,6 +233,7 @@ public class HeartRateResult extends Activity {
 
 			@Override
 			public void done(ParseException arg0) {
+				dialog.dismiss();
 				if (arg0 != null) {
 					Constants.getInstance().listDataHR.remove(Constants
 							.getInstance().listDataHR.size() - 1);

@@ -42,9 +42,8 @@ import app.healthcare.dataobject.HeartRateDTO;
 import app.healthcare.dataobject.RatioBMIDTO;
 import app.healthcare.dataobject.RatioWHRDTO;
 import app.healthcare.dataobject.StepRunDTO;
-import app.healthcare.dataobject.UserDTO;
-import app.healthcare.docbaoonline.activity.ReadNewsActivity;
 import app.healthcare.heartrate.HeartRateFragment;
+import app.healthcare.readnews.activity.ReadNewsActivity;
 import app.healthcare.slidingmenu.adapter.NavDrawerListAdapter;
 import app.healthcare.slidingmenu.model.NavDrawerItem;
 import app.healthcare.symptom.activity.GuideMenu;
@@ -257,17 +256,14 @@ public class MainActivity extends Activity {
 				ParseObject.registerSubclass(HeartRateDTO.class);
 				ParseObject.registerSubclass(RatioBMIDTO.class);
 				ParseObject.registerSubclass(RatioWHRDTO.class);
-				ParseObject.registerSubclass(UserDTO.class);
 				ParseObject.registerSubclass(StepRunDTO.class);
 				ParseObject.registerSubclass(DoctorDTO.class);
 				Parse.initialize(MainActivity.this,
 						"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
 						"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
 				ParseAnalytics.trackAppOpenedInBackground(getIntent());
-				// ParseUser.enableAutomaticUser();
 				ParseACL defaultACL = new ParseACL();
 				ParseACL.setDefaultACL(defaultACL, true);
-				// logIn();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

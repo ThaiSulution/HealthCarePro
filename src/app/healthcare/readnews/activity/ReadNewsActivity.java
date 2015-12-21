@@ -1,4 +1,4 @@
-package app.healthcare.docbaoonline.activity;
+package app.healthcare.readnews.activity;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import app.healthcare.R;
-import app.healthcare.docbaoonline.adapters.PaperAdapter;
-import app.healthcare.docbaoonline.models.Variables;
+import app.healthcare.readnews.adapters.PaperAdapter;
+import app.healthcare.readnews.models.Variables;
 
 public class ReadNewsActivity extends ListActivity {
 

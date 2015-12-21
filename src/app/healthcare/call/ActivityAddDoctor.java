@@ -1,6 +1,7 @@
 package app.healthcare.call;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.parse.ParseException;
 import com.parse.SaveCallback;
 
 public class ActivityAddDoctor extends Activity {
+	private ProgressDialog dialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +50,8 @@ public class ActivityAddDoctor extends Activity {
 		btnAdd.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				dialog = ProgressDialog.show(ActivityAddDoctor.this, "",
+						"Vui lòng chờ...");
 				DoctorDTO dto = new DoctorDTO();
 				dto.setDoctorName(name.getText().toString());
 				dto.setNumberCall(numberCall.getText().toString());
@@ -60,6 +65,7 @@ public class ActivityAddDoctor extends Activity {
 				dto.saveInBackground(new SaveCallback() {
 					@Override
 					public void done(ParseException ex) {
+						dialog.dismiss();
 						if (ex == null) {
 							finish();
 						} else {

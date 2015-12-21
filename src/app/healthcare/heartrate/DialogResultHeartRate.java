@@ -1,9 +1,9 @@
-package app.healthcare;
+package app.healthcare.heartrate;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import app.healthcare.heartrate.HeartRateResult;
+import app.healthcare.R;
 
 public class DialogResultHeartRate extends Dialog{
 	Context c;

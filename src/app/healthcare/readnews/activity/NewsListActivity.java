@@ -1,4 +1,4 @@
-package app.healthcare.docbaoonline.activity;
+package app.healthcare.readnews.activity;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import app.healthcare.R;
-import app.healthcare.docbaoonline.adapters.NewsListAdapter;
-import app.healthcare.docbaoonline.models.RssItem;
-import app.healthcare.docbaoonline.models.Variables;
+import app.healthcare.readnews.adapters.NewsListAdapter;
+import app.healthcare.readnews.models.RssItem;
+import app.healthcare.readnews.models.Variables;
 
 public class NewsListActivity extends ListActivity {
 

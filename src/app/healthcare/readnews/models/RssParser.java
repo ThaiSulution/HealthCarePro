@@ -1,4 +1,4 @@
-package app.healthcare.docbaoonline.models;
+package app.healthcare.readnews.models;
 
 import java.io.IOException;
 import java.io.StringReader;
