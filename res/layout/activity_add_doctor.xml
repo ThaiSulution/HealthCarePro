@@ -26,11 +26,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp" 
-        android:weightSum="2">
+        android:padding="5dp"
+        android:weightSum="2" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbadd_doctor_name"
@@ -38,13 +38,11 @@
 
         <EditText
             android:id="@+id/tb_name_doctor"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext"
-            android:ems="10">
-
-            <requestFocus />
+            android:ems="10" >
         </EditText>
     </LinearLayout>
 
@@ -53,11 +51,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp" 
-        android:weightSum="2">
+        android:padding="5dp"
+        android:weightSum="2" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbadd_doctor_number_call"
@@ -65,22 +63,23 @@
 
         <EditText
             android:id="@+id/tbnumBerCall"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext"
-            android:ems="10"/>
+            android:ems="10" />
     </LinearLayout>
-     <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp" 
-        android:weightSum="2">
+        android:padding="5dp"
+        android:weightSum="2" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbadd_doctor_skypes"
@@ -88,11 +87,11 @@
 
         <EditText
             android:id="@+id/tbSkype"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext"
-            android:ems="10"/>
+            android:ems="10" />
     </LinearLayout>
 
     <LinearLayout

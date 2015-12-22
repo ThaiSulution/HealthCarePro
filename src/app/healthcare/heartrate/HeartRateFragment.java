@@ -335,7 +335,7 @@ public class HeartRateFragment extends Fragment {
 						if (isRemove) {
 							builder.setTitle("Lỗi thao tác");
 							builder.setMessage("Trong quá trình đo bạn đã di chuyển ngón tay nên kết quả đo không chính xác. Vui lòng thực hiện đo lại!");
-							builder.setPositiveButton("Finish",
+							builder.setPositiveButton("OK",
 									new DialogInterface.OnClickListener() {
 
 										@Override

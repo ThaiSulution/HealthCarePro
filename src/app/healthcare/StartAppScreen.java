@@ -1,8 +1,6 @@
 package app.healthcare;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import android.animation.Animator;
 import android.annotation.TargetApi;
@@ -72,7 +70,7 @@ public class StartAppScreen extends Fragment {
 									a);
 							builder.setTitle("Lỗi kết nối");
 							builder.setMessage("Kết nối không ổn định, hãy kiểm tra kết nối mạng và thử lại lần nữa!");
-							builder.setPositiveButton("Finish",
+							builder.setPositiveButton("Kết thúc",
 									new DialogInterface.OnClickListener() {
 
 										@Override
@@ -85,7 +83,7 @@ public class StartAppScreen extends Fragment {
 									});
 							builder.show();
 						}
-						//MainActivity.logIn(a);
+						// MainActivity.logIn(a);
 						i++;
 						mHandler.postDelayed(this, 3000);
 					}
@@ -190,7 +188,6 @@ public class StartAppScreen extends Fragment {
 			Double distance = 0.0;
 			int target = 0;
 			int step = 0;
-			long time = 0;
 			Double calos = (double) 0;
 			int size = Constants.getInstance().listDataStepDTO.size();
 			Log.e("distance",
@@ -205,22 +202,9 @@ public class StartAppScreen extends Fragment {
 						.getStep();
 				calos = Constants.getInstance().listDataStepDTO.get(size - 1)
 						.getCalos();
-				time = Constants.getInstance().listDataStepDTO.get(size - 1)
-						.getTime();
 			}
-			Date now = new Date();
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(now);
-			@SuppressWarnings("deprecation")
-			int timeRange = Integer
-					.parseInt((now.toLocaleString().split(" ")[1]).split(":")[0]);
-			cal.add(Calendar.HOUR, -timeRange);
-			if (cal.getTimeInMillis() > time) {
-				Constants.getInstance().setDistance(0);
-			} else {
-				Constants.getInstance().setDistance(
-						Float.parseFloat(String.valueOf(distance)));
-			}
+			Constants.getInstance().setDistance(
+					Float.parseFloat(String.valueOf(distance)));
 			Constants.getInstance().setTarget(target);
 			Constants.getInstance().setStepRuns(step);
 			Constants.getInstance().setCalos(

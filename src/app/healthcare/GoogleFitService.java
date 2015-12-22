@@ -83,7 +83,7 @@ public class GoogleFitService extends IntentService implements
 	public static final int TYPE_GET_DATA_TO_MONTH = 3;
 	public static final int TYPE_GET_DATA_TO_YEAR = 4;
 	public static final int TYPE_REQUEST_CONNECTION = 5;
-	public static final int TYPE_SET_HEIGHT_ANDWEIGHT = 6;
+	public static final int TYPE_SET_HEIGHT_AND_WEIGHT = 6;
 	public static final int TYPE_SET_DISTANCE = 7;
 	public static final int TYPE_SET_ROUND_BUTT = 8;
 	public static final int TYPE_SET_TARGET = 9;
@@ -163,14 +163,11 @@ public class GoogleFitService extends IntentService implements
 				endTime = cal.getTimeInMillis();
 				cal.add(Calendar.HOUR, -time);
 				startTime = cal.getTimeInMillis();
-				readRequest = queryFitnessDataStep(startTime, endTime);
 				DailyTotalResult rs = Fitness.HistoryApi.readDailyTotal(
 						mClient, DataType.TYPE_STEP_COUNT_DELTA).await(1,
 						TimeUnit.MINUTES);
 				totalStepsGet = dumpDataSetHistorySteps(rs.getTotal());
-//				if (totalStepsGet > Constants.getInstance().getStepRuns()) {
-					Constants.getInstance().setStepRuns(totalStepsGet);
-//				}
+				Constants.getInstance().setStepRuns(totalStepsGet);
 				DailyTotalResult rscl = Fitness.HistoryApi.readDailyTotal(
 						mClient, DataType.TYPE_CALORIES_EXPENDED).await(1,
 						TimeUnit.MINUTES);
@@ -183,9 +180,9 @@ public class GoogleFitService extends IntentService implements
 				Constants.getInstance().setDistance(distance);
 				getDataDayFinish = true;
 				break;
-			case TYPE_SET_HEIGHT_ANDWEIGHT:
-				String sWeight = StepRun.weight_weight.split("_")[0];
-				String sHeight = StepRun.weight_weight.split("_")[1];
+			case TYPE_SET_HEIGHT_AND_WEIGHT:
+				String sWeight = StepRun.weight_weight.split("_")[1];
+				String sHeight = StepRun.weight_weight.split("_")[0];
 				float weight = Float.parseFloat(sWeight);
 				float height = Float.parseFloat(sHeight);
 				setUserHeight(height);
@@ -198,9 +195,7 @@ public class GoogleFitService extends IntentService implements
 				endTime = cal.getTimeInMillis();
 				int date = cal.get(Calendar.DAY_OF_YEAR);
 				// reset lai so ngay co du lieu
-				// dataSizeHour = 0;
 				dataSizeSteps = 0;
-				// listDataStep.retainAll(listDataStep);
 				Constants.getInstance().listDataStep.retainAll(Constants
 						.getInstance().listDataStep);
 				// xac dinh so ngay co hoat dong de tinh so buoc di trung binh
@@ -250,83 +245,47 @@ public class GoogleFitService extends IntentService implements
 		}
 	}
 
-	private boolean setUserHeight(float heightCentimiters) {
-		// to post data
+	private void setUserHeight(float heightCentimiters) {
+		Calendar cal = Calendar.getInstance();
+		Date now = new Date();
+		cal.setTime(now);
+		long endTime = cal.getTimeInMillis();
+		cal.add(Calendar.DATE, -1);
+		long startTime = cal.getTimeInMillis();
 		float height = ((float) heightCentimiters) / 100.0f;
-		Calendar cal = Calendar.getInstance();
-		Date now = new Date();
-		cal.setTime(now);
-		long endTime = cal.getTimeInMillis();
-		cal.add(Calendar.DAY_OF_YEAR, -1);
-		long startTime = cal.getTimeInMillis();
-
-		DataSet heightDataSet = createDataForRequest(DataType.TYPE_HEIGHT,
-				DataSource.TYPE_RAW, height, startTime, endTime,
-				TimeUnit.MILLISECONDS);
-
-		Status heightInsertStatus = Fitness.HistoryApi.insertData(mClient,
-				heightDataSet).await(1, TimeUnit.MINUTES);
-		if (heightInsertStatus.isSuccess()) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean setUserWeight(float weight) {
-		// to post data
-		Calendar cal = Calendar.getInstance();
-		Date now = new Date();
-		cal.setTime(now);
-		long endTime = cal.getTimeInMillis();
-		cal.add(Calendar.DAY_OF_YEAR, -1);
-		long startTime = cal.getTimeInMillis();
-
-		DataSet weightDataSet = createDataForRequest(DataType.TYPE_WEIGHT,
-				DataSource.TYPE_RAW, weight, // weight in kgs
-				startTime, // start time
-				endTime, // end time
-				TimeUnit.MILLISECONDS // Time Unit, for example,
-										// TimeUnit.MILLISECONDS
-		);
-
-		com.google.android.gms.common.api.Status weightInsertStatus = Fitness.HistoryApi
-				.insertData(mClient, weightDataSet).await(1, TimeUnit.MINUTES);
-		if (weightInsertStatus.isSuccess()) {
-			return true;
-		}
-		return false;
-	}
-
-	private DataSet createDataForRequest(DataType dataType, int dataSourceType,
-			Object values, long startTime, long endTime, TimeUnit timeUnit) {
-		DataSource dataSource = new DataSource.Builder()
-				.setAppPackageName("app.heatlcare").setDataType(dataType)
-				.setType(dataSourceType).build();
-
-		DataSet dataSet = DataSet.create(dataSource);
+		// Create a data source
+		DataSource dataSourceHeight = new DataSource.Builder()
+				.setAppPackageName(this).setDataType(DataType.TYPE_HEIGHT)
+				.setName(TAG_HISTORY + " - TYPE_HEIGHT")
+				.setType(DataSource.TYPE_RAW).build();
+		DataSet dataSet = DataSet.create(dataSourceHeight);
 		DataPoint dataPoint = dataSet.createDataPoint().setTimeInterval(
-				startTime, endTime, timeUnit);
-
-		if (values instanceof Integer) {
-			dataPoint = dataPoint.setIntValues((Integer) values);
-		} else {
-			dataPoint = dataPoint.setFloatValues((Float) values);
-		}
-
+				startTime, endTime, TimeUnit.MILLISECONDS);
+		dataPoint.getValue(Field.FIELD_HEIGHT).setFloat(height);
 		dataSet.add(dataPoint);
+	}
 
-		return dataSet;
+	private void setUserWeight(float weight) {
+		Calendar cal = Calendar.getInstance();
+		Date now = new Date();
+		cal.setTime(now);
+		long endTime = cal.getTimeInMillis();
+		cal.add(Calendar.DATE, -1);
+		long startTime = cal.getTimeInMillis();
+		// Create a data source
+		DataSource dataSourceHeight = new DataSource.Builder()
+				.setAppPackageName(this).setDataType(DataType.TYPE_WEIGHT)
+				.setName(TAG_HISTORY + " - TYPE_WEIGHT")
+				.setType(DataSource.TYPE_RAW).build();
+		// Create a data set
+		DataSet dataSet = DataSet.create(dataSourceHeight);
+		DataPoint dataPoint = dataSet.createDataPoint().setTimeInterval(
+				startTime, endTime, TimeUnit.MILLISECONDS);
+		dataPoint.getValue(Field.FIELD_WEIGHT).setFloat(weight);
+		dataSet.add(dataPoint);
 	}
 
 	/*-----------SensorsApi------------------*/
-	/**
-	 * Find available data sources and attempt to register on a specific
-	 * {@link DataType}. If the application cares about a data type but doesn't
-	 * care about the source of the data, this can be skipped entirely, instead
-	 * calling
-	 * {@link com.google.android.gms.fitness.SensorsApi #register(GoogleApiClient, SensorRequest, DataSourceListener)}
-	 * , where the {@link SensorRequest} contains the desired data type.
-	 */
 	public void findFitnessDataSourcesSensors() {
 		// [START find_data_sources]
 		Fitness.SensorsApi.findDataSources(
@@ -346,21 +305,11 @@ public class GoogleFitService extends IntentService implements
 				.setResultCallback(new ResultCallback<DataSourcesResult>() {
 					@Override
 					public void onResult(DataSourcesResult dataSourcesResult) {
-						Log.i(TAG_SENSOR, "Result: "
-								+ dataSourcesResult.getStatus().toString());
 						for (DataSource dataSource : dataSourcesResult
 								.getDataSources()) {
-							Log.i(TAG_SENSOR, "Data source found: "
-									+ dataSource.toString());
-							Log.i(TAG_SENSOR, "Data Source type: "
-									+ dataSource.getDataType().getName());
-							// Let's register a listener to receive Activity
-							// data!
 							if (dataSource.getDataType().equals(
 									DataType.TYPE_STEP_COUNT_DELTA)
 									&& mListener == null) {
-								Log.i(TAG_SENSOR,
-										"Data source for TYPE_STEP_COUNT_DELTA found!  Registering.");
 								registerFitnessDataListener(dataSource,
 										DataType.TYPE_STEP_COUNT_DELTA);
 							}
@@ -382,9 +331,6 @@ public class GoogleFitService extends IntentService implements
 			public void onDataPoint(DataPoint dataPoint) {
 				for (Field field : dataPoint.getDataType().getFields()) {
 					Value val = dataPoint.getValue(field);
-					Log.i(TAG_SENSOR,
-							"Detected DataPoint field: " + field.getName());
-					Log.i(TAG_SENSOR, "Detected DataPoint value: " + val);
 					if (field.getName().equals("steps")) {
 						totalStepsRecord += val.asInt();
 					}
@@ -392,9 +338,6 @@ public class GoogleFitService extends IntentService implements
 				}
 			}
 		};
-		Constants.getInstance().setStepRuns(
-				Constants.getInstance().getStepRuns() + totalStepsRecord);
-		// new InsertAndVerifyDataTask().execute();
 		Fitness.SensorsApi.add(
 				mClient,
 				new SensorRequest.Builder().setDataSource(dataSource)
@@ -418,18 +361,9 @@ public class GoogleFitService extends IntentService implements
 	 */
 	public void unregisterFitnessDataListener() {
 		if (mListener == null) {
-			// This code only activates one listener at a time. If there's no
-			// listener, there's
-			// nothing to unregister.
 			return;
 		}
-
 		// [START unregister_data_listener]
-		// Waiting isn't actually necessary as the unregister call will complete
-		// regardless,
-		// even if called from within onStop, but a callback can still be added
-		// in order to
-		// inspect the results.
 		Fitness.SensorsApi.remove(mClient, mListener).setResultCallback(
 				new ResultCallback<Status>() {
 					@Override
@@ -445,19 +379,7 @@ public class GoogleFitService extends IntentService implements
 	}
 
 	/*-----------RecordingApi------------------*/
-	/**
-	 * Subscribe to an available {@link DataType}. Subscriptions can exist
-	 * across application instances (so data is recorded even after the
-	 * application closes down). When creating a new subscription, it may
-	 * already exist from a previous invocation of this app. If the subscription
-	 * already exists, the method is a no-op. However, you can check this with a
-	 * special success code.
-	 */
 	public void subscribe() {
-		// To create a subscription, invoke the Recording API. As soon as the
-		// subscription is
-		// active, fitness data will start recording.
-		// [START subscribe_to_datatype]
 		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_STEP_COUNT_DELTA)
 				.setResultCallback(new ResultCallback<Status>() {
 					@Override
@@ -476,152 +398,137 @@ public class GoogleFitService extends IntentService implements
 					}
 				});
 		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_LOCATION_SAMPLE)
-		.setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				if (status.isSuccess()) {
-					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-						Log.i(TAG_RECORDING,
-								"Existing subscription for activity detected.");
-					} else {
-						Log.i(TAG_RECORDING, "Successfully subscribed!");
+				.setResultCallback(new ResultCallback<Status>() {
+					@Override
+					public void onResult(Status status) {
+						if (status.isSuccess()) {
+							if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+								Log.i(TAG_RECORDING,
+										"Existing subscription for activity detected.");
+							} else {
+								Log.i(TAG_RECORDING, "Successfully subscribed!");
+							}
+						} else {
+							Log.i(TAG_RECORDING,
+									"There was a problem subscribing.");
+						}
 					}
-				} else {
-					Log.i(TAG_RECORDING,
-							"There was a problem subscribing.");
-				}
-			}
-		});
+				});
 		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_LOCATION_TRACK)
-		.setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				if (status.isSuccess()) {
-					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-						Log.i(TAG_RECORDING,
-								"Existing subscription for activity detected.");
-					} else {
-						Log.i(TAG_RECORDING, "Successfully subscribed!");
+				.setResultCallback(new ResultCallback<Status>() {
+					@Override
+					public void onResult(Status status) {
+						if (status.isSuccess()) {
+							if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+								Log.i(TAG_RECORDING,
+										"Existing subscription for activity detected.");
+							} else {
+								Log.i(TAG_RECORDING, "Successfully subscribed!");
+							}
+						} else {
+							Log.i(TAG_RECORDING,
+									"There was a problem subscribing.");
+						}
 					}
-				} else {
-					Log.i(TAG_RECORDING,
-							"There was a problem subscribing.");
-				}
-			}
-		});
+				});
 		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_DISTANCE_DELTA)
-		.setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				if (status.isSuccess()) {
-					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-						Log.i(TAG_RECORDING,
-								"Existing subscription for activity detected.");
-					} else {
-						Log.i(TAG_RECORDING, "Successfully subscribed!");
+				.setResultCallback(new ResultCallback<Status>() {
+					@Override
+					public void onResult(Status status) {
+						if (status.isSuccess()) {
+							if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+								Log.i(TAG_RECORDING,
+										"Existing subscription for activity detected.");
+							} else {
+								Log.i(TAG_RECORDING, "Successfully subscribed!");
+							}
+						} else {
+							Log.i(TAG_RECORDING,
+									"There was a problem subscribing.");
+						}
 					}
-				} else {
-					Log.i(TAG_RECORDING,
-							"There was a problem subscribing.");
-				}
-			}
-		});
-		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_CALORIES_EXPENDED)
-		.setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				if (status.isSuccess()) {
-					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-						Log.i(TAG_RECORDING,
-								"Existing subscription for activity detected.");
-					} else {
-						Log.i(TAG_RECORDING, "Successfully subscribed!");
+				});
+		Fitness.RecordingApi
+				.subscribe(mClient, DataType.TYPE_CALORIES_EXPENDED)
+				.setResultCallback(new ResultCallback<Status>() {
+					@Override
+					public void onResult(Status status) {
+						if (status.isSuccess()) {
+							if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+								Log.i(TAG_RECORDING,
+										"Existing subscription for activity detected.");
+							} else {
+								Log.i(TAG_RECORDING, "Successfully subscribed!");
+							}
+						} else {
+							Log.i(TAG_RECORDING,
+									"There was a problem subscribing.");
+						}
 					}
-				} else {
-					Log.i(TAG_RECORDING,
-							"There was a problem subscribing.");
-				}
-			}
-		});
-		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_CALORIES_CONSUMED)
-		.setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				if (status.isSuccess()) {
-					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-						Log.i(TAG_RECORDING,
-								"Existing subscription for activity detected.");
-					} else {
-						Log.i(TAG_RECORDING, "Successfully subscribed!");
+				});
+		Fitness.RecordingApi
+				.subscribe(mClient, DataType.TYPE_CALORIES_CONSUMED)
+				.setResultCallback(new ResultCallback<Status>() {
+					@Override
+					public void onResult(Status status) {
+						if (status.isSuccess()) {
+							if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+								Log.i(TAG_RECORDING,
+										"Existing subscription for activity detected.");
+							} else {
+								Log.i(TAG_RECORDING, "Successfully subscribed!");
+							}
+						} else {
+							Log.i(TAG_RECORDING,
+									"There was a problem subscribing.");
+						}
 					}
-				} else {
-					Log.i(TAG_RECORDING,
-							"There was a problem subscribing.");
-				}
-			}
-		});
+				});
 		Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_WORKOUT_EXERCISE)
-		.setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				if (status.isSuccess()) {
-					if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-						Log.i(TAG_RECORDING,
-								"Existing subscription for activity detected.");
-					} else {
-						Log.i(TAG_RECORDING, "Successfully subscribed!");
+				.setResultCallback(new ResultCallback<Status>() {
+					@Override
+					public void onResult(Status status) {
+						if (status.isSuccess()) {
+							if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
+								Log.i(TAG_RECORDING,
+										"Existing subscription for activity detected.");
+							} else {
+								Log.i(TAG_RECORDING, "Successfully subscribed!");
+							}
+						} else {
+							Log.i(TAG_RECORDING,
+									"There was a problem subscribing.");
+						}
 					}
-				} else {
-					Log.i(TAG_RECORDING,
-							"There was a problem subscribing.");
-				}
-			}
-		});
+				});
 		// [END subscribe_to_datatype]
 	}
 
-	/**
-	 * Fetch a list of all active subscriptions and log it. Since the logger for
-	 * this sample also prints to the screen, we can see what is happening in
-	 * this way.
-	 */
 	public long dumpSubscriptionsList() {
 		long stepRecord = 0;
 		// [START list_current_subscriptions]
 		Fitness.RecordingApi.listSubscriptions(mClient,
-				DataType.TYPE_ACTIVITY_SAMPLE)
-		// Create the callback to retrieve the list of subscriptions
-		// asynchronously.
-				.setResultCallback(
-						new ResultCallback<ListSubscriptionsResult>() {
-							@Override
-							public void onResult(
-									ListSubscriptionsResult listSubscriptionsResult) {
-								for (Subscription sc : listSubscriptionsResult
-										.getSubscriptions()) {
-									DataType dt = sc.getDataType();
-									Log.i(TAG_RECORDING,
-											"Active subscription for data type: "
-													+ dt.getName());
-								}
-							}
-						});
+				DataType.TYPE_ACTIVITY_SAMPLE).setResultCallback(
+				new ResultCallback<ListSubscriptionsResult>() {
+					@Override
+					public void onResult(
+							ListSubscriptionsResult listSubscriptionsResult) {
+						for (Subscription sc : listSubscriptionsResult
+								.getSubscriptions()) {
+							DataType dt = sc.getDataType();
+							Log.i(TAG_RECORDING,
+									"Active subscription for data type: "
+											+ dt.getName());
+						}
+					}
+				});
 		return stepRecord;
 		// [END list_current_subscriptions]
 	}
 
-	/**
-	 * Cancel the ACTIVITY_SAMPLE subscription by calling unsubscribe on that
-	 * {@link DataType}.
-	 */
 	public void cancelSubscription() {
 		final String dataTypeStr = DataType.TYPE_ACTIVITY_SAMPLE.toString();
 		Log.i(TAG_RECORDING, "Unsubscribing from data type: " + dataTypeStr);
-
-		// Invoke the Recording API to unsubscribe from the data type and
-		// specify a callback that
-		// will check the result.
-		// [START unsubscribe_from_datatype]
 		Fitness.RecordingApi
 				.unsubscribe(mClient, DataType.TYPE_ACTIVITY_SAMPLE)
 				.setResultCallback(new ResultCallback<Status>() {
@@ -643,51 +550,26 @@ public class GoogleFitService extends IntentService implements
 	}
 
 	/*-----------SessionsApi------------------*/
-	/**
-	 * Create and execute a {@link SessionInsertRequest} to insert a session
-	 * into the History API, and then create and execute a
-	 * {@link SessionReadRequest} to verify the insertion succeeded. By using an
-	 * AsyncTask to make our calls, we can schedule synchronous calls, so that
-	 * we can query for sessions after confirming that our insert was
-	 * successful. Using asynchronous calls and callbacks would not guarantee
-	 * that the insertion had concluded before the read request was made. An
-	 * example of an asynchronous call using a callback can be found in the
-	 * example on deleting sessions below.
-	 */
 	public class InsertAndVerifySessionTask extends AsyncTask<Void, Void, Void> {
 		protected Void doInBackground(Void... params) {
 			// First, create a new session and an insertion request.
 			SessionInsertRequest insertRequest = insertFitnessSession();
-
 			// [START insert_session]
-			// Then, invoke the Sessions API to insert the session and await the
-			// result,
-			// which is possible here because of the AsyncTask. Always include a
-			// timeout when
-			// calling await() to avoid hanging that can occur from the service
-			// being shutdown
-			// because of low memory or other conditions.
 			Log.i(TAG_SESSION, "Inserting the session in the History API");
 			com.google.android.gms.common.api.Status insertStatus = Fitness.SessionsApi
 					.insertSession(mClient, insertRequest).await(1,
 							TimeUnit.MINUTES);
-
-			// Before querying the session, check to see if the insertion
-			// succeeded.
 			if (!insertStatus.isSuccess()) {
 				Log.i(TAG_SESSION,
 						"There was a problem inserting the session: "
 								+ insertStatus.getStatusMessage());
 				return null;
 			}
-
 			// At this point, the session has been inserted and can be read.
 			Log.i(TAG_SESSION, "Session insert was successful!");
 			// [END insert_session]
-
 			// Begin by creating the query.
 			SessionReadRequest readRequest = readFitnessSession();
-
 			// [START read_session]
 			// Invoke the Sessions API to fetch the session with the query and
 			// wait for the result
@@ -695,7 +577,6 @@ public class GoogleFitService extends IntentService implements
 			SessionReadResult sessionReadResult = Fitness.SessionsApi
 					.readSession(mClient, readRequest).await(1,
 							TimeUnit.MINUTES);
-
 			// Get a list of the sessions that match the criteria to check the
 			// result.
 			Log.i(TAG_SESSION,
@@ -704,7 +585,6 @@ public class GoogleFitService extends IntentService implements
 			for (Session session : sessionReadResult.getSessions()) {
 				// Process the session
 				dumpSession(session);
-
 				// Process the data sets for this session
 				List<DataSet> dataSets = sessionReadResult.getDataSet(session);
 				for (DataSet dataSet : dataSets) {
@@ -717,25 +597,6 @@ public class GoogleFitService extends IntentService implements
 		}
 	}
 
-	/**
-	 * Create a {@link SessionInsertRequest} for a run that consists of 10
-	 * minutes running, 10 minutes walking, and 10 minutes of running. The
-	 * request contains two {@link DataSet}s: speed data and activity segments
-	 * data.
-	 *
-	 * {@link Session}s are time intervals that are associated with all Fit data
-	 * that falls into that time interval. This data can be inserted when
-	 * inserting a session or independently, without affecting the association
-	 * between that data and the session. Future queries for that session will
-	 * return all data relevant to the time interval created by the session.
-	 *
-	 * Sessions may contain {@link DataSet}s, which are comprised of
-	 * {@link DataPoint}s and a {@link DataSource}. A {@link DataPoint} is
-	 * associated with a Fit {@link DataType}, which may be derived from the
-	 * {@link DataSource}, as well as a time interval, and a value. A given
-	 * {@link DataSet} may only contain data for a single data type, but a
-	 * {@link Session} can contain multiple {@link DataSet}s.
-	 */
 	public SessionInsertRequest insertFitnessSession() {
 		Log.i(TAG, "Creating a new session for an afternoon run");
 		// Setting start and end times for our run.
@@ -752,7 +613,6 @@ public class GoogleFitService extends IntentService implements
 		long startWalkTime = cal.getTimeInMillis();
 		cal.add(Calendar.MINUTE, -10);
 		long startTime = cal.getTimeInMillis();
-
 		// Create a data source
 		DataSource stepDataSource = new DataSource.Builder()
 				.setAppPackageName(this.getPackageName())
@@ -820,14 +680,12 @@ public class GoogleFitService extends IntentService implements
 				.setActivity(FitnessActivities.RUNNING)
 				.setStartTime(startTime, TimeUnit.MILLISECONDS)
 				.setEndTime(endTime, TimeUnit.MILLISECONDS).build();
-
 		// Build a session insert request
 		SessionInsertRequest insertRequest = new SessionInsertRequest.Builder()
 				.setSession(session).addDataSet(stepDataSet)
 				.addDataSet(activitySegments).build();
 		// [END build_insert_session_request]
 		// [END build_insert_session_request_with_activity_segments]
-
 		return insertRequest;
 	}
 
@@ -853,25 +711,11 @@ public class GoogleFitService extends IntentService implements
 				.read(DataType.TYPE_SPEED).setSessionName(SAMPLE_SESSION_NAME)
 				.build();
 		// [END build_read_session_request]
-
 		return readRequest;
 	}
 
 	public void dumpDataSetSessions(DataSet dataSet) {
-		Log.i(TAG_SESSION, "Data returned for Data type: "
-				+ dataSet.getDataType().getName());
 		for (DataPoint dp : dataSet.getDataPoints()) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-			Log.i(TAG_SESSION, "Data point:");
-			Log.i(TAG_SESSION, "\tType: " + dp.getDataType().getName());
-			Log.i(TAG_SESSION,
-					"\tStart: "
-							+ dateFormat.format(dp
-									.getStartTime(TimeUnit.MILLISECONDS)));
-			Log.i(TAG_SESSION,
-					"\tEnd: "
-							+ dateFormat.format(dp
-									.getEndTime(TimeUnit.MILLISECONDS)));
 			for (Field field : dp.getDataType().getFields()) {
 				Log.i(TAG_SESSION, "\tField: " + field.getName() + " Value: "
 						+ dp.getValue(field));
@@ -894,16 +738,8 @@ public class GoogleFitService extends IntentService implements
 								.getEndTime(TimeUnit.MILLISECONDS)));
 	}
 
-	/**
-	 * Delete the {@link DataSet} we inserted with our {@link Session} from the
-	 * History API. In this example, we delete all step count data for the past
-	 * 24 hours. Note that this deletion uses the History API, and not the
-	 * Sessions API, since sessions are truly just time intervals over a set of
-	 * data, and the data is what we are interested in removing.
-	 */
 	public void deleteSession() {
 		Log.i(TAG_SESSION, "Deleting today's session data for speed");
-
 		// Set a start and end time for our data, using a start time of 1 day
 		// before this moment.
 		Calendar cal = Calendar.getInstance();
@@ -946,16 +782,6 @@ public class GoogleFitService extends IntentService implements
 	}
 
 	/*-----------HistoryApi------------------*/
-	/**
-	 * Create a {@link DataSet} to insert data into the History API, and then
-	 * create and execute a {@link DataReadRequest} to verify the insertion
-	 * succeeded. By using an {@link AsyncTask}, we can schedule synchronous
-	 * calls, so that we can query for data after confirming that our insert was
-	 * successful. Using asynchronous calls and callbacks would not guarantee
-	 * that the insertion had concluded before the read request was made. An
-	 * example of an asynchronous call using a callback can be found in the
-	 * example on deleting data below.
-	 */
 	public class InsertAndVerifyDataTask extends AsyncTask<Void, Void, Void> {
 		protected Void doInBackground(Void... params) {
 			// First, create a new dataset and insertion request.
@@ -992,7 +818,6 @@ public class GoogleFitService extends IntentService implements
 	 */
 	public DataSet insertFitnessStepData() {
 		Log.i(TAG_HISTORY, "Creating a new data insert request");
-
 		// [START build_insert_data_request]
 		// Set a start and end time for our data, using a start time of 1 hour
 		// before this moment.
@@ -1059,10 +884,6 @@ public class GoogleFitService extends IntentService implements
 	 * week.
 	 */
 	public DataReadRequest queryFitnessDataStep(long startTime, long endTime) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-		Log.i(TAG_HISTORY, "Range Start: " + dateFormat.format(startTime));
-		Log.i(TAG_HISTORY, "Range End: " + dateFormat.format(endTime));
-
 		DataReadRequest readRequest = new DataReadRequest.Builder()
 				.aggregate(DataType.TYPE_STEP_COUNT_DELTA,
 						DataType.AGGREGATE_STEP_COUNT_DELTA)
@@ -1118,15 +939,6 @@ public class GoogleFitService extends IntentService implements
 		return readRequest;
 	}
 
-	/**
-	 * Log a record of the query result. It's possible to get more constrained
-	 * data sets by specifying a data source or data type, but for demonstrative
-	 * purposes here's how one would dump all the data. In this sample, logging
-	 * also prints to the device screen, so we can see what the query returns,
-	 * but your app should not log fitness information as a privacy
-	 * consideration. A better option would be to dump the data you receive to a
-	 * local data directory to avoid exposing it to other applications.
-	 */
 	public long printDataStep(DataReadResult dataReadResult) {
 		long steps = 0;
 		if (dataReadResult.getBuckets().size() > 0) {
@@ -1159,17 +971,7 @@ public class GoogleFitService extends IntentService implements
 	 */
 	public float printDataCaloFree(DataReadResult dataReadResult) {
 		float calos = 0;
-		// thai delete start - code nay khong can thiet vi lam sai so buoc di
-		// trung binh
-		// dataSizeSteps = 1;
-		// thai delete end
 		if (dataReadResult.getBuckets().size() > 0) {
-			// thai delete start - code nay khong can thiet vi lam sai so buoc
-			// di trung binh
-			// dataSizeSteps += dataReadResult.getBuckets().size();
-			// thai delete end
-			Log.i(TAG_HISTORY, "Number of returned buckets of DataSets is: "
-					+ dataReadResult.getBuckets().size());
 			for (Bucket bucket : dataReadResult.getBuckets()) {
 				List<DataSet> dataSets = bucket.getDataSets();
 				for (DataSet dataSet : dataSets) {
@@ -1177,22 +979,10 @@ public class GoogleFitService extends IntentService implements
 				}
 			}
 		} else if (dataReadResult.getDataSets().size() > 0) {
-			// thai delete start - code nay khong can thiet vi lam sai so buoc
-			// di trung binh
-			// dataSizeSteps += dataReadResult.getDataSets().size();
-			// thai delete end
-			Log.i(TAG_HISTORY, "Number of returned DataSets is: "
-					+ dataReadResult.getDataSets().size());
 			for (DataSet dataSet : dataReadResult.getDataSets()) {
 				calos += dumpDataSetHistoryCalos(dataSet);
 			}
 		}
-		// thai delete start - code nay khong can thiet vi lam sai so buoc di
-		// trung binh
-		// if (dataSizeSteps > 1) {
-		// dataSizeSteps = dataSizeSteps - 1;
-		// }
-		// thai delete end
 		return calos;
 	}
 
@@ -1227,19 +1017,8 @@ public class GoogleFitService extends IntentService implements
 	public long dumpDataSetHistorySteps(DataSet dataSet) {
 		Log.i(TAG, "Data returned for Data type: "
 				+ dataSet.getDataType().getName());
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		long steps = 0;
 		for (DataPoint dp : dataSet.getDataPoints()) {
-			Log.i(TAG_HISTORY, "Data point:");
-			Log.i(TAG_HISTORY, "\tType: " + dp.getDataType().getName());
-			Log.i(TAG_HISTORY,
-					"\tStart: "
-							+ dateFormat.format(dp
-									.getStartTime(TimeUnit.MILLISECONDS)));
-			Log.i(TAG_HISTORY,
-					"\tEnd: "
-							+ dateFormat.format(dp
-									.getEndTime(TimeUnit.MILLISECONDS)));
 			for (Field field : dp.getDataType().getFields()) {
 				Log.i(TAG,
 						"\tField: " + field.getName() + " Value: "
@@ -1255,19 +1034,8 @@ public class GoogleFitService extends IntentService implements
 	public float dumpDataSetHistoryCalos(DataSet dataSet) {
 		Log.i(TAG, "Data returned for Data type: "
 				+ dataSet.getDataType().getName());
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		float calos = 0;
 		for (DataPoint dp : dataSet.getDataPoints()) {
-			Log.i(TAG_HISTORY, "Data point:");
-			Log.i(TAG_HISTORY, "\tType: " + dp.getDataType().getName());
-			Log.i(TAG_HISTORY,
-					"\tStart: "
-							+ dateFormat.format(dp
-									.getStartTime(TimeUnit.MILLISECONDS)));
-			Log.i(TAG_HISTORY,
-					"\tEnd: "
-							+ dateFormat.format(dp
-									.getEndTime(TimeUnit.MILLISECONDS)));
 			for (Field field : dp.getDataType().getFields()) {
 				Log.i(TAG,
 						"\tField: " + field.getName() + " Value: "
@@ -1280,23 +1048,11 @@ public class GoogleFitService extends IntentService implements
 		return calos;
 	}
 
-
 	public float dumpDataSetHistoryDistance(DataSet dataSet) {
 		Log.e(TAG, "Data returned for Data type: "
 				+ dataSet.getDataType().getName());
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		float distance = 0;
 		for (DataPoint dp : dataSet.getDataPoints()) {
-			Log.e(TAG_HISTORY, "Data point:");
-			Log.e(TAG_HISTORY, "\tType: " + dp.getDataType().getName());
-			Log.i(TAG_HISTORY,
-					"\tStart: "
-							+ dateFormat.format(dp
-									.getStartTime(TimeUnit.MILLISECONDS)));
-			Log.i(TAG_HISTORY,
-					"\tEnd: "
-							+ dateFormat.format(dp
-									.getEndTime(TimeUnit.MILLISECONDS)));
 			for (Field field : dp.getDataType().getFields()) {
 				Log.e("type",
 						"\tField: " + field.getName() + " Value: "
@@ -1317,7 +1073,6 @@ public class GoogleFitService extends IntentService implements
 	 */
 	public void deleteData() {
 		Log.i(TAG_HISTORY, "Deleting today's step count data");
-
 		// [START delete_dataset]
 		// Set a start and end time for our data, using a start time of 1 day
 		// before this moment.
@@ -1327,13 +1082,11 @@ public class GoogleFitService extends IntentService implements
 		long endTime = cal.getTimeInMillis();
 		cal.add(Calendar.DAY_OF_YEAR, -1);
 		long startTime = cal.getTimeInMillis();
-
 		// Create a delete request object, providing a data type and a time
 		// interval
 		DataDeleteRequest request = new DataDeleteRequest.Builder()
 				.setTimeInterval(startTime, endTime, TimeUnit.MILLISECONDS)
 				.addDataType(DataType.TYPE_STEP_COUNT_DELTA).build();
-
 		// Invoke the History API with the Google API client object and delete
 		// request, and then
 		// specify a callback that will check the result.
@@ -1379,7 +1132,6 @@ public class GoogleFitService extends IntentService implements
 				.addApi(Fitness.SENSORS_API)
 				.addApi(Fitness.CONFIG_API)
 				.addApi(Fitness.SESSIONS_API)
-				.addApi(Fitness.BLE_API)
 				.addApi(Plus.API)
 				.addScope(new Scope(Scopes.FITNESS_BODY_READ_WRITE))
 				.addScope(new Scope(Scopes.FITNESS_LOCATION_READ_WRITE))
@@ -1512,7 +1264,6 @@ public class GoogleFitService extends IntentService implements
 			String arg1) {
 		PendingResult<DataTypeResult> pendingResult = Fitness.ConfigApi
 				.readDataType(mClient, "app.healthcare");
-
 		// 2. Check the result asynchronously
 		// (The result may not be immediately available)
 		pendingResult.setResultCallback(new ResultCallback<DataTypeResult>() {

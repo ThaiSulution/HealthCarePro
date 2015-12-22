@@ -78,7 +78,7 @@ public class CategotyActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if (isNetworkAvaiable()) {
-			if (Variables.PAPERS[paper].equalsIgnoreCase("K�nh 14")) {
+			if (Variables.PAPERS[paper].equalsIgnoreCase("Kênh 14")) {
 				Intent intent = new Intent(this, NoRssActivity.class);
 				intent.putExtra(Variables.paper, paper);
 				intent.putExtra(Variables.position, position);
@@ -101,9 +101,9 @@ public class CategotyActivity extends ListActivity {
 			}
 		} else {
 			AlertDialog.Builder builder = new AlertDialog.Builder(CategotyActivity.this);
-			builder.setTitle("Network no avaiable");
-			builder.setMessage("Please check the network connection!");
-			builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
+			builder.setTitle("Không có kết nối");
+			builder.setMessage("Vui lòng kiểm tra kết nối!");
+			builder.setPositiveButton("Kết thúc", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {

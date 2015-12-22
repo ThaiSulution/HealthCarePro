@@ -156,6 +156,8 @@ public class MainActivity extends Activity {
 				.getResourceId(8, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[9], navMenuIcons
 				.getResourceId(9, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[10], navMenuIcons
+				.getResourceId(10, -1)));
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -201,7 +203,7 @@ public class MainActivity extends Activity {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Không có kết nối");
 			builder.setMessage("Vui lòng kiểm tra kết nối mạng!");
-			builder.setPositiveButton("Finish",
+			builder.setPositiveButton("Kết thúc",
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -310,76 +312,146 @@ public class MainActivity extends Activity {
 
 	public static void getData() {
 		// lay thong tin bmi
-		if (Constants.getInstance().listDataBMI.size() > 0) {
-			Constants.getInstance().listDataBMI.retainAll(Constants
-					.getInstance().listDataBMI);
-		}
 		ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
 				"RatioBMIDTO");
+		queryBMI.setLimit(1000);
 		queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
 
 			@Override
 			public void done(List<RatioBMIDTO> datas, ParseException arg1) {
-				Constants.getInstance().listDataBMI = datas;
+				if (datas != null)
+					Constants.getInstance().listDataBMI = datas;
 				getBMIFinish = true;
 			}
 
 		}));
 		// lay thong tin whr
-		if (Constants.getInstance().listDataWHR.size() > 0) {
-			Constants.getInstance().listDataWHR.retainAll(Constants
-					.getInstance().listDataWHR);
-		}
 		ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
 				"RatioWHRDTO");
+		queryWHR.setLimit(1000);
 		queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
 
 			@Override
 			public void done(List<RatioWHRDTO> datas, ParseException arg1) {
-				Constants.getInstance().listDataWHR = datas;
+				if (datas != null)
+					Constants.getInstance().listDataWHR = datas;
 				getWHRFinish = true;
 			}
-
 		}));
 		// lay thong tin heartrate
-		if (Constants.getInstance().listDataHR.size() > 0) {
-			Constants.getInstance().listDataHR.retainAll(Constants
-					.getInstance().listDataHR);
-		}
 		ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
 				"HeartRateDTO");
+		queryHR.setLimit(1000);
 		queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
-
 			@Override
 			public void done(List<HeartRateDTO> datas, ParseException arg1) {
-				Constants.getInstance().listDataHR = datas;
+				if (datas != null)
+					Constants.getInstance().listDataHR = datas;
 				getHRFinish = true;
 			}
-
 		}));
 		// LAY THONG TIN STEP
 		ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
 				"StepRunDTO");
+		queryStep.setLimit(1000);
 		queryStep.findInBackground((new FindCallback<StepRunDTO>() {
 
 			@Override
 			public void done(List<StepRunDTO> datas, ParseException arg1) {
-				Constants.getInstance().listDataStepDTO = datas;
+				if (datas != null)
+					Constants.getInstance().listDataStepDTO = datas;
 				getStepFinish = true;
 			}
-
 		}));
 		// LAY THONG TIN BAC SI
 		ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
 				"DoctorDTO");
+		queryDoctor.setLimit(1000);
 		queryDoctor.findInBackground((new FindCallback<DoctorDTO>() {
-
 			@Override
 			public void done(List<DoctorDTO> datas, ParseException arg1) {
-				Constants.getInstance().listDoctorDTO = datas;
+				if (datas != null)
+					Constants.getInstance().listDoctorDTO = datas;
 				getDoctorFinish = true;
 			}
+		}));
+	}
 
+	public static void deleteAllData() {
+		// lay thong tin bmi
+		ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
+				"RatioBMIDTO");
+		queryBMI.setLimit(10000);
+		queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
+
+			@Override
+			public void done(List<RatioBMIDTO> datas, ParseException arg1) {
+				if (datas != null) {
+					for (int i = 0; i < datas.size() - 1; i++) {
+						datas.get(i).deleteInBackground();
+					}
+				}
+
+			}
+
+		}));
+		// lay thong tin whr
+		ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
+				"RatioWHRDTO");
+		queryWHR.setLimit(10000);
+		queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+
+			@Override
+			public void done(List<RatioWHRDTO> datas, ParseException arg1) {
+				if (datas != null) {
+					for (int i = 0; i < datas.size() - 1; i++) {
+						datas.get(i).deleteInBackground();
+					}
+				}
+			}
+		}));
+		// lay thong tin heartrate
+		ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
+				"HeartRateDTO");
+		queryHR.setLimit(10000);
+		queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+			@Override
+			public void done(List<HeartRateDTO> datas, ParseException arg1) {
+				if (datas != null) {
+					for (int i = 0; i < datas.size() - 1; i++) {
+						datas.get(i).deleteInBackground();
+					}
+				}
+			}
+		}));
+		// LAY THONG TIN STEP
+		ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
+				"StepRunDTO");
+		queryStep.setLimit(10000);
+		queryStep.findInBackground((new FindCallback<StepRunDTO>() {
+
+			@Override
+			public void done(List<StepRunDTO> datas, ParseException arg1) {
+				if (datas != null) {
+					for (int i = 0; i < datas.size() - 1; i++) {
+						datas.get(i).deleteInBackground();
+					}
+				}
+			}
+		}));
+		// LAY THONG TIN BAC SI
+		ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
+				"DoctorDTO");
+		queryDoctor.setLimit(10000);
+		queryDoctor.findInBackground((new FindCallback<DoctorDTO>() {
+			@Override
+			public void done(List<DoctorDTO> datas, ParseException arg1) {
+				if (datas != null) {
+					for (int i = 0; i < datas.size() - 1; i++) {
+						datas.get(i).deleteInBackground();
+					}
+				}
+			}
 		}));
 	}
 
@@ -414,7 +486,7 @@ public class MainActivity extends Activity {
 													builder.setTitle("Không có kết nối");
 													builder.setMessage("Kết nối không ổn định!");
 													builder.setPositiveButton(
-															"Finish",
+															"Kết thúc",
 															new DialogInterface.OnClickListener() {
 
 																@Override
@@ -556,6 +628,9 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, GuideMenu.class));
 			break;
 		case 9:
+			deleteAllData();
+			break;
+		case 10:
 			this.finish();
 			break;
 		default:

@@ -265,7 +265,6 @@ public class StepRun extends Activity {
 		dto.setTime(insertTime);
 		dto.setDistance(Double.parseDouble(String
 				.valueOf(GoogleFitService.distance)));
-		Log.e("setDistance", String.valueOf(dto.getDistance()));
 		dto.setStepID(id);
 		dto.setTarget(Integer.parseInt(targetContent.getText().toString()));
 		dto.setStep((int) Constants.getInstance().getStepRuns());
@@ -423,8 +422,11 @@ public class StepRun extends Activity {
 				public void run() {
 					if (!SetupWeightAndHeight.isFinishSetup) {
 						mHandler.postDelayed(this, 2000);
-					} else {
+					} else if (!SetupWeightAndHeight.isCancle){
 						setWeightAndHieght();
+						SetupWeightAndHeight.isFinishSetup = false;
+						Thread.currentThread().interrupt();
+					}else{
 						Thread.currentThread().interrupt();
 					}
 				}
@@ -524,7 +526,7 @@ public class StepRun extends Activity {
 	public void setWeightAndHieght() {
 		Intent service = new Intent(this, GoogleFitService.class);
 		service.putExtra(GoogleFitService.SERVICE_REQUEST_TYPE,
-				GoogleFitService.TYPE_SET_HEIGHT_ANDWEIGHT);
+				GoogleFitService.TYPE_SET_HEIGHT_AND_WEIGHT);
 		startService(service);
 	}
 

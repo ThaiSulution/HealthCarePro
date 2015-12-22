@@ -32,6 +32,7 @@ public class SetupWeightAndHeight extends Dialog {
 	EditText tbxWeight;
 	EditText tbxHeight;
 	public static boolean isFinishSetup = false;
+	public static boolean isCancle = false;
 
 	String buttonCancelText;
 
@@ -86,7 +87,8 @@ public class SetupWeightAndHeight extends Dialog {
 
 		this.buttonAccept = (ButtonFlat) findViewById(R.id.button_accept);
 		buttonAccept.setOnClickListener(new View.OnClickListener() {
-			@SuppressLint("ResourceAsColor") @Override
+			@SuppressLint("ResourceAsColor")
+			@Override
 			public void onClick(View v) {
 				if (tbxWeight.getText().length() == 0) {
 					lWeight.setTextColor(R.color.red);
@@ -99,7 +101,7 @@ public class SetupWeightAndHeight extends Dialog {
 				String weight_height = tbxWeight.getText().toString() + "_"
 						+ tbxHeight.getText().toString();
 				returnResult(weight_height);
-				
+
 				if (onAcceptButtonClickListener != null)
 					onAcceptButtonClickListener.onClick(v);
 				finishSetup();
@@ -185,6 +187,13 @@ public class SetupWeightAndHeight extends Dialog {
 	}
 
 	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finishSetup();
+		isCancle = true;
+	}
+
+	@Override
 	public void dismiss() {
 		Animation anim = AnimationUtils.loadAnimation(context,
 				R.anim.dialog_main_hide_amination);
@@ -225,10 +234,7 @@ public class SetupWeightAndHeight extends Dialog {
 		dismiss();
 	}
 
-
 	public void finishSetup() {
 		isFinishSetup = true;
-//		StepRun s = new StepRun();
-//		s.setWeightAndHieght();
 	}
 }

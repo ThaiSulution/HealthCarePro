@@ -50,9 +50,9 @@ public class NewsListActivity extends ListActivity {
 			overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 		} else{
 			AlertDialog.Builder builder = new AlertDialog.Builder(NewsListActivity.this);
-			builder.setTitle("Network no avaiable");
-			builder.setMessage("Please check the network connection!");
-			builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
+			builder.setTitle("Không có kết nối");
+			builder.setMessage("Vui lòng kiểm tra kết nối!");
+			builder.setPositiveButton("Kết thúc", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
