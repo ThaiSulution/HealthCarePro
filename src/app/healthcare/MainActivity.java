@@ -208,8 +208,7 @@ public class MainActivity extends Activity {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							// finish();
-
+							finish();
 						}
 					});
 			builder.show();
