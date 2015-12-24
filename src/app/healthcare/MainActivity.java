@@ -35,6 +35,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import app.healthcare.bmi.HistoryBMI;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.call.ListDoctor;
 import app.healthcare.dataobject.DoctorDTO;
@@ -49,6 +50,7 @@ import app.healthcare.slidingmenu.model.NavDrawerItem;
 import app.healthcare.symptom.activity.GuideMenu;
 import app.healthcare.whr.RatioWHRFragment;
 
+import com.gc.materialdesign.widgets.Dialog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.fitness.FitnessStatusCodes;
@@ -627,7 +629,21 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, GuideMenu.class));
 			break;
 		case 9:
-			deleteAllData();
+			final Dialog confirm = new Dialog(
+					this,
+					"Xóa dữ liệu",
+					"Tất cả dữ liệu sẽ bị xóa trừ lần lần đo cuối cùng, bạn có chắc chắn?",
+					app.healthcare.R.drawable.ic_launcher);
+			confirm.show();
+			confirm.getButtonAccept().setOnClickListener(
+					new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							deleteAllData();
+							confirm.dismiss();
+						}
+					});
 			break;
 		case 10:
 			this.finish();

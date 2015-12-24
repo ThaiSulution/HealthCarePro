@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="title_activity_main">Your Nearest Places</string>
     <string name="app_name">Health Care Pro</string>
     <string name="app_name_info">Thông tin</string>
     <string name="action_settings">Settings</string>
@@ -14,7 +15,6 @@
     <string name="btnStartString">Bắt đầu</string>
     <string name="btnStopString">Dừng</string>
     <string name="btnHelpString">Trợ giúp</string>
-
     <string name="note">Note</string>
     <string name="hr_last_date_demo">05.11.1987 13:30</string>
     <string name="status_nomal">Bình thường</string>
@@ -30,7 +30,7 @@
     <string name="detail_activity_scale_yellow">60–90</string>
     <string name="beats_per_minute">B/M</string>
     <string name="kg_per_m">KG/M2</string>
-     <string name="cm_per_cm">CM/CM</string>
+    <string name="cm_per_cm">CM/CM</string>
     <string name="tutorial_camera">Hướng dẫn sử dụng</string>
     <string name="tutorial_camera_decription">Nhẹ đặt ngón tay trỏ của bạn trên ống kính camera và đèn flash ở mặt sau của điện thoại của bạn. Hãy chắc chắn rằng các ống kính và đèn flash được bao phủ hoàn toàn. Giữ cho đến khi đo xong.</string>
     <string name="drawer_open">Slider Menu Opened</string>
@@ -132,11 +132,12 @@
     <string name="label_nhacnho">Nhắc nhở</string>
     <string name="label_phatsinh">Phát sinh</string>
     <string name="label_thucdon_child_nguyenlieu">Chi tiết món ăn</string>
-    <string name="phatsinh_songuoilon_content"/>
-    <string name="phatsinh_sotrecon_content"/>
+    <string name="phatsinh_songuoilon_content" />
+    <string name="phatsinh_sotrecon_content" />
     <string name="monan">Danh sách triệu chứng</string>
     <string name="symptoms_avatar">Symptoms Avatar</string>
     <string name="complete_symptoms_list">Switch to a text listing of symptoms</string>
     <string name="switch_gender">Switch avatar gender</string>
     <string name="rotate_avatar">Xoay avatar</string>
+
 </resources>

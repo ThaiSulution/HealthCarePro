@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import app.healthcare.R;
-import app.healthcare.symptom.list.ListBenh;
+import app.healthcare.symptom.list.ListDisease;
 
 public class BodyActivity extends Activity{
 
@@ -45,9 +45,9 @@ public class BodyActivity extends Activity{
 				// TODO Auto-generated method stub
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 					//Kiem tra
-					Toast.makeText(BodyActivity.this, "Touch coordinates : " +
+			/*		Toast.makeText(BodyActivity.this, "Touch coordinates : " +
                         String.valueOf(event.getX()) + "x" + String.valueOf(event.getY()),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_LONG).show();*/
 					int x =0;
 					int y=0;
 					//int red;
@@ -67,7 +67,7 @@ public class BodyActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent iSymptoms = new Intent(BodyActivity.this, ListBenh.class);
+				Intent iSymptoms = new Intent(BodyActivity.this, ListDisease.class);
 				startActivity(iSymptoms);
 			}
 		});

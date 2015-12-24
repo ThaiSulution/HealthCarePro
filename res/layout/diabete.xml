@@ -8,7 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mô tả"
+        android:text="Bệnh tiểu đường"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ScrollView
@@ -20,9 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-            
              <TextView
         android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mô tả"             />
+            
+             <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tiểu đường - một căn bệnh do thừa lượng đường trong cơ thể đang là mối đe dọa cho chúng ta. Hiện nay số người bị bệnh tiểu đường đã lên đến con số đáng báo động, vậy nguyên nhân bệnh tiểu đường là gì ? Không chỉ những người có gen di truyền từ người thân từng có lịch sử bệnh tiểu đường, những người thường xuyên dung nạp nhiều chất đường bột-glucose mà nay ngay cả trẻ em cũng có nguy cơ mắc phải căn bệnh này.
@@ -64,11 +69,16 @@ Bỏ bữa ăn sáng: Người Việt chúng ta thường có thói quen bỏ b�
         android:text="Video"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-  
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="https://www.youtube.com/watch?v=icU8shTUPBw" />
         
             
         </LinearLayout>
     </ScrollView>
 
+  
    
 </LinearLayout>

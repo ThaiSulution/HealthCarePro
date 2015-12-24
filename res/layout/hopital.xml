@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff00ff"
+        android:text="Danh sách các bệnh viện tại TP.HCM"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            
+            <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="
+         - BỆNH VIỆN AN BÌNH 
+        Địa chỉ: 146 AN BÌNH, P.7, Q.5, TP. HCM 
+        Điện thoại: (08)9234260 
+        Email: anbinhhospital@hcm.vnn.vn; bv_anbinh@medinet.org 
+        
+- BỆNH VIỆN ĐA KHOA TƯ NHÂN AN SINH 
+Địa chỉ: 10 TRẦN HUY LIỆU, P.12, Q.PN, TP. HCM 
+Điện thoại: (08)8457777 
+Email: info@ansinh.com.vn
+        
+- BỆNH VIỆN QUÂN DÂN MIỀN ĐÔNG 
+Địa chỉ: 50 LÊ VĂN VIỆT, P.HIỆP PHÚ, Q.9, TP. HCM 
+Điện thoại: (08)7307125
+
+- BỆNH VIỆN BƯU ĐIỆN 2 
+Địa chỉ: MM12 CX BẮC HẢI TRƯỜNG SƠN, P.15, Q.10, TP. HCM 
+Điện thoại: (08)8649829
+
+- BỆNH VIỆN UNG BƯỚU TP.HCM 
+Địa chỉ: 3 NƠ TRANG LONG, P.7, Q.BT, TP. HCM 
+Điện thoại: (08)8433021
+
+- BỆNH VIỆN TRUYỀN MÁU HUYẾT HỌC 
+Địa chỉ: 201 PHẠM VIẾT CHÁNH, P.NCT, Q.1, TP. HCM 
+Điện thoại: (08)8397535 Email: hemato@vnn.vn
+
+- BỆNH VIỆN TÂM THẦN TP.HCM 
+Địa chỉ: 192 BẾN HÀM TỬ, P.1, Q.5, TP. HCM 
+Điện thoại: (08)9234675
+
+- BỆNH VIỆN Y HỌC CỔ TRUYỀN 
+Địa chỉ: 179 NAM KỲ KHỞI NGHĨA, P.7, Q.3, TP. HCM 
+Điện thoại: (08)9326579
+
+- BỆNH VIỆN CHẤN THƯƠNG CHỈNH HÌNH 
+Địa chỉ: 929 TRẦN HƯNG ĐẠO, P.1, Q.5, TP. HCM 
+Điện thoại: (08)9235791
+
+- BÌNH DÂN - BỆNH VIỆN BÌNH DÂN 
+Địa chỉ: 371 ĐIỆN BIÊN PHỦ, P.4, Q.3, TP. HCM 
+Điện thoại: (08)8394747 Email: bvbinhdan@hcm.vnn.vn
+
+- BỆNH VIỆN BỆNH NHIỆT ĐỚI 
+Địa chỉ: 190 BẾN HÀM TỬ, P.1, Q.5, TP. HCM 
+Điện thoại: (08)9238704
+
+- BỆNH VIỆN DA LIỄU 
+Địa chỉ: 2 NGUYỄN THÔNG, P.6, Q.3, TP. HCM 
+Điện thoại: (08)9305995
+
+- BỆNH VIỆN MẮT TP.HCM 
+Địa chỉ: 280 ĐIỆN BIÊN PHỦ, P.7, Q.3, TP. HCM 
+Điện thoại: (08)9326732
+
+- BỆNH VIỆN TAI MŨI HỌNG TP.HCM 
+Địa chỉ: 155B TRẦN QUỐC THẢO, P.9, Q.3, TP. HCM 
+Điện thoại: (08)9317381 
+Email: entcenter@hcm.fpt.vn
+
+- BỆNH VIỆN ĐIỀU DƯỠNG - PHỤC HỒI CHỨC NĂNG - ĐIỀU TRỊ BỆNH NGHỀ NGHIỆP 
+Địa chỉ: 125/61 ÂU DƯƠNG LÂN, P.2, Q.8, TP. HCM 
+Điện thoại: (08)8569147 
+Email: bv-dduong@hcm.vnn.vn; bv-dduong@yahoo.com
+
+- BỆNH VIỆN RĂNG HÀM MẶT TP.HCM 
+Địa chỉ: 263-265 TRẦN HƯNG ĐẠO, P.CG, Q.1, TP. HCM 
+Điện thoại: (08)8360191 Email: ranghammat@hcm.vnn.vn
+
+- BỆNH VIỆN NHÂN DÂN 115 
+Địa chỉ: 88 THÀNH THÁI, P.12, Q.10, TP. HCM 
+Điện thoại: (08)8652368
+
+- BỆNH VIỆN 30 THÁNG 4 
+Địa chỉ: 9 SƯ VẠN HẠNH, P.9, Q.5, TP. HCM 
+Điện thoại: (08)8354986
+
+- BỆNH VIỆN TRƯỜNG ĐH Y DƯỢC 
+Địa chỉ: 215 HỒNG BÀNG, P.11, Q.5, TP. HCM 
+Điện thoại: (08)8554269 BỆNH VIỆN RĂNG HÀM MẶT TW 
+Địa chỉ: 201 NGUYỄN CHÍ THANH, P.12, Q.5, TP. HCM 
+Điện thoại: (08)8570757
+
+- BỆNH VIỆN NHI ĐỒNG 1 
+Địa chỉ: 341 SƯ VẠN HẠNH, P.10, Q.10, TP. HCM 
+Điện thoại: (08)9271119
+
+- BỆNH VIỆN NHI ĐỒNG 2 
+Địa chỉ: 14 LÝ TỰ TRỌNG, P.BN, Q.1, TP. HCM 
+Điện thoại: (08)8298385
+
+- BỆNH VIỆN CHỢ RẪY 
+Địa chỉ: 201B NGUYỄN CHÍ THANH, P.12, Q.5, TP. HCM 
+Điện thoại: (08)8554137
+
+- BỆNH VIỆN HÙNG VƯƠNG 
+Địa chỉ: 128 HỒNG BÀNG, P.12, Q.5, TP. HCM 
+Điện thoại: (08)8550585 Email: bv-hvuong@hcm.vnn.vn
+
+- BỆNH VIỆN ĐA KHOA HOÀN MỸ 
+Địa chỉ: 124 TRẦN QUỐC THẢO, P.7, Q.3, TP. HCM 
+Điện thoại: (08)9316944 Website: www.hoanmyhospital.com Email: hm1@hoanmyhospital.com
+
+- TT CHẨN ĐOÁN Y KHOA MEDIC 
+Địa chỉ: 254 HÒA HẢO, P.4, Q.10, TP. HCM 
+Điện thoại: (08)9270284 Website: www.medic.com.vn Email: medic@hcm.vnn.vn
+
+- BỆNH VIỆN NGUYỄN TRÃI 
+Địa chỉ: 314 NGUYỄN TRÃI, P.8, Q.5, TP. HCM 
+Điện thoại: (08)9235020 Email: pkhktnguyentrai@cinet.vnnews.com
+
+- BỆNH VIỆN NGUYỄN TRI PHƯƠNG 
+Địa chỉ: 468 NGUYỄN TRÃI, P.8, Q.5, TP. HCM 
+Điện thoại: (08)9234349
+
+- BỆNH VIỆN NHÂN DÂN GIA ĐỊNH 
+Địa chỉ: 1 NƠ TRANG LONG, P.7, Q.BT, TP. HCM 
+Điện thoại: (08)8412692
+
+- BỆNH VIỆN PHẠM NGỌC THẠCH 
+Địa chỉ: 120 HÙNG VƯƠNG, P.12, Q.5, TP. HCM 
+Điện thoại: (08)8551746 Email: bsquyttpnt@hcm.vnn.vn
+
+- QUÂN Y VIỆN 175 
+Địa chỉ: 782 NGUYỄN KIỆM, P.3, Q.GV, TP. HCM 
+Điện thoại: (08)8954988
+
+- BỆNH VIỆN ĐA KHOA SÀI GÒN 
+Địa chỉ: 125 LÊ LỢI, P.BT, Q.1, TP. HCM 
+Điện thoại: (08)8291711
+
+- BỆNH VIỆN THỐNG NHẤT 
+Địa chỉ: 1 LÝ THƯỜNG KIỆT, P.7, Q.TB, TP. HCM 
+Điện thoại: (08)8642140
+
+- BỆNH VIỆN TRƯNG VƯƠNG 
+Địa chỉ: 266 LÝ THƯỜNG KIỆT, P.14, Q.10, TP. HCM 
+Điện thoại: (08)8642750
+
+- BỆNH VIỆN PHỤ SẢN TỪ DŨ 
+Địa chỉ: 284 CỐNG QUỲNH, P.PNL, Q.1, TP. HCM 
+Điện thoại: (08)8395117
+
+- VIỆN TIM TP.HCM 
+Địa chỉ: 88 THÀNH THÁI, P.12, Q.10, TP. HCM 
+Điện thoại: (08)8651586 
+Email: vientim@hcm.vnn.vn
+
+- VIỆN Y DƯỢC HỌC DÂN TỘC 
+Địa chỉ: 273-275 NGUYỄN VĂN TRỖI, P.10, Q.PN, TP. HCM
+ Điện thoại: (08)8443047 
+ Email: tmihcm@hcm.vnn.vn
+
+- BỆNH VIỆN ĐA KHOA VẠN HẠNH 
+Địa chỉ: 72-74 SƯ VẠN HẠNH, P.12, Q.10, TP. HCM 
+Điện thoại: (08)8631272"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+        </LinearLayout>
+    </ScrollView>
+
+    
+</LinearLayout>

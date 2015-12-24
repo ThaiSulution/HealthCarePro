@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bệnh tiểu đường"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đau dạ dày là bệnh lý về đường tiêu hóa, đây là biểu hiện của dạ dày bị tổn thương dẫn đến những cơn đau khó chịu, âm ỉ cho người bệnh nhất là những lúc dạ dày no quá hoặc đói quá. Bệnh thường chủ yếu xảy ra với những người thường xuyên phải thức đêm, uống nhiều bia rượu và đây cũng là những nguyên nhân chính gây ra bệnh. 
+                Dấu hiệu nhận biết bệnh đau dạ dày:
+                Đau thượng vị
+                Đây là dấu hiệu cơ bản của bệnh và thường có ở tất cả những người bị mắc các bệnh lý tá tràng. Người bệnh bị đau thượng vị có thể đau vùng dưới hoặc cách xa mũi ức. Cảm giác đau thường là do tùy từng người đau âm ỉ, tức bụng, nóng rát khó chiu… nhưng không có cảm giác đau quằn quại và cơn đau thường xảy ra khi cơ thể đói quá hoặc có thể no quá.
+
+				Ăn kém là dấu hiệu nhận biết bệnh đau dạ dày
+
+				Người có biểu hiện này có thể kém ăn do hệ tiêu hóa không tiêu, tức bụng, căng bụng dẫn đến ăn không ngon, kém ăn.
+				
+				Ợ chua, ợ hơi
+
+Đây là dấu hiệu rất quan trọng của bệnh đau dạ dày do sự vận động của dạ dày bị rối loạn làm thức ăn bị khó tiêu dẫn tới lên men và sinh ra hơi. Bệnh nhân có thể bị ợ hơi, ợ chua và ở lên nửa chừng và kèm theo đó là các dấu hiệu đau sau mũi ức hoặc sau xương ức ( dấu hiệu đau thượng vị).
+Buồn nôn và nôn
+
+Buồn nôn và nôn là hiện tượng các thức ăn trong dạ dày bị đẩy ra ngoài qua đường miệng . Nếu việc này tiếp diễn nhiều thương xuyên sẽ dẫn tới những hậu quả như: rách thực quản, rách niêm mạc thực quản vùng tâm vị dẫn đến chảy máu (Hội chứng Mallory Weiss). Ngoài ra khi nôn nhiều cơ thể sẽ bị lầm vào tình trạng bị mất nước và kéo theo là tụt huyết áp. Triệu chứng này là biểu hiện của các bệnh có liên quan tới dạ dày gây ra nôn như: viêm dạ dày cấp, loét dạ dày tá tràng, ung thư dạ dày, hẹp môn vị, chảy máu dạ dày.
+
+Chảy máu tiêu hóa
+
+Chảy máu tiêu hóa hay còn gọi là chảy máu dạ dày là hiện tượng máu thoát ra khỏi thành mạch và chảy vào lòng ống tiêu hóa. Biểu hiện này rất nguy hiểm, có thể gây nguy hiểm đến tính mạng cho con người trong thời gian ngắn vài giờ thậm chí có thể trong vài phút chính vì thế cần đưa người bệnh có triệu chứng này đến các cơ sở y tế ngay để được điều trị. Những biểu hiện cơ bản dễ nhận thấy của chảy máu tiêu hóa là như bị nôn ra máu đỏ tươi, máu đen hoặc đi ngoài ra máu. Khi người bệnh có hiện tượng này là do những bệnh lý về dạ dày như loét dạ dày tá tràng, ung thư dạ dày….
+"/>
+            
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hình ảnh"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/daday" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

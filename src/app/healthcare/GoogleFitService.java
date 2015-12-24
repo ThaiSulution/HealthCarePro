@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -50,12 +51,16 @@ import com.google.android.gms.fitness.result.DataSourcesResult;
 import com.google.android.gms.fitness.result.DataTypeResult;
 import com.google.android.gms.fitness.result.ListSubscriptionsResult;
 import com.google.android.gms.fitness.result.SessionReadResult;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 @SuppressLint("SimpleDateFormat")
 public class GoogleFitService extends IntentService implements
-		ConnectionCallbacks, OnConnectionFailedListener, ConfigApi {
+		ConnectionCallbacks, OnConnectionFailedListener, ConfigApi,
+		LocationListener {
 	public static GoogleApiClient mClient;
 	private boolean mTryingToConnect = false;
 	public static boolean isConnected = false;
@@ -76,7 +81,9 @@ public class GoogleFitService extends IntentService implements
 	public static Integer targetToset = 0;
 	public static Integer workout = 0;
 	public static float distance = 0;
-	// public static ArrayList<HistoryStepObject> listDataStep;
+	private LocationRequest mLocationRequest;
+	public static double currentLatitude = 0;
+	public static double currentLongitude = 0;
 
 	public static final int TYPE_GET_DATA_TO_DAY = 1;
 	public static final int TYPE_GET_DATA_TO_WEEK = 2;
@@ -1133,6 +1140,7 @@ public class GoogleFitService extends IntentService implements
 				.addApi(Fitness.CONFIG_API)
 				.addApi(Fitness.SESSIONS_API)
 				.addApi(Plus.API)
+				.addApi(LocationServices.API)
 				.addScope(new Scope(Scopes.FITNESS_BODY_READ_WRITE))
 				.addScope(new Scope(Scopes.FITNESS_LOCATION_READ_WRITE))
 				.addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
@@ -1193,9 +1201,29 @@ public class GoogleFitService extends IntentService implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 		findFitnessDataSourcesSensors();
 		// new InsertAndVerifyDataTask().execute();
 		subscribe();
+		
+		mLocationRequest = LocationRequest.create()
+				.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+				.setInterval(10 * 1000) // 10 seconds, in milliseconds
+				.setFastestInterval(1 * 1000); // 1 second, in milliseconds
+		Location location = LocationServices.FusedLocationApi
+				.getLastLocation(mClient);
+
+		if (location == null) {
+			LocationServices.FusedLocationApi.requestLocationUpdates(mClient,
+					mLocationRequest, this);
+
+		} else {
+			// If everything went fine lets get latitude and longitude
+			currentLatitude = location.getLatitude();
+			currentLongitude = location.getLongitude();
+		}
+		Log.e("notifyUiFitConnected", currentLatitude + " WORKS " + currentLongitude + "");
 		Intent intent = new Intent(FIT_NOTIFY_INTENT);
 		intent.putExtra(FIT_EXTRA_CONNECTION_MESSAGE,
 				FIT_EXTRA_CONNECTION_MESSAGE);
@@ -1275,5 +1303,11 @@ public class GoogleFitService extends IntentService implements
 			}
 		});
 		return null;
+	}
+
+	@Override
+	public void onLocationChanged(Location arg0) {
+		// TODO Auto-generated method stub
+
 	}
 }

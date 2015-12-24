@@ -10,11 +10,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import app.healthcare.R;
 
-public class Diasease extends ListActivity {
+public class Diasease1 extends ListActivity {
 	
 	TextView selection;
 	String arr[]={
-			  " Bệnh tiểu đường"};
+			  " Đau dạ dày"};
 	ArrayAdapter<String>adapter2=null;
 
 	@Override
@@ -35,8 +35,8 @@ public class Diasease extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		Intent iTieuDuong = new Intent(this, Diabete.class);
-		startActivity(iTieuDuong);
+		Intent iDaDay = new Intent(this, Diabete1.class);
+		startActivity(iDaDay);
 		finish();
 		
 	}

@@ -20,7 +20,7 @@ import app.healthcare.symptom.activity.Diasease;
 import app.healthcare.symptom.adapter.AdapterBenh;
 import app.healthcare.symptom.object.Benh;
 
-public class ListBenh extends ListActivity {
+public class ListDisease extends ListActivity {
 	List<Benh> array;
 	ListView lst;
 	private Context mContext;
@@ -33,11 +33,11 @@ public class ListBenh extends ListActivity {
 	//
 	TextView selection;
 	String arr[]={
-			  "Cháº­m lĂ nh váº¿t loĂ©t hoáº·c nhiá»…m trĂ¹ng thÆ°á»�ng xuyĂªn", "ChÆ°á»›ng bá»¥ng",
-			 "Ä�au sÆ°á»�n", "Ä�au ngá»±c", "Ä�au bá»¥ng dÆ°á»›i", "Ä�au bá»¥ng trĂªn", "Ä�Ă³i â€“ Äƒn nhiá»�u", "Ä�áº§y hÆ¡i bá»¥ng", "KhĂ´ miá»‡ng, ngá»©a da",
-			 "Má»‡t má»�i","Má»�i máº¯t", "NĂ´n", "Ná»•i má»� Ä‘Ă¢y", "Ná»•i máº©n da", "NgĂ¡y", "LĂ£ng tai", 
-			 "Uá»‘ng nhiá»�u quĂ¡ má»©c","Tiá»ƒu nhiá»�u"
-			 ,"Thá»Ÿ khĂ² khĂ¨","Sá»¥t cĂ¢n","VĂ ng da"
+			  "Chậm lành vết loét hoặc nhiễm trùng thường xuyên", "Chướng bụng",
+			 "Đau sườn", "Đau ngực", "Đau bụng dưới", "Đau bụng trên", "Đói – ăn nhiều", "Đầy hơi bụng", "Khô miệng, ngứa da",
+			 "Mệt mỏi","Mỏi mắt", "Nôn", "Nổi mề đây", "Nổi mẩn da", "Ngáy", "Lãng tai", 
+			 "Uống nhiều quá mức","Tiểu nhiều"
+			 ,"Thở khò khè","Sụt cân","Vàng da"
 			 , ""};
 	ArrayAdapter<String>adapter1=null;
 

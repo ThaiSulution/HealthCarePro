@@ -15,19 +15,21 @@ import android.graphics.Paint.Style;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import app.healthcare.GoogleFitService;
 import app.healthcare.R;
+import app.healthcare.call.ListDoctor;
 
 public class GuideMenu extends Activity {
 	String idnguoidung = "phivien";
 
-	LinearLayout thucdonLinearLayout;
-	
+	// LinearLayout thucdonLinearLayout;
 
-	//AdapterDB mDB = new AdapterDB(this);
+	// AdapterDB mDB = new AdapterDB(this);
 
 	public boolean isNetworkAvailable(Context context) {
 		final ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -59,99 +61,72 @@ public class GuideMenu extends Activity {
 	protected void onCreate(Bundle icookmenu) {
 		super.onCreate(icookmenu);
 		setContentView(R.layout.main_diagnious);
-		//thucdonLinearLayout = (LinearLayout) findViewById(R.id.thucdonLinearLayout);
 
-		//idnguoidung = (String) getIntent().getExtras().get("idnguoidung");
-		// String menu = checkUserCreateMenu(idnguoidung);
-		/*
-		 * if (menu.equals("0")) { thucdonLinearLayout.setVisibility(View.GONE);
-		 * new AlertDialog.Builder(this)
-		 * .setTitle("Bạn chưa phát sinh thực đơn!")
-		 * .setMessage("Bạn có muốn phát sinh thực đơn?")
-		 * .setPositiveButton("�?ồng ý", new
-		 * DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialog, int which) {
-		 * try { phatsinh(null); } catch (NumberFormatException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } catch
-		 * (JSONException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } } }) .setNegativeButton("Không", new
-		 * DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialog, int which) { //
-		 * do nothing } }).show(); } else { new AlertDialog.Builder(this)
-		 * .setTitle("Bạn đã phát sinh thực đơn!")
-		 * .setMessage("Bạn có muốn vào xem thực đơn hôm nay?")
-		 * .setPositiveButton("�?ồng ý", new
-		 * DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialog, int which) {
-		 * try { thucdon(null); } catch (NumberFormatException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } catch
-		 * (JSONException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } } }) .setNegativeButton("Không", new
-		 * DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialog, int which) { //
-		 * do nothing } }).show(); }
-		 */
 	}
 
 	/*
 	 * boolean kiemtrathucdon() { return
 	 * AdapterDB.kiemtranguoidungphatsinh(idnguoidung); }
 	 */
-	public void monan(View v) throws NumberFormatException, JSONException {
+	public void trieuchung(View v) throws NumberFormatException, JSONException {
 		Intent intent = new Intent(GuideMenu.this, BodyActivity.class);
-		intent.putExtra("idnguoidung", idnguoidung);
 		startActivity(intent);
 	}
 
-/*	public void phatsinh(View v) throws NumberFormatException, JSONException {
-		
-		 * Intent intent = new Intent(GuideCookMenu.this,
-		 * ProcessingGenerate.class); intent.putExtra("idnguoidung",
-		 * idnguoidung); startActivityForResult(intent, phatsinhActivity);
-		 
-	}*/
+	public void giupdo(View v) throws NumberFormatException, JSONException {
+		final Intent i = new Intent(this, ListDoctor.class);
+		Button btnHelp = (Button) findViewById(R.id.button_laplich);
+		btnHelp.setOnClickListener(new View.OnClickListener() {
 
-	/*public void thucdon(View v) throws NumberFormatException, JSONException {
-		
-		 * Intent intent = new Intent(GuideCookMenu.this, MenuApp.class);
-		 * intent.putExtra("idnguoidung", idnguoidung); startActivity(intent);
-		 
-	}*/
+			@Override
+			public void onClick(View v) {
+				startActivity(i);
+			}
+		});
+	}
 
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		Intent intent = new Intent(GuideMenu.this, LoginActivity.class);
-//		startActivity(intent);
-//	}
+	public void phanhoi(View v) throws NumberFormatException, JSONException {
 
-	/*public void lichdicho(View v) throws NumberFormatException, JSONException {
-		
-		 * Intent intent = new Intent(GuideCookMenu.this, MarketSchedule.class);
-		 * intent.putExtra("idnguoidung", idnguoidung); startActivity(intent);
-		 
-	}*/
+		Intent browserIntent = new Intent(
+				Intent.ACTION_VIEW,
+				Uri.parse("https://docs.google.com/forms/d/1MJlpNthinWugsYscFfGNdp-LMWoDzsklrsKM-GQee6A/prefill"));
+		startActivity(browserIntent);
 
-	/*public void thongtin(View v) throws NumberFormatException, JSONException {
-		Intent intent = new Intent(GuideMenu.this, Info.class);
-		intent.putExtra("idnguoidung", idnguoidung);
-		startActivity(intent);
-	}*/
+	}
 
-/*	public void huongdan(View v) throws NumberFormatException, JSONException {
-		Intent intent = new Intent(GuideMenu.this, Guide.class);
-		intent.putExtra("idnguoidung", idnguoidung);
-		startActivity(intent);
-	}*/
+	public void benhvien(View v) throws NumberFormatException, JSONException {
+		String locationX = String.valueOf(GoogleFitService.currentLatitude);
+		String locationY = String.valueOf(GoogleFitService.currentLongitude);
+		Uri gmmIntentUri = Uri.parse("geo:" + locationX + "," + locationY+ "?q=hospital");
+		Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+		mapIntent.setPackage("com.google.android.apps.maps");
+		startActivity(mapIntent);
 
-//	public void taikhoan(View v) throws NumberFormatException {
-//		Intent intent = new Intent(GuideMenu.this, LoginActivity.class);
-//		startActivity(intent);
-//	}
+	}
+
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// Intent intent = new Intent(GuideMenu.this, LoginActivity.class);
+	// startActivity(intent);
+	// }
+
+	/*
+	 * public void thongtin(View v) throws NumberFormatException, JSONException
+	 * { Intent intent = new Intent(GuideMenu.this, Info.class);
+	 * intent.putExtra("idnguoidung", idnguoidung); startActivity(intent); }
+	 */
+
+	/*
+	 * public void huongdan(View v) throws NumberFormatException, JSONException
+	 * { Intent intent = new Intent(GuideMenu.this, Guide.class);
+	 * intent.putExtra("idnguoidung", idnguoidung); startActivity(intent); }
+	 */
+
+	// public void taikhoan(View v) throws NumberFormatException {
+	// Intent intent = new Intent(GuideMenu.this, LoginActivity.class);
+	// startActivity(intent);
+	// }
 
 	public BitmapDrawable writeOnDrawable(int drawableId, String text) {
 
@@ -177,7 +152,7 @@ public class GuideMenu extends Activity {
 	 * added in // resources Bitmap dest = Bitmap.createBitmap(src.getWidth(),
 	 * src.getHeight(), Bitmap.Config.ARGB_8888);
 	 * 
-	 * String yourText = "Thực đơn của tôi";
+	 * String yourText = "Thá»±c Ä‘Æ¡n cá»§a tÃ´i";
 	 * 
 	 * Canvas cs = new Canvas(dest); Paint tPaint = new Paint();
 	 * tPaint.setTextSize(35); tPaint.setColor(Color.BLUE);
@@ -200,52 +175,34 @@ public class GuideMenu extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-/*	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		if (item.getTitle().toString().equals("Hướng dẫn"))
-			try {
-			//	huongdan(null);
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		if (item.getTitle().toString().equals("Thông tin"))
-			try {
-			//	thongtin(null);
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		return false;
-	}*/
+	/*
+	 * @Override public boolean onOptionsItemSelected(MenuItem item) {
+	 * 
+	 * if (item.getTitle().toString().equals("HÆ°á»›ng dáº«n")) try { //
+	 * huongdan(null); } catch (NumberFormatException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } catch (JSONException e)
+	 * { // TODO Auto-generated catch block e.printStackTrace(); } if
+	 * (item.getTitle().toString().equals("ThÃ´ng tin")) try { //
+	 * thongtin(null); } catch (NumberFormatException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } catch (JSONException e)
+	 * { // TODO Auto-generated catch block e.printStackTrace(); } return false;
+	 * }
+	 */
 
 	int chiaseActivity = 0;
 	int phatsinhActivity = 1;
 
-/*	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		if (requestCode == phatsinhActivity) {
-			if (resultCode == RESULT_OK) {
-				try {
-					thucdonLinearLayout.setVisibility(View.VISIBLE);
-					//thucdon(null);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}*/
+	/*
+	 * @Override protected void onActivityResult(int requestCode, int
+	 * resultCode, Intent data) {
+	 * 
+	 * if (requestCode == phatsinhActivity) { if (resultCode == RESULT_OK) { try
+	 * { thucdonLinearLayout.setVisibility(View.VISIBLE); //thucdon(null); }
+	 * catch (NumberFormatException e) { e.printStackTrace(); } catch
+	 * (JSONException e) { e.printStackTrace(); } } }
+	 * 
+	 * }
+	 */
 
 	/*
 	 * protected String checkUserCreateMenu(String idUser) { mDB.open(); String

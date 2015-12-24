@@ -20,7 +20,7 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/doctor" />
 
     <LinearLayout
@@ -50,7 +50,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/ic_main_symptoms"
-                    android:onClick="monan" />
+                    android:onClick="trieuchung" />
 
                 <TextView
                     android:id="@+id/txtMonan"
@@ -76,7 +76,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/ic_main_providers"
-                    android:onClick="phatsinh" />
+                    android:onClick="benhvien" />
 
                 <TextView
                     android:id="@+id/txtPhatsinh"
@@ -136,7 +136,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/ic_main_feedback"
-                    android:onClick="thucdon" />
+                    android:onClick="phanhoi" />
 
                 <TextView
                     android:id="@+id/txtThucdon"
@@ -195,7 +195,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/ic_main_physicians"
-                    android:onClick="lichdicho" />
+                    android:onClick="giupdo" />
 
                 <TextView
                     android:id="@+id/txtAlarm"
