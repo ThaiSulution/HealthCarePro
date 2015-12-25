@@ -190,9 +190,6 @@ public class StartAppScreen extends Fragment {
 			int step = 0;
 			Double calos = (double) 0;
 			int size = Constants.getInstance().listDataStepDTO.size();
-			Log.e("distance",
-					String.valueOf(Constants.getInstance().listDataStepDTO.get(
-							size - 1).getDistance()));
 			if (size > 0) {
 				distance = Constants.getInstance().listDataStepDTO
 						.get(size - 1).getDistance();

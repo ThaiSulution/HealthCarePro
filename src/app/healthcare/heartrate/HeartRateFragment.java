@@ -326,7 +326,7 @@ public class HeartRateFragment extends Fragment {
 					int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
 					heartBeat = beatsAvg;
 					pg.setBackgroundText("      " + String.valueOf(beatsAvg)
-							+ "\n     BPM");
+							+ "\n     BPM\n" + String.valueOf(ImageProcessing.red));
 					startTime = System.currentTimeMillis();
 					beats = 0;
 					if (timeFinish >= 30) {

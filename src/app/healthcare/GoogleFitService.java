@@ -259,7 +259,7 @@ public class GoogleFitService extends IntentService implements
 		long endTime = cal.getTimeInMillis();
 		cal.add(Calendar.DATE, -1);
 		long startTime = cal.getTimeInMillis();
-		float height = ((float) heightCentimiters) / 100.0f;
+		//float height = ((float) heightCentimiters) / 100.0f;
 		// Create a data source
 		DataSource dataSourceHeight = new DataSource.Builder()
 				.setAppPackageName(this).setDataType(DataType.TYPE_HEIGHT)
@@ -268,8 +268,18 @@ public class GoogleFitService extends IntentService implements
 		DataSet dataSet = DataSet.create(dataSourceHeight);
 		DataPoint dataPoint = dataSet.createDataPoint().setTimeInterval(
 				startTime, endTime, TimeUnit.MILLISECONDS);
-		dataPoint.getValue(Field.FIELD_HEIGHT).setFloat(height);
+		dataPoint.getValue(Field.FIELD_HEIGHT).setFloat(heightCentimiters);
 		dataSet.add(dataPoint);
+		com.google.android.gms.common.api.Status weightInsertStatus =
+		        Fitness.HistoryApi.insertData(mClient, dataSet )
+		                .await(1, TimeUnit.MINUTES);
+		// Before querying the data, check to see if the insertion succeeded.
+		if (!weightInsertStatus.isSuccess()) {
+		    Log.i(TAG, "There was a problem inserting the dataset.");
+		}
+
+		// At this point, the data has been inserted and can be read.
+		Log.i(TAG, "Data insert was successful!");
 	}
 
 	private void setUserWeight(float weight) {
@@ -290,6 +300,16 @@ public class GoogleFitService extends IntentService implements
 				startTime, endTime, TimeUnit.MILLISECONDS);
 		dataPoint.getValue(Field.FIELD_WEIGHT).setFloat(weight);
 		dataSet.add(dataPoint);
+		com.google.android.gms.common.api.Status weightInsertStatus =
+		        Fitness.HistoryApi.insertData(mClient, dataSet )
+		                .await(1, TimeUnit.MINUTES);
+		// Before querying the data, check to see if the insertion succeeded.
+		if (!weightInsertStatus.isSuccess()) {
+		    Log.i(TAG, "There was a problem inserting the dataset.");
+		}
+
+		// At this point, the data has been inserted and can be read.
+		Log.i(TAG, "Data insert was successful!");
 	}
 
 	/*-----------SensorsApi------------------*/

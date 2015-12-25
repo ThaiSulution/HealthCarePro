@@ -59,12 +59,15 @@ public class ListDoctorAdapter extends BaseAdapter {
 		TextView typeNumberCall = (TextView) vi.findViewById(R.id.number_call);
 		TextView typeSkypeNumber = (TextView) vi
 				.findViewById(R.id.number_skype_call);
+		TextView typeViberNumber = (TextView) vi
+				.findViewById(R.id.number_viber_call);
 		HashMap<String, String> listDoctor = new HashMap<String, String>();
 		listDoctor = data.get(position);
 		// Setting all values in listview
 		typeName.setText(listDoctor.get(ListDoctor.KEY_NAME));
 		typeNumberCall.setText(listDoctor.get(ListDoctor.KEY_NUMBER_CALL));
 		typeSkypeNumber.setText(listDoctor.get(ListDoctor.KEY_NUMBER_SKYPE));
+		typeViberNumber.setText(listDoctor.get(ListDoctor.KEY_NUMBER_VIBER));
 		return vi;
 	}
 }

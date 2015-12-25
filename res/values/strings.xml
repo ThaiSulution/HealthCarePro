@@ -41,6 +41,7 @@
     <string name="add_doctor_title">Thêm địa chỉ bác sĩ</string>
     <string name="lbadd_doctor_name">Tên bác sĩ</string>
     <string name="lbadd_doctor_skypes">Địa chỉ skype</string>
+    <string name="lbadd_doctor_viber">Địa chỉ Viber</string>
     <string name="lbadd_doctor_number_call">Số điện thoại</string>
     <string name="btn_add_doctor">Thêm</string>
     <string name="list_doctor_skypes">Danh sách</string>

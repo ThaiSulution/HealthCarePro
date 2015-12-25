@@ -29,7 +29,7 @@
                 android:layout_weight="1"
                 android:background="@color/red"
                 android:text="@string/btnHelpString"
-                android:textColor="#ffffff" />
+                 />
 
             <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/btn_history"

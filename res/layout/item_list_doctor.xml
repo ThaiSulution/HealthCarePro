@@ -61,6 +61,13 @@
                     android:text="live:qthai93"
                     android:textColor="@color/beat_signal"
                     android:textSize="12.0sp" />
+                <TextView
+                    android:id="@+id/number_viber_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01688000836"
+                    android:textColor="@color/beat_signal"
+                    android:textSize="12.0sp" />
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

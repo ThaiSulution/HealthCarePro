@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +38,8 @@ public class ListDoctor extends Activity {
 	static final String KEY_NAME = "NAME";
 	static final String KEY_NUMBER_CALL = "NUMBER_CALL";
 	static final String KEY_NUMBER_SKYPE = "NUMBER_SKYPE";
-
+	static final String KEY_NUMBER_VIBER = "NUMBER_VIBER";
+	final Handler mHandler = new Handler();
 	ListView list;
 	ListDoctorAdapter adapter;
 
@@ -63,6 +65,8 @@ public class ListDoctor extends Activity {
 							.getNumberCall());
 			map.put(KEY_NUMBER_SKYPE, Constants.getInstance().listDoctorDTO
 					.get(i).getSkypeNumber());
+			map.put(KEY_NUMBER_VIBER, Constants.getInstance().listDoctorDTO
+					.get(i).getViberNumber());
 			map.put(KEY_NAME,
 					String.valueOf(Constants.getInstance().listDoctorDTO.get(i)
 							.getDoctorName()));
@@ -75,11 +79,32 @@ public class ListDoctor extends Activity {
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-					long id) {
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					final int pos, long id) {
 				if (isNetworkAvaiable()) {
-					initiateSkypeUri(Constants.getInstance().listDoctorDTO.get(
-							pos).getSkypeNumber());
+					final Dialog dialog = new Dialog(ListDoctor.this,
+							"Chọn thao tác", "Bạn có muốn gọi bằng Viber", 123);
+					dialog.addCancelButton("No");
+					dialog.show();
+					dialog.setOnAcceptButtonClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							initiateViberUri(Constants.getInstance().listDoctorDTO
+									.get(pos).getViberNumber());
+							dialog.dismiss();
+						}
+					});
+					dialog.setOnCancelButtonClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							initiateSkypeUri(Constants.getInstance().listDoctorDTO
+									.get(pos).getSkypeNumber());
+							dialog.dismiss();
+						}
+					});
+
 				} else {
 					Intent callIntent = new Intent(Intent.ACTION_CALL);
 					callIntent.setData(Uri.parse("tel:"
@@ -88,13 +113,10 @@ public class ListDoctor extends Activity {
 					startActivity(callIntent);
 				}
 			}
-
 		});
 		final Dialog dialog = new Dialog(this, "Xóa bác sĩ",
 				"Bạn có muốn xóa thông tin bác sĩ này?", R.drawable.doctor14);
-
 		list.setOnItemLongClickListener(new OnItemLongClickListener() {
-
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int pos, long arg3) {
@@ -166,7 +188,7 @@ public class ListDoctor extends Activity {
 
 	public void initiateSkypeUri(String mySkypeUri) {
 		if (!isSkypeClientInstalled(this.getApplicationContext())) {
-			goToMarket(this.getApplicationContext());
+			goToMarket(this.getApplicationContext(), "com.skype.raider");
 			return;
 		}
 		Uri skypeUri = Uri.parse("skype:" + mySkypeUri + "?call");
@@ -176,6 +198,19 @@ public class ListDoctor extends Activity {
 				"com.skype.raider.Main"));
 		myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(myIntent);
+		return;
+	}
+
+	public void initiateViberUri(String myViberUri) {
+		if (!isSkypeClientInstalled(this.getApplicationContext())) {
+			goToMarket(this.getApplicationContext(), "com.viber.voip");
+			return;
+		}
+		Uri uri = Uri.parse("tel:" + Uri.encode(myViberUri));
+		Intent intent = new Intent("android.intent.action.VIEW");
+		intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
+		intent.setData(uri);
+		startActivity(intent);
 		return;
 	}
 
@@ -190,13 +225,24 @@ public class ListDoctor extends Activity {
 		return (true);
 	}
 
-	public void goToMarket(Context myContext) {
-		Uri marketUri = Uri.parse("market://details?id=com.skype.raider");
+	public void goToMarket(Context myContext, String id) {
+		Uri marketUri = Uri.parse("market://details?id=" + id);
 		Intent myIntent = new Intent(Intent.ACTION_VIEW, marketUri);
 		myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		myContext.startActivity(myIntent);
 
 		return;
+	}
+
+	public boolean isViberClientInstalled(Context myContext) {
+		PackageManager myPackageMgr = myContext.getPackageManager();
+		try {
+			myPackageMgr.getPackageInfo("com.viber.voip",
+					PackageManager.GET_ACTIVITIES);
+		} catch (PackageManager.NameNotFoundException e) {
+			return (false);
+		}
+		return (true);
 	}
 
 	@Override

@@ -29,6 +29,7 @@ public class ActivityAddDoctor extends Activity {
 		final EditText name = (EditText) findViewById(R.id.tb_name_doctor);
 		final EditText numberCall = (EditText) findViewById(R.id.tbnumBerCall);
 		final EditText numberSkype = (EditText) findViewById(R.id.tbSkype);
+		final EditText numberViber = (EditText) findViewById(R.id.tbViber);
 		Button btnAdd = (Button) findViewById(R.id.btnAddDoctor);
 		Button btnReinput = (Button) findViewById(R.id.btnReinput);
 		btnReinput.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +38,7 @@ public class ActivityAddDoctor extends Activity {
 				name.setText("");
 				numberCall.setText("");
 				numberSkype.setText("");
+				numberViber.setText("");;
 			}
 		});
 		Button btnShowList = (Button) findViewById(R.id.btn_list_doctor);
@@ -56,6 +58,7 @@ public class ActivityAddDoctor extends Activity {
 				dto.setDoctorName(name.getText().toString());
 				dto.setNumberCall(numberCall.getText().toString());
 				dto.setSkypeNumber(numberSkype.getText().toString());
+				dto.setViberNumber(numberViber.getText().toString());
 				int id = 1;
 				if (Constants.getInstance().listDoctorDTO.size() > 0) {
 					id = Constants.getInstance().listDoctorDTO.size() + 1;

@@ -35,7 +35,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import app.healthcare.bmi.HistoryBMI;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.call.ListDoctor;
 import app.healthcare.dataobject.DoctorDTO;

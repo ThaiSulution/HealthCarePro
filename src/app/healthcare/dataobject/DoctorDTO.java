@@ -34,6 +34,14 @@ public class DoctorDTO extends ParseObject {
 	public void setSkypeNumber(String value) {
 		put("skypeNumber", value);
 	}
+	
+	public String getViberNumber() {
+		return getString("viberNumber");
+	}
+
+	public void setViberNumber(String value) {
+		put("viberNumber", value);
+	}
 
 	public String getDoctorName() {
 		return getString("doctorName");
