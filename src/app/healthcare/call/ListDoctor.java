@@ -26,6 +26,7 @@ import app.healthcare.Constants;
 import app.healthcare.R;
 import app.healthcare.dataobject.DoctorDTO;
 
+import com.gc.materialdesign.views.Button;
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -47,6 +48,14 @@ public class ListDoctor extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_doctor);
+		Button btnAddDoctor = (Button) findViewById(R.id.btnAddDt);
+		final Intent addNewIntent = new Intent(this, ActivityAddDoctor.class);
+		btnAddDoctor.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(addNewIntent);
+			}
+		});
 		initList();
 	}
 
@@ -254,11 +263,7 @@ public class ListDoctor extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.addNew) {
-			Intent addNewIntent = new Intent(this, ActivityAddDoctor.class);
-			startActivity(addNewIntent);
-			return true;
-		} else if (id == R.id.refresh) {
+		if (id == R.id.refresh) {
 			initList();
 		}
 		return super.onOptionsItemSelected(item);

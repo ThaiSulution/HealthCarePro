@@ -244,8 +244,9 @@ public class HeartRateFragment extends Fragment {
 
 			int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(),
 					height, width);
-			// Log.i("imgAvg", String.valueOf(imgAvg));
-
+			//Log.i("imgAvg", String.valueOf(imgAvg));
+			if (ImageProcessing.red<130)
+			Log.i("red", String.valueOf(ImageProcessing.red));
 			if (imgAvg == 0 || imgAvg == 255) {
 				processing.set(false);
 				return;
@@ -294,8 +295,8 @@ public class HeartRateFragment extends Fragment {
 					updateGraph(grap);
 					// Log.i(TAG, "updateGraph=" + String.valueOf(grap));
 					startTimeUpdate = System.currentTimeMillis();
-					// Log.i("red", String.valueOf(ImageProcessing.red));
-					if (ImageProcessing.red < 200) {
+
+					if (ImageProcessing.red < 120) {
 						isRemove = true;
 					}
 				}
@@ -326,7 +327,7 @@ public class HeartRateFragment extends Fragment {
 					int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
 					heartBeat = beatsAvg;
 					pg.setBackgroundText("      " + String.valueOf(beatsAvg)
-							+ "\n     BPM\n" + String.valueOf(ImageProcessing.red));
+							+ "\n     BPM");
 					startTime = System.currentTimeMillis();
 					beats = 0;
 					if (timeFinish >= 30) {
@@ -479,12 +480,12 @@ public class HeartRateFragment extends Fragment {
 
 				@Override
 				public void onAnimationEnd(Animator animation) {
-					Log.d("piefrag", "anim end");
+					//Log.d("piefrag", "anim end");
 				}
 
 				@Override
 				public void onAnimationCancel(Animator animation) {
-					Log.d("piefrag", "anim cancel");
+					//Log.d("piefrag", "anim cancel");
 				}
 
 				@Override

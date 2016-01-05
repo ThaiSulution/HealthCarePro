@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="app.healthcare.About" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/About.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="56" width="134" x="331" y="-40"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="app.healthcare.Constants.ConstantsHolder" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/Constants.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="-129" y="-152"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="app.healthcare.Constants" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/Constants.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="232" x="-136" y="-234"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="app.healthcare.Constants.ActionReceiver" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/Constants.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="153" x="11" y="-158"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="app.healthcare.GoogleFitService.InsertAndVerifySessionTask" 
+    project="HealthCarePro" file="/HealthCarePro/src/app/healthcare/GoogleFitService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="184" x="179" y="-159"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="app.healthcare.GoogleFitService" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/GoogleFitService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="173" x="290" y="-236"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="app.healthcare.GoogleFitService.InsertAndVerifyDataTask" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/GoogleFitService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="164" x="374" y="-157"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="app.healthcare.HistoryStep" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/HistoryStep.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="134" x="31" y="-100"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="app.healthcare.HistoryStepObject" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/HistoryStepObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="127" x="150" y="-235"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="app.healthcare.MainActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/MainActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="132" x="-134" y="41"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="app.healthcare.MainActivity.SlideMenuClickListener" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/MainActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="162" x="-132" y="97"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="app.healthcare.SetupWeightAndHeight" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/SetupWeightAndHeight.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="196" x="169" y="-99"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="app.healthcare.SplashActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/SplashActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="134" x="192" y="-40"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="app.healthcare.StartAppScreen" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/StartAppScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="151" x="30" y="-41"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="app.healthcare.StepRun" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/StepRun.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="265" x="48" y="20"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="app.healthcare.bmi.BMIResultView" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/bmi/BMIResultView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="141" x="376" y="-97"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="app.healthcare.bmi.RatioBMIFragment" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/bmi/RatioBMIFragment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="150" x="479" y="-234"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="app.healthcare.bmi.HistoryBMIAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/bmi/HistoryBMIAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="143" x="550" y="-157"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="app.healthcare.bmi.HistoryBMI" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/bmi/HistoryBMI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="127" x="633" y="-288"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="app.healthcare.call.ListDoctorAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/call/ListDoctorAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="170" x="471" y="-37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="app.healthcare.call.ActivityAddDoctor" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/call/ActivityAddDoctor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="134" x="335" y="21"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="app.healthcare.call.ListDoctor" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/call/ListDoctor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="111" x="522" y="-96"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="app.healthcare.dataobject.HeartRateDTO" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/HeartRateDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="136" x="3" y="-328"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="app.healthcare.dataobject.StepRunDTO" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/StepRunDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="129" x="174" y="-329"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="app.healthcare.dataobject.DoctorDTO" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/DoctorDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="120" x="332" y="-331"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="app.healthcare.dataobject.RatioBMIDTO" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/RatioBMIDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="129" x="477" y="-329"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="app.healthcare.dataobject.RatioWHRDTO" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/RatioWHRDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="136" x="-141" y="-325"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="app.healthcare.heartrate.HeartRateResult" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/HeartRateResult.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="170" x="-132" y="155"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="app.healthcare.heartrate.ImageProcessing" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/ImageProcessing.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="133" x="59" y="86"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="app.healthcare.heartrate.DialogResultHeartRate" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/DialogResultHeartRate.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="152" x="314" y="171"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="app.healthcare.heartrate.HeartRateFragment" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/HeartRateFragment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="184" x="324" y="87"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="app.healthcare.heartrate.HeartbeatView" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/HeartbeatView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="111" x="203" y="86"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="app.healthcare.heartrate.HelpActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/HelpActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="111" x="483" y="26"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="34" language="java" name="app.healthcare.heartrate.HeartRateFragment.TYPE" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartrate/HeartRateFragment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="519" y="83"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="35" language="java" name="app.healthcare.heartratehistory.MemoryCache" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/MemoryCache.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="180" x="-138" y="361"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="app.healthcare.heartratehistory.HistoryAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/HistoryAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="140" x="-132" y="293"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="app.healthcare.heartratehistory.ImageLoader" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/ImageLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="228" x="83" y="239"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="app.healthcare.heartratehistory.ImageLoader.PhotosLoader" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/ImageLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="163" x="304" y="333"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="app.healthcare.heartratehistory.HistoryHeartRate" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/HistoryHeartRate.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="171" x="-132" y="216"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="app.healthcare.heartratehistory.HeartRateResultView" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/HeartRateResultView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="189" x="83" y="165"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="app.healthcare.heartratehistory.FileCache" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/FileCache.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="140" x="146" y="310"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="app.healthcare.heartratehistory.ImageLoader.BitmapDisplayer" 
+    project="HealthCarePro" file="/HealthCarePro/src/app/healthcare/heartratehistory/ImageLoader.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="208" x="490" y="326"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="app.healthcare.heartratehistory.ImageLoader.PhotoToLoad" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/ImageLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="181" x="417" y="231"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="app.healthcare.heartratehistory.Utils" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/heartratehistory/Utils.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="140" x="507" y="175"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="app.healthcare.readnews.activity.CategotyActivity.RssTask" 
+    project="HealthCarePro" file="/HealthCarePro/src/app/healthcare/readnews/activity/CategotyActivity.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="54" y="380"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="app.healthcare.readnews.activity.NewActivity.MyWebViewClient" 
+    project="HealthCarePro" file="/HealthCarePro/src/app/healthcare/readnews/activity/NewActivity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="592" y="476"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="app.healthcare.readnews.activity.NewActivity.MyTask" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/NewActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="589" y="395"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="app.healthcare.readnews.activity.NoRssActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/NoRssActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="248" y="397"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="app.healthcare.readnews.activity.NoRssActivity.MyTask" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/NoRssActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="249" y="477"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="app.healthcare.readnews.activity.NewActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/NewActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="412" y="396"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="app.healthcare.readnews.activity.CategotyActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/CategotyActivity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="-141" y="578"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="app.healthcare.readnews.activity.ReadNewsActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/ReadNewsActivity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="-143" y="511"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="app.healthcare.readnews.activity.NewsListActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/activity/NewsListActivity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="54" width="148" x="55" y="469"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="app.healthcare.readnews.activity.NoRssActivity.MyWebViewClient" 
+    project="HealthCarePro" file="/HealthCarePro/src/app/healthcare/readnews/activity/NoRssActivity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="426" y="478"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="app.healthcare.readnews.adapters.PaperAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/adapters/PaperAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="152" x="-141" y="425"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="app.healthcare.readnews.adapters.CategoryAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/adapters/CategoryAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="152" x="-144" y="654"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="app.healthcare.readnews.adapters.NewsListAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/adapters/NewsListAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="152" x="47" y="545"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="app.healthcare.readnews.models.RssItem" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/models/RssItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="154" x="48" y="608"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="app.healthcare.readnews.models.RssHandler" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/models/RssHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="146" x="246" y="553"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="app.healthcare.readnews.models.RssParser" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/models/RssParser.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="164" x="416" y="550"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="app.healthcare.readnews.models.Variables" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/readnews/models/Variables.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="146" x="598" y="547"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="app.healthcare.slidingmenu.adapter.NavDrawerListAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/slidingmenu/adapter/NavDrawerListAdapter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="157" x="-145" y="-89"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="app.healthcare.slidingmenu.model.NavDrawerItem" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/slidingmenu/model/NavDrawerItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="151" x="-145" y="-26"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="app.healthcare.symptom.activity.Diabete" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Diabete.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="9" y="664"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="app.healthcare.symptom.activity.Info" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Info.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="244" y="612"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="app.healthcare.symptom.activity.BodyActivity" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/BodyActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="420" y="611"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="app.healthcare.symptom.activity.BannerThread" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/BannerThread.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="160" x="594" y="605"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="68" language="java" name="app.healthcare.symptom.activity.Symptom4Part" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Symptom4Part.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="154" x="313" y="669"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="app.healthcare.symptom.activity.Diasease" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Diasease.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="623" y="664"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="app.healthcare.symptom.activity.Diasease1" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Diasease1.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="161" y="664"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="71" language="java" name="app.healthcare.symptom.activity.GuideMenu" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/GuideMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="470" y="669"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="72" language="java" name="app.healthcare.symptom.activity.Hopital" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Hopital.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="711" y="-80"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="73" language="java" name="app.healthcare.symptom.activity.ListMenu" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/ListMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="642" y="247"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="74" language="java" name="app.healthcare.symptom.activity.Diabete1" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/activity/Diabete1.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="769" y="-266"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="75" language="java" name="app.healthcare.symptom.adapter.AdapterBenh" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/adapter/AdapterBenh.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="722" y="-209"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="76" language="java" name="app.healthcare.symptom.list.ListDisease" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/list/ListDisease.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="129" x="713" y="-3"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="77" language="java" name="app.healthcare.symptom.object.Benh" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/symptom/object/Benh.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="151" x="761" y="-331"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="78" language="java" name="app.healthcare.whr.HistoryWHRAdapter" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/whr/HistoryWHRAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="161" x="733" y="-147"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="79" language="java" name="app.healthcare.whr.RatioWHRFragment" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/whr/RatioWHRFragment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="135" x="702" y="62"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="80" language="java" name="app.healthcare.whr.WHRResultView" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/whr/WHRResultView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="116" x="693" y="183"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="81" language="java" name="app.healthcare.whr.HistoryWHR" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/whr/HistoryWHR.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="92" x="706" y="119"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="82">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="83" name="itemCurentSelect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="86" name="data">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="87" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="89" name="listDataStep">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="91">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <association id="92">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="93" name="currentType">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="94" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="96" name="listDataStepDTO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="97" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="99" name="array"/>      
+      <multiplicity id="100" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="77" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="102" name="adapter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="105" name="alertDialog2">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="108" name="listDataWHR">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="109" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="111" name="listDataHR">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="112" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="113">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="114" name="itemCurentSelect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="115" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="116">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <association id="117">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="118" name="data">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="119" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="121" name="photoToLoad">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="122" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="123">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="34"/>  
+  </nesting>  
+  <nesting id="124">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="38"/>  
+  </nesting>  
+  <association id="125">    
+    <end type="SOURCE" refId="81" navigable="false">      
+      <attribute id="126" name="adapter"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="129" name="listDataBMI">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="130" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="78" navigable="false">      
+      <attribute id="132" name="imageLoader"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="135" name="items">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="136" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="137">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="138" name="listDoctorDTO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="139" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="140">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="141" name="adapter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="142" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="57" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="144" name="adapter">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </attribute>      
+      <multiplicity id="145" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="147" name="adapter">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </attribute>      
+      <multiplicity id="148" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="149">    
+    <end type="SOURCE" refId="81" navigable="false">      
+      <attribute id="150" name="itemCurentSelect"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="153" name="photoToLoad">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="154" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="155">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <association id="156">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="157" name="imageLoader">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="158" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <end type="SOURCE" refId="80" navigable="false">      
+      <attribute id="160" name="data"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="162">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="45"/>  
+  </nesting>  
+  <association id="163">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="164" name="item">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="165" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="167" name="fileCache">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="168" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="169">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="47"/>  
+  </nesting>  
+  <association id="170">    
+    <end type="SOURCE" refId="75" navigable="false">      
+      <attribute id="171" name="listBenh"/>      
+      <multiplicity id="172" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="77" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="173">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="174" name="adapter"/>      
+      <multiplicity id="175" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="176">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="177" name="memoryCache">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </attribute>      
+      <multiplicity id="178" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="179">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="180" name="navDrawerItems"/>      
+      <multiplicity id="181" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="63" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="182">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="183" name="adapter">        
+        <position height="18" width="45" x="-123" y="-42"/>      
+      </attribute>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="62" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="185">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="43"/>  
+  </nesting>  
+  <nesting id="186">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="49"/>  
+  </nesting>  
+  <association id="187">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="188" name="INSTANCE">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="189" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="190">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <nesting id="191">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <association id="192">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="193" name="imageLoader">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="194" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="195">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="42"/>  
+  </nesting>  
+  <nesting id="196">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="46"/>  
+  </nesting>  
+  <association id="197">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="198" name="navDrawerItems">        
+        <position height="18" width="88" x="-112" y="18"/>      
+      </attribute>      
+      <multiplicity id="199" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="63" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="200">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="201" name="adapter">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </attribute>      
+      <multiplicity id="202" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-4" y="51"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="203">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="204" name="imageLoader">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="205" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="206">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="54"/>  
+  </nesting>  
+  <association id="207">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="208" name="adapter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="209" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="211" name="items">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="212" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

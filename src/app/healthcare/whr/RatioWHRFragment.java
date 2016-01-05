@@ -130,7 +130,7 @@ public class RatioWHRFragment extends Fragment {
 				result = "Rất nguy hiểm";
 			}
 		}
-		ratioWHR = (double) (Math.round((double) ratioWHR * 10) / (double) 10);
+		ratioWHR = (double) (Math.floor((double) ratioWHR * 10) / (double) 10);
 		tbxResult.setText(String.valueOf(ratioWHR));
 		tbxImpact.setText(result);
 		RatioWHRDTO dto = new RatioWHRDTO();

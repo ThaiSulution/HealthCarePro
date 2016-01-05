@@ -121,7 +121,7 @@ public class RatioBMIFragment extends Fragment {
 			result = "Béo phì cấp độ 3";
 		}
 		RatioBMIDTO dto = new RatioBMIDTO();
-		ratioBMI = (double) (Math.round((double) ratioBMI * 10) / (double) 10);
+		ratioBMI = (double) (Math.floor((double) ratioBMI * 10) / (double) 10);
 		tbxResult.setText(String.valueOf(ratioBMI));
 		tbxImpact.setText(result);
 		dto.setRatio(ratioBMI);

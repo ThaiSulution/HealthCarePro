@@ -1,5 +1,6 @@
 package app.healthcare.heartrate;
 
+
 public abstract class ImageProcessing {
 
 	public static int red = 0;
@@ -46,6 +47,9 @@ public abstract class ImageProcessing {
 				int pixel = 0xff000000 | ((r << 3) & 0xff0000)
 						| ((g >> 1) & 0xff00) | ((b >> 5) & 0xff);
 				int green = (pixel >> 8) & 0xff;
+//				Log.e("decodeYUV420SPtoRedSum1", String.valueOf(pixel));
+//				Log.e("decodeYUV420SPtoRedSum2", String.valueOf(pixel >> 8));
+//				Log.e("decodeYUV420SPtoRedSum3", String.valueOf(green));
 				sum += green;
 				int pixel2 = 0xff000000 | ((r << 6) & 0xff0000)
 						| ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
