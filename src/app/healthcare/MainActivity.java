@@ -42,6 +42,7 @@ import app.healthcare.dataobject.HeartRateDTO;
 import app.healthcare.dataobject.RatioBMIDTO;
 import app.healthcare.dataobject.RatioWHRDTO;
 import app.healthcare.dataobject.StepRunDTO;
+import app.healthcare.drug.ListDrug;
 import app.healthcare.heartrate.HeartRateFragment;
 import app.healthcare.readnews.activity.ReadNewsActivity;
 import app.healthcare.slidingmenu.adapter.NavDrawerListAdapter;
@@ -159,6 +160,8 @@ public class MainActivity extends Activity {
 				.getResourceId(9, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[10], navMenuIcons
 				.getResourceId(10, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[11], navMenuIcons
+				.getResourceId(11, -1)));
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -628,6 +631,9 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, GuideMenu.class));
 			break;
 		case 9:
+			startActivity(new Intent(this, ListDrug.class));
+			break;
+		case 10:
 			final Dialog confirm = new Dialog(
 					this,
 					"Xóa dữ liệu",
@@ -644,7 +650,7 @@ public class MainActivity extends Activity {
 						}
 					});
 			break;
-		case 10:
+		case 11:
 			this.finish();
 			break;
 		default:

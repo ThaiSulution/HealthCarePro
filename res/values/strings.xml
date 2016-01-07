@@ -57,6 +57,7 @@
         <item>Thông tin</item>
         <item>Danh sách bác sĩ</item>
         <item>Chẩn đoán</item>
+        <item>Tra cứu thuốc tây</item>
         <item>Xóa toàn bộ dữ liệu</item>
         <item>Thoát</item>
     </string-array>
@@ -73,6 +74,7 @@
         <item>@drawable/info</item>
         <item>@drawable/doctor14</item>
         <item>@drawable/diagnose_icon</item>
+        <item>@drawable/searchicon</item>
         <item>@drawable/recycle_bin</item>
         <item>@drawable/exit_icon</item>
     </array>

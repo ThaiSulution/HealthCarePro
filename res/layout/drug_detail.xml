@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/ten_thuoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tên thuốc: "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0066CC"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/nhom_duoc_ly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Thành phần: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/thanh_phan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Chỉ định: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/chi_dinh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Chống chỉ định: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/chong_chi_dinh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Tương tác thuốc: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/tuong_tac_thuoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Chú ý đề phòng: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/chu_y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Tác dụng phụ: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/tac_dung_phu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Liều lượng: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/lieu_luong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhóm Dược lý: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</ScrollView>

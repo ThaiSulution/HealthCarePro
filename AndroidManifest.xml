@@ -148,6 +148,8 @@
         <activity android:name="app.healthcare.symptom.activity.Diabete1" />
         <activity android:name="app.healthcare.symptom.activity.Diasease1" />
         <activity android:name="app.healthcare.CheckInActivity" />
+        <activity android:name="app.healthcare.drug.ListDrug" />
+        <activity android:name="app.healthcare.drug.DrugDetail" />
 
         <service
             android:name="app.healthcare.GoogleFitService"
