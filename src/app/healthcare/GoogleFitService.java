@@ -158,8 +158,8 @@ public class GoogleFitService extends IntentService implements
 			long startTime;
 			Date now = new Date();
 			@SuppressWarnings("deprecation")
-			int time = Integer.parseInt((now.toLocaleString().split(" ")[1])
-					.split(":")[0]);
+			int time = now.getHours();
+			
 			DataReadRequest readRequest;
 			DataReadResult dataReadResult;
 			switch (type) {

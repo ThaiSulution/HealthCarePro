@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/ten_benh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tên bệnh: "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0066CC"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Mô tả: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/mo_ta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mô tả: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Định nghĩa: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/dinh_nghia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Định nghĩa: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Các triệu chứng: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/trieu_chung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Triệu chứng: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Đến gặp bác sĩ khi: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/gap_bac_si"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đến gặp bác sĩ khi: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Nguyên nhân: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/nguyen_nhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nguyên nhân: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Yếu tố nguy cơ: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/nguy_co"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yếu tố nguy cơ: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Biến chứng: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/bien_chung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biến chứng: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Các xét nghiệm và chẩn đoán: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/xet_nghiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Các xét nghiệm và chẩn đoán: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Phương pháp điều trị: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/dieu_tri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phương pháp điều trị: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Thuốc: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/thuoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thuốc: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Phòng chống: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <TextView
+            android:id="@+id/phong_chong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phòng chống: "
+            android:textColor="#0066CC"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Hình ảnh: "
+            android:textColor="#FF3333"
+            android:textSize="15dp"
+            android:textStyle="italic|bold" />
+        <ImageView
+            android:id="@+id/hinh_anh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:textColor="#0066CC"
+            android:textStyle="italic"
+            android:contentDescription="Hình ảnh" />
+    </LinearLayout>
+
+</ScrollView>

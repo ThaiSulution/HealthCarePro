@@ -1,216 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    
-    android:gravity="center"
-    android:orientation="vertical" >
-<!-- android:background="@drawable/background_mainmenu" -->
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Health"
-        android:textSize="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#0000ff" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/doctor" />
+    android:layout_height="match_parent" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1.0" >
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#0000ff"
+            android:textSize="40dp" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/doctor" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="vertical"
+            android:weightSum="1.0" >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:onClick="monan"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-                <Button
-                    android:id="@+id/button_symptoms"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_main_symptoms"
-                    android:onClick="trieuchung" />
-
-                <TextView
-                    android:id="@+id/txtMonan"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Triệu chứng"
-                  
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-                  <!-- android:textColor="#FFFFFF" -->
+                    android:layout_marginLeft="10dp"
+                    android:onClick="monan"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" >
+
+                    <Button
+                        android:id="@+id/button_symptoms"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/ic_main_symptoms"
+                        android:onClick="trieuchung" />
+
+                    <TextView
+                        android:id="@+id/txtMonan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Triệu chứng"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                    <!-- android:textColor="#FFFFFF" -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" >
+
+                    <Button
+                        android:id="@+id/button_phatsinh"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/ic_main_providers"
+                        android:onClick="benhvien" />
+
+                    <TextView
+                        android:id="@+id/txtPhatsinh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Bệnh Viện"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                    <!-- android:textColor="#FFFFFF" -->
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/thucdonLinearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal" >
 
-                <Button
-                    android:id="@+id/button_phatsinh"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_main_providers"
-                    android:onClick="benhvien" />
-
-                <TextView
-                    android:id="@+id/txtPhatsinh"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Bệnh Viện"
-                  
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-                <!--   android:textColor="#FFFFFF" -->
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" >
+
+                    <Button
+                        android:id="@+id/button_thucdon"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/ic_main_feedback"
+                        android:onClick="phanhoi" />
+
+                    <TextView
+                        android:id="@+id/txtThucdon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Phản hồi"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                    <!-- android:textColor="#FFFFFF" -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/button_laplich"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/ic_main_physicians"
+                        android:onClick="giupdo" />
+
+                    <TextView
+                        android:id="@+id/txtAlarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Giúp đỡ"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                    <!-- android:textColor="#FFFFFF" -->
+                </LinearLayout>
             </LinearLayout>
-
-          <!--   <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:visibility="gone" >
-
-                <Button
-                    android:id="@+id/button_khuyennghi"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_main_physicians"
-                    android:onClick="khuyennghi" />
-
-                <TextView
-                    android:id="@+id/txtKhuyennghi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/txtkhuyennghi"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-            </LinearLayout> -->
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/thucdonLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
-
-                <Button
-                    android:id="@+id/button_thucdon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_main_feedback"
-                    android:onClick="phanhoi" />
-
-                <TextView
-                    android:id="@+id/txtThucdon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Phản hồi"
-                   
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-                <!--  android:textColor="#FFFFFF" -->
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" >
-
-                <!--
-                     Button
-                    android:id="@+id/button_nguyenlieu"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/btn_nguyenlieudicho"
-                    android:onClick="nguyenlieu" /
-                -->
-
-               <!--  <Button
-                    android:id="@+id/button_nguyenlieu"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/btn_nguyenlieudicho"
-                    android:onClick="nguyenlieu" />
-
-                <TextView
-                    android:id="@+id/txtNguyenlieu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/txtnguyenlieu"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />--> 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/button_laplich"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_main_physicians"
-                    android:onClick="giupdo" />
-
-                <TextView
-                    android:id="@+id/txtAlarm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Giúp đỡ"
-            
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-                <!--         android:textColor="#FFFFFF" -->
-            </LinearLayout>
-            
-            
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
