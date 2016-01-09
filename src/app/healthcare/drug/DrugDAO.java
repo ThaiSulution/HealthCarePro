@@ -12,7 +12,7 @@ public class DrugDAO extends DbConnectionService {
 		super(context);
 	}
 
-	public boolean insertRatioBMI(DrugDTO drugDto) {
+	public boolean insertDrug(DrugDTO drugDto) {
 		try {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put("MA_THUOC", this.getNewDrugId());

@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import app.healthcare.R;
-import app.healthcare.symptom.list.ListDisease;
+import app.healthcare.symptom.list.ListSymptom;
 
 public class BodyActivity extends Activity{
 
@@ -67,7 +67,7 @@ public class BodyActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent iSymptoms = new Intent(BodyActivity.this, ListDisease.class);
+				Intent iSymptoms = new Intent(BodyActivity.this, ListSymptom.class);
 				startActivity(iSymptoms);
 			}
 		});

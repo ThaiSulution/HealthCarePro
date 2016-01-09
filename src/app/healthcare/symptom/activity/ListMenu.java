@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import app.healthcare.R;
-import app.healthcare.symptom.list.ListDisease;
+import app.healthcare.symptom.list.ListSymptom;
 
 public class ListMenu extends TabActivity {
 
@@ -34,7 +34,7 @@ public class ListMenu extends TabActivity {
 		View indicator11 = getLayoutInflater().inflate(R.layout.tab_bg_food,
 				null);
 		dsmonan.setIndicator(indicator11);
-		Intent lmonanIntent = new Intent(this, ListDisease.class);
+		Intent lmonanIntent = new Intent(this, ListSymptom.class);
 		dsmonan.setContent(lmonanIntent);
 		tabHost.addTab(dsmonan);
 

@@ -1,6 +1,9 @@
 package app.healthcare.symptom.activity;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,35 +15,35 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import app.healthcare.R;
+import app.healthcare.symptom.object.SickSymptomDAO;
+import app.healthcare.symptom.object.SickSymptomDTO;
 
 public class Symptom4Part extends ListActivity {
 	
 	private AutoCompleteTextView autoSearch;
 	TextView selection;
-	String arr[]={
-			 
-			 "Đau bụng dưới", "Đau bụng trên", 
-			 "Đau sườn", 
-			 "Chán ăn", "Đầy hơi bụng", 
-			 "Ngứa da",
-			  "Nổi mề đây", "Nổi mẩn da",
-			"Vàng da"
-			 , ""};
+	
 	ArrayAdapter<String>adapter1=null;
+	SickSymptomDAO sickSymptomDAO;
+	List<String> arr = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listview_demo2);
+		sickSymptomDAO = new SickSymptomDAO(this);
+		List<SickSymptomDTO> dtos = sickSymptomDAO.searchSymptom(" Bụng");
+		arr = new ArrayList<String>();
+		for(SickSymptomDTO dto : dtos){
+			arr.add(dto.getTrieuChung());
+		}
 		adapter1=new ArrayAdapter<String>
 		(this,
 		android.R.layout.simple_list_item_1,
 		arr);
-	//GĂ¡n Adapter vĂ o ListView
-	//Nhá»› lĂ  pháº£i Ä‘áº·t id cho ListView theo Ä‘Ăºng quy táº¯c
 	setListAdapter(adapter1);
 	
-	selection=(TextView) findViewById(R.id.selection);
+	//selection=(TextView) findViewById(R.id.selection);
 	autoSearch = (AutoCompleteTextView) findViewById(R.id.autoSearch);
 	autoSearch.setAdapter(adapter1);
 	autoSearch.addTextChangedListener(new TextWatcher() {
@@ -67,13 +70,10 @@ public class Symptom4Part extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		
+		Diasease1.symptom = arr.get(position);
+		Diasease1.viTri = " Bụng";
 		// xử lý bệnh cho từng bộ phận
 		Intent iBenh1 = new Intent(this, Diasease1.class );
-		//đau bao tử
-				if(position==0 || position==1 || position==3|| position==4)
-				{
-					 startActivity(iBenh1);
-				}
+		startActivity(iBenh1);
 	}
 }

@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import app.healthcare.R;
 
+@SuppressLint("HandlerLeak")
 public class ListDrug extends Activity implements TextWatcher {
 	DrugDAO dao;
 	ListView listDrug;
@@ -47,7 +48,7 @@ public class ListDrug extends Activity implements TextWatcher {
 		final List<String> drugName = new ArrayList<String>();
 		if (dtos.size() == 0) {
 			dialogProgess = ProgressDialog.show(this, "",
-     				"Vui lòng chờ");
+     				"Thiết lập dữ liệu");
 			new Thread(new Runnable() {  
 		         @Override  
 		         public void run() {  
@@ -93,7 +94,7 @@ public class ListDrug extends Activity implements TextWatcher {
 		 							dto.setLieuLuong(line.replace("Liều lượng: ", ""));
 		 						}
 		 						if (line.startsWith("end")) {
-		 							dao.insertRatioBMI(dto);
+		 							dao.insertDrug(dto);
 		 							dtos.add(dto);
 		 							dto = new DrugDTO();
 		 						}

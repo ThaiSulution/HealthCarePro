@@ -1,9 +1,16 @@
 package app.healthcare.symptom.activity;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,19 +24,33 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import app.healthcare.GoogleFitService;
 import app.healthcare.R;
 import app.healthcare.call.ListDoctor;
+import app.healthcare.symptom.object.SickDAO;
+import app.healthcare.symptom.object.SickDTO;
+import app.healthcare.symptom.object.SickSymptomDAO;
+import app.healthcare.symptom.object.SickSymptomDTO;
 
+@SuppressLint("HandlerLeak")
 public class GuideMenu extends Activity {
 	String idnguoidung = "phivien";
 
 	// LinearLayout thucdonLinearLayout;
 
 	// AdapterDB mDB = new AdapterDB(this);
+	ProgressDialog dialogProgess;
+	Handler handler = new Handler() {  
+	    @Override  
+	    public void handleMessage(Message msg) {
+	    	dialogProgess.dismiss(); 
+	    }  
+	};
 
 	public boolean isNetworkAvailable(Context context) {
 		final ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -62,6 +83,99 @@ public class GuideMenu extends Activity {
 		super.onCreate(icookmenu);
 		setContentView(R.layout.main_diagnious);
 
+		final SickDAO sickDao = new SickDAO(this);
+		final SickSymptomDAO sickSymptomDao = new SickSymptomDAO(this);
+		List<SickDTO> dtos = sickDao.getListSick();
+		if (dtos.size() == 0) {
+			dialogProgess = ProgressDialog.show(this, "",
+     				"Thiết lập dữ liệu lần đầu");
+			new Thread(new Runnable() {  
+		         @Override  
+		         public void run() {  
+		        	String lineSick;
+		 			InputStream inSick = getResources().openRawResource(R.drawable.benh);
+		 			InputStreamReader inreader = new InputStreamReader(inSick);
+		 			BufferedReader bufreader = new BufferedReader(inreader);
+		 			if (inSick != null) {
+		 				try {
+		 					SickDTO dto = new SickDTO();
+		 					while ((lineSick = bufreader.readLine()) != null) {
+		 						if (lineSick.startsWith("Tên bệnh: ")) {
+		 							dto.setTen(lineSick.replace("Tên bệnh: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Mô tả: ")) {
+		 							dto.setMoTa(lineSick.replace("Mô tả: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Định nghĩa: ")) {
+		 							dto.setDinhNghia(lineSick.replace("Định nghĩa: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Các triệu chứng: ")) {
+		 							dto.setTrieuChung(lineSick.replace("Các triệu chứng: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Đến gặp bác sĩ khi: ")) {
+		 							dto.setGapBacSi(lineSick.replace("Đến gặp bác sĩ khi: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Nguyên nhân: ")) {
+		 							dto.setNguyenNhan(lineSick.replace("Nguyên nhân: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Yếu tố nguy cơ: ")) {
+		 							dto.setNguyCo(lineSick.replace("Yếu tố nguy cơ: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Các biến chứng: ")) {
+		 							dto.setBienChung(lineSick.replace("Các biến chứng: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Các xét nghiệm và chẩn đoán: ")) {
+		 							dto.setXetNghiem(lineSick.replace("Các xét nghiệm và chẩn đoán: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Phương pháp điều trị: ")) {
+		 							dto.setDieuTri(lineSick.replace("Phương pháp điều trị: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Thuốc: ")) {
+		 							dto.setThuoc(lineSick.replace("Thuốc: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Phòng chống: ")) {
+		 							dto.setPhongChong(lineSick.replace("Phòng chống: ", ""));
+		 						}
+		 						if (lineSick.startsWith("Hình ảnh: ")) {
+		 							dto.setHinhAnh(lineSick.replace("Hình ảnh: ", ""));
+		 						}
+		 						if (lineSick.startsWith("end")) {
+		 							sickDao.insertSick(dto);
+		 							dto = new SickDTO();
+		 						}
+		 					}
+		 				} catch (IOException e) {
+		 					e.printStackTrace();
+		 					dialogProgess.dismiss();
+		 				}
+		 			}
+		 			
+		 			String lineSymptom;
+		 			InputStream inSymptom = getResources().openRawResource(R.drawable.benh_trieuchung);
+		 			InputStreamReader inreaderSymptom = new InputStreamReader(inSymptom);
+		 			BufferedReader bufreaderSymptom = new BufferedReader(inreaderSymptom);
+		 			if (inSymptom != null) {
+		 				try {
+		 					SickSymptomDTO dto = new SickSymptomDTO();
+		 					while ((lineSymptom = bufreaderSymptom.readLine()) != null) {
+		 						dto.setTenBenh(lineSymptom.split(":")[0]);
+		 						dto.setTrieuChung(lineSymptom.split(":")[1]);
+		 						dto.setViTri(lineSymptom.split(":")[2]);
+		 						sickSymptomDao.insert(dto);
+		 						dto = new SickSymptomDTO();
+		 					}
+		 				} catch (IOException e) {
+		 					e.printStackTrace();
+		 					dialogProgess.dismiss();
+		 				}
+		 			}
+		 			
+		             handler.sendEmptyMessage(0); 
+		          }  
+		      }).start(); 
+			
+			
+		}
 	}
 
 	/*

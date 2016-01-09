@@ -97,20 +97,28 @@
         <activity android:name="app.healthcare.readnews.activity.NewActivity" />
         <activity android:name="app.healthcare.readnews.activity.NoRssActivity" />
         <activity android:name="app.healthcare.readnews.activity.ReadNewsActivity" />
-        <activity android:name="app.healthcare.heartrate.HeartRateResult" />
-        <activity android:name="app.healthcare.heartratehistory.HistoryHeartRate" />
-        <activity android:name="app.healthcare.heartratehistory.HeartRateResultView" />
-        <activity android:name="app.healthcare.bmi.HistoryBMI" />
-        <activity android:name="app.healthcare.bmi.BMIResultView" />
-        <activity android:name="app.healthcare.whr.HistoryWHR" />
-        <activity android:name="app.healthcare.whr.WHRResultView" />
-        <activity android:name="app.healthcare.heartrate.HelpActivity" />
-        <activity android:name="app.healthcare.call.ActivityAddDoctor" />
-        <activity android:name="app.healthcare.call.ListDoctor" />
-        <activity android:name="app.healthcare.symptom.activity.GuideMenu" />
-        <activity android:name="app.healthcare.symptom.activity.Hopital" />
-        <activity android:name="app.healthcare.HopitalActivity" />
-        <activity android:name="app.healthcare.symptom.activity.CurrentLocation" />
+        <activity android:name="app.healthcare.heartrate.HeartRateResult"
+            android:label="Kết quả đo nhịp tim" />
+        <activity android:name="app.healthcare.heartratehistory.HistoryHeartRate"
+            android:label="Lịch sử đo nhịp tim" />
+        <activity android:name="app.healthcare.heartratehistory.HeartRateResultView"
+            android:label="Kết quả đo nhịp tim" />
+        <activity android:name="app.healthcare.bmi.HistoryBMI" 
+            android:label="Lịch sử BMI"/>
+        <activity android:name="app.healthcare.bmi.BMIResultView" 
+            android:label="Kết quả BMI"/>
+        <activity android:name="app.healthcare.whr.HistoryWHR" 
+            android:label="Lịch sử WHR"/>
+        <activity android:name="app.healthcare.whr.WHRResultView"
+            android:label="Kết quả WHR" />
+        <activity android:name="app.healthcare.heartrate.HelpActivity"
+            android:label="Trợ giúp" />
+        <activity android:name="app.healthcare.call.ActivityAddDoctor" 
+            android:label="Thêm bác sĩ"/>
+        <activity android:name="app.healthcare.call.ListDoctor" 
+            android:label="Danh sách bác sĩ" />
+        <activity android:name="app.healthcare.symptom.activity.GuideMenu" 
+            android:label="Chẩn đoán bệnh"/>
         <activity
             android:name="app.healthcare.HistoryStep"
             android:label="Lịch sử đo đạc"
@@ -118,7 +126,7 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="app.healthcare.symptom.activity.Diasease"
-            android:label="@string/app_name"
+            android:label="Danh sách bệnh"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -131,25 +139,29 @@
             android:label="@string/monan"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="app.healthcare.symptom.list.ListDisease" >
+        <activity android:name="app.healthcare.symptom.list.ListSymptom" 
+            android:label="Danh sách triệu chứng">
         </activity>
         <activity
             android:name="app.healthcare.symptom.activity.BodyActivity"
+            android:label="Chẩn đoán bệnh"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="app.healthcare.symptom.activity.Symptom4Part"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="app.healthcare.HopitalNear"
+            android:label="Danh sách triệu chứng"
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name="app.healthcare.symptom.activity.Diabete1" />
-        <activity android:name="app.healthcare.symptom.activity.Diasease1" />
-        <activity android:name="app.healthcare.CheckInActivity" />
-        <activity android:name="app.healthcare.drug.ListDrug" />
-        <activity android:name="app.healthcare.drug.DrugDetail" />
+        <activity android:name="app.healthcare.symptom.activity.Diasease1" 
+            android:label="Danh sách bệnh"/>
+        <activity android:name="app.healthcare.drug.ListDrug"
+            android:label="Danh sách thuốc"  />
+        <activity android:name="app.healthcare.drug.DrugDetail"
+            android:label="Chi tiết thuốc"  />
+        <activity 
+            android:name="app.healthcare.symptom.activity.SickDetail" 
+            android:label="Chi tiết bệnh"/>
 
         <service
             android:name="app.healthcare.GoogleFitService"

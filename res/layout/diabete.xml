@@ -20,34 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tiểu đường - một căn bệnh do thừa lượng đường trong cơ thể đang là mối đe dọa cho chúng ta. Hiện nay số người bị bệnh tiểu đường đã lên đến con số đáng báo động, vậy nguyên nhân bệnh tiểu đường là gì ? Không chỉ những người có gen di truyền từ người thân từng có lịch sử bệnh tiểu đường, những người thường xuyên dung nạp nhiều chất đường bột-glucose mà nay ngay cả trẻ em cũng có nguy cơ mắc phải căn bệnh này." />
+
              <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mô tả"             />
-            
-             <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tiểu đường - một căn bệnh do thừa lượng đường trong cơ thể đang là mối đe dọa cho chúng ta. Hiện nay số người bị bệnh tiểu đường đã lên đến con số đáng báo động, vậy nguyên nhân bệnh tiểu đường là gì ? Không chỉ những người có gen di truyền từ người thân từng có lịch sử bệnh tiểu đường, những người thường xuyên dung nạp nhiều chất đường bột-glucose mà nay ngay cả trẻ em cũng có nguy cơ mắc phải căn bệnh này.
-
-Sự tấn công của tiểu đường ngày càng đáng lo ngại hơn khi chúng để lại những biến chứng ác tính có thể gây chết người. Theo số liệu thống kê cho biết, tỷ lệ tử vong do tiểu đường gây ra cao ngang ngửa với tỷ lệ tử vong do ung thư, HIV và một số bệnh nan y khác.
-
-Chính vì sự nguy hiểm của căn bệnh này, chúng ta cần có nền tảng kiến thức hiểu biết chắc chắn để có thể bảo vệ sức khỏe bản thân khỏi sự xâm nhập của chúng. Do đó, ngay hôm nay hãy tìm hiểu rõ nguyên nhân, căn cội của tiểu đường nhằm hạn chế nguy cơ mắc bệnh và có cuộc sống khỏe mạnh hơn.
-
-Nguyên nhân bệnh tiểu đường là gì ?
-
-Tiểu đường chủ yếu được phân ra làm 2 loại chính:
-
-Loại 1: Do tụy không tiết ra chất Insulin hoặc tế bào không tiêu thụ được Insulin. Loại 1 thường rất hiếm gặp. Thông thường thì xảy ra ở trẻ em và những người trẻ.
-Loại 2: Do tiết giảm chất Insulin. Các bệnh nhân chủ yếu rơi vào loại 2 chiếm đến khoảng 90-95% số người mắc bệnh tiểu đường và chủ yếu gặp phải ở người cao tuổi và trung niên. Tuy nhiên tỷ lệ người dưới 30 mắc phải loại 2 cũng đang có xu hướng gia tăng.
-Bên cạnh đó, những thói quen hằng ngày tưởng chừng như vô hại nhưng chúng lại là nguyên nhân bệnh tiểu đường chủ yếu. Sau đây là những nguyên nhân gây bệnh:
-
-Yếu tố di truyền từ người thân: Chủ yếu là do gen di truyền từ thế hệ trước trong gia đình.
-Ăn nhiều chất bột đường, nhất là gạo: Bạn có thể cắt giảm khẩu phần của gạo trắng hoặc thay thế gạo trắng bằng gạo lứt trong bữa ăn hàng ngày.
-Ngủ không đủ giấc và có lối sống căng thẳng: Khi bị căng thẳng sẽ làm một số cơ quan chức năng trong cơ thể của bạn sẽ bị rối loạn, dẫn đến rối loạn chuyển hóa glucose gây gia tăng lượng đường
-Bỏ bữa ăn sáng: Người Việt chúng ta thường có thói quen bỏ bữa ăn sáng nhưng chính thói quen này dẫn đến việc đường huyết trong cơ thể sẽ giảm đột ngột và tạo ra phản xạ thèm ngọt. Nếu đáp ứng cơn thèm bằng việc dung nạp những món ngọt thì sẽ làm tăng lượng đường huyết trong cơ thể khiến bạn nguy cơ mắc bệnh tiểu đường của bạn tăng cao." />
 
     <TextView
         android:id="@+id/textView3"
