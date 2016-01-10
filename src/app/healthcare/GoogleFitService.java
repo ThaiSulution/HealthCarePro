@@ -66,7 +66,7 @@ public class GoogleFitService extends IntentService implements
 	public static boolean isConnected = false;
 	public static boolean getDataDayFinish = false;
 	public static boolean getDataYearFinish = false;
-	public static boolean setWHDataYearFinish = false;
+	//public static boolean setWHDataYearFinish = false;
 	private OnDataPointListener mListener;
 	public static long totalStepsRecord = 0;
 	public static long totalStepsGet = 0;
@@ -256,7 +256,6 @@ public class GoogleFitService extends IntentService implements
 		long endTime = cal.getTimeInMillis();
 		cal.add(Calendar.DATE, -1);
 		long startTime = cal.getTimeInMillis();
-		//float height = ((float) heightCentimiters) / 100.0f;
 		// Create a data source
 		DataSource dataSourceHeight = new DataSource.Builder()
 				.setAppPackageName(this).setDataType(DataType.TYPE_HEIGHT)
