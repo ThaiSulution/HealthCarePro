@@ -56,12 +56,13 @@ public class DrugDAO extends DbConnectionService {
 	}
 	
 	public DrugDTO getDrug(String name) {
-		DrugDTO drug = new DrugDTO();
+		DrugDTO drug = null;
 		Cursor res = myDb.rawQuery(
 				"select * from THUOC where TEN_THUOC = ?",
 				new String[] { name });
 		res.moveToFirst();
 		while (res.isAfterLast() == false) {
+			drug = new DrugDTO();
 			drug.setMaThuoc(res.getInt(res.getColumnIndex("MA_THUOC")));
 			drug.setTenThuoc(res.getString(res.getColumnIndex("TEN_THUOC")));
 			drug.setNhomDuocLy(res.getString(res.getColumnIndex("NHOM_DUOC_LY")));
