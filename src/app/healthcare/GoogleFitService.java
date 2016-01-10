@@ -77,7 +77,6 @@ public class GoogleFitService extends IntentService implements
 	public static int dataSizeSteps = 0;
 	public static int dataSizeCalories = 0;
 	public static int dataSizeDistance = 0;
-	// public static int dataSizeHour = 0;
 	public static Integer targetToset = 0;
 	public static Integer workout = 0;
 	public static float distance = 0;
@@ -129,7 +128,6 @@ public class GoogleFitService extends IntentService implements
 	public void onCreate() {
 		super.onCreate();
 		buildFitnessClient();
-		// listDataStep = new ArrayList<HistoryStepObject>();
 		Log.d(TAG, "GoogleFitService created");
 	}
 
@@ -221,7 +219,7 @@ public class GoogleFitService extends IntentService implements
 						HistoryStepObject o = new HistoryStepObject();
 						o.setStep(tempSteps);
 						String curTime = String.valueOf(cal
-								.get(Calendar.DAY_OF_MONTH) + 1)
+								.get(Calendar.DAY_OF_MONTH))
 								+ "/"
 								+ String.valueOf(cal.get(Calendar.MONTH) + 1);
 						o.setTime(curTime);
@@ -236,7 +234,7 @@ public class GoogleFitService extends IntentService implements
 						dataSizeCalories += 1;
 						totalCalosInYear += tempCalories;
 					}
-					if (dataSizeSteps >= 20) {
+					if (dataSizeSteps >= 50) {
 						break;
 					}
 					endTime = startTime;
@@ -247,7 +245,6 @@ public class GoogleFitService extends IntentService implements
 				break;
 			}
 		} else {
-			// Not connected
 			Log.w(TAG, "Fit wasn't able to connect, so the request failed.");
 		}
 	}
