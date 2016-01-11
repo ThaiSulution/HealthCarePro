@@ -51,7 +51,7 @@
                         android:id="@+id/button_symptoms"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/ic_main_symptoms"
+                        android:background="@drawable/btn_main_symptoms"
                         android:onClick="trieuchung" />
 
                     <TextView
@@ -76,7 +76,7 @@
                         android:id="@+id/button_phatsinh"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/ic_main_providers"
+                        android:background="@drawable/btn_main_providers"
                         android:onClick="benhvien" />
 
                     <TextView
@@ -109,7 +109,7 @@
                         android:id="@+id/button_thucdon"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/ic_main_feedback"
+                        android:background="@drawable/btn_main_feedback"
                         android:onClick="phanhoi" />
 
                     <TextView
@@ -141,7 +141,7 @@
                         android:id="@+id/button_laplich"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/ic_main_physicians"
+                        android:background="@drawable/btn_main_physicians"
                         android:onClick="giupdo" />
 
                     <TextView
