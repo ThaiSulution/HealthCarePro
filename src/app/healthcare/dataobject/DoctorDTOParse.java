@@ -6,9 +6,9 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 @ParseClassName("DoctorDTO")
-public class DoctorDTO extends ParseObject {
-	public static ParseQuery<DoctorDTO> getQuery() {
-		return ParseQuery.getQuery(DoctorDTO.class);
+public class DoctorDTOParse extends ParseObject {
+	public static ParseQuery<DoctorDTOParse> getQuery() {
+		return ParseQuery.getQuery(DoctorDTOParse.class);
 	}
 
 	public ParseUser getUser() {

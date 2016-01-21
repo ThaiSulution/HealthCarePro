@@ -24,7 +24,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.DoctorDTO;
+import app.healthcare.dataobject.DoctorDTOParse;
 
 import com.gc.materialdesign.views.Button;
 import com.gc.materialdesign.widgets.Dialog;
@@ -135,16 +135,16 @@ public class ListDoctor extends Activity {
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								ParseQuery<DoctorDTO> queryDoctor = ParseQuery
+								ParseQuery<DoctorDTOParse> queryDoctor = ParseQuery
 										.getQuery("DoctorDTO");
 								queryDoctor.whereEqualTo("doctorId", Constants
 										.getInstance().listDoctorDTO.get(index)
 										.getDoctorId());
 								queryDoctor
-										.findInBackground((new FindCallback<DoctorDTO>() {
+										.findInBackground((new FindCallback<DoctorDTOParse>() {
 											@Override
 											public void done(
-													List<DoctorDTO> datas,
+													List<DoctorDTOParse> datas,
 													ParseException e) {
 												if (e == null) {
 													for (int i = 0; i < datas

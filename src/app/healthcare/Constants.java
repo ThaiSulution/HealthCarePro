@@ -5,11 +5,11 @@ import java.util.List;
 
 import android.app.Fragment;
 import android.text.format.Time;
-import app.healthcare.dataobject.DoctorDTO;
-import app.healthcare.dataobject.HeartRateDTO;
-import app.healthcare.dataobject.RatioBMIDTO;
-import app.healthcare.dataobject.RatioWHRDTO;
-import app.healthcare.dataobject.StepRunDTO;
+import app.healthcare.dataobject.DoctorDTOParse;
+import app.healthcare.dataobject.HeartRateDTOParse;
+import app.healthcare.dataobject.RatioBMIDTOParse;
+import app.healthcare.dataobject.RatioWHRDTOParse;
+import app.healthcare.dataobject.StepRunDTOParse;
 
 public class Constants {
 	public static final String CHECK_DATA = "createdata";
@@ -29,11 +29,11 @@ public class Constants {
 	public String email = "";
 	public String name = "";
 	public boolean isStart = true;
-	public List<RatioBMIDTO> listDataBMI = new ArrayList<RatioBMIDTO>();
-	public List<RatioWHRDTO> listDataWHR = new ArrayList<RatioWHRDTO>();
-	public List<HeartRateDTO> listDataHR = new ArrayList<HeartRateDTO>();
-	public List<StepRunDTO> listDataStepDTO = new ArrayList<StepRunDTO>();
-	public List<DoctorDTO> listDoctorDTO = new ArrayList<DoctorDTO>();
+	public List<RatioBMIDTOParse> listDataBMI = new ArrayList<RatioBMIDTOParse>();
+	public List<RatioWHRDTOParse> listDataWHR = new ArrayList<RatioWHRDTOParse>();
+	public List<HeartRateDTOParse> listDataHR = new ArrayList<HeartRateDTOParse>();
+	public List<StepRunDTOParse> listDataStepDTO = new ArrayList<StepRunDTOParse>();
+	public List<DoctorDTOParse> listDoctorDTO = new ArrayList<DoctorDTOParse>();
 	public ArrayList<HistoryStepObject> listDataStep = new ArrayList<HistoryStepObject>();
 
 	public long getStepsAvg() {

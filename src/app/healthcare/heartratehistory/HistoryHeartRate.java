@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.HeartRateDTO;
+import app.healthcare.dataobject.HeartRateDTOParse;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
@@ -30,7 +30,7 @@ import com.parse.ParseQuery;
 
 public class HistoryHeartRate extends Activity {
 	BarGraph bg;
-	public static HeartRateDTO itemCurentSelect;
+	public static HeartRateDTOParse itemCurentSelect;
 	TextView avgHeartRate;
 
 	// All static variables
@@ -52,7 +52,7 @@ public class HistoryHeartRate extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_heartrate);
 		avgHeartRate = (TextView) findViewById(R.id.avg_text);
-		itemCurentSelect = new HeartRateDTO();
+		itemCurentSelect = new HeartRateDTOParse();
 		initChart();
 		initList();
 	}
@@ -191,14 +191,14 @@ public class HistoryHeartRate extends Activity {
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								ParseQuery<HeartRateDTO> queryHR = ParseQuery
+								ParseQuery<HeartRateDTOParse> queryHR = ParseQuery
 										.getQuery("HeartRateDTO");
 								queryHR.whereEqualTo("heartRateId", Constants
 										.getInstance().listDataHR.get(index)
 										.getHeartRateId());
-								queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+								queryHR.findInBackground((new FindCallback<HeartRateDTOParse>() {
 									@Override
-									public void done(List<HeartRateDTO> datas,
+									public void done(List<HeartRateDTOParse> datas,
 											ParseException e) {
 										if (e == null) {
 											for (int i = 0; i < datas.size(); i++) {

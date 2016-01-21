@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.RatioBMIDTO;
+import app.healthcare.dataobject.RatioBMIDTOParse;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
@@ -38,13 +38,13 @@ public class HistoryBMI extends Activity {
 
 	ListView list;
 	HistoryBMIAdapter adapter;
-	public static RatioBMIDTO itemCurentSelect;
+	public static RatioBMIDTOParse itemCurentSelect;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_bmi);
-		itemCurentSelect = new RatioBMIDTO();
+		itemCurentSelect = new RatioBMIDTOParse();
 		initChart();
 		initList();
 	}
@@ -97,14 +97,14 @@ public class HistoryBMI extends Activity {
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								ParseQuery<RatioBMIDTO> queryBMI = ParseQuery
+								ParseQuery<RatioBMIDTOParse> queryBMI = ParseQuery
 										.getQuery("RatioBMIDTO");
 								queryBMI.whereEqualTo("ratioBMIId", Constants
 										.getInstance().listDataBMI.get(index)
 										.getRatioBMIId());
-								queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
+								queryBMI.findInBackground((new FindCallback<RatioBMIDTOParse>() {
 									@Override
-									public void done(List<RatioBMIDTO> datas,
+									public void done(List<RatioBMIDTOParse> datas,
 											ParseException e) {
 										if (e == null) {
 											for (int i = 0; i < datas.size(); i++) {

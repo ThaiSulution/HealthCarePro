@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.HeartRateDTO;
+import app.healthcare.dataobject.HeartRateDTOParse;
 import app.healthcare.heartratehistory.HeartRateResultView;
 import app.healthcare.heartratehistory.HistoryHeartRate;
 
@@ -211,7 +211,7 @@ public class HeartRateResult extends Activity {
 		final Intent i = new Intent(this, HistoryHeartRate.class);
 		final Intent resultView = new Intent(this, HeartRateResultView.class);
 		noteString = note.getText().toString();
-		HeartRateDTO dto = new HeartRateDTO();
+		HeartRateDTOParse dto = new HeartRateDTOParse();
 		dto.setHeartRate(HeartRateFragment.heartBeat);
 		Constants.getInstance().getTime().setToNow();
 		int date = Constants.getInstance().getTime().monthDay;

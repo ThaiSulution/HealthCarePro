@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.RatioBMIDTO;
+import app.healthcare.dataobject.RatioBMIDTOParse;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.ParseException;
@@ -120,7 +120,7 @@ public class RatioBMIFragment extends Fragment {
 		} else {
 			result = "Béo phì cấp độ 3";
 		}
-		RatioBMIDTO dto = new RatioBMIDTO();
+		RatioBMIDTOParse dto = new RatioBMIDTOParse();
 		ratioBMI = (double) (Math.floor((double) ratioBMI * 10) / (double) 10);
 		tbxResult.setText(String.valueOf(ratioBMI));
 		tbxImpact.setText(result);

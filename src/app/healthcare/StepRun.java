@@ -11,6 +11,8 @@ import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -35,7 +37,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
-import app.healthcare.dataobject.StepRunDTO;
+import app.healthcare.dataobject.StepRunDTOParse;
 
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieGraph.OnSliceClickedListener;
@@ -68,6 +70,18 @@ public class StepRun extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.step_run);
+		NotificationManager notificationManager =
+			    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			int icon = R.drawable.run_icon;
+			CharSequence notiText = "Ban da di du so buoc";
+			long meow = System.currentTimeMillis();
+			Notification notification = new Notification(icon, notiText, meow);
+			Context context = getApplicationContext();
+			CharSequence contentTitle = "Your notification";
+			CharSequence contentText = "Some data has arrived!";
+			notification.setLatestEventInfo(context, contentTitle, contentText, MainActivity.contentIntent);
+			int SERVER_DATA_RECEIVED = 1;
+			notificationManager.notify(SERVER_DATA_RECEIVED, notification);
 		init();
 	}
 
@@ -183,6 +197,7 @@ public class StepRun extends Activity {
 								.get(1)
 								.setGoalValue(
 										Constants.getInstance().getTarget());
+						targetContent.setText(String.valueOf(Constants.getInstance().getTarget()));
 					} else {
 						pg.getSlices()
 								.get(1)
@@ -260,7 +275,7 @@ public class StepRun extends Activity {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(now);
 		long insertTime = cal.getTimeInMillis();
-		StepRunDTO dto = new StepRunDTO();
+		StepRunDTOParse dto = new StepRunDTOParse();
 		dto.setCalos((double) Math.round(Constants.getInstance().getCalos()));
 		dto.setTime(insertTime);
 		dto.setDistance(Double.parseDouble(String

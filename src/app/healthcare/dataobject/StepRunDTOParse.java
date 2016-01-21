@@ -6,9 +6,9 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 @ParseClassName("StepRunDTO")
-public class StepRunDTO extends ParseObject {
-	public static ParseQuery<StepRunDTO> getQuery() {
-		return ParseQuery.getQuery(StepRunDTO.class);
+public class StepRunDTOParse extends ParseObject {
+	public static ParseQuery<StepRunDTOParse> getQuery() {
+		return ParseQuery.getQuery(StepRunDTOParse.class);
 	}
 
 	public ParseUser getUser() {

@@ -6,9 +6,9 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 @ParseClassName("RatioWHRDTO")
-public class RatioWHRDTO extends ParseObject {
-	public static ParseQuery<RatioWHRDTO> getQuery() {
-		return ParseQuery.getQuery(RatioWHRDTO.class);
+public class RatioWHRDTOParse extends ParseObject {
+	public static ParseQuery<RatioWHRDTOParse> getQuery() {
+		return ParseQuery.getQuery(RatioWHRDTOParse.class);
 	}
 
 	public ParseUser getUser() {

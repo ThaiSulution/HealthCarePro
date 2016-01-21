@@ -21,6 +21,18 @@ public class Database extends SQLiteOpenHelper {
 				+ "(MA_BENH integer primary key, TEN_BENH text, MO_TA text, DINH_NGHIA text, TRIEU_CHUNG text, GAP_BAC_SI text, NGUYEN_NHAN text, NGUY_CO text, BIEN_CHUNG text, XET_NGHIEM text, DIEU_TRI text, THUOC text, PHONG_CHONG text, HINH_ANH text)");
 		db.execSQL("create table BENH_TRIEUCHUNG "
 				+ "(MA integer primary key, TEN_BENH text, TRIEU_CHUNG text, VI_TRI text)");
+		db.execSQL("create table RATIOBMI "
+				+ "(RatioBMIId integer primary key, Time text, Date text, Ratio text, Status text)");
+		db.execSQL("create table RATIOWHR "
+				+ "(RatioWHRId integer primary key, Time text, Date text, Ratio text, Status text)");
+		db.execSQL("create table STEPRUN "
+				+ "(StepRunId integer primary key, Taget integer, Time integer, Step integer, Distance text, Calos text)");
+		db.execSQL("create table HEARTRATE "
+				+ "(HeartRateId integer primary key, Time text, Date text, HeartRate integer, BodyCo text, StatusSport text, Note text)");
+		db.execSQL("create table DOCTOR "
+				+ "(DoctorId integer primary key, Name text, number text, viber text, skype text)");
+		db.execSQL("create table MESSAGE "
+				+ "(MessageId integer primary key, Subject text, Content text, Date text)");
 	}
 
 	@Override
@@ -28,6 +40,12 @@ public class Database extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS THUOC");
 		db.execSQL("DROP TABLE IF EXISTS BENH");
 		db.execSQL("DROP TABLE IF EXISTS BENH_TRIEUCHUNG");
+		db.execSQL("DROP TABLE IF EXISTS RATIOBMI");
+		db.execSQL("DROP TABLE IF EXISTS RATIOWHR");
+		db.execSQL("DROP TABLE IF EXISTS STEPRUN");
+		db.execSQL("DROP TABLE IF EXISTS HEARTRATE");
+		db.execSQL("DROP TABLE IF EXISTS DOCTOR");
+		db.execSQL("DROP TABLE IF EXISTS MESSAGE");
 		onCreate(db);
 	}
 }

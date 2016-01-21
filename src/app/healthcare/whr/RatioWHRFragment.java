@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.RatioWHRDTO;
+import app.healthcare.dataobject.RatioWHRDTOParse;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.ParseException;
@@ -133,7 +133,7 @@ public class RatioWHRFragment extends Fragment {
 		ratioWHR = (double) (Math.floor((double) ratioWHR * 10) / (double) 10);
 		tbxResult.setText(String.valueOf(ratioWHR));
 		tbxImpact.setText(result);
-		RatioWHRDTO dto = new RatioWHRDTO();
+		RatioWHRDTOParse dto = new RatioWHRDTOParse();
 		dto.setRatio(ratioWHR);
 		dto.setStatus(result);
 		int id = 1;

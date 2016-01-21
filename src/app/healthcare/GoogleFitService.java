@@ -8,6 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -357,6 +360,20 @@ public class GoogleFitService extends IntentService implements
 					if (field.getName().equals("steps")) {
 						totalStepsRecord += val.asInt();
 					}
+					if (totalStepsGet >= 1){
+						NotificationManager notificationManager =
+							    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+							int icon = R.drawable.run_icon;
+							CharSequence notiText = "Ban da di du so buoc";
+							long meow = System.currentTimeMillis();
+							Notification notification = new Notification(icon, notiText, meow);
+							Context context = getApplicationContext();
+							CharSequence contentTitle = "Your notification";
+							CharSequence contentText = "Some data has arrived!";
+							notification.setLatestEventInfo(context, contentTitle, contentText, MainActivity.contentIntent);
+							int SERVER_DATA_RECEIVED = 1;
+							notificationManager.notify(SERVER_DATA_RECEIVED, notification);
+					}
 
 				}
 			}
@@ -373,6 +390,22 @@ public class GoogleFitService extends IntentService implements
 					Log.i(TAG_SENSOR, "Listener registered!");
 				} else {
 					Log.i(TAG_SENSOR, "Listener not registered.");
+				}
+				//Log.i(TAG, "bugggggggggggggggggggggggggg" + String.valueOf(totalStepsGet));
+				totalStepsGet = 5;
+				if (totalStepsGet >= 1){
+					NotificationManager notificationManager =
+						    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+						int icon = R.drawable.run_icon;
+						CharSequence notiText = "Ban da di du so buoc";
+						long meow = System.currentTimeMillis();
+						Notification notification = new Notification(icon, notiText, meow);
+						Context context = getApplicationContext();
+						CharSequence contentTitle = "Your notification";
+						CharSequence contentText = "Some data has arrived!";
+						notification.setLatestEventInfo(context, contentTitle, contentText, MainActivity.contentIntent);
+						int SERVER_DATA_RECEIVED = 1;
+						notificationManager.notify(SERVER_DATA_RECEIVED, notification);
 				}
 			}
 		});

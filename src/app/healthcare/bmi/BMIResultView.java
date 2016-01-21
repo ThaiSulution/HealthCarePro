@@ -19,18 +19,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import app.healthcare.dataobject.RatioBMIDTO;
+import app.healthcare.dataobject.RatioBMIDTOParse;
 
 public class BMIResultView extends Activity {
-	RatioBMIDTO data = new RatioBMIDTO();
+	RatioBMIDTOParse data = new RatioBMIDTOParse();
 	ImageButton imgeShareFacebook;
 	File imagePath;
 
-	public RatioBMIDTO getData() {
+	public RatioBMIDTOParse getData() {
 		return data;
 	}
 
-	public void setData(RatioBMIDTO data) {
+	public void setData(RatioBMIDTOParse data) {
 		this.data = data;
 	}
 

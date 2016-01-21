@@ -6,9 +6,9 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 @ParseClassName("HeartRateDTO")
-public class HeartRateDTO extends ParseObject {
-	public static ParseQuery<HeartRateDTO> getQuery() {
-		return ParseQuery.getQuery(HeartRateDTO.class);
+public class HeartRateDTOParse extends ParseObject {
+	public static ParseQuery<HeartRateDTOParse> getQuery() {
+		return ParseQuery.getQuery(HeartRateDTOParse.class);
 	}
 
 	public ParseUser getUser() {

@@ -19,18 +19,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import app.healthcare.dataobject.RatioWHRDTO;
+import app.healthcare.dataobject.RatioWHRDTOParse;
 
 public class WHRResultView extends Activity {
-	RatioWHRDTO data = new RatioWHRDTO();
+	RatioWHRDTOParse data = new RatioWHRDTOParse();
 	ImageButton imgeShareFacebook;
 	File imagePath;
 
-	public RatioWHRDTO getData() {
+	public RatioWHRDTOParse getData() {
 		return data;
 	}
 
-	public void setData(RatioWHRDTO data) {
+	public void setData(RatioWHRDTOParse data) {
 		this.data = data;
 	}
 

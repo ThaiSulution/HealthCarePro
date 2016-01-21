@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="app.healthcare.dataobject.HeartRateDTO" project="HealthCarePro" 
-    file="/HealthCarePro/src/app/healthcare/dataobject/HeartRateDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="app.healthcare.dataobject.HeartRateDTOParse" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/HeartRateDTOParse.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="358" y="261"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="app.healthcare.dataobject.StepRunDTO" project="HealthCarePro" 
-    file="/HealthCarePro/src/app/healthcare/dataobject/StepRunDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="app.healthcare.dataobject.StepRunDTOParse" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/StepRunDTOParse.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="613" y="253"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="app.healthcare.dataobject.DoctorDTO" project="HealthCarePro" 
-    file="/HealthCarePro/src/app/healthcare/dataobject/DoctorDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="app.healthcare.dataobject.DoctorDTOParse" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/DoctorDTOParse.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="139" y="700"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="app.healthcare.dataobject.RatioBMIDTO" project="HealthCarePro" 
-    file="/HealthCarePro/src/app/healthcare/dataobject/RatioBMIDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="app.healthcare.dataobject.RatioBMIDTOParse" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/RatioBMIDTOParse.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="360" y="623"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="app.healthcare.dataobject.RatioWHRDTO" project="HealthCarePro" 
-    file="/HealthCarePro/src/app/healthcare/dataobject/RatioWHRDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="app.healthcare.dataobject.RatioWHRDTOParse" project="HealthCarePro" 
+    file="/HealthCarePro/src/app/healthcare/dataobject/RatioWHRDTOParse.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="617" y="623"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

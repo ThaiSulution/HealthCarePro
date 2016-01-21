@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.DoctorDTO;
+import app.healthcare.dataobject.DoctorDTOParse;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.parse.ParseException;
@@ -54,7 +54,7 @@ public class ActivityAddDoctor extends Activity {
 			public void onClick(View v) {
 				dialog = ProgressDialog.show(ActivityAddDoctor.this, "",
 						"Vui lòng chờ...");
-				DoctorDTO dto = new DoctorDTO();
+				DoctorDTOParse dto = new DoctorDTOParse();
 				dto.setDoctorName(name.getText().toString());
 				dto.setNumberCall(numberCall.getText().toString());
 				dto.setSkypeNumber(numberSkype.getText().toString());

@@ -19,22 +19,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.healthcare.R;
-import app.healthcare.dataobject.HeartRateDTO;
+import app.healthcare.dataobject.HeartRateDTOParse;
 
 import com.facebook.share.model.ShareLinkContent;
 
 public class HeartRateResultView extends Activity {
-	HeartRateDTO data = new HeartRateDTO();
+	HeartRateDTOParse data = new HeartRateDTOParse();
 	ShareLinkContent content = new ShareLinkContent.Builder().setContentUrl(
 			Uri.parse("https://developers.facebook.com")).build();
 	ImageButton imgeShareFacebook;
 	File imagePath;
 
-	public HeartRateDTO getData() {
+	public HeartRateDTOParse getData() {
 		return data;
 	}
 
-	public void setData(HeartRateDTO data) {
+	public void setData(HeartRateDTOParse data) {
 		this.data = data;
 	}
 

@@ -37,11 +37,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 import app.healthcare.bmi.RatioBMIFragment;
 import app.healthcare.call.ListDoctor;
-import app.healthcare.dataobject.DoctorDTO;
-import app.healthcare.dataobject.HeartRateDTO;
-import app.healthcare.dataobject.RatioBMIDTO;
-import app.healthcare.dataobject.RatioWHRDTO;
-import app.healthcare.dataobject.StepRunDTO;
+import app.healthcare.dataobject.DoctorDTOParse;
+import app.healthcare.dataobject.HeartRateDTOParse;
+import app.healthcare.dataobject.RatioBMIDTOParse;
+import app.healthcare.dataobject.RatioWHRDTOParse;
+import app.healthcare.dataobject.StepRunDTOParse;
 import app.healthcare.drug.ListDrug;
 import app.healthcare.heartrate.HeartRateFragment;
 import app.healthcare.readnews.activity.ReadNewsActivity;
@@ -86,6 +86,8 @@ public class MainActivity extends Activity {
 	public static boolean getHRFinish = false;
 	public static boolean getStepFinish = false;
 	public static boolean getDoctorFinish = false;
+	public static Intent notificationIntent;
+	public static PendingIntent contentIntent;
 
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -117,6 +119,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		notificationIntent = new Intent(this, StepRun.class);
+		contentIntent = PendingIntent.getActivity(this, 0, MainActivity.notificationIntent, 0);
 		Constants.getInstance().isStart = true;
 		mTitle = mDrawerTitle = getTitle();
 
@@ -258,11 +262,11 @@ public class MainActivity extends Activity {
 
 			try {
 				Parse.enableLocalDatastore(this);
-				ParseObject.registerSubclass(HeartRateDTO.class);
-				ParseObject.registerSubclass(RatioBMIDTO.class);
-				ParseObject.registerSubclass(RatioWHRDTO.class);
-				ParseObject.registerSubclass(StepRunDTO.class);
-				ParseObject.registerSubclass(DoctorDTO.class);
+				ParseObject.registerSubclass(HeartRateDTOParse.class);
+				ParseObject.registerSubclass(RatioBMIDTOParse.class);
+				ParseObject.registerSubclass(RatioWHRDTOParse.class);
+				ParseObject.registerSubclass(StepRunDTOParse.class);
+				ParseObject.registerSubclass(DoctorDTOParse.class);
 				Parse.initialize(MainActivity.this,
 						"ZGXqZjd6vKlpdEnDDODoBTWBuzt25xbSUcdEBiVt",
 						"NKG4pQrCIFXDsVKAsLSpNZaWxcR7vYbVUbbRLyZ5");
@@ -315,13 +319,13 @@ public class MainActivity extends Activity {
 
 	public static void getData() {
 		// lay thong tin bmi
-		ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
+		ParseQuery<RatioBMIDTOParse> queryBMI = new ParseQuery<RatioBMIDTOParse>(
 				"RatioBMIDTO");
 		queryBMI.setLimit(1000);
-		queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
+		queryBMI.findInBackground((new FindCallback<RatioBMIDTOParse>() {
 
 			@Override
-			public void done(List<RatioBMIDTO> datas, ParseException arg1) {
+			public void done(List<RatioBMIDTOParse> datas, ParseException arg1) {
 				if (datas != null)
 					Constants.getInstance().listDataBMI = datas;
 				getBMIFinish = true;
@@ -329,50 +333,50 @@ public class MainActivity extends Activity {
 
 		}));
 		// lay thong tin whr
-		ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
+		ParseQuery<RatioWHRDTOParse> queryWHR = new ParseQuery<RatioWHRDTOParse>(
 				"RatioWHRDTO");
 		queryWHR.setLimit(1000);
-		queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+		queryWHR.findInBackground((new FindCallback<RatioWHRDTOParse>() {
 
 			@Override
-			public void done(List<RatioWHRDTO> datas, ParseException arg1) {
+			public void done(List<RatioWHRDTOParse> datas, ParseException arg1) {
 				if (datas != null)
 					Constants.getInstance().listDataWHR = datas;
 				getWHRFinish = true;
 			}
 		}));
 		// lay thong tin heartrate
-		ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
+		ParseQuery<HeartRateDTOParse> queryHR = new ParseQuery<HeartRateDTOParse>(
 				"HeartRateDTO");
 		queryHR.setLimit(1000);
-		queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+		queryHR.findInBackground((new FindCallback<HeartRateDTOParse>() {
 			@Override
-			public void done(List<HeartRateDTO> datas, ParseException arg1) {
+			public void done(List<HeartRateDTOParse> datas, ParseException arg1) {
 				if (datas != null)
 					Constants.getInstance().listDataHR = datas;
 				getHRFinish = true;
 			}
 		}));
 		// LAY THONG TIN STEP
-		ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
+		ParseQuery<StepRunDTOParse> queryStep = new ParseQuery<StepRunDTOParse>(
 				"StepRunDTO");
 		queryStep.setLimit(1000);
-		queryStep.findInBackground((new FindCallback<StepRunDTO>() {
+		queryStep.findInBackground((new FindCallback<StepRunDTOParse>() {
 
 			@Override
-			public void done(List<StepRunDTO> datas, ParseException arg1) {
+			public void done(List<StepRunDTOParse> datas, ParseException arg1) {
 				if (datas != null)
 					Constants.getInstance().listDataStepDTO = datas;
 				getStepFinish = true;
 			}
 		}));
 		// LAY THONG TIN BAC SI
-		ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
+		ParseQuery<DoctorDTOParse> queryDoctor = new ParseQuery<DoctorDTOParse>(
 				"DoctorDTO");
 		queryDoctor.setLimit(1000);
-		queryDoctor.findInBackground((new FindCallback<DoctorDTO>() {
+		queryDoctor.findInBackground((new FindCallback<DoctorDTOParse>() {
 			@Override
-			public void done(List<DoctorDTO> datas, ParseException arg1) {
+			public void done(List<DoctorDTOParse> datas, ParseException arg1) {
 				if (datas != null)
 					Constants.getInstance().listDoctorDTO = datas;
 				getDoctorFinish = true;
@@ -382,13 +386,13 @@ public class MainActivity extends Activity {
 
 	public static void deleteAllData() {
 		// lay thong tin bmi
-		ParseQuery<RatioBMIDTO> queryBMI = new ParseQuery<RatioBMIDTO>(
+		ParseQuery<RatioBMIDTOParse> queryBMI = new ParseQuery<RatioBMIDTOParse>(
 				"RatioBMIDTO");
 		queryBMI.setLimit(10000);
-		queryBMI.findInBackground((new FindCallback<RatioBMIDTO>() {
+		queryBMI.findInBackground((new FindCallback<RatioBMIDTOParse>() {
 
 			@Override
-			public void done(List<RatioBMIDTO> datas, ParseException arg1) {
+			public void done(List<RatioBMIDTOParse> datas, ParseException arg1) {
 				if (datas != null) {
 					for (int i = 0; i < datas.size() - 1; i++) {
 						datas.get(i).deleteInBackground();
@@ -399,13 +403,13 @@ public class MainActivity extends Activity {
 
 		}));
 		// lay thong tin whr
-		ParseQuery<RatioWHRDTO> queryWHR = new ParseQuery<RatioWHRDTO>(
+		ParseQuery<RatioWHRDTOParse> queryWHR = new ParseQuery<RatioWHRDTOParse>(
 				"RatioWHRDTO");
 		queryWHR.setLimit(10000);
-		queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+		queryWHR.findInBackground((new FindCallback<RatioWHRDTOParse>() {
 
 			@Override
-			public void done(List<RatioWHRDTO> datas, ParseException arg1) {
+			public void done(List<RatioWHRDTOParse> datas, ParseException arg1) {
 				if (datas != null) {
 					for (int i = 0; i < datas.size() - 1; i++) {
 						datas.get(i).deleteInBackground();
@@ -414,12 +418,12 @@ public class MainActivity extends Activity {
 			}
 		}));
 		// lay thong tin heartrate
-		ParseQuery<HeartRateDTO> queryHR = new ParseQuery<HeartRateDTO>(
+		ParseQuery<HeartRateDTOParse> queryHR = new ParseQuery<HeartRateDTOParse>(
 				"HeartRateDTO");
 		queryHR.setLimit(10000);
-		queryHR.findInBackground((new FindCallback<HeartRateDTO>() {
+		queryHR.findInBackground((new FindCallback<HeartRateDTOParse>() {
 			@Override
-			public void done(List<HeartRateDTO> datas, ParseException arg1) {
+			public void done(List<HeartRateDTOParse> datas, ParseException arg1) {
 				if (datas != null) {
 					for (int i = 0; i < datas.size() - 1; i++) {
 						datas.get(i).deleteInBackground();
@@ -428,13 +432,13 @@ public class MainActivity extends Activity {
 			}
 		}));
 		// LAY THONG TIN STEP
-		ParseQuery<StepRunDTO> queryStep = new ParseQuery<StepRunDTO>(
+		ParseQuery<StepRunDTOParse> queryStep = new ParseQuery<StepRunDTOParse>(
 				"StepRunDTO");
 		queryStep.setLimit(10000);
-		queryStep.findInBackground((new FindCallback<StepRunDTO>() {
+		queryStep.findInBackground((new FindCallback<StepRunDTOParse>() {
 
 			@Override
-			public void done(List<StepRunDTO> datas, ParseException arg1) {
+			public void done(List<StepRunDTOParse> datas, ParseException arg1) {
 				if (datas != null) {
 					for (int i = 0; i < datas.size() - 1; i++) {
 						datas.get(i).deleteInBackground();
@@ -443,12 +447,12 @@ public class MainActivity extends Activity {
 			}
 		}));
 		// LAY THONG TIN BAC SI
-		ParseQuery<DoctorDTO> queryDoctor = new ParseQuery<DoctorDTO>(
+		ParseQuery<DoctorDTOParse> queryDoctor = new ParseQuery<DoctorDTOParse>(
 				"DoctorDTO");
 		queryDoctor.setLimit(10000);
-		queryDoctor.findInBackground((new FindCallback<DoctorDTO>() {
+		queryDoctor.findInBackground((new FindCallback<DoctorDTOParse>() {
 			@Override
-			public void done(List<DoctorDTO> datas, ParseException arg1) {
+			public void done(List<DoctorDTOParse> datas, ParseException arg1) {
 				if (datas != null) {
 					for (int i = 0; i < datas.size() - 1; i++) {
 						datas.get(i).deleteInBackground();

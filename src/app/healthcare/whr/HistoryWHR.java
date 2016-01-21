@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import app.healthcare.Constants;
 import app.healthcare.R;
-import app.healthcare.dataobject.RatioWHRDTO;
+import app.healthcare.dataobject.RatioWHRDTOParse;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
@@ -38,13 +38,13 @@ public class HistoryWHR extends Activity {
 
 	ListView list;
 	HistoryWHRAdapter adapter;
-	public static RatioWHRDTO itemCurentSelect;
+	public static RatioWHRDTOParse itemCurentSelect;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_whr);
-		itemCurentSelect = new RatioWHRDTO();
+		itemCurentSelect = new RatioWHRDTOParse();
 		initChart();
 		initList();
 	}
@@ -97,14 +97,14 @@ public class HistoryWHR extends Activity {
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								ParseQuery<RatioWHRDTO> queryWHR = ParseQuery
+								ParseQuery<RatioWHRDTOParse> queryWHR = ParseQuery
 										.getQuery("RatioWHRDTO");
 								queryWHR.whereEqualTo("ratioWHRId", Constants
 										.getInstance().listDataWHR.get(index)
 										.getRatioWHRId());
-								queryWHR.findInBackground((new FindCallback<RatioWHRDTO>() {
+								queryWHR.findInBackground((new FindCallback<RatioWHRDTOParse>() {
 									@Override
-									public void done(List<RatioWHRDTO> datas,
+									public void done(List<RatioWHRDTOParse> datas,
 											ParseException e) {
 										if (e == null) {
 											for (int i = 0; i < datas.size(); i++) {
